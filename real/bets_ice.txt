@@ -1,0 +1,6 @@
+Greenland ice hypothesis. Written 2026-10-05 22:20 UTC before downloading the ice mask or fitting.
+Split Greenland outlets (A >= 10 km2) by whether the head of the main stem (the reach of the same MAIN_RIV with the
+largest DIST_DN_KM) lies inside the Natural Earth 1:10m glaciated-areas polygons.
+E1: h(head on ice) < h(head off ice) by >= 0.05.
+E2: h(head off ice) is in the normal band 0.50-0.56.
+If E1 fails, the ice-sheet explanation in the README is wrong and must be struck.

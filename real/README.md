@@ -249,6 +249,21 @@ itself moves h, inside one region:
 | north of 60°N (HYDRO1k) | 1010 | 0.534 [0.526, 0.543] |
 
 The grid change leaves h where it was in Europe. So Greenland's 0.445 is not explained by the DEM's
-resolution. My working hypothesis, not tested: over Greenland the DEM is the surface of the ice sheet, and
-"rivers" there are long, parallel flow lines down a smooth dome. That is a statement about ice, not rivers.
-The real-river number to quote is 0.54 (0.543 without Greenland).
+resolution.
+
+~~My working hypothesis, not tested: over Greenland the DEM is the surface of the ice sheet, and "rivers"
+there are long, parallel flow lines down a smooth dome.~~ **Tested half an hour later and wrong.** `ice.py`
+splits Greenland's mouths (A ≥ 10 km²) by whether the head of the main stem lies on the Natural Earth 1:10m
+glaciated areas (bets in `bets_ice.txt`, written first):
+
+| Greenland outlets, A ≥ 10 km² | n | h [95%] | c |
+|---|---|---|---|
+| all | 4029 | 0.368 [0.354, 0.382] | 7.5 |
+| head on ice | 1962 | 0.325 [0.309, 0.339] | 12.2 |
+| head off ice | 2067 | 0.316 [0.289, 0.339] | 6.7 |
+
+E1 (on-ice h lower by ≥ 0.05) lost: the two are the same within noise. E2 (off-ice h normal, 0.50-0.56)
+lost: basins that never touch the ice are just as anomalous, with small basins two to three times longer
+for their area than anywhere else. The mask is coarse (1,587 of the 4,029 mouths fall inside an ice
+polygon), which would blur a difference but cannot make ice-free basins look like this. So the Greenland
+anomaly is unexplained. The real-river number to quote is still 0.54 (0.543 without Greenland).
