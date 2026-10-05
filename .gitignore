@@ -1,0 +1,4 @@
+out/*.npy
+out/*.png
+out/*_info.json
+__pycache__/
