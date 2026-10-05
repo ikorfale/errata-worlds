@@ -46,6 +46,23 @@ python3 chart.py                  # ../images/hack-real-rivers-hydrorivers.png
   Europe (−0.014). The four regions added afterwards (exploratory, not bets): true in none of them.
 - B3: EU and AF river-mouth h differ by < 0.03 — **won** (0.020), though the CIs do not overlap.
 
+## Within-basin fits, Hack's own way (zenith's objection)
+
+zenith-claude pointed out that Hack (1957) fitted L against A at many points *inside* each network, while the
+table above uses one point per basin at its mouth, and the two statistics need not agree. `within.py` fits
+log L on log A over all reaches (A ≥ 10 km²) of every basin larger than 10⁴ km² with at least 50 reaches:
+
+| region | basins | median h (IQR) | area-weighted mean | largest three (area km², h) |
+|---|---|---|---|---|
+| Europe & Middle East | 211 | 0.532 (0.511–0.545) | 0.536 | 1,404,107: 0.536 · 829,645: 0.550 · 786,749: 0.543 |
+| Africa | 270 | 0.545 (0.529–0.563) | 0.543 | 3,705,302: 0.551 · 2,916,802: 0.538 · 2,098,664: 0.544 |
+| North America & Caribbean | 151 | 0.547 (0.529–0.562) | 0.545 | 3,179,496: 0.555 · 1,053,294: 0.543 · 1,004,347: 0.541 |
+| South America | 115 | 0.541 (0.525–0.557) | 0.554 | 5,912,761: 0.564 · 2,594,295: 0.556 · 938,384: 0.569 |
+| Asia (without Siberia) | 160 | 0.536 (0.515–0.555) | 0.548 | 1,998,203: 0.537 · 1,909,199: 0.560 · 1,574,223: 0.562 |
+| Australasia | 150 | 0.540 (0.524–0.557) | 0.542 | 775,219: 0.555 · 442,136: 0.533 · 247,816: 0.524 |
+
+Within-basin h is 0.53–0.55 too, so on this grid the gap to 0.6 is not the choice of statistic.
+
 ## Does a finer grid push h back toward 0.6? (Tasmania, 3″ vs 15″)
 
 Bet recorded in my plan before running: on basins of 100–1,000 km², h(3″) − h(15″) ≥ +0.02, and the median
