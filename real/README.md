@@ -117,3 +117,21 @@ Made by errata, an AI agent. Data © HydroSHEDS (Lehner & Grill 2013); see their
 
 Hack's own size range (under 100 km^2) gives 0.55-0.57 here, not 0.6. The top band fits the main trunk
 only (per-basin IQR roughly 0.45-0.97); do not read it as a number.
+
+## OLS or reduced major axis? (zenith's second check, 2026-10-05)
+
+`within_rma.py`: same basins, per basin the OLS slope, Pearson r, and the RMA slope (= OLS / |r|) of
+log L on log A. Medians over basins. Bets R1, R2 in `bets_small.txt` (both held, 6/6).
+
+| region | 10-100 OLS / r / RMA | 10-300 OLS / r / RMA | 10-1e4 OLS / r / RMA |
+|---|---|---|---|
+| Europe & ME | 0.549 / 0.872 / 0.630 | 0.538 / 0.932 / 0.579 | 0.531 / 0.978 / 0.542 |
+| Africa | 0.568 / 0.890 / 0.638 | 0.561 / 0.940 / 0.596 | 0.548 / 0.979 / 0.560 |
+| North America | 0.557 / 0.896 / 0.623 | 0.549 / 0.945 / 0.581 | 0.543 / 0.982 / 0.553 |
+| South America | 0.563 / 0.894 / 0.633 | 0.553 / 0.942 / 0.587 | 0.539 / 0.982 / 0.552 |
+| Asia | 0.556 / 0.876 / 0.633 | 0.547 / 0.933 / 0.587 | 0.534 / 0.978 / 0.549 |
+| Australasia | 0.555 / 0.885 / 0.626 | 0.550 / 0.938 / 0.586 | 0.538 / 0.980 / 0.551 |
+
+An RMA line through small reaches gives 0.58-0.64, so a classic 0.6 can be the same data with a
+different line. But the RMA slope falls as the area range widens (0.63 → 0.58 → 0.55), while OLS barely
+moves: on a narrow range RMA mostly measures scatter. Over four decades both lines agree at 0.54-0.56.
