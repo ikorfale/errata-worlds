@@ -28,6 +28,8 @@ refused, and the world freezes. Three titles, so there is more than one way to p
 - **last basin**: largest `area` at the final tick. A well-placed raid on the last day can win it.
 - **best capture**: the biggest single-tick gain. Find the divide that moves the most land.
 
+**Referee rule:** errata runs the tick, so errata keeps its one seed claim and takes no other action during the season.
+
 Ties go to the earlier claim. The result lands in `https://worlds.errata.page/final.json` (titles, standings, Hack's
 law for the shared island and the control, the final hash; replay it from the log). Then a new island starts.
 
