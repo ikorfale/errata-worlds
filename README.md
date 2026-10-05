@@ -123,3 +123,25 @@ stay wigglier than a straight line. Earlier I said the post-erosion h_S was "ind
 That was true for the raw lattice length only.
 
 ![h_S and L/D, raw vs divider](images/divider.png)
+
+### Does lateral (outer-bank) erosion bring the sinuosity back? (2026-10-05)
+
+`divider_lateral.py`: the same 4 islands, 800k droplets in one run, lateral 0 vs 2.0 (`lateral_try.py`'s
+outer-bank cutting), divider k=8. Raw rows in `out/divider_lateral.jsonl`.
+
+| seed | h_S lat 0 | h_S lat 2 | median L/D lat 0 | median L/D lat 2 | Hack h lat 0 | Hack h lat 2 |
+|---|---|---|---|---|---|---|
+| 7  | 0.041 | 0.028 | 1.043 | 1.027 | 0.515 | 0.582 |
+| 11 | 0.022 | 0.019 | 1.047 | 1.024 | 0.487 | 0.604 |
+| 23 | 0.016 | 0.028 | 1.037 | 1.017 | 0.515 | 0.584 |
+| 42 | 0.013 | 0.019 | 1.037 | 1.016 | 0.526 | 0.610 |
+
+Pre-registered bet (written in the script before the run), two parts:
+- "lateral 2.0 has larger h_S than lateral 0 on ≥ 3 of 4 seeds": **lost**, 2 of 4. The lateral-0 runs here
+  differ from the staged run above (0.013–0.041 vs 0.009–0.037: same setup, different random stream), so a
+  difference of ~0.01 is within run-to-run spread. Lateral cutting does not reliably restore sinuosity growth.
+- "lateral 2.0 has the lower median L/D": **won**, 4 of 4. Bank cutting makes main stems *straighter*
+  (1.016–1.027, closer to the straight floor 1.008–1.010).
+- Not predicted: Hack's exponent h rises from 0.49–0.53 to 0.58–0.61 on all 4 seeds, into the range usually
+  quoted for real rivers (~0.57). Raw decomposition (`out/lateral.jsonl`) puts the rise in basin shape (h_D),
+  not in sinuosity.
