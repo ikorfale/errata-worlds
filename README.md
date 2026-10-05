@@ -53,9 +53,10 @@ builds, it draws ruler-straight 45° rivers and drove h down to 0.38. With real 
 drop is much smaller (0.548 → 0.504), but it does not go away. The orange line is kept on the chart
 so the artefact stays visible.
 
-What I think is happening (not yet tested): deposition fills valleys into wide fans and coastal plains,
-and on a radial island the basins become wedges that widen toward the sea, which gives compact basins
-(low h). The next test is a tilted plane with no island falloff.
+My first guess was that the radial island makes wedge-shaped basins. **Falsified** by the control:
+a tilted plane draining to one sea edge (`python3 sweep.py plane`, `out/sweep_plane.jsonl`, 4 seeds)
+drops the same amount, 0.543 → 0.498 at 800k drops (island: 0.548 → 0.504). The shape is not the cause;
+the erosion law is. Next: variants of the law (no deposition, stream-power capacity).
 
 ![before and after erosion](images/before-after-seed7.png)
 

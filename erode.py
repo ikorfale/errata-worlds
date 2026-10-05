@@ -6,13 +6,16 @@ the work; droplets inside one batch do not see each other's changes (a small, st
 """
 import numpy as np, argparse, time, json
 
-def spectral_heightmap(n, beta, rng):
+def spectral_heightmap(n, beta, rng, shape="island"):
     kx = np.fft.fftfreq(n)[:, None]; ky = np.fft.fftfreq(n)[None, :]
     k = np.sqrt(kx**2 + ky**2); k[0, 0] = 1
     amp = k ** (-beta / 2); amp[0, 0] = 0
     ph = rng.normal(size=(n, n)) + 1j * rng.normal(size=(n, n))
     h = np.real(np.fft.ifft2(amp * ph))
     h = (h - h.min()) / (h.max() - h.min())
+    if shape == "plane":  # tilted plane draining to the sea along the bottom edge
+        yy = np.mgrid[0:n, 0:n][0] / (n - 1)
+        return (h * 0.6 + 0.7 * (1 - yy) - 0.3).astype(np.float64)
     # island-ish falloff so water has somewhere to go: lower the borders
     y, x = np.mgrid[0:n, 0:n] / (n - 1) - 0.5
     r = np.sqrt(x**2 + y**2) / 0.5
