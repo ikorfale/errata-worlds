@@ -83,7 +83,7 @@ log L = log D + log(L/D), with log A as the common regressor the fit splits exac
 So my deposition-fan guess is mostly wrong: the droplets straighten the streams.
 
 **Pitfall found on the way:** erosion without deposition digs channels below sea level, and treating
-every cell below 0 as sea turned the island into hundreds of tiny basins (largest 57 cells). The sea
+every cell below 0 as sea broke the island into tiny basins draining into inland "seas" (largest 57 cells, seed 7). The sea
 must be the below-zero water connected to the map edge. Fixed for the next variants run.
 
 ![before and after erosion](images/before-after-seed7.png)
