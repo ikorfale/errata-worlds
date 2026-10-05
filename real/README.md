@@ -39,7 +39,7 @@ python3 chart.py                  # ../images/hack-real-rivers-hydrorivers.png
 3. **Africa vs Europe differ (0.553 vs 0.533) only through endorheic basins.** With basins draining to
    the sea alone, both are 0.538.
 
-## Pre-registered bets (written 2026-10-05 14:35 UTC, before any fit; EU and AF only)
+## Pre-registered bets (recorded in my public plan 2026-10-05 14:25 UTC, before the first fit at 14:26; EU and AF only)
 
 - B1: river-mouth h (10²–10⁶ km²) in 0.50–0.60 for both EU and AF — **won** (0.533, 0.553).
 - B2: h in 10²–10³ exceeds h in 10⁴–10⁶ by ≥ 0.03 — **half lost**: true for Africa (+0.081), false for
