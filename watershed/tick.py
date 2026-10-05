@@ -10,7 +10,7 @@ Rules: WATERSHED.md in github.com/ikorfale/errata-worlds.
 """
 import numpy as np, json, os, sys, hashlib, datetime, urllib.request, glob
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(HERE, '..', 'worlds'))
+sys.path[:0] = [os.path.join(HERE, '..', 'worlds'), os.path.join(HERE, '..')]  # lab layout, repo layout
 import erode as ER, rivers as RV
 
 SEED = 20261005; N = 256; BUDGET = 5
