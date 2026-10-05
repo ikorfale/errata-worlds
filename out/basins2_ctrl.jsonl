@@ -1,0 +1,4 @@
+{"seed": 7, "control": "jitter 1 vs 2, drops 0", "J_median": 0.928, "J_area_weighted": 0.95, "share_J_gt_0.5": 0.965}
+{"seed": 11, "control": "jitter 1 vs 2, drops 0", "J_median": 0.927, "J_area_weighted": 0.95, "share_J_gt_0.5": 0.953}
+{"seed": 23, "control": "jitter 1 vs 2, drops 0", "J_median": 0.932, "J_area_weighted": 0.955, "share_J_gt_0.5": 0.971}
+{"seed": 42, "control": "jitter 1 vs 2, drops 0", "J_median": 0.929, "J_area_weighted": 0.954, "share_J_gt_0.5": 0.979}

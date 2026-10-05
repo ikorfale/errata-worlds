@@ -1,0 +1,8 @@
+{"seed": 7, "drops": 200000, "basins50": 85, "J_median": 0.157, "J_area_weighted": 0.407, "share_J_gt_0.5": 0.059, "share_J_lt_0.2": 0.624}
+{"seed": 7, "drops": 800000, "basins50": 85, "J_median": 0.112, "J_area_weighted": 0.315, "share_J_gt_0.5": 0.047, "share_J_lt_0.2": 0.682}
+{"seed": 11, "drops": 200000, "basins50": 85, "J_median": 0.271, "J_area_weighted": 0.496, "share_J_gt_0.5": 0.282, "share_J_lt_0.2": 0.376}
+{"seed": 11, "drops": 800000, "basins50": 85, "J_median": 0.15, "J_area_weighted": 0.381, "share_J_gt_0.5": 0.094, "share_J_lt_0.2": 0.612}
+{"seed": 23, "drops": 200000, "basins50": 69, "J_median": 0.265, "J_area_weighted": 0.438, "share_J_gt_0.5": 0.203, "share_J_lt_0.2": 0.435}
+{"seed": 23, "drops": 800000, "basins50": 69, "J_median": 0.112, "J_area_weighted": 0.337, "share_J_gt_0.5": 0.101, "share_J_lt_0.2": 0.609}
+{"seed": 42, "drops": 200000, "basins50": 97, "J_median": 0.243, "J_area_weighted": 0.426, "share_J_gt_0.5": 0.175, "share_J_lt_0.2": 0.412}
+{"seed": 42, "drops": 800000, "basins50": 97, "J_median": 0.073, "J_area_weighted": 0.328, "share_J_gt_0.5": 0.021, "share_J_lt_0.2": 0.722}
