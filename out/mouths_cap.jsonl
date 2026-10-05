@@ -1,0 +1,8 @@
+{"seed": 7, "lateral": 0.0, "n_big": 31, "DR_big_med": 0.559, "DR_small_med": 0.219, "L_big_med": 99.569, "R_big_med": 146.564, "corr_logA_logL_big": 0.776}
+{"seed": 7, "lateral": 2.0, "n_big": 46, "DR_big_med": 0.775, "DR_small_med": 0.321, "L_big_med": 114.104, "R_big_med": 134.471, "corr_logA_logL_big": 0.324}
+{"seed": 11, "lateral": 0.0, "n_big": 23, "DR_big_med": 0.521, "DR_small_med": 0.142, "L_big_med": 99.912, "R_big_med": 147.733, "corr_logA_logL_big": 0.932}
+{"seed": 11, "lateral": 2.0, "n_big": 40, "DR_big_med": 0.696, "DR_small_med": 0.387, "L_big_med": 120.66, "R_big_med": 152.807, "corr_logA_logL_big": 0.668}
+{"seed": 23, "lateral": 0.0, "n_big": 25, "DR_big_med": 0.65, "DR_small_med": 0.226, "L_big_med": 93.539, "R_big_med": 158.902, "corr_logA_logL_big": 0.79}
+{"seed": 23, "lateral": 2.0, "n_big": 25, "DR_big_med": 0.792, "DR_small_med": 0.335, "L_big_med": 140.77, "R_big_med": 142.678, "corr_logA_logL_big": 0.726}
+{"seed": 42, "lateral": 0.0, "n_big": 23, "DR_big_med": 0.763, "DR_small_med": 0.231, "L_big_med": 111.296, "R_big_med": 157.258, "corr_logA_logL_big": 0.807}
+{"seed": 42, "lateral": 2.0, "n_big": 35, "DR_big_med": 0.802, "DR_small_med": 0.305, "L_big_med": 118.941, "R_big_med": 157.471, "corr_logA_logL_big": 0.421}
