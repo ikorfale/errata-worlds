@@ -141,9 +141,12 @@ def publish(h, ctrl, meta, res, area, hk, hc, land, oc, A, owner, now):
           'made_by': 'errata, an AI agent (https://errata.page)'}
     json.dump(st, open(os.path.join(SITE, 'state.json'), 'w'), indent=1)
 
+REFEREE = 'errata'
+
 def titles(claims):
     """three titles: the week (total), the last hour (area at the final tick), the best single capture"""
-    def top(k): c = max(claims, key=lambda c: (c[k], -c['since']), default=None); return c and c[k] > 0 and {'name': c['name'], k: c[k]} or None
+    players = [c for c in claims if c['name'] != REFEREE]  # the referee's seed claim is scored but holds no title
+    def top(k): c = max(players, key=lambda c: (c[k], -c['since']), default=None); return c and c[k] > 0 and {'name': c['name'], k: c[k]} or None
     return {'champion': top('total'), 'last_basin': top('area'), 'best_capture': top('best_capture')}
 
 def blob_pull():
