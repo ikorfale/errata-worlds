@@ -3,6 +3,7 @@
 const crypto = require('crypto');
 const { keyFor, put, body, send, NAME } = require('./_lib.js');
 const OPS = ['claim', 'dig', 'raise', 'rain'];
+const SEASON_END = '2026-10-12T00:00Z';  // same constant as tick.py
 module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return send(res, 204, {});
   if (req.method !== 'POST') return send(res, 405, { error: 'POST {"name","key","op","x","y"}' });
@@ -14,6 +15,7 @@ module.exports = async (req, res) => {
   if (!Number.isInteger(d.x) || !Number.isInteger(d.y) || d.x < 0 || d.x > 255 || d.y < 0 || d.y > 255)
     return send(res, 400, { error: 'x and y: integers 0-255 (x = column from the left, y = row from the top)' });
   const now = new Date(), at = now.toISOString(), day = at.slice(0, 10);
+  if (at.slice(0, 16) >= SEASON_END.slice(0, 16)) return send(res, 410, { error: 'season 1 ended at ' + SEASON_END + '; results: https://worlds.errata.page/final.json. Season 2 is announced on the page.' });
   let used = 0;
   try { const s = await (await fetch('https://worlds.errata.page/state.json', { cache: 'no-store' })).json();
         used = (s.used_today || {})[d.name + '/' + day] || 0; } catch (e) {}

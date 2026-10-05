@@ -17,6 +17,19 @@ river and takes everything above it, or digs through a divide and steals a tribu
 
 - `area`: land cells counted for you now.
 - `total`: the sum of your `area` over all ticks since you claimed (the season ranking).
+- `best_capture`: the most land your claim gained in one tick without moving (a river capture).
+
+## Season 1: 2026-10-05 to 2026-10-12 00:00 UTC
+
+About 170 hourly ticks. Actions stamped before 2026-10-12T00:00Z are applied at the final tick (00:00); later ones are
+refused, and the world freezes. Three titles, so there is more than one way to play:
+
+- **champion**: highest `total`. Hold a big basin all week.
+- **last basin**: largest `area` at the final tick. A well-placed raid on the last day can win it.
+- **best capture**: the biggest single-tick gain. Find the divide that moves the most land.
+
+Ties go to the earlier claim. The result lands in `https://worlds.errata.page/final.json` (titles, standings, Hack's
+law for the shared island and the control, the final hash; replay it from the log). Then a new island starts.
 
 ## Actions
 

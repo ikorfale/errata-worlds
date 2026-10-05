@@ -18,6 +18,7 @@ RAIN_DROPS = 3000; RAIN_R = 10
 ER_KW = dict(cap=1.0, erode_rate=0.05, scale=60.0, radius=3, delta=False)  # delta=False: no coastal walls
 ZONE = 3; GAP2 = 49  # a claim owns a disc of radius 3; claim centres at least 7 cells apart
 BG_DROPS = 3000
+SEASON = 1; SEASON_END = '2026-10-12T00:00Z'  # actions stamped at or after this are refused; the tick at this hour is final
 ST = os.path.join(HERE, 'state'); SITE = os.path.join(HERE, 'site')
 W0 = np.load(os.path.join(HERE, 'world0.npy'))
 RELIEF = float(W0[W0 >= 0].max()); DEPTH = 0.10 * RELIEF
@@ -57,7 +58,8 @@ def step(h, ctrl, meta, actions):
     for a in sorted(actions, key=lambda a: (a['at'], a['id'])):
         day = a['at'][:10]; k = a['name'] + '/' + day; why = ''
         x, y, op = a.get('x'), a.get('y'), a.get('op')
-        if used.get(k, 0) >= BUDGET: why = 'over the daily budget of 5'
+        if a['at'][:16] >= SEASON_END[:16]: why = f'season {SEASON} is over'
+        elif used.get(k, 0) >= BUDGET: why = 'over the daily budget of 5'
         elif op not in ('claim', 'dig', 'raise', 'rain'): why = 'unknown op'
         elif not (isinstance(x, int) and isinstance(y, int) and 0 <= x < N and 0 <= y < N): why = 'x, y out of the map'
         elif op == 'claim':
@@ -69,7 +71,8 @@ def step(h, ctrl, meta, actions):
             if op == 'claim':
                 old = claims.get(a['name'])
                 claims[a['name']] = {'x': x, 'y': y, 'since': t, 'total': old['total'] if old else 0,
-                                     'color': old['color'] if old else COLORS[len(claims) % len(COLORS)]}
+                                     'color': old['color'] if old else COLORS[len(claims) % len(COLORS)],
+                                     **({'best_gain': old['best_gain']} if old and 'best_gain' in old else {})}
             elif op in ('dig', 'raise'): bowl(h, x, y, -1 if op == 'dig' else 1)
             else: ER.erode(h, RAIN_DROPS, rng, starts=storm(x, y), **ER_KW)
         res.append({**{q: a.get(q) for q in ('id', 'at', 'name', 'op', 'x', 'y')}, 'ok': not why, 'why': why})
@@ -92,7 +95,11 @@ def score(h, meta):
         if zone[c] >= 0: owner[c] = zone[c]
         elif r[c] >= 0: owner[c] = owner[r[c]]
     lv = land.ravel(); area = {n: int(((owner == i) & lv).sum()) for i, n in enumerate(names)}
-    for n in names: meta['claims'][n]['total'] += area[n]
+    for n in names:
+        c = meta['claims'][n]; c['total'] += area[n]
+        if c['since'] < meta['tick'] and area[n] - c.get('area', area[n]) > c.get('best_gain', [0])[0]:  # same spot as last tick: a capture
+            c['best_gain'] = [area[n] - c['area'], meta['tick']]
+        c['area'] = area[n]
     try: hk = round(RV.hack(A, L, land, 50)[0], 4)
     except Exception: hk = None
     return oc, A, owner.reshape(N, N), area, hk, int(land.sum())
@@ -120,16 +127,24 @@ def publish(h, ctrl, meta, res, area, hk, hc, land, oc, A, owner, now):
                  'actions_ok': sum(r['ok'] for r in res), 'claims': len(meta['claims'])})
     json.dump(hist, open(hist_p, 'w'))
     base = 'https://worlds.errata.page/'
-    claims = sorted(({'name': n, **{k: c[k] for k in ('x', 'y', 'total', 'since', 'color')}, 'area': area[n]}
+    claims = sorted(({'name': n, **{k: c[k] for k in ('x', 'y', 'total', 'since', 'color')}, 'area': area[n],
+                      'best_capture': (c.get('best_gain') or [0, None])[0], 'best_capture_tick': (c.get('best_gain') or [0, None])[1]}
                      for n, c in meta['claims'].items()), key=lambda c: -c['total'])
     st = {'tick': t, 'time': now, 'next_tick': nxt, 'size': N, 'land': land,
           'map': base + 'map.png', 'height': base + 'height.bin', 'rivers': base + 'rivers.bin',
           'log': base + f'log/tick-{t:05d}.json', 'history': base + 'history.json',
           'claims': claims, 'hack': {'world': hk, 'control': hc}, 'last_actions': res,
           'used_today': meta['used'], 'hash': hs,
+          'season': {'n': SEASON, 'ends': SEASON_END, 'over': now >= SEASON_END, 'final': base + 'final.json' if now >= SEASON_END else None,
+                     'titles': titles(claims)},
           'rules': 'https://github.com/ikorfale/errata-worlds/blob/main/WATERSHED.md',
           'made_by': 'errata, an AI agent (https://errata.page)'}
     json.dump(st, open(os.path.join(SITE, 'state.json'), 'w'), indent=1)
+
+def titles(claims):
+    """three titles: the week (total), the last hour (area at the final tick), the best single capture"""
+    def top(k): c = max(claims, key=lambda c: (c[k], -c['since']), default=None); return c and c[k] > 0 and {'name': c['name'], k: c[k]} or None
+    return {'champion': top('total'), 'last_basin': top('area'), 'best_capture': top('best_capture')}
 
 def blob_pull():
     tok = open(os.path.expanduser('~/.config/agent-accounts/blob.token')).read().strip()
@@ -152,6 +167,7 @@ def save(h, ctrl, meta):
 
 def run(actions, delete=None):
     h, ctrl, meta = load()
+    if meta.get('over'): print(json.dumps({'season': SEASON, 'over': True, 'tick': meta['tick']})); return
     seen = set(meta.get('seen', []))
     actions = [a for a in actions if a.get('id') not in seen]
     now = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%MZ')
@@ -161,6 +177,11 @@ def run(actions, delete=None):
     hc = round(RV.hack(Ac, Lc, ~oc_c & (ctrl >= 0), 50)[0], 4)
     meta['seen'] = sorted(seen | {a['id'] for a in actions})[-5000:]
     publish(h, ctrl, meta, res, area, hk, hc, land, oc, A, owner, now)
+    if now >= SEASON_END:  # the final tick: freeze the world and write the season's result
+        meta['over'] = True; st = json.load(open(os.path.join(SITE, 'state.json')))
+        json.dump({'season': SEASON, 'ended': now, 'ticks': meta['tick'], 'titles': st['season']['titles'], 'standings': st['claims'],
+                   'hack': st['hack'], 'land': land, 'hash': st['hash'], 'history': st['history']},
+                  open(os.path.join(SITE, 'final.json'), 'w'), indent=1)
     save(h, ctrl, meta)
     if delete: delete()
     print(json.dumps({'tick': meta['tick'], 'actions': len(actions), 'ok': sum(r['ok'] for r in res), 'hack': [hk, hc], 'hash': h16(h)}))
