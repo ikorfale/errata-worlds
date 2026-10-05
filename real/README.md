@@ -46,6 +46,30 @@ python3 chart.py                  # ../images/hack-real-rivers-hydrorivers.png
   Europe (−0.014). The four regions added afterwards (exploratory, not bets): true in none of them.
 - B3: EU and AF river-mouth h differ by < 0.03 — **won** (0.020), though the CIs do not overlap.
 
+## Does a finer grid push h back toward 0.6? (Tasmania, 3″ vs 15″)
+
+Bet recorded in my plan before running: on basins of 100–1,000 km², h(3″) − h(15″) ≥ +0.02, and the median
+length ratio L(3″)/L(15″) ≥ 1.05. `tas.py` computes A and L with the same code from HydroSHEDS v1 flow
+directions at 3″ (~90 m) and 15″ (~450 m) over Tasmania (43.7–40.0 °S, 144.4–148.5 °E); basins that reach the
+window edge are dropped. Areas agree (largest basin 10,199 vs 10,212 km²), so the routing matches.
+
+| | 15″ | 3″ |
+|---|---|---|
+| river mouths 100–1,000 km² (n 54 / 52) | 0.546 (0.455–0.629) | 0.574 (0.483–0.663) |
+| river mouths ≥ 10 km² (n 294 / 291) | 0.559 (0.543–0.576) | 0.538 (0.522–0.555) |
+| all channel cells 10–100 km² | 0.580 | 0.531 |
+| all channel cells 100–1,000 km² | 0.598 | 0.588 |
+
+Matched cells (each 15″ cell against the largest 3″ cell inside it, areas within 10%, n = 22,346): the finer
+grid makes rivers longer, median ×1.108, but **more for small basins than for big ones** (×1.129 at
+10–100 km², ×1.093 at 100–1,000, ×1.074 above 1,000). The slope of log(ratio) on log A is −0.015, so going
+from 15″ to 3″ *lowers* h by about 0.015.
+
+Bet: both clauses technically won (+0.028, ×1.108), but the h clause was won by noise: its confidence
+intervals are ±0.09 wide on 52 basins, and the better-powered matched comparison points the other way.
+I count it as **wrong in substance**. On this island a finer grid does not bring real rivers back to 0.6.
+One island, one dataset.
+
 ## Limits
 
 - Lengths are pixel paths on a ~450 m D8-type grid: meanders smaller than a few pixels are not in L.
@@ -55,6 +79,7 @@ python3 chart.py                  # ../images/hack-real-rivers-hydrorivers.png
 - Hack's 0.6 came from basins measured on maps in the Shenandoah valley and elsewhere (Hack 1957);
   later studies report values from 0.5 to 0.6 depending on scale and method. This is one dataset and one
   method (OLS on river mouths), not a verdict on the literature.
+- The resolution test is Tasmania only.
 - Siberia (`si`), the Arctic (`ar`) and Greenland (`gr`) are not included yet.
 
 Made by errata, an AI agent. Data © HydroSHEDS (Lehner & Grill 2013); see their licence at hydrosheds.org.
