@@ -19,3 +19,15 @@
 {"seed": 23, "lateral": 2.0, "drops": 800000, "relief": 0.508, "land": 56927, "h": 0.5874, "h_D": 0.5555, "h_S": 0.0319, "sinuosity_med": 1.0935, "h_out": 0.4785, "h_cut500": 0.6632}
 {"seed": 42, "lateral": 0.0, "drops": 800000, "relief": 0.697, "land": 57311, "h": 0.5148, "h_D": 0.5128, "h_S": 0.002, "sinuosity_med": 1.1464, "h_out": 0.5179, "h_cut500": 0.5575}
 {"seed": 42, "lateral": 2.0, "drops": 800000, "relief": 0.635, "land": 58349, "h": 0.6122, "h_D": 0.5908, "h_S": 0.0214, "sinuosity_med": 1.092, "h_out": 0.4914, "h_cut500": 0.6964}
+{"seed": 7, "lateral": 0.25, "drops": 800000, "relief": 0.674, "land": 57439, "h": 0.555, "h_D": 0.5238, "h_S": 0.0312, "sinuosity_med": 1.1466, "h_out": 0.4389, "h_cut500": 0.6171}
+{"seed": 7, "lateral": 0.5, "drops": 800000, "relief": 0.672, "land": 57806, "h": 0.559, "h_D": 0.524, "h_S": 0.035, "sinuosity_med": 1.1292, "h_out": 0.4906, "h_cut500": 0.6242}
+{"seed": 7, "lateral": 1.0, "drops": 800000, "relief": 0.63, "land": 58166, "h": 0.5648, "h_D": 0.5322, "h_S": 0.0326, "sinuosity_med": 1.1202, "h_out": 0.5246, "h_cut500": 0.6202}
+{"seed": 11, "lateral": 0.25, "drops": 800000, "relief": 0.515, "land": 63245, "h": 0.556, "h_D": 0.5388, "h_S": 0.0172, "sinuosity_med": 1.119, "h_out": 0.4839, "h_cut500": 0.6141}
+{"seed": 11, "lateral": 0.5, "drops": 800000, "relief": 0.517, "land": 63387, "h": 0.6316, "h_D": 0.6097, "h_S": 0.0219, "sinuosity_med": 1.0996, "h_out": 0.5408, "h_cut500": 0.7018}
+{"seed": 11, "lateral": 1.0, "drops": 800000, "relief": 0.497, "land": 63512, "h": 0.6094, "h_D": 0.5911, "h_S": 0.0183, "sinuosity_med": 1.0926, "h_out": 0.5102, "h_cut500": 0.664}
+{"seed": 23, "lateral": 0.25, "drops": 800000, "relief": 0.61, "land": 56115, "h": 0.5409, "h_D": 0.5253, "h_S": 0.0156, "sinuosity_med": 1.1324, "h_out": 0.4503, "h_cut500": 0.5942}
+{"seed": 23, "lateral": 0.5, "drops": 800000, "relief": 0.593, "land": 56359, "h": 0.6001, "h_D": 0.5743, "h_S": 0.0259, "sinuosity_med": 1.0981, "h_out": 0.4975, "h_cut500": 0.6761}
+{"seed": 23, "lateral": 1.0, "drops": 800000, "relief": 0.56, "land": 56645, "h": 0.5999, "h_D": 0.5672, "h_S": 0.0328, "sinuosity_med": 1.0904, "h_out": 0.4893, "h_cut500": 0.685}
+{"seed": 42, "lateral": 0.25, "drops": 800000, "relief": 0.678, "land": 57765, "h": 0.5946, "h_D": 0.5781, "h_S": 0.0166, "sinuosity_med": 1.1199, "h_out": 0.4986, "h_cut500": 0.6636}
+{"seed": 42, "lateral": 0.5, "drops": 800000, "relief": 0.672, "land": 57991, "h": 0.6206, "h_D": 0.5983, "h_S": 0.0223, "sinuosity_med": 1.1031, "h_out": 0.5413, "h_cut500": 0.6968}
+{"seed": 42, "lateral": 1.0, "drops": 800000, "relief": 0.648, "land": 58177, "h": 0.5966, "h_D": 0.5777, "h_S": 0.0189, "sinuosity_med": 1.0858, "h_out": 0.4834, "h_cut500": 0.667}
