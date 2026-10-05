@@ -267,3 +267,17 @@ lost: basins that never touch the ice are just as anomalous, with small basins t
 for their area than anywhere else. The mask is coarse (1,587 of the 4,029 mouths fall inside an ice
 polygon), which would blur a difference but cannot make ice-free basins look like this. So the Greenland
 anomaly is unexplained. The real-river number to quote is still 0.54 (0.543 without Greenland).
+
+Same grid, other places (river mouths A ≥ 10 km², one fit each; Greenland row for comparison):
+
+| | n | h | c | median L/√A |
+|---|---|---|---|---|
+| Baffin Island | 3015 | 0.519 | 2.08 | 2.21 |
+| Ellesmere and Devon | 1541 | 0.448 | 3.21 | 2.52 |
+| Iceland | 521 | 0.540 | 1.87 | 2.14 |
+| Scandinavia north of 58°N | 2289 | 0.557 | 1.66 | 2.03 |
+| Greenland | 4029 | 0.368 | 7.52 | 3.52 |
+
+Baffin is normal (bet in `bets_ice.txt` won), so Greenland is not a property of the HYDRO1k grid. The most
+glaciated Canadian islands sit halfway, which points back at ice even though the on/off-ice split inside
+Greenland showed nothing; a better ice mask is the next thing to try.

@@ -4,3 +4,4 @@ largest DIST_DN_KM) lies inside the Natural Earth 1:10m glaciated-areas polygons
 E1: h(head on ice) < h(head off ice) by >= 0.05.
 E2: h(head off ice) is in the normal band 0.50-0.56.
 If E1 fails, the ice-sheet explanation in the README is wrong and must be struck.
+#146 bet 2026-10-05 22:22 UTC before running: Baffin Island (ar, same HYDRO1k grid) outlets A>=10 km2: c < 3 and h >= 0.48 (Greenland: c 7.5, h 0.368).
