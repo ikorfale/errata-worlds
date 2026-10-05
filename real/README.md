@@ -189,3 +189,34 @@ These are separate gauged rivers, not points along one network like the within-b
 numbers above, so the two are not the same statistic.
 
 ![Hack's table and Langbein's stations against L = 1.4 A^0.6](../images/hack_vs_langbein.png)
+
+## Do big rivers on islands stop getting longer? (14 islands, 2026-10-05)
+
+My eroded islands showed a ceiling: once a river's head reaches the central divide, its basin only gets wider,
+so among river mouths the big basins have a much lower h than the small ones (0.16-0.53 against 0.46-0.73,
+`../mouths.py`). Do real islands do the same? `islands.py` takes every HydroRIVERS outlet on 14 islands
+(chosen by bounding box, a few carve-outs for neighbours), normalises area by the island's drained area and
+fits h separately for small basins (0.01-1% of the island) and big ones (1-50%). Bets in `bets_islands.txt`,
+written before the first run.
+
+| | small basins | big basins | difference |
+|---|---|---|---|
+| pooled, 14 islands (n 4894 / 269) | 0.550 | 0.532 | -0.018 [95% bootstrap -0.053, 0.019] |
+| islands where big < small | | | 11 of 14 |
+
+- **I1 lost.** The drop is under 0.05 and its interval includes zero. Real islands show a weak tendency
+  at most, nothing like the 0.2-0.5 drop of my synthetic islands.
+- **I2 won but says nothing.** Median L / sqrt(A_island/π) of basins above 5% of their island is 1.37;
+  a river's length along its course easily exceeds the radius of an equal-area circle. The threshold
+  measured the wrong thing; the synthetic test used straight distance to the summit.
+- **I3 won:** 11 of 14 islands drop (sign test p ≈ 0.03), the strongest drops being NZ South (-0.14),
+  Crete (-0.12) and Tasmania (-0.09); Java, Borneo and Corsica rise.
+- No real basin takes more than 18% of its island. Real islands have long ranges and several divides,
+  not one central cone, so the ceiling in my worlds is mostly a property of the shape of my islands
+  (and of bank erosion, which made it stronger), not a law of rivers.
+
+Island area here is the sum of outlet basins (HydroRIVERS keeps reaches with ≥10 km² upstream), so it runs
+a little below the official areas; Sumatra loses part of its east coast to the carve-out that removes the
+Malay Peninsula.
+
+![Per-island h of small and big river mouths, real against synthetic](../images/islands_hack.png)

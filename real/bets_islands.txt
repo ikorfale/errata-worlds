@@ -1,0 +1,6 @@
+#144 real islands: does Hack's h flatten for outlet basins that are a sizeable fraction of their island? Written 2026-10-05 22:22 UTC before any island fit.
+Method: islands chosen by bounding box (no other land inside): outlet reaches (NEXT_DOWN=0) of HydroRIVERS; Aisl = sum of outlet UPLAND_SKM in the box, Ri = sqrt(Aisl/pi).
+Normalised: a = A/Aisl, l = L/Ri, pooled over islands.
+I1: pooled h for big outlets (a in 0.01-0.5) is lower than h for small outlets (a in 1e-4 - 1e-2) by >= 0.05.  (synthetic: big 0.16-0.53 vs small 0.68-0.73)
+I2: median l of big outlets (a>=0.05) >= 0.6  (main stream reaches deep into the island).
+I3: per island, big-h < small-h on >= 2/3 of islands that have >= 8 big outlets.

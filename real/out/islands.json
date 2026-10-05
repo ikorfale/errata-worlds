@@ -1,0 +1,139 @@
+{
+ "islands": {
+  "Great Britain": {
+   "n_out": 1660,
+   "Aisl_km2": 230768,
+   "n_big": 18,
+   "h_small": 0.554,
+   "h_big": 0.548,
+   "l_med_a>=0.05": 1.01,
+   "largest_a": 0.058
+  },
+  "Ireland": {
+   "n_out": 647,
+   "Aisl_km2": 78830,
+   "n_big": 17,
+   "h_small": 0.559,
+   "h_big": 0.531,
+   "l_med_a>=0.05": 1.056,
+   "largest_a": 0.149
+  },
+  "Iceland": {
+   "n_out": 1076,
+   "Aisl_km2": 93833,
+   "n_big": 19,
+   "h_small": 0.522,
+   "h_big": 0.502,
+   "l_med_a>=0.05": 1.355,
+   "largest_a": 0.088
+  },
+  "Corsica": {
+   "n_out": 93,
+   "Aisl_km2": 7745,
+   "n_big": 26,
+   "h_small": 0.525,
+   "h_big": 0.587,
+   "l_med_a>=0.05": 1.284,
+   "largest_a": 0.13
+  },
+  "Sardinia": {
+   "n_out": 110,
+   "Aisl_km2": 21987,
+   "n_big": 17,
+   "h_small": 0.566,
+   "h_big": 0.557,
+   "l_med_a>=0.05": 1.29,
+   "largest_a": 0.155
+  },
+  "Sicily": {
+   "n_out": 167,
+   "Aisl_km2": 23558,
+   "n_big": 21,
+   "h_small": 0.531,
+   "h_big": 0.479,
+   "l_med_a>=0.05": 1.373,
+   "largest_a": 0.179
+  },
+  "Crete": {
+   "n_out": 122,
+   "Aisl_km2": 6635,
+   "n_big": 24,
+   "h_small": 0.597,
+   "h_big": 0.477,
+   "l_med_a>=0.05": 0.91,
+   "largest_a": 0.087
+  },
+  "Tasmania": {
+   "n_out": 366,
+   "Aisl_km2": 60622,
+   "n_big": 16,
+   "h_small": 0.574,
+   "h_big": 0.481,
+   "l_med_a>=0.05": 1.307,
+   "largest_a": 0.168
+  },
+  "NZ North": {
+   "n_out": 773,
+   "Aisl_km2": 108887,
+   "n_big": 23,
+   "h_small": 0.583,
+   "h_big": 0.534,
+   "l_med_a>=0.05": 1.551,
+   "largest_a": 0.132
+  },
+  "NZ South": {
+   "n_out": 875,
+   "Aisl_km2": 146653,
+   "n_big": 21,
+   "h_small": 0.569,
+   "h_big": 0.433,
+   "l_med_a>=0.05": 1.168,
+   "largest_a": 0.141
+  },
+  "New Guinea": {
+   "n_out": 4136,
+   "Aisl_km2": 798350,
+   "n_big": 14,
+   "h_small": 0.571,
+   "h_big": 0.569,
+   "l_med_a>=0.05": 1.932,
+   "largest_a": 0.1
+  },
+  "Borneo": {
+   "n_out": 2169,
+   "Aisl_km2": 748257,
+   "n_big": 19,
+   "h_small": 0.581,
+   "h_big": 0.608,
+   "l_med_a>=0.05": 1.872,
+   "largest_a": 0.112
+  },
+  "Java": {
+   "n_out": 922,
+   "Aisl_km2": 127686,
+   "n_big": 18,
+   "h_small": 0.581,
+   "h_big": 0.623,
+   "l_med_a>=0.05": 1.584,
+   "largest_a": 0.124
+  },
+  "Sumatra": {
+   "n_out": 2094,
+   "Aisl_km2": 418622,
+   "n_big": 16,
+   "h_small": 0.591,
+   "h_big": 0.532,
+   "l_med_a>=0.05": 1.872,
+   "largest_a": 0.131
+  }
+ },
+ "pooled": {
+  "pooled_h_small": 0.55,
+  "pooled_h_big": 0.532,
+  "n_small": 4894,
+  "n_big": 269,
+  "median_l_a>=0.05": 1.374,
+  "n_a>=0.05": 46,
+  "I3": "11/14 islands with >=8 big outlets have h_big < h_small"
+ }
+}
