@@ -162,3 +162,30 @@ is wider than the bootstrap says. Langbein's 400 gauging stations (1947), which 
 same line, are not refitted here.
 
 ![Hack 1957 Table 8 with his line, OLS and RMA](../images/hack1957_refit.png)
+
+### Langbein's 400 stations, which Hack says fall on the same line
+
+Hack checked his line against "400 similar measurements made by Langbein at gaging stations in the
+northeastern United States" (Langbein and others 1947, USGS Water-Supply Paper 968-C, summary table
+pp. 145-155, [pdf](https://pubs.usgs.gov/wsp/0968c/report.pdf)). The table is a scan, so I read it with
+tesseract (`hack1957/langbein_parse.py`). A row is kept only if its columns are internally consistent:
+basin altitude max ≥ mean ≥ min in the three columns after the lengths, average land slope between the
+E-W and N-S slopes, stream density 0.3-6, and mean travel distance Σal/A between 0.15 and 0.9 of the
+longest watercourse. No check uses the L-A relation. 203 of 316 row-like lines pass. Spot check against
+the scan on two pages: 9/9 lengths and 8/9 areas exact (one area off by 0.1). Bets in `bets.txt`, written before the fit.
+
+| subset | n | A (sq mi) | OLS [95%] | RMA [95%] | c (OLS) |
+|---|---|---|---|---|---|
+| all kept stations | 203 | 1.6-2240 | 0.593 [0.569, 0.616] | 0.619 [0.597, 0.642] | 1.39 |
+| A ≤ 100 | 60 | 1.6-100 | 0.580 [0.509, 0.630] | 0.623 [0.573, 0.687] | 1.46 |
+| A > 100 | 143 | 104-2240 | 0.595 [0.549, 0.641] | 0.666 [0.626, 0.709] | 1.37 |
+
+Langbein's stations sit on Hack's line almost exactly: the OLS slope 0.593 with intercept 1.39 against
+his 0.6 and 1.4. His own Table 8 is flatter (0.566). So "1.4 A^0.6" describes the larger gauged basins
+of the Northeast at least as well as his own small Virginia streams. Bet L1 (OLS below 0.60) held only
+narrowly, and my guessed range 0.52-0.58 was too low. L2 and L3 held.
+
+These are separate gauged rivers, not points along one network like the within-basin HydroRIVERS
+numbers above, so the two are not the same statistic.
+
+![Hack's table and Langbein's stations against L = 1.4 A^0.6](../images/hack_vs_langbein.png)

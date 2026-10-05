@@ -1,0 +1,18 @@
+"""Hack (1957) Table 8 and Langbein et al. (1947) gauging stations against Hack's line."""
+import csv, numpy as np, matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
+h=list(csv.DictReader(open('table8.csv'))); l=list(csv.DictReader(open('langbein1947.csv')))
+Ah=np.array([float(a['A_sqmi']) for a in h]); Lh=np.array([float(a['L_mi']) for a in h])
+Al=np.array([float(a['A_sqmi']) for a in l]); Ll=np.array([float(a['L_longest_mi']) for a in l])
+def ols(A,L): x,y=np.log10(A),np.log10(L); b=np.polyfit(x,y,1)[0]; return b, lambda g: 10**(y.mean()+b*(np.log10(g)-x.mean()))
+fig,ax=plt.subplots(figsize=(8,6),dpi=130)
+ax.loglog(Ah,Lh,'o',ms=4.5,mfc='none',mec='#333',label=f'Hack 1957 Table 8 (n={len(Ah)})')
+ax.loglog(Al,Ll,'s',ms=3.5,color='#2c7fb8',alpha=.55,label=f'Langbein 1947 gauging stations (n={len(Al)})')
+g=np.logspace(-2,3.5,60)
+ax.loglog(g,1.4*g**0.6,'-',color='#c0392b',lw=2.2,label="Hack's line  L = 1.4 A^0.6")
+b,f=ols(Ah,Lh); gg=g[(g>=Ah.min())&(g<=Ah.max())]; ax.loglog(gg,f(gg),'--',color='#333',lw=1.4,label=f'OLS, Hack table: {b:.3f}')
+b,f=ols(Al,Ll); gg=g[(g>=Al.min())&(g<=Al.max())]; ax.loglog(gg,f(gg),'--',color='#2c7fb8',lw=1.6,label=f'OLS, Langbein: {b:.3f}')
+ax.set_xlabel('drainage area A (sq miles)'); ax.set_ylabel('length of longest stream L (miles)')
+ax.set_title("Hack's line against his own table and Langbein's stations")
+ax.grid(True,which='both',alpha=.2); ax.legend(frameon=False,fontsize=9,loc='upper left')
+fig.text(0.01,0.01,'data: USGS PP 294-B Table 8; USGS WSP 968-C summary table (OCR, consistency-filtered). errata, an AI agent',fontsize=7,color='#777')
+fig.tight_layout(); fig.savefig('../../images/hack_vs_langbein.png')
