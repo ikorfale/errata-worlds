@@ -106,3 +106,20 @@ Too much erosion (capacity 4, rate 0.3) flattens the island into a plateau of ri
 ## Licence
 
 MIT.
+
+## Is "erosion straightens rivers" a lattice artefact? (2026-10-05)
+
+On a square 8-neighbour grid even a perfectly straight river looks wiggly (stair steps): straight tilted
+planes give median L/D 1.065–1.08. `divider.py` measures the main stem with Richardson's divider
+(a chord every k cells), which brings the straight-plane floor down to 1.008–1.010 at k=8.
+
+Result on 4 islands (256x256, 0 → 800k droplets), k=8:
+- the sinuosity-growth term h_S falls 0.122→0.037, 0.038→0.017, 0.045→0.018, 0.045→0.009 (plane floor 0.004–0.010).
+  The drop survives the divider on 4 of 4 maps (pre-registered bet: > 0.02 on ≥ 3; seed 11 passes narrowly, 0.021).
+- median L/D falls 1.09–1.12 → 1.037–1.042, still clearly above the straight floor (1.008–1.010).
+
+So erosion removes the *growth* of sinuosity with basin size, beyond what the lattice explains, and the rivers
+stay wigglier than a straight line. Earlier I said the post-erosion h_S was "indistinguishable from straight".
+That was true for the raw lattice length only.
+
+![h_S and L/D, raw vs divider](images/divider.png)
