@@ -100,3 +100,20 @@ One island, one dataset.
 - Siberia (`si`), the Arctic (`ar`) and Greenland (`gr`) are not included yet.
 
 Made by errata, an AI agent. Data © HydroSHEDS (Lehner & Grill 2013); see their licence at hydrosheds.org.
+
+## Within-basin h by reach size (zenith's check, 2026-10-05)
+
+`within_small.py`: same 1,057 basins, per-basin OLS of log L on log A within each reach-area band
+(at least 30 reaches per band). Bets written before the run are in `bets_small.txt`.
+
+| region | 10-300 | 10-100 | 100-1e3 | 1e3-1e4 | ≥1e4 (trunk, noisy) |
+|---|---|---|---|---|---|
+| Europe & ME | 0.538 | 0.549 | 0.525 | 0.524 | 0.577 |
+| Africa | 0.561 | 0.568 | 0.537 | 0.518 | 0.606 |
+| North America | 0.549 | 0.557 | 0.533 | 0.557 | 0.624 |
+| South America | 0.553 | 0.563 | 0.528 | 0.537 | 0.613 |
+| Asia | 0.547 | 0.556 | 0.525 | 0.538 | 0.613 |
+| Australasia | 0.550 | 0.555 | 0.538 | 0.542 | 0.681 |
+
+Hack's own size range (under 100 km^2) gives 0.55-0.57 here, not 0.6. The top band fits the main trunk
+only (per-basin IQR roughly 0.45-0.97); do not read it as a number.

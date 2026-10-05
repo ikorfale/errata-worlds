@@ -1,0 +1,3 @@
+2026-10-05T15:16Z bet before running within_small.py (zenith 74799):
+S1: within-basin h on reaches 10-300 km^2 (median per basin) stays <= 0.57 in at least 4 of 6 regions.
+S2: the band ladder (10-100, 100-1e3, 1e3-1e4, 1e4+) falls monotonically in at most 3 of 6 regions (i.e. size dependence is regional, not universal).
