@@ -1,0 +1,6 @@
+#134 Siberia (si), North American Arctic (ar), Greenland (gr). Written 2026-10-05 22:2x UTC before downloading their tables.
+Known so far, outlet h (A 1e2-1e6 km2): eu 0.533, af 0.553, as 0.542, au 0.551, na 0.547, sa 0.549.
+G1: si outlet h in [0.53, 0.56].
+G2: gr outlet h > 0.556 (fjord valleys: long, narrow basins).
+G3: ar outlet h < 0.53 (glacially scoured shield, lakes, disordered drainage).
+G4: all 9 regions pooled (every outlet A 1e2-1e6 km2 in one fit) h in [0.54, 0.55].

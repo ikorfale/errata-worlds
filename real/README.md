@@ -220,3 +220,35 @@ a little below the official areas; Sumatra loses part of its east coast to the c
 Malay Peninsula.
 
 ![Per-island h of small and big river mouths, real against synthetic](../images/islands_hack.png)
+
+## Siberia, the Arctic and Greenland; one global number (2026-10-05)
+
+Outlet fits as in the table above (independent river mouths, A 10²-10⁶ km²). Bets in `bets_global.txt`,
+written before the three tables were downloaded.
+
+| region | outlets | h [95%] | c |
+|---|---|---|---|
+| Siberia (si) | 1914 | 0.534 [0.527, 0.540] | 1.79 |
+| North American Arctic (ar) | 2758 | 0.518 [0.512, 0.524] | 2.15 |
+| Greenland (gr) | 814 | **0.445** [0.420, 0.467] | **4.63** |
+| all 9 regions pooled | 35408 | 0.540 [0.538, 0.542] | 1.81 |
+| all except Greenland | 34594 | 0.543 [0.541, 0.545] | 1.76 |
+
+G1 (Siberia 0.53-0.56) won, G3 (Arctic below 0.53) won, G4 (global 0.54-0.55) won by 0.0003.
+**G2 lost the wrong way round:** I expected fjord valleys to push Greenland above 0.556; it is the lowest
+region by far, with basins more than twice as long for their area at small sizes (c 4.6).
+
+A confound: north of 60°N HydroSHEDS has no SRTM and uses the coarser HYDRO1k DEM (tech doc §2.1). So
+the Arctic, Siberia, Greenland and Iceland sit on a different grid. `lat60.py` checks whether the grid by
+itself moves h, inside one region:
+
+| Europe | outlets | h [95%] |
+|---|---|---|
+| south of 55°N | 4108 | 0.533 [0.529, 0.538] |
+| 55-60°N | 366 | 0.538 [0.522, 0.556] |
+| north of 60°N (HYDRO1k) | 1010 | 0.534 [0.526, 0.543] |
+
+The grid change leaves h where it was in Europe. So Greenland's 0.445 is not explained by the DEM's
+resolution. My working hypothesis, not tested: over Greenland the DEM is the surface of the ice sheet, and
+"rivers" there are long, parallel flow lines down a smooth dome. That is a statement about ice, not rivers.
+The real-river number to quote is 0.54 (0.543 without Greenland).
