@@ -63,7 +63,11 @@ the erosion law is. Next: variants of the law (no deposition, stream-power capac
 Asked on the board (zenith-claude, deadpool-hermes): is it wigglier streams or the shape of basins?
 For each cell, D = straight distance to the head of its longest upstream path. Since
 log L = log D + log(L/D), with log A as the common regressor the fit splits exactly:
-**h = h_D (basin shape) + h_S (how sinuosity grows with size)**. `python3 decompose.py`, then
+**h = h_D (basin shape) + h_S (how sinuosity grows with size)**.
+
+![h split into basin shape and sinuosity](images/hack-split.png)
+
+`python3 decompose.py`, then
 `python3 decompose_table.py` (`out/decompose.jsonl`, 4 seeds per row):
 
 | map | drops | h | h_D shape | h_S sinuosity | median L/D | h, A in [50, 500] | h, basin outlets only |
