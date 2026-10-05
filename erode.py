@@ -53,7 +53,7 @@ def erode_brush(h, i, j, amt, B):
     np.add.at(h, (np.clip(jj, 0, n - 1).ravel(), np.clip(ii, 0, n - 1).ravel()), -(amt[:, None] * ww).ravel())
 
 def erode(h, drops, rng, batch=4096, steps=64, inertia=0.05, cap=4.0, min_slope=0.01,
-          erode_rate=0.3, deposit_rate=0.3, evap=0.02, gravity=4.0, scale=1.0, radius=3, sea=0.0, snap=None, snap_every=0):
+          erode_rate=0.3, deposit_rate=0.3, evap=0.02, gravity=4.0, scale=1.0, radius=3, sea=0.0, deposit=True, snap=None, snap_every=0):
     n = h.shape[0]; done = 0; frames = []; B = brush(radius); life = 0
     while done < drops:
         m = min(batch, drops - done)
@@ -82,7 +82,8 @@ def erode(h, drops, rng, batch=4096, steps=64, inertia=0.05, cap=4.0, min_slope=
             # reaching the sea (base level): drop the whole load as a delta and stop
             wet = nh < sea
             if wet.any():
-                spread(h, i[wet], j[wet], u[wet], v[wet], sed[k[wet]] / scale)
+                # erosion-only variant: the load leaves with the water (05.10: dumping it here built coastal walls)
+                if deposit: spread(h, i[wet], j[wet], u[wet], v[wet], sed[k[wet]] / scale)
                 alive[k[wet]] = False
                 dry = ~wet; k = k[dry]; i, j, u, v, hh = i[dry], j[dry], u[dry], v[dry], hh[dry]
                 ndx, ndy, nx, ny, nh = ndx[dry], ndy[dry], nx[dry], ny[dry], nh[dry]
@@ -91,6 +92,7 @@ def erode(h, drops, rng, batch=4096, steps=64, inertia=0.05, cap=4.0, min_slope=
             depo = (sed[k] > c) | (dh > 0)
             amt = np.where(dh > 0, np.minimum(dh, sed[k]), (sed[k] - c) * deposit_rate)
             amt = np.where(depo, amt, -np.minimum((c - sed[k]) * erode_rate, -dh))
+            if not deposit: amt = np.where(depo, 0.0, amt)  # erosion-only variant: carried soil never comes back
             dep = np.where(amt > 0, amt, 0); ero = np.where(amt < 0, -amt, 0)
             spread(h, i, j, u, v, dep / scale)
             if radius > 0: erode_brush(h, i, j, ero / scale, B)
@@ -111,7 +113,7 @@ if __name__ == "__main__":
     ap.add_argument("--n", type=int, default=256); ap.add_argument("--drops", type=int, default=200000)
     ap.add_argument("--seed", type=int, default=7); ap.add_argument("--beta", type=float, default=3.2)
     ap.add_argument("--scale", type=float, default=60.0, help="height units per map unit when computing slopes")
-    ap.add_argument("--radius", type=int, default=3); ap.add_argument("--cap", type=float, default=4.0); ap.add_argument("--er", type=float, default=0.3); ap.add_argument("--out", default="out/w"); ap.add_argument("--snap_every", type=int, default=0)
+    ap.add_argument("--radius", type=int, default=3); ap.add_argument("--cap", type=float, default=4.0); ap.add_argument("--er", type=float, default=0.3); ap.add_argument("--out", default="lab/worlds/out/w"); ap.add_argument("--snap_every", type=int, default=0)
     a = ap.parse_args()
     rng = np.random.default_rng(a.seed)
     h0 = spectral_heightmap(a.n, a.beta, rng); h = h0.copy()

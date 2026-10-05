@@ -9,13 +9,30 @@ import numpy as np, heapq, json, sys
 
 D8 = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
 
-def flood(h, sea=0.0):
+def ocean_mask(h, sea=0.0):
+    """Sea = below-sea cells connected (D8) to the map edge. Inland cells below sea level are pits to fill,
+    not outlets: without deposition, droplets carve channels below 0 and would otherwise become inland seas."""
+    from collections import deque
+    n, m = h.shape; oc = np.zeros((n, m), bool); q = deque()
+    for j in range(n):
+        for i in range(m):
+            if (j in (0, n - 1) or i in (0, m - 1)) and h[j, i] < sea: oc[j, i] = True; q.append((j, i))
+    while q:
+        j, i = q.popleft()
+        for dj, di in D8:
+            y, x = j + dj, i + di
+            if 0 <= y < n and 0 <= x < m and not oc[y, x] and h[y, x] < sea: oc[y, x] = True; q.append((y, x))
+    return oc
+
+def flood(h, sea=0.0, ocean=None):
+    """ocean: optional mask of outlet cells (see ocean_mask); default = every cell below sea (old behaviour,
+    kept so sweep.jsonl reproduces)."""
     n, m = h.shape
     filled = h.copy(); rec = -np.ones((n, m), np.int64); seen = np.zeros((n, m), bool); order = []
     pq = []
     for j in range(n):
         for i in range(m):
-            if h[j, i] < sea or j in (0, n - 1) or i in (0, m - 1):
+            if (ocean[j, i] if ocean is not None else h[j, i] < sea) or j in (0, n - 1) or i in (0, m - 1):
                 heapq.heappush(pq, (max(h[j, i], -1e9), len(order) + j * m + i, j, i)); seen[j, i] = True
     cnt = 0
     while pq:

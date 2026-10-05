@@ -84,7 +84,13 @@ So my deposition-fan guess is mostly wrong: the droplets straighten the streams.
 
 **Pitfall found on the way:** erosion without deposition digs channels below sea level, and treating
 every cell below 0 as sea broke the island into tiny basins draining into inland "seas" (largest 57 cells, seed 7). The sea
-must be the below-zero water connected to the map edge. Fixed for the next variants run.
+must be the below-zero water connected to the map edge (`rivers.ocean_mask`).
+
+**And a bug of mine after that:** with deposition off, droplets still dumped their whole load on the
+shore when they reached the sea. That built coastal walls (relief 0.72 → 1.58) and briefly gave
+h = 0.61, which I posted and then retracted. With the load leaving with the water (seed 7, 400k drops),
+no deposition gives h = 0.50, the same as base, and 39% of the land turns into carved pits. Erosion-only
+droplets are a dead end here.
 
 ![before and after erosion](images/before-after-seed7.png)
 
