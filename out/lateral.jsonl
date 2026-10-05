@@ -1,0 +1,13 @@
+{"seed": 7, "lateral": 0.0, "drops": 200000, "relief": 0.729, "land": 55701, "h": 0.5443, "h_D": 0.4918, "h_S": 0.0525, "sinuosity_med": 1.2401, "h_out": 0.497, "h_cut500": 0.5683}
+{"seed": 7, "lateral": 0.5, "drops": 200000, "relief": 0.726, "land": 56419, "h": 0.5497, "h_D": 0.5093, "h_S": 0.0404, "sinuosity_med": 1.1944, "h_out": 0.5022, "h_cut500": 0.5937}
+{"seed": 7, "lateral": 2.0, "drops": 200000, "relief": 0.713, "land": 56748, "h": 0.5659, "h_D": 0.5355, "h_S": 0.0304, "sinuosity_med": 1.1807, "h_out": 0.4978, "h_cut500": 0.6232}
+{"seed": 7, "lateral": 8.0, "drops": 200000, "relief": 0.699, "land": 56877, "h": 0.5587, "h_D": 0.5103, "h_S": 0.0485, "sinuosity_med": 1.1766, "h_out": 0.5358, "h_cut500": 0.6}
+{"seed": 11, "lateral": 0.0, "drops": 200000, "relief": 0.571, "land": 62623, "h": 0.5172, "h_D": 0.4805, "h_S": 0.0366, "sinuosity_med": 1.2658, "h_out": 0.5057, "h_cut500": 0.5504}
+{"seed": 11, "lateral": 8.0, "drops": 200000, "relief": 0.536, "land": 63302, "h": 0.5811, "h_D": 0.5497, "h_S": 0.0314, "sinuosity_med": 1.1665, "h_out": 0.5339, "h_cut500": 0.6261}
+{"seed": 11, "lateral": 2.0, "drops": 200000, "relief": 0.559, "land": 63237, "h": 0.5702, "h_D": 0.5313, "h_S": 0.0389, "sinuosity_med": 1.1748, "h_out": 0.566, "h_cut500": 0.6048}
+{"seed": 23, "lateral": 0.0, "drops": 200000, "relief": 0.657, "land": 54957, "h": 0.5186, "h_D": 0.4825, "h_S": 0.0361, "sinuosity_med": 1.2299, "h_out": 0.4641, "h_cut500": 0.5666}
+{"seed": 23, "lateral": 8.0, "drops": 200000, "relief": 0.596, "land": 55805, "h": 0.5839, "h_D": 0.5625, "h_S": 0.0213, "sinuosity_med": 1.1784, "h_out": 0.4772, "h_cut500": 0.6287}
+{"seed": 23, "lateral": 2.0, "drops": 200000, "relief": 0.628, "land": 55731, "h": 0.5736, "h_D": 0.5429, "h_S": 0.0306, "sinuosity_med": 1.1641, "h_out": 0.481, "h_cut500": 0.5884}
+{"seed": 42, "lateral": 8.0, "drops": 200000, "relief": 0.696, "land": 57538, "h": 0.5704, "h_D": 0.5482, "h_S": 0.0222, "sinuosity_med": 1.1444, "h_out": 0.5333, "h_cut500": 0.6154}
+{"seed": 42, "lateral": 0.0, "drops": 200000, "relief": 0.756, "land": 56450, "h": 0.5214, "h_D": 0.5141, "h_S": 0.0073, "sinuosity_med": 1.2478, "h_out": 0.5175, "h_cut500": 0.5646}
+{"seed": 42, "lateral": 2.0, "drops": 200000, "relief": 0.725, "land": 57404, "h": 0.5769, "h_D": 0.558, "h_S": 0.0188, "sinuosity_med": 1.1499, "h_out": 0.4945, "h_cut500": 0.6308}

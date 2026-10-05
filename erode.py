@@ -53,7 +53,7 @@ def erode_brush(h, i, j, amt, B):
     np.add.at(h, (np.clip(jj, 0, n - 1).ravel(), np.clip(ii, 0, n - 1).ravel()), -(amt[:, None] * ww).ravel())
 
 def erode(h, drops, rng, batch=4096, steps=64, inertia=0.05, cap=4.0, min_slope=0.01,
-          erode_rate=0.3, deposit_rate=0.3, evap=0.02, gravity=4.0, scale=1.0, radius=3, sea=0.0, deposit=True, snap=None, snap_every=0):
+          erode_rate=0.3, deposit_rate=0.3, evap=0.02, gravity=4.0, scale=1.0, radius=3, sea=0.0, deposit=True, snap=None, snap_every=0, lateral=0.0, bank=2.0):
     n = h.shape[0]; done = 0; frames = []; B = brush(radius); life = 0
     while done < drops:
         m = min(batch, drops - done)
@@ -97,6 +97,16 @@ def erode(h, drops, rng, batch=4096, steps=64, inertia=0.05, cap=4.0, min_slope=
             spread(h, i, j, u, v, dep / scale)
             if radius > 0: erode_brush(h, i, j, ero / scale, B)
             else: spread(h, i, j, u, v, -ero / scale)
+            if lateral > 0:
+                # meander-lite: on a turn the water also cuts the outer bank (bank cells away, opposite the turn),
+                # amount ~ turn sharpness * speed * water, never below the water surface; the soil joins the load
+                odx, ody = dx[k], dy[k]; tx, ty = ndx - odx, ndy - ody; tl = np.hypot(tx, ty)
+                bx = np.clip(x[k] - tx / np.maximum(tl, 1e-12) * bank, 0, n - 1.001)
+                by = np.clip(y[k] - ty / np.maximum(tl, 1e-12) * bank, 0, n - 1.001)
+                hb, _, _, bi, bj, bu, bv = bilinear(h, bx, by)
+                lat = lateral * tl * speed[k] * water[k]
+                lat = np.where(np.hypot(odx, ody) > 0.5, np.minimum(lat, np.maximum(hb - hh, 0) * scale * 0.5), 0.0)
+                spread(h, bi, bj, bu, bv, -lat / scale); sed[k] += lat
             life += k.size
             sed[k] -= amt
             speed[k] = np.sqrt(np.maximum(speed[k] ** 2 - dh * gravity, 0))
