@@ -135,3 +135,30 @@ log L on log A. Medians over basins. Bets R1, R2 in `bets_small.txt` (both held,
 An RMA line through small reaches gives 0.58-0.64, so a classic 0.6 can be the same data with a
 different line. But the RMA slope falls as the area range widens (0.63 → 0.58 → 0.55), while OLS barely
 moves: on a narrow range RMA mostly measures scatter. Over four decades both lines agree at 0.54-0.56.
+
+## How was the classic 0.6 fitted? Hack's own table, refitted (zenith's third question, 2026-10-05)
+
+Hack (1957, USGS Professional Paper 294-B, p. 63-64, [pdf](https://pubs.usgs.gov/pp/0294b/report.pdf))
+gives no fitting method: the points of his figure 25 "are grouped closely about a line" `L = 1.4 A^0.6`
+drawn on log paper. His Table 8 lists L and A for 96 "selected localities" (0.03 to 379 sq mi). I
+transcribed it (`hack1957/table8.csv`, checked against the printed table) and refitted it (`hack1957/fit.py`,
+output in `fit.out`). Bets were written before the fit in `hack1957/bets.txt`; all three held.
+
+| subset | n | OLS | RMA | r |
+|---|---|---|---|---|
+| all rows | 96 | 0.566 | 0.574 | 0.987 |
+| unique (L, A) pairs | 93 | 0.565 | 0.572 | 0.987 |
+| without his terrace departures | 83 | 0.563 | 0.569 | 0.989 |
+| A ≥ 1 sq mi | 88 | 0.572 | 0.584 | 0.981 |
+
+Bootstrap (5000 resamples of points) 95%: OLS 0.547-0.583, RMA 0.554-0.591. On his own data the line
+choice moves the slope by less than 0.01, because the cloud is tight over four decades. The 0.6 sits
+just outside both intervals, but forcing it costs little (rms 0.085 vs 0.080 in log10), so it reads as a
+round line drawn by eye, not a fitted value. His table and HydroRIVERS agree at about 0.55-0.57.
+
+Caveats: Table 8 is a selection; figure 25 plots "all localities visited", which I cannot read off the
+figure. Many points lie along the same few streams, so they are not independent and the real interval
+is wider than the bootstrap says. Langbein's 400 gauging stations (1947), which Hack says fall on the
+same line, are not refitted here.
+
+![Hack 1957 Table 8 with his line, OLS and RMA](../images/hack1957_refit.png)

@@ -1,0 +1,19 @@
+all rows                                   n= 96 OLS=0.566 RMA=0.574 r=0.987 c_OLS=1.61 decades=4.10
+unique (L,A) pairs                         n= 93 OLS=0.565 RMA=0.572 r=0.987 c_OLS=1.63 decades=4.10
+without terrace (Hack's solid black)       n= 83 OLS=0.563 RMA=0.569 r=0.989 c_OLS=1.58 decades=4.10
+without terrace + North River              n= 80 OLS=0.563 RMA=0.570 r=0.989 c_OLS=1.57 decades=4.10
+  group coastal                            n=  6 OLS=0.592 RMA=0.604 r=0.981 c_OLS=1.37 decades=0.79
+  group granodiorite                       n=  5 OLS=0.561 RMA=0.567 r=0.990 c_OLS=1.33 decades=1.14
+  group limestone                          n= 32 OLS=0.561 RMA=0.565 r=0.992 c_OLS=1.64 decades=3.00
+  group piedmont                           n= 10 OLS=0.549 RMA=0.557 r=0.986 c_OLS=1.39 decades=2.38
+  group sandstone                          n= 11 OLS=0.560 RMA=0.566 r=0.990 c_OLS=1.70 decades=3.34
+  group sandstone_calfpasture              n= 10 OLS=0.529 RMA=0.538 r=0.982 c_OLS=1.67 decades=1.96
+  group shale                              n=  8 OLS=0.533 RMA=0.534 r=0.998 c_OLS=2.22 decades=2.51
+  group terrace                            n= 13 OLS=0.568 RMA=0.574 r=0.989 c_OLS=1.93 decades=1.27
+A <= 10 sq mi                              n= 41 OLS=0.556 RMA=0.577 r=0.963 c_OLS=1.62 decades=2.51
+A >= 1 sq mi                               n= 88 OLS=0.572 RMA=0.584 r=0.981 c_OLS=1.58 decades=2.58
+bootstrap 95% OLS [0.547 0.583] RMA [0.554 0.591]
+0.5 c= 1.93 rms= 0.0988
+0.566 c= 1.61 rms= 0.08
+0.6 c= 1.47 rms= 0.0852
+Hack line 1.4A^0.6 rms 0.0878 mean resid 0.021

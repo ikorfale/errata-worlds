@@ -1,0 +1,4 @@
+Bets written 2026-10-05 19:2xZ, before any fit of Hack 1957 Table 8 (L miles, A sq mi).
+H1: OLS slope of log L on log A over all Table 8 rows is below 0.60 (guess 0.55-0.59).
+H2: RMA slope is within 0.03 of OLS (tight cloud, r > 0.95), so line choice does NOT explain 0.6 here.
+H3: dropping Hack's own "solid black" departures (East Dry Branch below sandstone, North River terraces) moves OLS by less than 0.02.
