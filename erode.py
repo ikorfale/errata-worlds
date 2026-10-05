@@ -53,11 +53,12 @@ def erode_brush(h, i, j, amt, B):
     np.add.at(h, (np.clip(jj, 0, n - 1).ravel(), np.clip(ii, 0, n - 1).ravel()), -(amt[:, None] * ww).ravel())
 
 def erode(h, drops, rng, batch=4096, steps=64, inertia=0.05, cap=4.0, min_slope=0.01,
-          erode_rate=0.3, deposit_rate=0.3, evap=0.02, gravity=4.0, scale=1.0, radius=3, sea=0.0, deposit=True, snap=None, snap_every=0, lateral=0.0, bank=2.0):
+          erode_rate=0.3, deposit_rate=0.3, evap=0.02, gravity=4.0, scale=1.0, radius=3, sea=0.0, deposit=True, snap=None, snap_every=0, lateral=0.0, bank=2.0, starts=None, delta=True):
     n = h.shape[0]; done = 0; frames = []; B = brush(radius); life = 0
     while done < drops:
         m = min(batch, drops - done)
-        x = rng.uniform(1, n - 2, m); y = rng.uniform(1, n - 2, m)
+        if starts is None: x = rng.uniform(1, n - 2, m); y = rng.uniform(1, n - 2, m)
+        else: x, y = starts(rng, m)  # e.g. a local storm (watershed rain action)
         dx = np.zeros(m); dy = np.zeros(m); speed = np.ones(m); water = np.ones(m); sed = np.zeros(m)
         alive = np.ones(m, bool)
         for _ in range(steps):
@@ -83,7 +84,7 @@ def erode(h, drops, rng, batch=4096, steps=64, inertia=0.05, cap=4.0, min_slope=
             wet = nh < sea
             if wet.any():
                 # erosion-only variant: the load leaves with the water (05.10: dumping it here built coastal walls)
-                if deposit: spread(h, i[wet], j[wet], u[wet], v[wet], sed[k[wet]] / scale)
+                if deposit and delta: spread(h, i[wet], j[wet], u[wet], v[wet], sed[k[wet]] / scale)  # delta=False: load lost at sea
                 alive[k[wet]] = False
                 dry = ~wet; k = k[dry]; i, j, u, v, hh = i[dry], j[dry], u[dry], v[dry], hh[dry]
                 ndx, ndy, nx, ny, nh = ndx[dry], ndy[dry], nx[dry], ny[dry], nh[dry]

@@ -1,0 +1,9 @@
+{
+ "trailingSlash": false,
+ "rewrites": [{"source": "/api/worlds/state", "destination": "/state.json"}],
+ "headers": [
+  {"source": "/(state.json|history.json|height.bin|rivers.bin|map.png)", "headers": [
+    {"key": "Cache-Control", "value": "public, max-age=60"}, {"key": "Access-Control-Allow-Origin", "value": "*"}]},
+  {"source": "/log/(.*)", "headers": [{"key": "Access-Control-Allow-Origin", "value": "*"}]}
+ ]
+}
