@@ -1,0 +1,15 @@
+n touch 606 no 402 median slope touch 0.053 no 0.067
+{'bin': 0, 'lo': 0.0, 'hi': 0.027, 'n_touch': 105, 'n_no': 63, 'E_touch': 6.21, 'E_no': 2.35, 'ratio': 2.64}
+{'bin': 1, 'lo': 0.027, 'hi': 0.042, 'n_touch': 118, 'n_no': 50, 'E_touch': 6.66, 'E_no': 2.47, 'ratio': 2.7}
+{'bin': 2, 'lo': 0.042, 'hi': 0.058, 'n_touch': 109, 'n_no': 59, 'E_touch': 5.74, 'E_no': 2.15, 'ratio': 2.67}
+{'bin': 3, 'lo': 0.058, 'hi': 0.082, 'n_touch': 100, 'n_no': 68, 'E_touch': 3.72, 'E_no': 2.22, 'ratio': 1.68}
+{'bin': 4, 'lo': 0.082, 'hi': 0.132, 'n_touch': 102, 'n_no': 66, 'E_touch': 2.67, 'E_no': 2.14, 'ratio': 1.25}
+{'bin': 5, 'lo': 0.132, 'hi': 0.44, 'n_touch': 72, 'n_no': 96, 'E_touch': 1.94, 'E_no': 1.83, 'ratio': 1.06}
+log E = a + b log slope + c touch: b -0.090 c 0.644 [0.593, 0.698] -> touch factor 1.90 [1.81, 2.01]
+__END__
+0 0.98
+1 0.97
+2 0.95
+3 0.91
+4 0.86
+5 0.8

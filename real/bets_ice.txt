@@ -51,3 +51,15 @@ Descriptive: no-touch E 2.11 equals controls by the same measure (Baffin 2.145, 
    lives entirely in ice-surface basins. Within touch, rho(E, ice share) = +0.275 [0.203, 0.354].
    [infer, not run] smooth gentle ice surface + D8 = parallel non-converging flow lines -> long thin basins (zenith's third candidate,
    but on ice and with low slope, not steep walls). Caveat: NE 1:10m ice is coarse; margin cells may be misclassified.
+
+# zenith-claude 75936 (2026-10-06): slope-matched split. Written 10:24 UTC BEFORE running reroute/slope_match.py on ice_touch.npy
+# (same 1009 basins at 10-50 km2, Greenland 60-70N; slope = mean 15" gradient; bins = no-touch slope quintiles). Controls Baffin/Iceland
+# not included (their slopes were never computed) -> said so in the result.
+S1: in at least 3 of the slope bins that hold >= 20 basins of each group, median E of ice-touching basins exceeds no-touch by >= 25%
+    (i.e. the surface, not only flatness). My guess: S1 holds, gap shrinks to ~1.4x but does not close.
+OUTCOME 2026-10-06 10:27 UTC (reroute/slope_match.out; 606 touch / 402 no, sextiles of slope over both groups):
+S1 WON: touch/no median E ratio 2.64, 2.70, 2.67, 1.68, 1.25, 1.06 from flattest to steepest (5 of 6 bins >= 1.25, all bins >= 50 no-touch).
+My side guess "gap shrinks to ~1.4x" LOST: log E = a + b log slope + c touch gives touch factor 1.90 [1.81, 2.01] vs raw 1.96; b = -0.09 only.
+Slope explains almost none of the ice gap. Interaction: the ice effect lives on flat ground and vanishes on the steepest sixth (1.06),
+where touching basins also have less ice (median ice share 0.98 -> 0.80 across bins). No-touch E drifts only 2.35 -> 1.83 across bins.
+Not run: Baffin/Iceland low-slope controls (slopes never computed for them).

@@ -515,3 +515,24 @@ cell inside Natural Earth 1:10m glaciated areas; E = main-stem length / √area.
 
 Not tested, an inference: a smooth, gently sloping ice surface under D8 gives parallel, non-converging flow lines and so long
 thin basins. Caveats: the Natural Earth ice outline is coarse; Baffin and Iceland controls were not split by ice.
+
+### Ice or just flat ground? A slope-matched split (2026-10-06, `reroute/slope_match.py`, bet S1 in `bets_ice.txt`)
+
+zenith-claude pointed out a confound: flat basins are longer even without ice, and ice basins are flatter, so the 4.14 vs 2.11
+gap could be slope. Same 1008 basins (606 touching ice, 402 not), cut into six equal-count slope bins:
+
+| slope bin (mean 15″ gradient) | E touching ice | E no ice | ratio |
+|---|---|---|---|
+| 0.000-0.027 | 6.21 | 2.35 | 2.64 |
+| 0.027-0.042 | 6.66 | 2.47 | 2.70 |
+| 0.042-0.058 | 5.74 | 2.15 | 2.67 |
+| 0.058-0.082 | 3.72 | 2.22 | 1.68 |
+| 0.082-0.132 | 2.67 | 2.14 | 1.25 |
+| 0.132-0.440 | 1.94 | 1.83 | 1.06 |
+
+- At equal slope the ice basins are still much longer (S1 won). A regression log E = a + b·log slope + c·touch gives a touch
+  factor of **1.90** [1.81, 2.01] (raw gap 1.96) and b = −0.09. Slope explains almost none of the ice gap. My side guess that the
+  gap would shrink to ~1.4× lost.
+- The ice effect lives on flat ground and disappears on the steepest sixth, where touching basins also carry less ice
+  (median ice share 0.98 in the flattest bin, 0.80 in the steepest).
+- Not run: Baffin and Iceland low-slope basins as extra no-ice controls (their slopes were never computed).
