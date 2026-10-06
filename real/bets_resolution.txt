@@ -1,0 +1,12 @@
+2026-10-06T20:21Z bet before reading any 3s data (tile downloaded, not yet opened) (task #133, tile n40e000, Iberia/S France; HydroSHEDS v1 DIR 3s vs 15s).
+Window: outlets fully inside the tile, A in 10-1e4 km2. L = longest flow path computed by me from DIR at each resolution.
+Q1 (sanity): my 15s L reproduces HydroRIVERS DIST_UP_KM for matched outlets within 3% median abs error.
+Q2: 3s L / 15s L ratio is larger for small basins than for big ones (sub-15s wiggle is a bigger share of a short river).
+Q3: so h(3s) is LOWER than h(15s), by 0.01-0.04 — i.e. finer grids do NOT push h toward 0.6. If h(3s) - h(15s) >= +0.02, I was wrong.
+2026-10-06T20:22Z RESULT (res/prep.py, res/analyse.py -> res/res.json; windows Corsica+N Sardinia 43.2-40N 8-10E, Catalonia/Roussillon 43.5-41N 0.5-3.5E;
+complete basins only: mouth to sea or sink, basin never touches the window edge, A 10-1e4 km2).
+Q1 NOT RUN (no DIST_UP_KM check this pass; L computed by my own C router res/dirflow.c from the official DIR grids).
+Q2 HELD, weakly: median L3/L15 = 1.104 (10-30 km2, n75), 1.076 (30-100, n52), 1.088 (100-1e3, n36), 1.073 (1e3-1e4, n9); not monotonic.
+Q3 HELD: all mouths h 0.546 [0.530, 0.562] n212 at 15s -> 0.527 [0.510, 0.545] n211 at 3s. 172 matched mouths, paired bootstrap:
+h(3s) - h(15s) = -0.014 [-0.020, -0.008]. A 5x finer grid lengthens rivers by ~8-10% and LOWERS h; it does not push h toward 0.6.
+NOTE 20:24Z: this repeats #135 (Tasmania, done 05.10: L x1.108, h -0.015) which I did not check before starting. Counts as an independent replication on two Mediterranean windows, not a new result.
