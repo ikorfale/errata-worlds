@@ -281,3 +281,27 @@ Same grid, other places (river mouths A ≥ 10 km², one fit each; Greenland row
 Baffin is normal (bet in `bets_ice.txt` won), so Greenland is not a property of the HYDRO1k grid. The most
 glaciated Canadian islands sit halfway, which points back at ice even though the on/off-ice split inside
 Greenland showed nothing; a better ice mask is the next thing to try.
+
+### Long or wiggly? The shape of Greenland's basins (2026-10-06)
+
+`elong.py` measures, for every mouth with A 10–1000 km², the straight distance D from an end of the main stem's
+head reach to an end of the outlet reach (the larger of the four end-to-end distances). Then S = L/D (how wiggly
+the main stem is) and E = D/√A (how elongated the basin is). Bets in `bets_ice.txt`, written before each run.
+
+| | n | median S = L/D | median E = D/√A | slope of log D on log A | slope of log L on log A |
+|---|---|---|---|---|---|
+| Greenland | 3838 | 2.38 | **1.35** | **0.61** | 0.34 |
+| Baffin Island | 2955 | 2.44 | 0.88 | 0.81 | 0.52 |
+| Ellesmere and Devon | 1706 | 2.52 | 0.99 | 0.72 | 0.44 |
+| Iceland | 502 | 1.71 | 1.20 | 0.67 | 0.53 |
+
+- F1 held: Greenland's main stems are no more wiggly than Baffin's (2.38 vs 2.44). The extra length is not routing zig-zag.
+- F2 held, narrowly: Greenland's basins are 1.52× as elongated as Baffin's (bet: ≥ 1.5×).
+- G1 held: straight source-to-mouth distance grows more slowly with area in Greenland (0.61 vs 0.81; bet: lower by ≥ 0.10).
+
+So Greenland's small basins are long, narrow strips, and a bigger basin is mostly a *wider* strip, not a longer one.
+That is what flow down a uniform slope towards a straight boundary does, and it gives a low h by construction
+(a tilted plane is the extreme case). It fits an ice-sheet margin or a smooth ice surface, and it fits Ellesmere
+sitting halfway, but it is a description of the geometry, not yet a cause: the same picture would come from
+a smooth DEM over the ice in HYDRO1k. [ran 4 regions, `out/elong.json`] Caveats: D is measured from reach ends,
+not from the divide, so S is inflated equally everywhere; the comparison is between regions, not absolute.

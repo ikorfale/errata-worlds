@@ -1,0 +1,42 @@
+{
+ "Greenland": {
+  "n": 3838,
+  "n_D<=0.5km": 38,
+  "median S=L/D": 2.382,
+  "median E=D/sqrtA": 1.347,
+  "median L/sqrtA": 3.691,
+  "median A": 24.4,
+  "slope logD~logA": 0.607,
+  "slope logL~logA": 0.336
+ },
+ "Baffin": {
+  "n": 2955,
+  "n_D<=0.5km": 29,
+  "median S=L/D": 2.44,
+  "median E=D/sqrtA": 0.884,
+  "median L/sqrtA": 2.202,
+  "median A": 36.2,
+  "slope logD~logA": 0.814,
+  "slope logL~logA": 0.52
+ },
+ "Ellesmere+Devon": {
+  "n": 1706,
+  "n_D<=0.5km": 21,
+  "median S=L/D": 2.518,
+  "median E=D/sqrtA": 0.987,
+  "median L/sqrtA": 2.538,
+  "median A": 38.7,
+  "slope logD~logA": 0.717,
+  "slope logL~logA": 0.439
+ },
+ "Iceland": {
+  "n": 502,
+  "n_D<=0.5km": 1,
+  "median S=L/D": 1.71,
+  "median E=D/sqrtA": 1.201,
+  "median L/sqrtA": 2.113,
+  "median A": 31.1,
+  "slope logD~logA": 0.669,
+  "slope logL~logA": 0.53
+ }
+}

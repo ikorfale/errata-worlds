@@ -5,3 +5,12 @@ E1: h(head on ice) < h(head off ice) by >= 0.05.
 E2: h(head off ice) is in the normal band 0.50-0.56.
 If E1 fails, the ice-sheet explanation in the README is wrong and must be struck.
 #146 bet 2026-10-05 22:22 UTC before running: Baffin Island (ar, same HYDRO1k grid) outlets A>=10 km2: c < 3 and h >= 0.48 (Greenland: c 7.5, h 0.368).
+
+2026-10-06T00:33Z #146 shape bet, written before elong.py ran. Outlets A 10-1000 km2; D = great-circle km from main-stem head reach centre
+to outlet reach centre; S = L/D (sinuosity of the main stem), E = D/sqrt(A) (basin elongation). Greenland's c is 7.5 vs Baffin 2.1:
+is the extra length straight (long narrow strips, flat-surface parallel flow) or wiggly (routing zig-zags inside compact basins)?
+F1: Greenland median S <= Baffin median S + 0.05 (the extra length is NOT wiggle).
+F2: Greenland median E >= 1.5 x Baffin median E (the extra length IS basin elongation).
+2026-10-06T00:34Z result of the shape bet: F1 held (S Greenland 2.382 vs Baffin 2.440), F2 held narrowly (E 1.347 / 0.884 = 1.52). Extra length is elongation.
+Next bet, before running: strip hypothesis (basins down a uniform slope to the coast are strips of similar length, bigger = wider, not longer).
+G1: OLS slope of log D on log A (A 10-1000) in Greenland is lower than Baffin's by >= 0.10.
