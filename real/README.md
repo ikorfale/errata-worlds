@@ -371,3 +371,47 @@ or resampling artefact specific to the Greenland tile. Until then, **Greenland's
 rivers**. The number to quote stays 0.543, which already leaves Greenland out. [ran `icedist.py`, `bearing.py`; `out/icedist.json`, `out/bearing.json`]
 
 ![Share of strip-shaped basins by angle to north-south: Greenland's pile up within 10 degrees of a meridian, Baffin and Ellesmere spread out](out/greenland_bearing.png)
+
+### What the documentation says, and what the flow-direction grids show (2026-10-06)
+
+**Documentation** (HydroSHEDS TechDoc v1.4, §2.7 and §3.7): there is no SRTM above 60°N. For the 15″ products, HydroSHEDS
+inserted the 1-km HYDRO1k DEM, resampled to 15″ by linear interpolation, blended at 60°N, sink-filled it and derived a
+flow-direction (D8) grid from it on the geographic lat/long grid. At 75°N a 15″ cell is ~460 m north-south but only ~120 m
+east-west. Greenland (`gr`) and the North American Arctic (`ar`) both come from this process.
+
+**Direction codes, counted.** `dircodes2.py` / `dircodes3.py` count D8 codes of every land cell by latitude band
+(`out/dircodes.txt`; bets in `bets_dir.txt`, written first). The ratio is (N+S codes) / (E+W codes); 1.0 means no lean:
+
+| band | Greenland `gr` | Arctic `ar` | Australia `au` (SRTM), control |
+|---|---|---|---|
+| 60-65°N | 1.44 | 1.44 | 10-45°S: 0.98-1.07 |
+| 65-70°N | 1.75 | 1.53 | |
+| 70-75°N | 2.45 | 1.75 | |
+| 75-80°N | 4.97 | 2.81 | |
+| 80-84°N | 7.66 | 3.56 | |
+
+If D8 were run on the lat/long grid **as if the cells were square**, east-west gradients would be squeezed by cos(latitude)
+and flow would lean north-south more and more toward the pole. `d8model.py` (isotropic planes) predicts the same direction
+but a much stronger lean (3.9 at 62.5°N, 21.6 at 82°N); real roughness and filled flats dilute it. A metric-correct D8 would
+lean the *other* way (east-west codes cover a wider sector when cells are narrow). The SRTM-based tile has no lean.
+
+**h by latitude** (`hlat.py`, outlets A ≥ 10 km², `out/hlat.json`):
+
+| band | Greenland h [95%] (n) | Arctic h [95%] (n) |
+|---|---|---|
+| 60-70°N | 0.451 [0.433, 0.466] (1577) | 0.531 [0.526, 0.535] (4762) |
+| 70-75°N | 0.360 [0.335, 0.384] (846) | 0.498 [0.492, 0.504] (2286) |
+| 75-84°N | 0.273 [0.249, 0.298] (1589) | 0.446 [0.438, 0.454] (2343) |
+
+Bets: B1 half lost (Greenland leans 3.55 overall as bet, but the Arctic leans 1.68, not ≤ 1.3); B2 won (Arctic lean rises
+2.5x from 60-65°N to 80-84°N); B3 won (Greenland 60-70°N: 1.67). H1 won: h falls with latitude in **both** regions
+(Greenland -0.18, Arctic -0.085). H2 lost: southern Greenland is still 0.08 below the Arctic at the same latitudes.
+
+**Correction to the section above.** I wrote that "latitude alone (narrow geographic cells) doesn't explain it". Half wrong:
+the north-south lean and the fall of h with latitude are present in the Arctic tile too, just weaker. What I now think,
+labelled as inference: (1) above ~70°N, HydroRIVERS basin shapes carry a grid artefact that grows with latitude, in both
+tiles; (2) Greenland has a second, tile-specific factor on top (its lean is stronger at matched latitude and its h is lower
+even at 60-70°N), possibly the source DEM over Greenland. Scandinavia (HYDRO1k, 60-71°N) gave a normal h (0.534), which fits:
+the artefact is weak below 70°N. The real-river number to quote stays 0.54, from the SRTM regions; the Arctic above 70°N
+and all of Greenland should not be used as evidence about rivers. Next test, not done: re-derive D8 from the Greenland DEM
+on a metric (polar stereographic) grid and see whether the strips and the low h go away.

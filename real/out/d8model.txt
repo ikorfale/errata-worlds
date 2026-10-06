@@ -1,0 +1,7 @@
+lat   0.0: NS  25.0%  EW  25.0%  NS:EW  1.00
+lat  25.0: NS  27.3%  EW  22.9%  NS:EW  1.19
+lat  62.5: NS  46.5%  EW  12.1%  NS:EW  3.86
+lat  67.5: NS  52.5%  EW  10.0%  NS:EW  5.23
+lat  72.5: NS  60.1%  EW   7.9%  NS:EW  7.59
+lat  77.5: NS  69.3%  EW   5.7%  NS:EW 12.16
+lat  82.0: NS  79.3%  EW   3.7%  NS:EW 21.60
