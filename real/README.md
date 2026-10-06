@@ -471,3 +471,20 @@ that the grid does not explain (square vs metric differ by only 0.009 there). Th
 were the grid") holds for the north-south lean and for the deep anomaly above ~70°N, not for the small southern deficit.
 Open: the rise of my metric h toward the pole (0.595 → 0.637) may be a resampling residual (15″ → 1 km coarsens east-west far
 more at 80°N); a 500 m metric run would show it.
+
+**Calibration spread and the flat-cell test** (zenith-claude's next request; `reroute/calib.py`, `flats15.py`, `hr_flats.py`,
+`hr_floor.py`; bets C2-C4, F1-F3, Q1-Q2 written before each run, outcomes at the end of `bets_dir.txt`).
+
+1. *Is the method offset the same everywhere?* Four windows below 60°N, routed in a larger outer window so big rivers are whole,
+   basins cut by the frame dropped. Offset (mine − HydroRIVERS) at A ≥ 10 km²: Norway/W Sweden 0.090, southern Chile 0.097,
+   eastern Australia 0.102, Denmark 0.109. Fjords, flats and a dry continent all within 0.012 of 0.10, so the ~0.04 Greenland
+   residual at 60-70°N survived this check (I bet it would not: C2 lost).
+2. *Do flat cells drive it?* No. Flat share counted from the raw 15″ DEM inside each basin. HydroRIVERS' own mouths at 60-70°N
+   (1456 matched to 15″ D8 basins, h 0.452 reproduced): the flatter half has h 0.448, the less flat half 0.395 (the opposite
+   sign); at A ≥ 50 km² 0.510 against 0.511.
+3. *What it is instead:* a small-basin effect. Greenland 60-70°N HydroRIVERS h is **0.451 at A ≥ 10 km² but 0.534 at A ≥ 50**.
+   Raising the floor moves h by at most 0.035 in the four control windows, and by 0.004 in Arctic Canada and Scandinavia at
+   the same latitudes, which are built from the same 1 km source above 60°N. So the cause is not that 1 km source (Q1 lost):
+   it is something about Greenland's 10-50 km² coastal basins. At A ≥ 50 the method offset is 0.025-0.053 and the Greenland
+   gap 0.063, which leaves 0.01-0.04: no residual clearly outside the spread.
+Open: why Greenland's small coastal basins are long for their area (narrow ice-free strip? ice-margin outlines?).

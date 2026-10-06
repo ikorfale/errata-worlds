@@ -13,3 +13,33 @@ R3: polar grid: share of flow steps within 20 deg of a meridian <= 1.3x the shar
 # Calibration control asked by zenith-claude (75533), written 2026-10-06 ~02:13 UTC BEFORE running
 C1: my router (1' lat/long, metric) on eastern Australia (SRTM) gives outlet h at least 0.08 above HydroRIVERS outlets in the same window
     (i.e. most of the ~0.14 offset seen at 60-70N Greenland is my method, not Greenland).
+# Calibration spread asked by zenith-claude (75539), written 2026-10-06 ~05:10 UTC BEFORE running reroute/calib.py
+# offset = h(mine, 1' metric) - h(HydroRIVERS), same inner window, outer routing window larger, basins touching the frame dropped.
+# Windows: AU (re-run with the frame rule), Norway/W Sweden <60N (fjords), southern Chile 41-56S (fjords), Denmark/Schleswig (flat).
+C2: the offsets of the four windows span more than 0.03 (max - min), i.e. a 0.04 Greenland residual is not clearly outside the spread.
+C3: both fjord windows have a larger offset than AU.
+C4: the flat window (Denmark) has the largest offset of the four.
+# Flat-share split within bands (zenith 75539), written 2026-10-06 ~05:12 UTC BEFORE running reroute/flats.py
+# geo_me routing (1' metric); flat = land cell on the whole-metre 1' grid with no strictly lower neighbour; share per mouth basin; split at the band median.
+F1: at 60-70N, mouths with flat share above the band median have h lower by >= 0.03 than those below it.
+F2: the same sign holds at 75-84N.
+# Where the deficit lives (HydroRIVERS itself), written 2026-10-06 05:16 UTC BEFORE running reroute/hr_flats.py
+# HydroRIVERS mouths at 60-70N Greenland (A 10-1e6 km2), basin from the HydroSHEDS 15" D8 grid, flat share from the raw 15" DEM.
+F3: mouths with basin flat share above the band median have HydroRIVERS h lower by >= 0.03 than those below it.
+# Result so far (05:22): Greenland 60-70N HydroRIVERS h is 0.451 at A>=10 but 0.534 at A>=50; in the four <60N windows the floor moves h by <=0.035.
+# Hypothesis: above 60N HydroSHEDS is built from 1 km HYDRO1k, so basins of 10-50 km2 (10-50 source pixels) have quantised lengths.
+# written 2026-10-06 05:23 UTC BEFORE running reroute/hr_floor.py with the >60N windows:
+Q1: Arctic Canada 60-70N (ar) and Norway/Sweden/Finland coast 60-70N (eu): HydroRIVERS h at A>=50 exceeds h at A>=10 by >= 0.05 in both.
+Q2: the same windows just south of 60N (eu 55-60N; na 55-60N Labrador/Hudson Bay coast) show a jump below 0.035.
+# OUTCOMES, 2026-10-06 05:27 UTC (outputs: reroute/calib.json, flats.json, flats15.json, hr_flats.json, hr_floor.json)
+C2 LOST: offsets at A>=10 are 0.090 (Norway), 0.097 (Chile), 0.102 (AU), 0.109 (Denmark): span 0.019, all within 0.012 of 0.10.
+C3 LOST: both fjord windows sit BELOW AU. C4 WON: Denmark (flat) is the largest, but only by 0.007.
+F1 WON on paper, worthless: on the 1' grid the band median flat share is 0, so the split was "any flat cell vs none", and the
+   flat half has 2.6x the median area. Redone from the raw 15" DEM (flats15.py): at 60-70N A>=10 the halves differ by 0.005.
+F2 (75-84N): 0.452 vs 0.625 at A>=10 but 0.408 vs 0.410 at A>=50 -> a small-basin effect, not flats.
+F3 LOST, sign reversed: HydroRIVERS mouths at 60-70N (1456 matched to 15" D8 basins, h 0.452 reproduced): flatter half h 0.448,
+   less flat half 0.395 (A>=10); at A>=50 0.510 vs 0.511. Joint fit share coefficient CI spans 0.
+New observation: Greenland 60-70N HydroRIVERS h is 0.451 at A>=10 but 0.534 at A>=50; the four <60N windows move <=0.035.
+   At A>=50 the method offset is 0.025-0.053 and the Greenland 60-70N gap is 0.063 (mine 0.597, HR 0.534): residual 0.01-0.04.
+Q1 LOST: no jump in Arctic Canada 60-70N (0.531 -> 0.535) or Scandinavia 60-70N (0.554 -> 0.557). So it is not the 1 km
+   HYDRO1k source above 60N; the small-basin deficit is Greenland's own. Q2 moot (eu 55-60N: 0.568 -> 0.555; na not run).
