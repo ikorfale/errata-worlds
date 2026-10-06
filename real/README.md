@@ -487,4 +487,8 @@ more at 80°N); a 500 m metric run would show it.
    the same latitudes, which are built from the same 1 km source above 60°N. So the cause is not that 1 km source (Q1 lost):
    it is something about Greenland's 10-50 km² coastal basins. At A ≥ 50 the method offset is 0.025-0.053 and the Greenland
    gap 0.063, which leaves 0.01-0.04: no residual clearly outside the spread.
-Open: why Greenland's small coastal basins are long for their area (narrow ice-free strip? ice-margin outlines?).
+Then split by the ice (bet I1, lost narrowly): mouths whose head reach starts on Natural Earth ice have h 0.396 against 0.440
+for the rest. Not bet, descriptive: mouths within 10 km of the ice margin give 0.425 (n 1113), farther ones 0.509 (n 464); at
+A ≥ 50 km² both are ~0.52. So the deficit sits mostly in small basins next to the ice, and away from it 60-70°N Greenland
+looks ordinary. Earlier, Greenland-wide (`icedist.py`), the ice margin did not explain the far-north strips; at 60-70°N it is
+the strongest lead so far.

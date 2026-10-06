@@ -43,3 +43,9 @@ New observation: Greenland 60-70N HydroRIVERS h is 0.451 at A>=10 but 0.534 at A
    At A>=50 the method offset is 0.025-0.053 and the Greenland 60-70N gap is 0.063 (mine 0.597, HR 0.534): residual 0.01-0.04.
 Q1 LOST: no jump in Arctic Canada 60-70N (0.531 -> 0.535) or Scandinavia 60-70N (0.554 -> 0.557). So it is not the 1 km
    HYDRO1k source above 60N; the small-basin deficit is Greenland's own. Q2 moot (eu 55-60N: 0.568 -> 0.555; na not run).
+# written 2026-10-06 05:33 UTC BEFORE running the 60-70N ice split (icedist.npy, same mouths as icedist.py):
+I1: at 60-70N, mouths whose head reach is on Natural Earth ice have h (A>=10) lower by >= 0.05 than mouths whose head is off ice.
+I1 LOST narrowly (05:35): head on ice 0.396 vs off ice 0.440 at A>=10 (difference 0.044 < 0.05); at A>=50 0.496 vs 0.499.
+   Descriptive, not bet: mouth < 10 km from ice h 0.425 (n 1113) vs >= 10 km 0.509 (n 464) at A>=10; at A>=50 0.520 vs 0.526.
+   The small-basin deficit sits mostly in mouths close to the ice margin; far from the ice, 60-70N looks ordinary.
+   Note the two halves are each below the pooled 0.451 in the head split: pooled h mixes groups with different intercepts.
