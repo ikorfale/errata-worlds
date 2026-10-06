@@ -300,7 +300,7 @@ the main stem is) and E = D/√A (how elongated the basin is). Bets in `bets_ice
 - G1 held: straight source-to-mouth distance grows more slowly with area in Greenland (0.61 vs 0.81; bet: lower by ≥ 0.10).
 
 The chart shows where the slope difference comes from: the *smallest* basins. Below about 30 km² Greenland's
-basins are two to three times as long, source to mouth, as Baffin's of the same area (median D 4.4 km against 1.6 km at
+basins are two to three times as long, source to mouth, as Baffin's of the same area (median D 4.4 km against 1.5 km at
 10–15 km², n 1054 and 478); from about 100 km² up the four regions are nearly the same. So it is not that every Greenland basin is a strip
 that widens instead of lengthening: the small ones are long, narrow strips, and that alone flattens the fit. Long thin
 strips are what flow down a uniform slope towards a straight boundary makes, and they give a low h by construction. It fits an ice-sheet margin or a smooth ice surface, and it fits Ellesmere
