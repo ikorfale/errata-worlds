@@ -1,0 +1,8 @@
+stations 307, kept 203
+Q1 A -1-72 n=77 rejected 39: only-length 0, any-length 30; {'Lpr+slope+dens+Lratio': 7, 'Lpr+slope+Lratio': 4, 'alt+Lpr+slope+Lratio': 3, 'alt+Lpr+slope+dens': 3, 'alt+Lpr+dens+Lratio': 3, 'short': 3, 'alt+dens+Lratio': 3, 'alt+Lratio': 2, 'dens': 2, 'alt+dens': 1, 'alt+Lpr': 1, 'alt+slope+dens+Lratio': 1, 'slope': 1, 'slope+dens': 1, 'alt': 1, 'alt+Lpr+slope+dens+Lratio': 1, 'dens+Lratio': 1, 'alt+slope+Lratio': 1}
+Q2 A 72-186 n=77 rejected 18: only-length 1, any-length 9; {'slope': 4, 'Lpr+slope+Lratio': 3, 'alt': 3, 'Lpr+slope': 2, 'Lratio': 1, 'alt+Lratio': 1, 'Lpr+slope+dens': 1, 'short': 1, 'alt+slope': 1, 'slope+Lratio': 1}
+Q3 A 186-434 n=76 rejected 16: only-length 4, any-length 14; {'Lpr+slope': 5, 'Lratio': 4, 'alt+Lpr+dens+Lratio': 2, 'alt+Lpr+slope+dens+Lratio': 1, 'Lpr+slope+Lratio': 1, 'short': 1, 'slope': 1, 'slope+dens+Lratio': 1}
+Q4 A 434-1000000000 n=77 rejected 31: only-length 3, any-length 20; {'short': 6, 'alt+Lpr+slope+dens+Lratio': 4, 'alt+Lratio': 3, 'slope': 2, 'alt+slope+dens+Lratio': 2, 'alt+Lpr': 2, 'Lpr': 2, 'alt': 2, 'Lpr+slope+dens': 1, 'Lpr+slope+dens+Lratio': 1, 'Lpr+slope': 1, 'alt+slope+Lratio': 1, 'alt+Lpr+slope+Lratio': 1, 'alt+Lpr+Lratio': 1, 'dens': 1, 'Lratio': 1}
+as printed (to stream source): n=203 OLS slope 0.593, pinned-0.6 c 1.341 [1.304, 1.380]
++ hillslope 1/(2*density): n=203 OLS slope 0.585, pinned-0.6 c 1.359 [1.322, 1.397]
+median density 1.63 mi/sq mi -> median hillslope 0.31 mi; median L 31.3 mi

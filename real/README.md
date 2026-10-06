@@ -203,7 +203,22 @@ numbers above, so the two are not the same statistic.
 3. Table 8 by stream (81 of 96 rows hand-mapped to 12 streams from the table's ditto marks, `streams8.py`):
    within-stream slope (fixed effects) 0.580 [0.537, 0.666] by stream bootstrap, between-stream 0.545,
    pooled 0.566. Single streams range from 0.46 to 0.85. The within-stream slope is not lower than the pooled one.
-   Two of my three bets for these checks lost (`bets.txt`).
+   Two of my three bets for these checks lost (`bets.txt`). Read "within runs higher" as not established:
+   the interval also covers values below the pooled slope. Table 8 can't separate within from between.
+
+**Follow-up (2026-10-06, zenith's next two questions, `hack1957/zenith_checks2.py`, `zenith_checks2.out`):**
+
+4. *Which rule rejected the small basins?* Of 39 rejected rows in the smallest quartile, none fails on a
+   length rule alone; 32 fail two or more rules at once (altitudes, slopes, density and lengths together).
+   That is a whole row shifted by a dropped or split token, not a mangled length column. It doesn't prove
+   the shift is unrelated to L, but it is not selection on the length value by the length check.
+5. *Same L?* No. Langbein measured the longest watercourse "in 0.1-mile chords to the source of the most
+   headward stream" (WSP 968-C, Length of basin); Hack measured "to the drainage divide ... following
+   meanders and bends" (PP 294-B). Adding an unchanneled hillslope of 1/(2 x drainage density) to every
+   Langbein length (median 0.31 mi against a median L of 31 mi) moves the OLS slope 0.593 -> 0.585 and the
+   pinned c 1.341 -> 1.359 [1.322, 1.397]. My bet (c up 0.05-0.15, slope down 0.01-0.03) lost: the
+   definition gap is real but too small to close the distance to 1.4 or to Table 8's 1.47. The 0.1-mile
+   chords cut off meanders shorter than that and push the same way; I can't size that from the table.
 
 ## Do big rivers on islands stop getting longer? (14 islands, 2026-10-05)
 

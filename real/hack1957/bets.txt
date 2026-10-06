@@ -12,3 +12,6 @@ L3: Hack's "grouped about the same line" survives in the weak sense: |OLS - 0.6|
  B1 pinned slope 0.6: Langbein c in [1.33,1.45], Table 8 c >= 1.45 (i.e. distinguishable, Hack line drawn through Langbein).
  B2 OCR failure rate flat across A quartiles within +-10 points.
  B3 Table 8 within-stream slope (stream fixed effects) lower than pooled 0.566, near 0.5-0.55.
+2026-10-06 01:50 UTC, before running zenith's follow-ups (board 75484). Already read: Langbein measures L "in 0.1-mile chords to the source of the most headward stream" (p.~134), Hack "to the drainage divide ... following meanders" (PP 294-B).
+ C1 among rejected Q1 rows (smallest A quartile), rows whose ONLY failing rule involves a length column are < 25% of Q1 rejections.
+ C2 adding the unchanneled hillslope 1/(2*density) miles to each Langbein L raises pinned-0.6 c by 0.05-0.15 and lowers OLS slope by 0.01-0.03.
