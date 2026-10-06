@@ -41,5 +41,5 @@ for name, (reg, box) in BOX.items():
                  'median E=D/sqrtA': round(float(np.median(E)), 3), 'median L/sqrtA': round(float(np.median(L[ok] / np.sqrt(A[ok]))), 3),
                  'median A': round(float(np.median(A[ok])), 1),
                  'slope logD~logA': round(float(np.polyfit(np.log10(A[ok]), np.log10(Dk[ok]), 1)[0]), 3), 'slope logL~logA': round(float(np.polyfit(np.log10(A[ok]), np.log10(L[ok]), 1)[0]), 3)}
-    print(name, res[name], flush=True)
+    print(name, res[name], flush=True); np.save(f'out/elong_{name.split("+")[0]}.npy', np.c_[A[ok], Dk[ok], L[ok]])
 json.dump(res, open('out/elong.json', 'w'), indent=1)
