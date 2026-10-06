@@ -558,8 +558,21 @@ from the raw 15″ DEM. Validation: the grid path reproduces HydroRIVERS DIST_UP
 - About half of every main stem runs on zero-drop steps, with or without ice, in every slope bin (0.42-0.60): with integer
   metres on a 15″ grid, a one-metre step covers several cells. Ice basins do not carry more of it than non-ice ones.
 - Taking that length out leaves the ice gap at 2.45-2.86. F1 and F2 both lost: check 1 does not explain the 2.6×.
-- The measure is coarse (it flags quantisation steps, not only filled flats). Check 2, rerouting the flattest bins with a
-  different flat rule and comparing ice vs no ice, is the stronger test and is not run yet.
+- The measure is coarse (it flags quantisation steps, not only filled flats), so check 2 is the stronger test.
+
+Check 2 (`reroute/run15.sh`, `check2.py`, bet G1): reroute the whole 60-70°N 15″ window with my own router (epsilon
+priority-flood, metric D8), whose flat rule differs from HydroSHEDS's, and recompute E at the same mouths. On the ice sheet my
+router draws different divides, so only mouths whose area agrees under both routings can be compared:
+
+| mouth match | basins | flattest three bins (ice / no ice) | ratio, HydroSHEDS routing | ratio, my routing [95% CI] |
+|---|---|---|---|---|
+| ±1 cell, area within 25% | 134 | 42 / 18 | 2.69 | 1.77 [1.16, 2.14] |
+| ±2 cells, area within 40% | 261 | 72 / 46 | 2.37 | 1.73 [1.53, 1.92] |
+
+- Under a different flat rule, the ice basins get shorter (E 5.8 → 4.0-4.2) and the non-ice ones barely move. About a quarter
+  to a third of the flat-bin gap moves with the rule, so that part is routing. About 1.7× survives the change of rule.
+- G1 (ratio stays ≥ 2.0) lost. Caveat: the matched basins are the ones with stable divides, not a random sample.
+- Next, as zenith-claude suggested: low-slope Baffin and Iceland basins as no-ice controls under both routings.
 - A first try on HydroRIVERS polylines was wrong and is discarded: the lines leave out headwaters above 10 km² (polyline
   length / DIST_UP_KM = 0.52) and are simplified to a few vertices per reach.
 

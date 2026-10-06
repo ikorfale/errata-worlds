@@ -1,0 +1,99 @@
+{
+ "matched": 261,
+ "bins": [
+  {
+   "bin": 0,
+   "lo": 0.0,
+   "hi": 0.027,
+   "n_touch": 28,
+   "n_no": 15,
+   "E_hs_touch": 7.46,
+   "E_hs_no": 2.42,
+   "E_me_touch": 4.31,
+   "E_me_no": 2.3,
+   "ratio_hs": 3.08,
+   "ratio_me": 1.87
+  },
+  {
+   "bin": 1,
+   "lo": 0.027,
+   "hi": 0.042,
+   "n_touch": 23,
+   "n_no": 15,
+   "E_hs_touch": 5.87,
+   "E_hs_no": 2.66,
+   "E_me_touch": 4.14,
+   "E_me_no": 2.42,
+   "ratio_hs": 2.21,
+   "ratio_me": 1.71
+  },
+  {
+   "bin": 2,
+   "lo": 0.042,
+   "hi": 0.058,
+   "n_touch": 21,
+   "n_no": 16,
+   "E_hs_touch": 5.67,
+   "E_hs_no": 2.12,
+   "E_me_touch": 3.59,
+   "E_me_no": 2.2,
+   "ratio_hs": 2.67,
+   "ratio_me": 1.63
+  },
+  {
+   "bin": 3,
+   "lo": 0.058,
+   "hi": 0.082,
+   "n_touch": 25,
+   "n_no": 21,
+   "E_hs_touch": 4.74,
+   "E_hs_no": 2.22,
+   "E_me_touch": 4.03,
+   "E_me_no": 2.48,
+   "ratio_hs": 2.14,
+   "ratio_me": 1.63
+  },
+  {
+   "bin": 4,
+   "lo": 0.082,
+   "hi": 0.132,
+   "n_touch": 31,
+   "n_no": 12,
+   "E_hs_touch": 2.93,
+   "E_hs_no": 2.09,
+   "E_me_touch": 2.8,
+   "E_me_no": 1.89,
+   "ratio_hs": 1.4,
+   "ratio_me": 1.48
+  },
+  {
+   "bin": 5,
+   "lo": 0.132,
+   "hi": 0.44,
+   "n_touch": 29,
+   "n_no": 25,
+   "E_hs_touch": 1.95,
+   "E_hs_no": 1.82,
+   "E_me_touch": 2.21,
+   "E_me_no": 1.86,
+   "ratio_hs": 1.07,
+   "ratio_me": 1.19
+  }
+ ],
+ "flat3 touch": {
+  "n": 72,
+  "E_hs": 5.84,
+  "E_me": 3.97
+ },
+ "flat3 no": {
+  "n": 46,
+  "E_hs": 2.46,
+  "E_me": 2.3
+ },
+ "flat3 ratio hs": 2.37,
+ "flat3 ratio me": 1.73,
+ "flat3 ratio me ci": [
+  1.53,
+  1.92
+ ]
+}

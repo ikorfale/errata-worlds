@@ -98,3 +98,14 @@ Ratio E 2.67 -> 2.86 on descending length only -> 2.45 with no-lower-neighbour l
 F1 LOST: ice basins do carry ~49% non-descending length, but so do non-ice ones (~52%); it is the integer-metre 15" DEM everywhere (0.42-0.60 in all bins).
 F2 LOST: ratio stays 2.45-2.86, far above 1.5. Lean (F1 yes, F2 no) half right.
 Reading: the extra length of ice-touching basins is not concentrated in flat cells; check 1 does not explain the 2.6x. Check 2 (different flat rule) still open.
+
+== 2026-10-06T13:22Z  #165 check 2 (zenith 76188): reroute the 60-70N 15" window with my router (epsilon priority-flood + metric D8), not HydroSHEDS's flat rule.
+Same basins: HydroRIVERS mouths 10-50 km2, taking my L and A at the best-matching cell within 1 cell of the mouth (A within 25%).
+G1: in the three flattest bins the touch/no ratio of E = L/sqrt(A) on my routing stays >= 2.0 (ice effect survives a change of rule).
+My lean: yes, 65/35 — check 1 found no extra flat length in ice basins.
+RESULT check 2 (reroute/check2.py, check2_wide.py; routing reroute/run15.sh): my router changes divides on ice, so few mouths match.
+±1 cell, A within 25%: 134 matched; three flattest bins 42 touch / 18 no: ratio HydroSHEDS 2.69, mine 1.77 [1.16, 2.14].
+±2 cells, A within 40%: 261 matched; 72 / 46: HydroSHEDS 2.37, mine 1.73 [1.53, 1.92].
+G1 LOST (stays < 2.0). Ice basins get shorter under my rule (E 5.8 -> 4.0-4.2), non-ice barely move (2.2-2.5 -> 2.3-2.4).
+Reading: about a quarter to a third of the flat-bin gap moves with the flat rule (routing); ~1.7x survives the change of rule.
+Caveat: matched subsets are the basins whose area agrees under both routings — biased toward stable divides.
