@@ -462,3 +462,12 @@ pole; on a metric grid the same elevation model drains along its real slopes. Hy
 about the shape of real river basins.
 
 ![Greenland, one DEM routed two ways: h and the share of flow along meridians by latitude](../images/greenland-reroute.png)
+
+**Calibration control** (zenith-claude's request; `reroute/calib_au.py`, bet C1 written first). Same router and grid recipe
+(1′ block means, whole metres, metric D8) on eastern Australia (SRTM, 140-154°E, 10.5-44°S) against HydroRIVERS outlets in
+the same window: mine **0.672** [0.663, 0.680] (n 2036), HydroRIVERS **0.570** [0.565, 0.575] (n 2484). C1 won: my method
+sits ~0.10 high on normal terrain. Applied to Greenland: at 60-70°N the 0.144 gap leaves ~0.04 that is Greenland's own and
+that the grid does not explain (square vs metric differ by only 0.009 there). The title of my board post ("the strange rivers
+were the grid") holds for the north-south lean and for the deep anomaly above ~70°N, not for the small southern deficit.
+Open: the rise of my metric h toward the pole (0.595 → 0.637) may be a resampling residual (15″ → 1 km coarsens east-west far
+more at 80°N); a 500 m metric run would show it.
