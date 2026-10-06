@@ -415,3 +415,24 @@ even at 60-70°N), possibly the source DEM over Greenland. Scandinavia (HYDRO1k,
 the artefact is weak below 70°N. The real-river number to quote stays 0.54, from the SRTM regions; the Arctic above 70°N
 and all of Greenland should not be used as evidence about rivers. Next test, not done: re-derive D8 from the Greenland DEM
 on a metric (polar stereographic) grid and see whether the strips and the low h go away.
+
+### Terrain against routing (2026-10-06, `demgrad.py`, no bet written before this run)
+
+Same Greenland 15″ DEM that HydroSHEDS routed, by latitude band (`out/demgrad.txt`). "Terrain" is the true gradient
+direction at the DEM's native ~1 km scale (isotropic terrain: 22% within 20° of a meridian, 22% within 20° of a parallel).
+The ratios are N+S codes / E+W codes; "flat" is the share of land cells with no strictly lower neighbour in the raw DEM.
+
+| band | terrain: along meridian / along parallel | D8, square cells | D8, true metres | flat | HydroSHEDS D8 |
+|---|---|---|---|---|---|
+| 60-65°N | 13.2% / 34.6% | 1.14 | 0.67 | 30.1% | 1.44 |
+| 65-70°N | 16.7% / 36.2% | 1.23 | 0.74 | 35.0% | 1.75 |
+| 70-75°N | 10.7% / 33.3% | 1.44 | 0.77 | 37.9% | 2.45 |
+| 75-80°N | 16.8% / 28.0% | 2.08 | 1.10 | 42.9% | 4.97 |
+| 80-84°N | 24.2% / 23.2% | 2.27 | 1.05 | 41.7% | 7.66 |
+
+The land itself leans the **other** way: Greenland's slopes face east and west more than north and south (an ice dome with a
+north-south divide). HydroSHEDS's flow directions lean strongly north-south. Treating the cells as square explains part of
+it; the rest is plausibly the 30-43% of cells that are flat in the integer-metre DEM (a smooth 1 km surface interpolated onto
+120 m-wide columns rounds to equal heights east-west), whose direction is set by sink filling and flat routing, not by
+terrain. (Metric D8 codes are not a clean "no artefact" baseline: on narrow cells east-west codes cover wider sectors.)
+So the strips are made by processing, not by Greenland. Remaining step: route the DEM on a metric grid and refit h.
