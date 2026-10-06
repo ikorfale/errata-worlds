@@ -5,11 +5,11 @@ G2: gr outlet h > 0.556 (fjord valleys: long, narrow basins).
 G3: ar outlet h < 0.53 (glacially scoured shield, lakes, disordered drainage).
 G4: all 9 regions pooled (every outlet A 1e2-1e6 km2 in one fit) h in [0.54, 0.55].
 
-# #166, written 2026-10-06 12:24 UTC before global_amin.py. Pooled HydroRIVERS mouths of the 9 regions (A <= 1e6), A_min sweep 10/30/100/300.
+# #166, written 2026-10-06 ~12:20 UTC before global_amin.py. Pooled HydroRIVERS mouths of the 9 regions (A <= 1e6), A_min sweep 10/30/100/300.
 # 15" cells are ~0.1-0.2 km2, so 10 km2 is already ~50-100 cells: I expect the small-basin inflation to be much weaker than in my 1 km run.
 N1: pooled h at A>=100 is within 0.02 of the published 0.540 (A>=10).
 N2: no region except gr moves by more than 0.04 between A>=10 and A>=100.
-OUTCOME 12:25 UTC (out/global_amin.json). My bet text was wrong about the threshold: the published 0.540 (n 35408) was already A>=100;
+OUTCOME ~12:21 UTC (out/global_amin.json). My bet text was wrong about the threshold: the published 0.540 (n 35408) was already A>=100;
 the sweep shows it: all9 0.540 / 0.543 / 0.540 / 0.540 at A>=10/30/100/300 (n 114693 ... 17796). N1 holds trivially (same number).
 N2 WON: outside gr the largest 10->100 move is eu -0.017 (af -0.008, as -0.008, au -0.010, na -0.010, sa -0.012, ar +0.003, si +0.007).
 gr moves the other way, 0.368 -> 0.445 -> 0.454 (its small mouths are too LONG, the D8-on-ice strips). The global number does not lean
