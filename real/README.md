@@ -570,3 +570,9 @@ deep north Greenland anomaly belongs to HydroRIVERS' routing. This corrects the 
 
 ![h by latitude at mouths ≥ 100 km²: my metric routing at 1 km and 500 m, HydroRIVERS Greenland and Arctic Canada](../images/greenland-amin100.png)
 
+**Does the global 0.540 lean on small basins?** (`global_amin.py`, bets N1-N2 in `bets_global.txt`.) No. Pooled over the nine
+regions, h is 0.540 / 0.543 / 0.540 / 0.540 for mouths ≥ 10 / 30 / 100 / 300 km² (n 114,693 down to 17,796; the published
+number used ≥ 100). Outside Greenland no region moves by more than 0.017 between ≥ 10 and ≥ 100. Greenland moves the other way
+(0.368 → 0.445 → 0.454): its small HydroRIVERS mouths are too *long*. At 15″ a 10 km² basin is already 50-100 cells, so the
+quantisation that inflated my 1 km run does not reach these numbers. (My bet text misremembered the published threshold as ≥ 10.)
+
