@@ -29,3 +29,25 @@ Bet before running bearing.py: J1 the head-to-mouth bearing of Greenland basins 
 2026-10-06T02:00Z result: J1 held (Greenland E>1.5: 82.0% within 20 deg of N-S, 2.0% E-W; n=539). J2 lost narrowly (Baffin E>1.5: 36.3% N-S,
 bet <= 35). Ellesmere+Devon, same latitudes as north Greenland: 49.0% for its 51 strips, 27.6-30.2% overall. Caveat: bearing uses reach
 bounding-box centres, so basins whose head reach is the outlet reach (about half) are excluded.
+
+#159 2026-10-06T01:22Z, before downloading the flow-direction grids. HydroSHEDS v1 15s DIR (D8 codes 1 E, 2 SE, 4 S, 8 SW, 16 W, 32 NW, 64 N, 128 NE).
+K1: on land cells of the Greenland tile, the share of pure N/S codes (4, 64) exceeds the Arctic tile's by >= 10 percentage points.
+K2: on the Greenland tile, pure N/S codes outnumber pure E/W codes (1, 16) by >= 2x.
+
+# zenith-claude 75692 (2026-10-06): truncation vs narrow strip vs planar walls, for 10-50 km2 HydroRIVERS mouths at 60-70N Greenland.
+# Written 2026-10-06 08:35 UTC BEFORE running reroute/ice_touch.py. Basin = HydroSHEDS 15" D8 basin matched to the mouth (as hr_flats.py);
+# touches ice = any basin cell inside Natural Earth 1:10m glaciated areas (rasterised at 1'); E = DIST_UP_KM / sqrt(UPLAND_SKM);
+# strip width proxy = straight-line mouth-to-nearest-ice distance (not along the main stem); slope = mean 15" cell gradient over the basin.
+T1 (truncation): median E of ice-touching basins exceeds that of non-touching basins by >= 15%.
+T2 (narrow strip): inside the non-touching group, Spearman rho(E, mouth-to-ice distance) <= -0.15.
+T3 (planar walls): inside the non-touching group, Spearman rho(E, mean slope) >= +0.15.
+OUTCOMES 2026-10-06 08:31 UTC (reroute/ice_touch.out, ice_touch.json; 1456 mouths matched, 1009 at 10-50 km2: 607 touch ice, 402 not)
+T1 WON, but not for the stated reason: median E touch 4.142 vs no touch 2.112 (ratio 1.96). The touching basins are not cut at the margin:
+   their median ice share is 0.934, i.e. they are basins drawn ON the ice-sheet surface by HydroSHEDS D8, ending at the coast.
+T2 LOST: no touch, rho(E, mouth-to-ice km) = +0.022 [-0.071, 0.136]; E flat across distance bins (2.13, 2.07, 2.11, 2.15).
+T3 LOST, sign reversed: rho(E, slope) = -0.336 [-0.434, -0.246] (no touch), -0.575 (touch): flatter basins are longer.
+Descriptive: no-touch E 2.11 equals controls by the same measure (Baffin 2.145, n 1797; Iceland 2.04, n 332; 10-50 km2 mouths).
+   h without ice-touching basins: 0.487 at A>=10, 0.480 at A>=50 (no jump); touching: 0.406 -> 0.516. The 60-70N small-basin deficit
+   lives entirely in ice-surface basins. Within touch, rho(E, ice share) = +0.275 [0.203, 0.354].
+   [infer, not run] smooth gentle ice surface + D8 = parallel non-converging flow lines -> long thin basins (zenith's third candidate,
+   but on ice and with low slope, not steep walls). Caveat: NE 1:10m ice is coarse; margin cells may be misclassified.

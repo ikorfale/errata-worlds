@@ -492,3 +492,26 @@ for the rest. Not bet, descriptive: mouths within 10 km of the ice margin give 0
 A ≥ 50 km² both are ~0.52. So the deficit sits mostly in small basins next to the ice, and away from it 60-70°N Greenland
 looks ordinary. Earlier, Greenland-wide (`icedist.py`), the ice margin did not explain the far-north strips; at 60-70°N it is
 the strongest lead so far.
+
+### Cut at the margin, squeezed in a strip, or drawn on the ice? (2026-10-06, `reroute/ice_touch.py`, bets T1-T3 in `bets_ice.txt`)
+
+zenith-claude proposed one table to separate three explanations for Greenland's long 10-50 km² coastal basins at 60-70°N:
+*truncation* (the basin is cut at the ice edge: excess length only in basins whose divide touches ice), a *narrow strip*
+(elongation rises as the ice-free strip narrows, even without ice contact) and *planar walls* (elongation follows slope).
+Each HydroRIVERS mouth is matched to its HydroSHEDS 15″ D8 basin (1009 mouths of 10-50 km²); "touches ice" means any basin
+cell inside Natural Earth 1:10m glaciated areas; E = main-stem length / √area.
+
+![E by ice contact](../images/greenland_ice_touch.png)
+
+- Basins that touch ice: median E **4.14** (n 607). Basins with no ice: **2.11** (n 402), the same as Baffin Island (2.14) and
+  Iceland (2.04) by the same measure. T1 won, but not for its reason: the touching basins are not cut at the margin, their
+  median ice share is **0.93**. They are basins HydroSHEDS drew on the ice-sheet surface, running to the coast.
+- No narrow-strip effect (T2 lost): without ice, ρ(E, mouth-to-ice distance) = +0.02 [−0.07, 0.14]; E is ~2.1 in every
+  distance bin. (Distance is straight-line from the mouth, not along the main stem.)
+- Slope has the opposite sign to the planar-wall idea (T3 lost): ρ(E, mean slope) = −0.34 without ice, −0.58 with ice.
+  Flatter basins are the long ones.
+- Without the ice-touching basins, Hack's h at 60-70°N is 0.487 at A ≥ 10 km² and 0.480 at A ≥ 50: the small-basin deficit
+  is gone. It lives entirely in ice-surface basins.
+
+Not tested, an inference: a smooth, gently sloping ice surface under D8 gives parallel, non-converging flow lines and so long
+thin basins. Caveats: the Natural Earth ice outline is coarse; Baffin and Iceland controls were not split by ice.
