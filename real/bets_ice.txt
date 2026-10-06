@@ -14,3 +14,18 @@ F2: Greenland median E >= 1.5 x Baffin median E (the extra length IS basin elong
 2026-10-06T00:34Z result of the shape bet: F1 held (S Greenland 2.382 vs Baffin 2.440), F2 held narrowly (E 1.347 / 0.884 = 1.52). Extra length is elongation.
 Next bet, before running: strip hypothesis (basins down a uniform slope to the coast are strips of similar length, bigger = wider, not longer).
 G1: OLS slope of log D on log A (A 10-1000) in Greenland is lower than Baffin's by >= 0.10.
+
+#151 2026-10-06T01:44Z, written before icedist.py ran. Distance d = great-circle km from each Greenland outlet mouth (A >= 10 km2)
+to the nearest vertex of the Natural Earth 1:10m glaciated-areas polygons (0 if the mouth is on ice). Bands: <10, 10-30, 30-60, >=60 km.
+I1: mouths with d >= 50 km have h >= 0.47 (within 0.05 of Baffin's 0.519).
+I2: median E = D/sqrt(A) (A 10-1000) falls monotonically across the four bands.
+I3: in the >=60 km band, median E is within 1.15x Baffin's 0.884.
+2026-10-06T01:50Z result: I1 lost (d>=50: h 0.158 [0.028, 0.261], n=175), I2 lost (E 1.49, 1.07, 1.21, 1.80: not monotone), I3 lost
+(>=60 km: E 1.80 = 2.0x Baffin, h 0.006). Far from the ice is MORE strip-like, not less. The ice margin is not the cause.
+2026-10-06T01:56Z follow-up (descriptive, after seeing the split): far-from-ice West Greenland 64-68N is normal (h 0.500, E 0.93 ~ Baffin),
+NE 72-76N moderate (h 0.33, E 1.34), Peary Land 80N+ extreme (h 0.13, E 3.61). The anomaly is regional, not about ice.
+Bet before running bearing.py: J1 the head-to-mouth bearing of Greenland basins with E > 1.5 is within 20 deg of a meridian (N-S) for
+>= 50% of them (uniform would be 22%), i.e. strips follow the geographic grid; J2 Baffin's E > 1.5 basins show <= 35% N-S.
+2026-10-06T02:00Z result: J1 held (Greenland E>1.5: 82.0% within 20 deg of N-S, 2.0% E-W; n=539). J2 lost narrowly (Baffin E>1.5: 36.3% N-S,
+bet <= 35). Ellesmere+Devon, same latitudes as north Greenland: 49.0% for its 51 strips, 27.6-30.2% overall. Caveat: bearing uses reach
+bounding-box centres, so basins whose head reach is the outlet reach (about half) are excluded.

@@ -318,9 +318,39 @@ The chart shows where the slope difference comes from: the *smallest* basins. Be
 basins are two to three times as long, source to mouth, as Baffin's of the same area (median D 4.4 km against 1.5 km at
 10–15 km², n 1054 and 478); from about 100 km² up the four regions are nearly the same. So it is not that every Greenland basin is a strip
 that widens instead of lengthening: the small ones are long, narrow strips, and that alone flattens the fit. Long thin
-strips are what flow down a uniform slope towards a straight boundary makes, and they give a low h by construction. It fits an ice-sheet margin or a smooth ice surface, and it fits Ellesmere
+strips are what flow down a uniform slope towards a straight boundary makes, and they give a low h by construction. (Struck by the next section: it is not the ice.) It fits an ice-sheet margin or a smooth ice surface, and it fits Ellesmere
 sitting halfway, but it is a description of the geometry, not yet a cause: the same picture would come from
 a smooth DEM over the ice in HYDRO1k. [ran 4 regions, `out/elong.json`] Caveats: D is measured from reach ends,
 not from the divide, so S is inflated equally everywhere; the comparison is between regions, not absolute.
 
 ![Median straight source-to-mouth distance by basin area: Greenland's smallest basins are 2-3 times longer than Baffin's, the curves meet above 100 km²](out/greenland_strips.png)
+
+### Not the ice: the strips run north-south (2026-10-06)
+
+The paragraph above says the strips "fit an ice-sheet margin". I tested that and it is wrong. `icedist.py` splits Greenland's
+mouths (A ≥ 10 km²) by their distance to the nearest Natural Earth glaciated-area vertex. Bets in `bets_ice.txt`:
+
+| mouth to ice | n | h [95%] | median E (A 10-1000) | heads on ice |
+|---|---|---|---|---|
+| < 10 km | 2876 | 0.361 [0.345, 0.375] | 1.49 | 67% |
+| 10-30 km | 610 | 0.411 [0.378, 0.443] | 1.07 | 4% |
+| 30-60 km | 418 | 0.333 [0.279, 0.383] | 1.21 | 1% |
+| ≥ 60 km | 125 | 0.006 [-0.137, 0.120] | 1.80 | 0% |
+
+All three bets lost: far from the ice the basins are *more* strip-like, not normal. The anomaly is regional. Far-from-ice
+West Greenland (64-68°N) is normal (h 0.50, E 0.93, as on Baffin), while Peary Land (80°N+) is extreme (h 0.13, E 3.6).
+
+`bearing.py` then measures the direction of the straight head-to-mouth line (multi-reach basins only, A 10-1000 km²):
+
+| | strips (E > 1.5): n | within 20° of north-south | within 20° of east-west | other basins: north-south |
+|---|---|---|---|---|
+| Greenland | 539 | **82%** | 2% | 36% |
+| Baffin Island | 91 | 36% | 10% | 24% |
+| Ellesmere and Devon | 51 | 49% | 6% | 28% |
+
+Random directions would give 22%. Greenland's strips run along the meridians. Coasts and ice margins have every orientation,
+so physical relief can't do that. It points at how the Greenland layer's grid was built. Ellesmere is at the same
+latitudes in a neighbouring region of the same product and shows almost none of it, so latitude alone (narrow geographic
+cells) doesn't explain it either. Working hypothesis, not yet checked against the HydroSHEDS documentation: a routing
+or resampling artefact specific to the Greenland tile. Until then, **Greenland's HydroRIVERS h is not evidence about real
+rivers**. The number to quote stays 0.543, which already leaves Greenland out. [ran `icedist.py`, `bearing.py`; `out/icedist.json`, `out/bearing.json`]

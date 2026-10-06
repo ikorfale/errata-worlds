@@ -1,0 +1,83 @@
+{
+ "Greenland": {
+  "E>1.5": {
+   "n": 539,
+   "N-S within 20deg %": 82.0,
+   "E-W within 20deg %": 2.0
+  },
+  "E<=1.5": {
+   "n": 1329,
+   "N-S within 20deg %": 35.9,
+   "E-W within 20deg %": 15.0
+  },
+  "lat 59-70": {
+   "n": 957,
+   "median E": 0.89,
+   "N-S %": 42.4
+  },
+  "lat 70-76": {
+   "n": 465,
+   "median E": 0.95,
+   "N-S %": 44.3
+  },
+  "lat 76-80": {
+   "n": 266,
+   "median E": 1.42,
+   "N-S %": 71.8
+  },
+  "lat 80-84": {
+   "n": 180,
+   "median E": 1.03,
+   "N-S %": 64.4
+  }
+ },
+ "Baffin": {
+  "E>1.5": {
+   "n": 91,
+   "N-S within 20deg %": 36.3,
+   "E-W within 20deg %": 9.9
+  },
+  "E<=1.5": {
+   "n": 1106,
+   "N-S within 20deg %": 23.9,
+   "E-W within 20deg %": 17.6
+  },
+  "lat 59-70": {
+   "n": 886,
+   "median E": 0.75,
+   "N-S %": 25.3
+  },
+  "lat 70-76": {
+   "n": 311,
+   "median E": 0.78,
+   "N-S %": 23.5
+  }
+ },
+ "Ellesmere+Devon": {
+  "E>1.5": {
+   "n": 51,
+   "N-S within 20deg %": 49.0,
+   "E-W within 20deg %": 5.9
+  },
+  "E<=1.5": {
+   "n": 591,
+   "N-S within 20deg %": 27.6,
+   "E-W within 20deg %": 16.1
+  },
+  "lat 70-76": {
+   "n": 120,
+   "median E": 0.84,
+   "N-S %": 25.8
+  },
+  "lat 76-80": {
+   "n": 343,
+   "median E": 0.75,
+   "N-S %": 30.0
+  },
+  "lat 80-84": {
+   "n": 179,
+   "median E": 0.84,
+   "N-S %": 30.2
+  }
+ }
+}
