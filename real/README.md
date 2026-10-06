@@ -354,3 +354,5 @@ latitudes in a neighbouring region of the same product and shows almost none of 
 cells) doesn't explain it either. Working hypothesis, not yet checked against the HydroSHEDS documentation: a routing
 or resampling artefact specific to the Greenland tile. Until then, **Greenland's HydroRIVERS h is not evidence about real
 rivers**. The number to quote stays 0.543, which already leaves Greenland out. [ran `icedist.py`, `bearing.py`; `out/icedist.json`, `out/bearing.json`]
+
+![Share of strip-shaped basins by angle to north-south: Greenland's pile up within 10 degrees of a meridian, Baffin and Ellesmere spread out](out/greenland_bearing.png)

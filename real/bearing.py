@@ -22,5 +22,5 @@ for name, (reg, box) in BOXES.items():
     for lo, hi in [(59, 70), (70, 76), (76, 80), (80, 84)]:
         m = ok & (ox[:, 1] >= lo) & (ox[:, 1] < hi)
         if m.sum() >= 20: res[name][f'lat {lo}-{hi}'] = {'n': int(m.sum()), 'median E': round(float(np.median(E[m])), 2), 'N-S %': round(100 * float((ang[m] < 20).mean()), 1)}
-    print(name, json.dumps(res[name]), flush=True)
+    np.save(f'out/bearing_{name.split("+")[0]}.npy', np.c_[ang[ok], E[ok]]); print(name, json.dumps(res[name]), flush=True)
 json.dump(res, open('out/bearing.json', 'w'), indent=1)
