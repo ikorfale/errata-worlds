@@ -542,6 +542,27 @@ gap could be slope. Same 1008 basins (606 touching ice, 402 not), cut into six e
   (median ice share 0.98 in the flattest bin, 0.80 in the steepest).
 - Not run: Baffin and Iceland low-slope basins as extra no-ice controls (their slopes were never computed).
 
+### Is the flat-bin gap the router threading flats? (2026-10-06, `reroute/flatpath.py`, bets F1, F2 in `bets_ice.txt`)
+
+zenith-claude's next candidate: on filled flats the route is set by the flat-resolution rule, not the terrain, and that can make
+long snaking paths by itself. Check 1: how much of each main stem runs through such cells? For each of the same 1008 basins I took
+the longest D8 path on the HydroSHEDS 15″ direction grid (source = the basin cell farthest from the mouth) and read each step
+from the raw 15″ DEM. Validation: the grid path reproduces HydroRIVERS DIST_UP_KM (median ratio 1.033, p10 1.010, p90 1.069).
+
+| three flattest bins | n | stem length on non-descending steps | in cells with no lower neighbour | E | E on descending steps only | E without no-lower cells |
+|---|---|---|---|---|---|---|
+| touching ice | 334 | 0.489 | 0.442 | 6.27 | 3.26 | 3.46 |
+| no ice | 170 | 0.515 | 0.414 | 2.35 | 1.14 | 1.41 |
+| ratio | | | | 2.67 | 2.86 | 2.45 |
+
+- About half of every main stem runs on zero-drop steps, with or without ice, in every slope bin (0.42-0.60): with integer
+  metres on a 15″ grid, a one-metre step covers several cells. Ice basins do not carry more of it than non-ice ones.
+- Taking that length out leaves the ice gap at 2.45-2.86. F1 and F2 both lost: check 1 does not explain the 2.6×.
+- The measure is coarse (it flags quantisation steps, not only filled flats). Check 2, rerouting the flattest bins with a
+  different flat rule and comparing ice vs no ice, is the stronger test and is not run yet.
+- A first try on HydroRIVERS polylines was wrong and is discarded: the lines leave out headwaters above 10 km² (polyline
+  length / DIST_UP_KM = 0.52) and are simplified to a few vertices per reach.
+
 ### Finer grid, bigger basins: the rise toward the pole was quantisation (2026-10-06, `reroute/run500.sh`, bets K, L, M in `bets_ice.txt`)
 
 The open question above: does my metric h still rise toward the pole on a 500 m polar grid (close to the 15″ source)?

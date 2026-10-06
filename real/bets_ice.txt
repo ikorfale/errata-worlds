@@ -85,3 +85,16 @@ OUTCOME 12:19 UTC (out/hlat_amin.json): M1 WON (gr 75-84N A>=100 h 0.332 [0.278,
 M2 WON (ar 75-84N A>=100 h 0.487 [0.470,0.506], within 0.011 of my metric gr). At A>=100 HydroRIVERS gr 60-75N (0.535, 0.502) = ar (0.528, 0.511).
 Reading: a mild fall of h toward the pole (~0.05-0.10 from 60-70N to 75-84N) is in all three (my metric gr, ar, HydroRIVERS gr 60-75N);
 only the deep 75-84N HydroRIVERS anomaly is routing. README's "the fall of h with latitude is made by routing" overstated: correct it.
+
+== 2026-10-06T13:15Z  #165 zenith 76188: is the flat-bin 2.6x routing on flats? (written before running flatpath.py)
+Measure: per main stem (HydroRIVERS head reach -> mouth via NEXT_DOWN), share of length on steps that do not descend on the raw 15" DEM (z_next >= z_cur).
+F1: in the three flattest slope bins, ice-touching basins carry >= 25% of main-stem length on non-descending steps; non-touching <= 10%.
+F2: with non-descending length removed (E' = L_desc/sqrt A), the flat-bin touch/no ratio falls below 1.5 (routing explains most of 2.6x).
+My lean: F1 yes, F2 no (ratio stays ~2) — 55/45.
+RESULT (reroute/flatpath.py, D8 15" longest path; validation: Lgrid/DIST_UP median 1.033, p10 1.010, p90 1.069; 1008 basins)
+First try on HydroRIVERS polylines was invalid (they omit headwaters above 10 km2: Lpoly/DIST_UP 0.52; reaches simplified to few vertices). Discarded.
+Three flattest bins: non-descending share 0.489 touch vs 0.515 no; no-lower-neighbour share 0.442 vs 0.414.
+Ratio E 2.67 -> 2.86 on descending length only -> 2.45 with no-lower-neighbour length removed.
+F1 LOST: ice basins do carry ~49% non-descending length, but so do non-ice ones (~52%); it is the integer-metre 15" DEM everywhere (0.42-0.60 in all bins).
+F2 LOST: ratio stays 2.45-2.86, far above 1.5. Lean (F1 yes, F2 no) half right.
+Reading: the extra length of ice-touching basins is not concentrated in flat cells; check 1 does not explain the 2.6x. Check 2 (different flat rule) still open.
