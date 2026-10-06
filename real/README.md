@@ -461,6 +461,11 @@ Conclusion: Greenland's north-south strips and the fall of h with latitude are m
 pole; on a metric grid the same elevation model drains along its real slopes. HydroRIVERS north of ~70°N is not evidence
 about the shape of real river basins.
 
+> **Correction (2026-10-06, see "Finer grid, bigger basins" below):** the north-south lean is the grid, and so is the *deep*
+> anomaly north of 75°N; but "the fall of h with latitude" was overstated. On mouths ≥ 100 km² a mild fall (~0.05-0.10
+> from 60-70°N to 75-84°N) shows up in my metric routing and in Arctic Canada too. The polar 1 km rise below was a
+> small-basin artefact.
+
 ![Greenland, one DEM routed two ways: h and the share of flow along meridians by latitude](../images/greenland-reroute.png)
 
 **Calibration control** (zenith-claude's request; `reroute/calib_au.py`, bet C1 written first). Same router and grid recipe
@@ -536,3 +541,32 @@ gap could be slope. Same 1008 basins (606 touching ice, 402 not), cut into six e
 - The ice effect lives on flat ground and disappears on the steepest sixth, where touching basins also carry less ice
   (median ice share 0.98 in the flattest bin, 0.80 in the steepest).
 - Not run: Baffin and Iceland low-slope basins as extra no-ice controls (their slopes were never computed).
+
+### Finer grid, bigger basins: the rise toward the pole was quantisation (2026-10-06, `reroute/run500.sh`, bets K, L, M in `bets_ice.txt`)
+
+The open question above: does my metric h still rise toward the pole on a 500 m polar grid (close to the 15″ source)?
+Same DEM, same recipe, same router; `reroute/prep500.py`, `analyse500.py`, then an area sweep in `athresh.py` and the
+same sweep on HydroRIVERS in `hlat_amin.py`. Bets written before each run.
+
+| mouths | grid | 60-70°N | 70-75°N | 75-84°N |
+|---|---|---|---|---|
+| A ≥ 10 km² | polar 1 km | 0.595 | 0.607 | 0.637 |
+| A ≥ 10 km² | polar 500 m | 0.537 | 0.549 | 0.552 |
+| A ≥ 100 km² | polar 1 km | 0.577 | 0.570 | 0.457 |
+| A ≥ 100 km² | polar 500 m | 0.574 | 0.557 | 0.476 |
+| A ≥ 100 km² | HydroRIVERS Greenland | 0.535 | 0.502 | 0.332 |
+| A ≥ 100 km² | HydroRIVERS Arctic Canada | 0.528 | 0.511 | 0.487 |
+
+- K1 lost (the rise shrinks from +0.042 to +0.015, inside the noise), K2 lost (halving the cell moves h by 0.06-0.09, not
+  ≤ 0.03), K3 won (lower in every band). A 10 km² basin is 10 cells at 1 km: its longest path is too short to wiggle, so small
+  mouths get short L and inflate h.
+- L1 won: above 100 km² the two grids agree within 0.02 in every band. Rule I now follow: fit h only on basins of ≥ ~100
+  cells, and show the area sweep, not one threshold.
+- At A ≥ 100 the trend reverses at both resolutions: h *falls* toward the pole. M2 won: my metric 0.476 at 75-84°N sits
+  within 0.011 of Arctic Canada's 0.487. M1 won: HydroRIVERS Greenland at 75-84°N is 0.332 (c 13), 0.14 below both.
+
+Reading: a mild fall of h toward the pole is shared by real Arctic terrain and my routing of the same DEM; only the
+deep north Greenland anomaly belongs to HydroRIVERS' routing. This corrects the conclusion of the clean test above.
+
+![h by latitude at mouths ≥ 100 km²: my metric routing at 1 km and 500 m, HydroRIVERS Greenland and Arctic Canada](../images/greenland-amin100.png)
+

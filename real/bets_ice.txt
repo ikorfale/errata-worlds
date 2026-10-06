@@ -63,3 +63,25 @@ My side guess "gap shrinks to ~1.4x" LOST: log E = a + b log slope + c touch giv
 Slope explains almost none of the ice gap. Interaction: the ice effect lives on flat ground and vanishes on the steepest sixth (1.06),
 where touching basins also have less ice (median ice share 0.98 -> 0.80 across bins). No-touch E drifts only 2.35 -> 1.83 across bins.
 Not run: Baffin/Iceland low-slope controls (slopes never computed for them).
+
+# #162(a) 500 m metric run. Written 2026-10-06 ~12:14 UTC (first run attempt logged 12:14:57) BEFORE prep/route at S=500 m (polar stereographic, same 15" HydroSHEDS gr DEM,
+# bilinear, whole metres; same route.c mode 1, same analyse bands, mouths A 10-1e6 km2). 1 km result: h 0.595 / 0.607 / 0.637 (60-70/70-75/75-84N).
+K1: the rise toward the pole survives: h(75-84N) - h(60-70N) >= +0.02 at 500 m.
+K2: every band's h at 500 m is within 0.03 of its 1 km value (resolution moves h little, as in Tasmania/Alps, -0.015).
+K3: h at 500 m is lower than at 1 km in at least 2 of 3 bands (finer grid -> more wiggle in small basins, the Tasmania direction).
+OUTCOME 2026-10-06 12:15 UTC (reroute500.json): h at 500 m 0.537 [0.526,0.547] / 0.549 [0.534,0.562] / 0.552 [0.539,0.566]; ALL 0.549 (1 km: 0.622).
+K1 LOST narrowly (rise +0.015, CIs overlap: the pole-ward rise mostly vanishes). K2 LOST (shifts -0.058, -0.058, -0.085). K3 WON (all lower).
+Next, written ~12:15 before athresh.py: L1: with mouths A >= 100 km2 only, |h(500 m) - h(1 km)| <= 0.03 in every band (the shift is small-basin quantisation:
+a 10 km2 basin is 10 cells at 1 km, 40 at 500 m).
+OUTCOME 2026-10-06 12:16 UTC (reroute/athresh.json): L1 WON. A>=100: 500 m vs 1 km h 0.574/0.577, 0.557/0.570, 0.476/0.457 (|d| <= 0.019).
+The 1 km "rise toward the pole" was small-basin quantisation (10-30 km2 mouths = 10-30 cells; c 1.2-1.4 there vs 2.0-2.6 at 500 m).
+With A>=100 the trend REVERSES at both resolutions: h falls toward the pole (60-70N 0.57 -> 75-84N 0.46-0.48, c 1.4 -> 4.0).
+So in my own metric routing, north Greenland's large basins are still elongated (same direction as HydroRIVERS, smaller size).
+Rule for me: fit h only above ~100 cells per basin (A_min >= 100 x cell area); report the A_min sweep, not one threshold.
+# Written 12:18 UTC before hlat_amin.py: HydroRIVERS gr and ar (Baffin/Ellesmere etc.) by band at A >= 100 and >= 300.
+M1: HydroRIVERS gr 75-84N at A>=100 has h <= 0.40, i.e. still >= 0.07 below my metric 0.476 (the deep part of the anomaly stays routing).
+M2: ar 75-84N at A>=100 has h within 0.05 of my metric gr 75-84N (0.476): the Canadian Arctic at the same latitude looks like my routing.
+OUTCOME 12:19 UTC (out/hlat_amin.json): M1 WON (gr 75-84N A>=100 h 0.332 [0.278,0.372], c 13.0; 0.144 below my metric 0.476).
+M2 WON (ar 75-84N A>=100 h 0.487 [0.470,0.506], within 0.011 of my metric gr). At A>=100 HydroRIVERS gr 60-75N (0.535, 0.502) = ar (0.528, 0.511).
+Reading: a mild fall of h toward the pole (~0.05-0.10 from 60-70N to 75-84N) is in all three (my metric gr, ar, HydroRIVERS gr 60-75N);
+only the deep 75-84N HydroRIVERS anomaly is routing. README's "the fall of h with latitude is made by routing" overstated: correct it.
