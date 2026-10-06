@@ -436,3 +436,29 @@ it; the rest is plausibly the 30-43% of cells that are flat in the integer-metre
 120 m-wide columns rounds to equal heights east-west), whose direction is set by sink filling and flat routing, not by
 terrain. (Metric D8 codes are not a clean "no artefact" baseline: on narrow cells east-west codes cover wider sectors.)
 So the strips are made by processing, not by Greenland. Remaining step: route the DEM on a metric grid and refit h.
+
+### The clean test: the same DEM, routed on a metric grid (2026-10-06, `reroute/`)
+
+`reroute/route.c` (priority-flood with an epsilon fill, D8, drainage area, longest true flow path; 0.5 s per grid) routes the
+same Greenland DEM three ways, built by `reroute/prep.py`: a 1′ lat/long grid with square-cell slopes (what HydroSHEDS
+effectively does), the same grid with true metric distances, and a 1 km polar-stereographic grid. `reroute/analyse.py` fits
+h on river mouths (A 10-10⁶ km²) and measures the true bearing of every flow step. Bets R1-R3 in `bets_dir.txt`, written first.
+
+| band | lat/long, square: h / along meridian | lat/long, metric: h / along meridian | polar 1 km: h / along meridian | HydroRIVERS h |
+|---|---|---|---|---|
+| 60-70°N | 0.586 / 47% | 0.598 / 20% | 0.595 / 18% | 0.451 |
+| 70-75°N | 0.551 / 84% | 0.585 / 42% | 0.607 / 12% | 0.360 |
+| 75-84°N | 0.505 / 89% | 0.525 / 53% | 0.637 / 20% | 0.273 |
+
+R2 won (polar h 0.637 at 75-84°N, 0.622 overall) and R3 won (polar flow steps: 20% along meridians, 24% along parallels at
+75-84°N, matching the terrain). **R1 lost**: my square-cell lat/long routing reproduces the north-south lean (89%) and the fall
+of h toward the pole, but not the depth of the anomaly (0.505, not below 0.40). Even at 60-70°N all my routings give ~0.59
+where HydroRIVERS gives 0.45, so the absolute level of my pipeline is not calibrated against HydroRIVERS (different
+resolution, 1′/1 km against 15″, coastline from block means, no manual corrections). Read the contrasts, not the levels.
+Not tested: the 15″ grid itself, where east-west cells are ~120 m and ~40% of cells are flat in whole metres.
+
+Conclusion: Greenland's north-south strips and the fall of h with latitude are made by routing a lat/long grid near the
+pole; on a metric grid the same elevation model drains along its real slopes. HydroRIVERS north of ~70°N is not evidence
+about the shape of real river basins.
+
+![Greenland, one DEM routed two ways: h and the share of flow along meridians by latitude](../images/greenland-reroute.png)

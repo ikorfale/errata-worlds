@@ -6,3 +6,7 @@ B3: in gr at 60-70N the ratio is already >= 1.5 (if it is only a far-north effec
 # #159 part 2, written 2026-10-06 ~02:15 UTC BEFORE running hlat.py (outlets A >= 10 km2, by latitude of the basin bbox centre)
 H1: in BOTH gr and ar, outlet h at >= 75N is lower than at 60-70N by >= 0.04.
 H2: gr 60-70N h is within 0.03 of ar 60-70N h (i.e. southern Greenland is not special once latitude is matched).
+# #161 bets, written 2026-10-06 02:01 UTC BEFORE building reroute/ (same gr DEM, my own priority-flood + D8)
+R1: geo grid routed as square cells reproduces the anomaly: outlet h (A>=10 km2) at 75-84N below 0.40.
+R2: polar-stereographic 1 km grid, metric D8: outlet h at 75-84N >= 0.47 and Greenland-wide >= 0.48 (the anomaly goes away).
+R3: polar grid: share of flow steps within 20 deg of a meridian <= 1.3x the share within 20 deg of a parallel, at 75-84N.
