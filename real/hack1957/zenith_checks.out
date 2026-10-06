@@ -1,0 +1,73 @@
+== 1. slope pinned at 0.6: c = 10^mean(log L - 0.6 log A)
+  Langbein 1947  n=203 c=1.341 95% [1.304,1.380]
+  Hack Table 8   n= 96 c=1.470 95% [1.413,1.531]
+  Langbein 1947  shared A 1.6-379: n=148 c=1.346
+  Hack Table 8   shared A 1.6-379: n=83 c=1.430
+== 2. OCR filter vs drainage area (first numeric token of every row-like line)
+  stations with a readable first token: 307 (kept 203), lines without one: 5
+  quartile 1: A 1.0-72  n= 77 kept 49.4%
+  quartile 2: A 75.3-187  n= 77 kept 76.6%
+  quartile 3: A 188.0-420  n= 76 kept 78.9%
+  quartile 4: A 448.0-123609  n= 77 kept 59.7%
+== 3. Table 8: within-stream vs between-stream
+  ?                                n=12 A 0.38-180
+  unnamed@648                      n= 7 A 2.50-14
+  unnamed@644                      n= 1 A 9.80-10
+  unnamed@631                      n= 2 A 2.84-8
+  Middle River                     n=14 A 42.50-379
+  North River                      n= 9 A 17.20-375
+  Tributary of Christians Creek    n= 1 A 1.10-1
+  Poor Farm raft                   n= 1 A 3.15-3
+  Folly Mills Creek                n= 1 A 17.09-17
+  Christians Creek                 n= 3 A 26.80-86
+  Ravine on Crawford Mtn           n= 1 A 0.03-0
+  Tributary of East Dry Branch     n= 1 A 0.12-0
+  Old Soil Branch                  n= 1 A 0.35-0
+  East Dry Branch                  n= 8 A 1.00-9
+  Stony Run                        n= 1 A 1.20-1
+  Mines Run                        n= 1 A 3.30-3
+  Skidmore Fork                    n= 1 A 6.60-7
+  Little River                     n= 1 A 15.80-16
+  unnamed@627                      n=10 A 1.40-128
+  Buffalo Branch                   n= 1 A 23.10-23
+  Campbell Creek                   n= 1 A 2.30-2
+  Tye River                        n= 4 A 5.90-32
+  Gillis Falls                     n= 8 A 0.16-19
+  Tributary, Gillis Falls          n= 1 A 1.20-1
+  South Branch Patapsco River      n= 1 A 38.80-39
+  unnamed@698                      n= 1 A 5.10-5
+  Zekiah Swamp                     n= 1 A 12.40-12
+  Mataponi Creek                   n= 2 A 4.60-8
+  pooled OLS all n=96: 0.566
+  within-stream (fixed effects, streams with >=3 pts: 9, n=75): 0.565
+    ?                              n=12 decades=2.68 slope=0.557
+    unnamed@648                    n= 7 decades=0.76 slope=0.777
+    Middle River                   n=14 decades=0.95 slope=0.761
+    North River                    n= 9 decades=1.34 slope=0.463
+    Christians Creek               n= 3 decades=0.51 slope=0.703
+    East Dry Branch                n= 8 decades=0.94 slope=0.850
+    unnamed@627                    n=10 decades=1.96 slope=0.529
+    Tye River                      n= 4 decades=0.73 slope=0.485
+    Gillis Falls                   n= 8 decades=2.08 slope=0.541
+  between-stream (stream means, 28 streams): 0.545
+  leave-one-stream-out pooled OLS: min 0.560 max 0.572  (dropped: Gillis Falls -> min, unnamed@627 -> max)
+  within-stream slope, stream bootstrap 95%: [0.540,0.641]
+== 3 (redo, hand-mapped streams)
+  Bell Creek       n= 3 decades=1.19 slope=0.494
+  Butlers Branch   n= 3 decades=0.40 slope=0.678
+  Calfpasture      n=10 decades=1.96 slope=0.529
+  Christians Creek n= 3 decades=0.51 slope=0.703
+  East Dry Branch  n= 8 decades=0.94 slope=0.850
+  Eidson Creek     n= 9 decades=1.43 slope=0.680
+  Gillis Falls     n= 8 decades=2.08 slope=0.541
+  Middle River     n=19 decades=0.95 slope=0.766
+  North River      n= 9 decades=1.34 slope=0.463
+  Tye River        n= 4 decades=0.73 slope=0.485
+  limestone 630    n= 3 decades=1.30 slope=0.585
+  pooled OLS n=96: 0.566; singles=15
+  within-stream FE (11 streams, n=79): 0.580  stream-bootstrap 95% [[0.537 0.666]]
+  within-stream FE without Hack's two departures (East Dry Branch, North River): 0.574
+  between-stream OLS on stream means (27 streams incl. singles): 0.545
+  leave-one-stream-out pooled: 0.560 (drop Gillis Falls) .. 0.572 (drop Calfpasture)
+== 2b. Langbein refit weighted by 1/kept-rate of the A quartile
+  unweighted OLS 0.593; weighted OLS 0.590, c at fitted slope 1.42; weighted c pinned 0.6 1.346

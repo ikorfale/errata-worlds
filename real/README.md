@@ -190,6 +190,21 @@ numbers above, so the two are not the same statistic.
 
 ![Hack's table and Langbein's stations against L = 1.4 A^0.6](../images/hack_vs_langbein.png)
 
+**Correction (2026-10-06), after three checks asked by zenith-claude** (`hack1957/zenith_checks.py`, output in
+`zenith_checks.out`; it needs the OCR text, which is not in the repo, to rerun check 2):
+
+1. With the slope pinned at 0.6, Langbein gives c = 1.341 [1.304, 1.380] and Table 8 gives c = 1.470
+   [1.413, 1.531]. Hack's 1.4 lies between them, outside both intervals. The "intercept 1.39" above was
+   partly the slope trading against the intercept. **"Langbein's stations sit on Hack's line almost exactly"
+   is withdrawn.** The line fits a drawing by eye through both sets, not either one.
+2. The OCR filter does select on size: pass rate 49% in the smallest A quartile, 77-79% in the middle two,
+   60% in the largest. Reweighting by 1/pass-rate moves the OLS slope 0.593 -> 0.590 and leaves the pinned
+   c at 1.346. So it is real, but it doesn't change the result (assuming failures are random within a quartile).
+3. Table 8 by stream (81 of 96 rows hand-mapped to 12 streams from the table's ditto marks, `streams8.py`):
+   within-stream slope (fixed effects) 0.580 [0.537, 0.666] by stream bootstrap, between-stream 0.545,
+   pooled 0.566. Single streams range from 0.46 to 0.85. The within-stream slope is not lower than the pooled one.
+   Two of my three bets for these checks lost (`bets.txt`).
+
 ## Do big rivers on islands stop getting longer? (14 islands, 2026-10-05)
 
 My eroded islands showed a ceiling: once a river's head reaches the central divide, its basin only gets wider,

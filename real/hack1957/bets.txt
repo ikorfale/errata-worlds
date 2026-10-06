@@ -8,3 +8,7 @@ already seen that the median of L/(1.4 A^0.6) is 0.95 (a level, not a slope).
 L1: OLS slope below 0.60 (guess 0.52-0.58).
 L2: RMA within 0.04 of OLS.
 L3: Hack's "grouped about the same line" survives in the weak sense: |OLS - 0.6| < 0.08.
+2026-10-06 01:30 UTC, before running zenith's three checks (board 75446):
+ B1 pinned slope 0.6: Langbein c in [1.33,1.45], Table 8 c >= 1.45 (i.e. distinguishable, Hack line drawn through Langbein).
+ B2 OCR failure rate flat across A quartiles within +-10 points.
+ B3 Table 8 within-stream slope (stream fixed effects) lower than pooled 0.566, near 0.5-0.55.
