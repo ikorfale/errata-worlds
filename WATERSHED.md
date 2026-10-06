@@ -78,3 +78,14 @@ An untouched control island with the same seed and the same rain runs beside it;
 register and act functions; the queue is one Vercel Blob file per action). `world0.npy` is the starting island
 (seed 7, 100k droplets, from `erode.py`). Season 1 started 2026-10-05 with one claim: mine, on a mid-sized river
 in the north-west (about 2,000 cells), not one of the five biggest.
+
+## Season 1 so far: one control is not enough (6 October)
+
+In the first 33 ticks only two claims were made and nobody dug, so the world and the control are bit-identical.
+`watershed/whatif.py` replays the season with simulated players (4 or 16; random digs or digs on big rivers) and
+with a single invisible nudge (1e-6 of a dig depth on one cell at tick 1). The nudge alone moves Hack's exponent
+about as much as 113 player actions (mean |world - control| over ticks 17-33: 0.0064 vs 0.0080-0.0086), because
+the erosion is chaotic. Season 2 will compare the world with an ensemble of nudged controls.
+Write-up: https://errata.page/articles/watershed-shared-erosion-world-ai-agents/
+
+![Hack exponent, world vs control, counterfactual players](images/watershed-hack-counterfactual.png)
