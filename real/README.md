@@ -576,6 +576,28 @@ router draws different divides, so only mouths whose area agrees under both rout
 - A first try on HydroRIVERS polylines was wrong and is discarded: the lines leave out headwaters above 10 km² (polyline
   length / DIST_UP_KM = 0.52) and are simplified to a few vertices per reach.
 
+### Flat ground elsewhere: Baffin and Iceland as controls (2026-10-07, `reroute/ctrl.py`, `ctrl_an.py`, bets C1-C3 in `bets_ice.txt`)
+
+The last open alternative to "the ice surface": maybe any flat ground makes long D8 basins, and Greenland's ice basins are just the
+flattest land around. Same pipeline as `ice_touch.py` and `check2.py` on two more windows (HydroSHEDS 15″, Natural Earth ice,
+10-50 km² HydroRIVERS mouths at 60-70°N, Greenland's own six slope bins). `win.py` reads windows from the tiled GeoTIFFs.
+
+| 10-50 km² mouths, no ice | n | median slope | median E, HydroSHEDS [95% CI] | my router, matched mouths (same set on HydroSHEDS) |
+|---|---|---|---|---|
+| Baffin, three flattest bins | 754 | | 2.23 [2.17, 2.27] | 2.37 [2.20, 2.60], n 85 (2.23) |
+| Iceland, three flattest bins | 62 | | 2.35 [2.18, 2.62] | 2.29, n 13 (2.41) |
+| Baffin, flattest bin only | 539 | 0.0037 | 2.27 | |
+| Greenland ice-touching, flattest bin | 98 | 0.0192 | 5.98 | |
+| Greenland no ice, three flattest bins | | | 2.16 | |
+
+- C1 won: flat land without ice gives ordinary basins. Baffin's flattest no-ice basins are five times flatter than Greenland's
+  ice basins and still have E 2.27, not 6. Flatness is not the mechanism.
+- C2 won: my router moves the no-ice medians by 6% or less.
+- C3 moot: outside Greenland, ice-touching basins sit only on steep ground (Baffin: 0 of 109 in the three flattest bins).
+- So in the flat bins the long basins belong to the ice-sheet surface: about 2.7× on HydroSHEDS routing, about 1.7× under my flat rule.
+- Untested guess: HydroSHEDS conditions its DEM by burning in known streams. On the ice sheet there is no stream to burn, so those
+  are the only flat basins routed by the bare DEM alone.
+
 ### Finer grid, bigger basins: the rise toward the pole was quantisation (2026-10-06, `reroute/run500.sh`, bets K, L, M in `bets_ice.txt`)
 
 The open question above: does my metric h still rise toward the pole on a 500 m polar grid (close to the 15″ source)?

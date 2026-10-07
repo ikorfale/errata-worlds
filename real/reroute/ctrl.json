@@ -1,0 +1,150 @@
+{
+ "baffin": {
+  "n": 1213,
+  "n_touch": 109,
+  "matched_me": 174,
+  "bins": [
+   {
+    "bin": 0,
+    "n_no": 539,
+    "E_no": 2.27,
+    "n_touch": 0,
+    "E_touch": null
+   },
+   {
+    "bin": 1,
+    "n_no": 111,
+    "E_no": 2.12,
+    "n_touch": 0,
+    "E_touch": null
+   },
+   {
+    "bin": 2,
+    "n_no": 104,
+    "E_no": 2.13,
+    "n_touch": 0,
+    "E_touch": null
+   },
+   {
+    "bin": 3,
+    "n_no": 101,
+    "E_no": 1.97,
+    "n_touch": 1,
+    "E_touch": 2.81
+   },
+   {
+    "bin": 4,
+    "n_no": 121,
+    "E_no": 1.95,
+    "n_touch": 19,
+    "E_touch": 2.22
+   },
+   {
+    "bin": 5,
+    "n_no": 128,
+    "E_no": 1.88,
+    "n_touch": 89,
+    "E_touch": 2.06
+   }
+  ],
+  "flat3 no hs": [
+   754,
+   2.23,
+   2.17,
+   2.27
+  ],
+  "flat3 no me(matched)": [
+   85,
+   2.37,
+   2.2,
+   2.6
+  ],
+  "flat3 no hs(matched)": [
+   85,
+   2.23,
+   2.1,
+   2.33
+  ],
+  "flat3 touch hs": null,
+  "flat3 touch me(matched)": null,
+  "flat3 touch hs(matched)": null,
+  "median slope no": 0.0285
+ },
+ "iceland": {
+  "n": 309,
+  "n_touch": 20,
+  "matched_me": 82,
+  "bins": [
+   {
+    "bin": 0,
+    "n_no": 34,
+    "E_no": 2.32,
+    "n_touch": 0,
+    "E_touch": null
+   },
+   {
+    "bin": 1,
+    "n_no": 16,
+    "E_no": 2.35,
+    "n_touch": 1,
+    "E_touch": 2.72
+   },
+   {
+    "bin": 2,
+    "n_no": 12,
+    "E_no": 2.61,
+    "n_touch": 0,
+    "E_touch": null
+   },
+   {
+    "bin": 3,
+    "n_no": 34,
+    "E_no": 2.3,
+    "n_touch": 4,
+    "E_touch": 3.24
+   },
+   {
+    "bin": 4,
+    "n_no": 60,
+    "E_no": 2.02,
+    "n_touch": 3,
+    "E_touch": 2.32
+   },
+   {
+    "bin": 5,
+    "n_no": 133,
+    "E_no": 1.82,
+    "n_touch": 12,
+    "E_touch": 2.51
+   }
+  ],
+  "flat3 no hs": [
+   62,
+   2.35,
+   2.18,
+   2.62
+  ],
+  "flat3 no me(matched)": [
+   13,
+   2.29,
+   1.96,
+   2.51
+  ],
+  "flat3 no hs(matched)": [
+   13,
+   2.41,
+   1.96,
+   2.7
+  ],
+  "flat3 touch hs": [
+   1,
+   2.72,
+   2.72,
+   2.72
+  ],
+  "flat3 touch me(matched)": null,
+  "flat3 touch hs(matched)": null,
+  "median slope no": 0.1189
+ },
+ "flat3 hi edge": 0.058
+}

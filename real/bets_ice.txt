@@ -109,3 +109,24 @@ RESULT check 2 (reroute/check2.py, check2_wide.py; routing reroute/run15.sh): my
 G1 LOST (stays < 2.0). Ice basins get shorter under my rule (E 5.8 -> 4.0-4.2), non-ice barely move (2.2-2.5 -> 2.3-2.4).
 Reading: about a quarter to a third of the flat-bin gap moves with the flat rule (routing); ~1.7x survives the change of rule.
 Caveat: matched subsets are the basins whose area agrees under both routings — biased toward stable divides.
+
+## #168 Baffin and Iceland controls (written 2026-10-07 00:25 UTC, before any run)
+Same measure as check2: 10-50 km2 HydroRIVERS mouths, E = L/sqrt(A), slope bins = Greenland's six equal-count bins
+(edges from check2.json), "flat3" = Greenland's three flattest bins. Ice = Natural Earth 1:10m glaciated areas.
+Both routings: HydroSHEDS 15" D8 (DIST_UP_KM / UPLAND_SKM) and my route.c (mode 1) on the 15" DEM window.
+C1: no-ice Baffin and Iceland basins in flat3 have median E (HydroSHEDS) <= 2.8, i.e. near Greenland no-ice (2.16),
+    far from Greenland ice (5.8). If they come out >= 4, flatness alone makes long basins and the "ice effect" is flatness.
+C2: under my router the same no-ice flat3 medians stay within 20% of their HydroSHEDS values.
+C3: Baffin ice-touching basins in flat3 (if n >= 15) have E >= 1.5x Baffin no-ice: the ice effect is not Greenland-only.
+Side guess: Iceland has too few flat3 no-ice basins (< 30) to say much on its own.
+Result 2026-10-07 00:40 UTC [ran reroute/ctrl.py, ctrl_an.py -> ctrl.json]:
+Baffin box (-91..-61, mouths 60-70N): 1213 mouths, 109 touch ice. Iceland: 309, 20 touch.
+No-ice, flat3, HydroSHEDS: Baffin n 754, E 2.23 [2.17, 2.27]; Iceland n 62, E 2.35 [2.18, 2.62]. Greenland no-ice 2.16, ice 5.8.
+Flattest bin alone (slope <= 0.027): Baffin no-ice n 539, median slope 0.0037, E 2.27; Greenland ice n 98, slope 0.0192, E 5.98.
+C1 WON: flat ground without ice gives ordinary basins (Baffin's are 5x flatter than Greenland's ice basins and still E 2.27).
+My router, matched mouths: Baffin 85: 2.37 [2.20, 2.60] vs 2.23 HydroSHEDS on the same set; Iceland 13: 2.29 vs 2.41. C2 WON.
+C3 MOOT: Baffin ice-touching basins sit only in the two steepest bins (0 in flat3), Iceland 1. Ice basins outside Greenland are steep.
+Side guess LOST on HydroSHEDS (Iceland flat3 no-ice n 62 >= 30); true for my router's matched set (13).
+Reading: flatness is not the mechanism. In the flat bins the long basins are an ice-sheet-surface effect, ~2.7x on HydroSHEDS routing
+and ~1.7x under my flat rule. Untested guess: HydroSHEDS conditions its DEM by burning known streams, and on the ice sheet there is no
+stream to burn, so the ice-surface basins are the only flat ones routed by the DEM alone.
