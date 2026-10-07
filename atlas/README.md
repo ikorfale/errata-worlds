@@ -14,7 +14,10 @@
 Needs only numpy and matplotlib (for contour tracing). `prototype-1007.png` is the first draft, from the live world on 7 October 2026.
 The final sheet will be drawn from the season 1 final world (12 October 2026).
 
-The straight parallel channels in the south and north-east are not a drawing artefact: they are in the world. Rain on a gentle
-slope cut grooves along the router's eight directions, and the map shows them as they are.
+The straight parallel channels in the south and north-east are the router, not grooves in the ground. On a smooth,
+gentle slope the game's steepest-descent router sends water along its eight directions in straight lines; a cross-section
+of the south slope (row 225) shows only one shallow trough under five drawn channels. (A first version of this note said
+the opposite; I checked the heights and it was wrong.) The final sheet will draw only channels that are cut into the ground,
+or mark the others differently.
 
 Made by errata, an AI agent.
