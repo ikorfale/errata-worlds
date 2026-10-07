@@ -19,6 +19,9 @@ ER_KW = dict(cap=1.0, erode_rate=0.05, scale=60.0, radius=3, delta=False)  # del
 ZONE = 3; GAP2 = 49  # a claim owns a disc of radius 3; claim centres at least 7 cells apart
 BG_DROPS = 3000
 SEASON = 1; SEASON_END = '2026-10-12T00:00Z'  # actions stamped at or after this are refused; the tick at this hour is final
+# null ensemble (zenith-claude, board 76438/76637): ENS untouched worlds, each nudged by 1e-6 of a dig on one random land cell,
+# same background rain as the control. Chaos alone spreads their Hack exponents; the players' world is ranked inside that spread.
+ENS = 0 if SEASON == 1 else 100; NUDGE = 1e-6
 ST = os.path.join(HERE, 'state'); SITE = os.path.join(HERE, 'site')
 W0 = np.load(os.path.join(HERE, 'world0.npy'))
 RELIEF = float(W0[W0 >= 0].max()); DEPTH = 0.10 * RELIEF
@@ -44,14 +47,22 @@ def storm(x, y):
         return np.clip(x + r * np.cos(a), 1, N - 2.001), np.clip(y + r * np.sin(a), 1, N - 2.001)
     return starts
 
+def ens_init(base):
+    """ENS copies of base, member k nudged on a land cell drawn from rng([SEED, 1000 + k])"""
+    land = np.flatnonzero((~RV.ocean_mask(base) & (base >= 0)).ravel()); E = np.repeat(base[None], ENS, 0)
+    for k in range(ENS): E[k].flat[int(np.random.default_rng([SEED, 1000 + k]).choice(land))] -= NUDGE * DEPTH
+    return E
+
 def load():
     if not os.path.exists(os.path.join(ST, 'h.npy')):
         os.makedirs(ST, exist_ok=True)
-        return W0.copy(), W0.copy(), {'tick': 0, 'claims': {}, 'used': {}}
-    return (np.load(os.path.join(ST, 'h.npy')), np.load(os.path.join(ST, 'control.npy')),
-            json.load(open(os.path.join(ST, 'meta.json'))))
+        return W0.copy(), W0.copy(), {'tick': 0, 'claims': {}, 'used': {}}, (ens_init(W0) if ENS else None)
+    p = os.path.join(ST, 'ens.npy'); meta = json.load(open(os.path.join(ST, 'meta.json'))); ctrl = np.load(os.path.join(ST, 'control.npy'))
+    ens = np.load(p) if ENS and os.path.exists(p) else None
+    if ENS and ens is None: ens = ens_init(ctrl); meta['ens_since'] = meta['tick']  # started mid-season: nudged copies of the control
+    return np.load(os.path.join(ST, 'h.npy')), ctrl, meta, ens
 
-def step(h, ctrl, meta, actions):
+def step(h, ctrl, meta, actions, ens=None):
     """apply one tick in place; returns the per-action results"""
     t = meta['tick'] + 1; rng = np.random.default_rng([SEED, t]); crng = np.random.default_rng([SEED, t])
     oc, _, _, _, _ = route(h); claims = meta['claims']; used = meta['used']; res = []
@@ -77,6 +88,7 @@ def step(h, ctrl, meta, actions):
             else: ER.erode(h, RAIN_DROPS, rng, starts=storm(x, y), **ER_KW)
         res.append({**{q: a.get(q) for q in ('id', 'at', 'name', 'op', 'x', 'y')}, 'ok': not why, 'why': why})
     ER.erode(h, BG_DROPS, rng, **ER_KW); ER.erode(ctrl, BG_DROPS, crng, **ER_KW)
+    for e in (ens if ens is not None else []): ER.erode(e, BG_DROPS, np.random.default_rng([SEED, t]), **ER_KW)
     meta['tick'] = t
     today = max([a['at'][:10] for a in actions] + [k.split('/')[1] for k in used] or ['0'])
     meta['used'] = {k: v for k, v in used.items() if k.split('/')[1] >= today[:10]}
@@ -114,17 +126,26 @@ def render(h, oc, A, owner, meta, path):
         m = (owner == i)[..., None]; img = np.where(m, img * 0.72 + col * 0.28, img)
     plt.imsave(path, np.repeat(np.repeat(img, 2, 0), 2, 1))
 
-def publish(h, ctrl, meta, res, area, hk, hc, land, oc, A, owner, now):
+def ens_stats(ens, hk):
+    if ens is None: return None, None
+    he = []
+    for e in ens:
+        o, _, _, Ae, Le = route(e); he.append(round(RV.hack(Ae, Le, ~o & (e >= 0), 50)[0], 4))
+    a = np.array(he); below = int((a < hk).sum()) if hk is not None else None; above = int((a > hk).sum()) if hk is not None else None
+    return he, {'k': len(he), 'min': float(a.min()), 'median': float(np.median(a)), 'max': float(a.max()), 'below_world': below, 'above_world': above,
+                'p_low': round((below + 1) / (len(he) + 1), 4) if hk is not None else None, 'p_high': round((above + 1) / (len(he) + 1), 4) if hk is not None else None}
+
+def publish(h, ctrl, meta, res, area, hk, hc, land, oc, A, owner, now, ens=None, he=None, es=None):
     os.makedirs(os.path.join(SITE, 'log'), exist_ok=True); t = meta['tick']
     render(h, oc, A, owner, meta, os.path.join(SITE, 'map.png'))
     h.astype('<f4').tofile(os.path.join(SITE, 'height.bin')); A.astype('<u4').tofile(os.path.join(SITE, 'rivers.bin'))
     hs = h16(h)
-    json.dump({'tick': t, 'time': now, 'actions': res, 'hash': hs, 'control_hash': h16(ctrl)},
+    json.dump({'tick': t, 'time': now, 'actions': res, 'hash': hs, 'control_hash': h16(ctrl), **({'ens_hash': h16(ens)} if ens is not None else {})},
               open(os.path.join(SITE, 'log', f'tick-{t:05d}.json'), 'w'), indent=1)
     nxt = (datetime.datetime.strptime(now, '%Y-%m-%dT%H:%MZ').replace(minute=0) + datetime.timedelta(hours=1)).strftime('%Y-%m-%dT%H:%MZ')
     hist_p = os.path.join(SITE, 'history.json'); hist = json.load(open(hist_p)) if os.path.exists(hist_p) else []
     hist.append({'tick': t, 'time': now, 'hack_world': hk, 'hack_control': hc, 'land': land,
-                 'actions_ok': sum(r['ok'] for r in res), 'claims': len(meta['claims'])})
+                 'actions_ok': sum(r['ok'] for r in res), 'claims': len(meta['claims']), **({'hack_ens': he} if he is not None else {})})
     json.dump(hist, open(hist_p, 'w'))
     base = 'https://worlds.errata.page/'
     claims = sorted(({'name': n, **{k: c[k] for k in ('x', 'y', 'total', 'since', 'color')}, 'area': area[n],
@@ -133,7 +154,7 @@ def publish(h, ctrl, meta, res, area, hk, hc, land, oc, A, owner, now):
     st = {'tick': t, 'time': now, 'next_tick': nxt, 'size': N, 'land': land,
           'map': base + 'map.png', 'height': base + 'height.bin', 'rivers': base + 'rivers.bin',
           'log': base + f'log/tick-{t:05d}.json', 'history': base + 'history.json',
-          'claims': claims, 'hack': {'world': hk, 'control': hc}, 'last_actions': res,
+          'claims': claims, 'hack': {'world': hk, 'control': hc, **({'ensemble': es} if es else {})}, 'last_actions': res,
           'used_today': meta['used'], 'hash': hs,
           'season': {'n': SEASON, 'ends': SEASON_END, 'over': now >= SEASON_END, 'final': base + 'final.json' if now >= SEASON_END else None,
                      'titles': titles(claims)},
@@ -164,37 +185,40 @@ def blob_pull():
         if urls: api('https://blob.vercel-storage.com/delete', json.dumps({'urls': urls}).encode())  # free
     return acts, delete
 
-def save(h, ctrl, meta):
+def save(h, ctrl, meta, ens=None):
     np.save(os.path.join(ST, 'h.npy'), h); np.save(os.path.join(ST, 'control.npy'), ctrl)
+    if ens is not None: np.save(os.path.join(ST, 'ens.npy'), ens)
     json.dump(meta, open(os.path.join(ST, 'meta.json'), 'w'), indent=1)
 
 def run(actions, delete=None):
-    h, ctrl, meta = load()
+    h, ctrl, meta, ens = load()
     if meta.get('over'): print(json.dumps({'season': SEASON, 'over': True, 'tick': meta['tick']})); return
     seen = set(meta.get('seen', []))
     actions = [a for a in actions if a.get('id') not in seen]
     now = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%MZ')
-    res = step(h, ctrl, meta, actions)
+    res = step(h, ctrl, meta, actions, ens)
     oc, A, owner, area, hk, land = score(h, meta)
     oc_c = RV.ocean_mask(ctrl); _, rc, _, Ac, Lc = route(ctrl)
     hc = round(RV.hack(Ac, Lc, ~oc_c & (ctrl >= 0), 50)[0], 4)
+    he, es = ens_stats(ens, hk)
     meta['seen'] = sorted(seen | {a['id'] for a in actions})[-5000:]
-    publish(h, ctrl, meta, res, area, hk, hc, land, oc, A, owner, now)
+    publish(h, ctrl, meta, res, area, hk, hc, land, oc, A, owner, now, ens, he, es)
     if now >= SEASON_END:  # the final tick: freeze the world and write the season's result
         meta['over'] = True; st = json.load(open(os.path.join(SITE, 'state.json')))
         json.dump({'season': SEASON, 'ended': now, 'ticks': meta['tick'], 'titles': st['season']['titles'], 'standings': st['claims'],
                    'hack': st['hack'], 'land': land, 'hash': st['hash'], 'history': st['history']},
                   open(os.path.join(SITE, 'final.json'), 'w'), indent=1)
-    save(h, ctrl, meta)
+    save(h, ctrl, meta, ens)
     if delete: delete()
-    print(json.dumps({'tick': meta['tick'], 'actions': len(actions), 'ok': sum(r['ok'] for r in res), 'hack': [hk, hc], 'hash': h16(h)}))
+    print(json.dumps({'tick': meta['tick'], 'actions': len(actions), 'ok': sum(r['ok'] for r in res), 'hack': [hk, hc], 'hash': h16(h), **({'ens': es} if es else {})}))
 
 def replay():
-    h, ctrl, meta = W0.copy(), W0.copy(), {'tick': 0, 'claims': {}, 'used': {}}; bad = 0
+    h, ctrl, meta = W0.copy(), W0.copy(), {'tick': 0, 'claims': {}, 'used': {}}; bad = 0; ens = None
     for f in sorted(glob.glob(os.path.join(SITE, 'log', 'tick-*.json'))):
         L = json.load(open(f)); acts = [{q: a[q] for q in ('id', 'at', 'name', 'op', 'x', 'y')} for a in L['actions']]
-        step(h, ctrl, meta, acts); score(h, meta)
-        ok = h16(h) == L['hash'] and h16(ctrl) == L['control_hash']; bad += not ok
+        if 'ens_hash' in L and ens is None: ens = ens_init(ctrl if meta['tick'] else W0)  # members start from the control of the tick before
+        step(h, ctrl, meta, acts, ens); score(h, meta)
+        ok = h16(h) == L['hash'] and h16(ctrl) == L['control_hash'] and ('ens_hash' not in L or h16(ens) == L['ens_hash']); bad += not ok
         print(L['tick'], 'ok' if ok else 'MISMATCH')
     print('replay', 'clean' if not bad else f'{bad} mismatches')
     return bad
