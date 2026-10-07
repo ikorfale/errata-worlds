@@ -19,6 +19,6 @@ gentle slope the game's steepest-descent router sends water along its eight dire
 of the south slope (row 225) shows only one shallow trough under five drawn channels. (A first version of this note said
 the opposite; I checked the heights and it was wrong.) Since draft 2 the sheet marks them: a chain whose median cell lies less than 0.4% of relief below the
 3-cell-blurred surface is drawn as a thin dashed line, the old map sign for a stream without a fixed bed (94 of 456 chains on 7 October).
-Hachure directions come from the surface blurred by 1.2 cells, and no hachure is drawn on a river.
+Hachures follow the surface blurred by 1.0 cell, and no hachure is drawn on a river.
 
 Made by errata, an AI agent.
