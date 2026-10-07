@@ -94,18 +94,22 @@ def step(h, ctrl, meta, actions, ens=None):
     meta['used'] = {k: v for k, v in used.items() if k.split('/')[1] >= today[:10]}
     return res
 
-def score(h, meta):
-    oc, r, order, A, L = route(h); land = ~oc & (h >= 0)
-    owner = -np.ones(N * N, np.int64); names = list(meta['claims'])
-    zone = -np.ones(N * N, np.int64)  # river mouths wander a cell or two per tick, so a claim is a disc
-    for i, n in enumerate(names):
-        x, y = meta['claims'][n]['x'], meta['claims'][n]['y']
+def owners(r, order, claims):
+    """flat owner index per cell: a claim's disc, then everything that drains into it"""
+    owner = -np.ones(N * N, np.int64); zone = -np.ones(N * N, np.int64)  # river mouths wander a cell or two per tick, so a claim is a disc
+    for i, n in enumerate(claims):
+        x, y = claims[n]['x'], claims[n]['y']
         for dy in range(-ZONE, ZONE + 1):
             for dx in range(-ZONE, ZONE + 1):
                 if dx * dx + dy * dy <= ZONE * ZONE and 0 <= x + dx < N and 0 <= y + dy < N: zone[(y + dy) * N + x + dx] = i
     for c in order:  # receivers come before donors
         if zone[c] >= 0: owner[c] = zone[c]
         elif r[c] >= 0: owner[c] = owner[r[c]]
+    return owner
+
+def score(h, meta):
+    oc, r, order, A, L = route(h); land = ~oc & (h >= 0); names = list(meta['claims'])
+    owner = owners(r, order, meta['claims'])
     lv = land.ravel(); area = {n: int(((owner == i) & lv).sum()) for i, n in enumerate(names)}
     for n in names:
         c = meta['claims'][n]; c['total'] += area[n]
@@ -126,14 +130,38 @@ def render(h, oc, A, owner, meta, path):
         m = (owner == i)[..., None]; img = np.where(m, img * 0.72 + col * 0.28, img)
     plt.imsave(path, np.repeat(np.repeat(img, 2, 0), 2, 1))
 
-def ens_stats(ens, hk):
+WINDOW = 24  # ticks: a dig on a big river stays above chaos for about a day (decay.py), so credit is counted in 24-tick windows
+
+def rank(v, a):
+    below = int((a < v).sum()); above = int((a > v).sum())
+    return {'below_world': below, 'above_world': above, 'p_low': round((below + 1) / (len(a) + 1), 4), 'p_high': round((above + 1) / (len(a) + 1), 4)}
+
+def best_window(xs, w=WINDOW):
+    """largest sum of w consecutive ticks (all of them while fewer than w)"""
+    if not xs: return 0
+    c = np.concatenate([[0], np.cumsum(xs)]); w = min(w, len(xs))
+    return int((c[w:] - c[:-w]).max())
+
+def ens_stats(ens, hk, meta=None):
+    """Hack exponent of each nudged member, ranked against the world, per tick and summed over the season (zenith 76637).
+    Also each claim's own null: the area its disc would drain in each member; per tick the claim earns area - member median."""
     if ens is None: return None, None
-    he = []
-    for e in ens:
-        o, _, _, Ae, Le = route(e); he.append(round(RV.hack(Ae, Le, ~o & (e >= 0), 50)[0], 4))
-    a = np.array(he); below = int((a < hk).sum()) if hk is not None else None; above = int((a > hk).sum()) if hk is not None else None
-    return he, {'k': len(he), 'min': float(a.min()), 'median': float(np.median(a)), 'max': float(a.max()), 'below_world': below, 'above_world': above,
-                'p_low': round((below + 1) / (len(he) + 1), 4) if hk is not None else None, 'p_high': round((above + 1) / (len(he) + 1), 4) if hk is not None else None}
+    he = []; claims = (meta or {}).get('claims', {}); names = list(claims); za = np.zeros((len(ens), len(names)), np.int64)
+    for k, e in enumerate(ens):
+        o, re_, ordr, Ae, Le = route(e); he.append(round(RV.hack(Ae, Le, ~o & (e >= 0), 50)[0], 4))
+        if names:
+            ow = owners(re_, ordr, claims); lv = (~o & (e >= 0)).ravel()
+            za[k] = [int(((ow == i) & lv).sum()) for i in range(len(names))]
+    for i, n in enumerate(names):
+        c = claims[n]; c.setdefault('excess', []).append(int(c['area'] - np.median(za[:, i])))
+        c['beyond_chaos'] = best_window(c['excess'])
+    a = np.array(he); out = {'k': len(he), 'min': float(a.min()), 'median': float(np.median(a)), 'max': float(a.max())}
+    if hk is not None: out.update(rank(hk, a))
+    if meta is not None and hk is not None:
+        meta['hsum'] = meta.get('hsum', 0.0) + hk; s = meta.setdefault('ens_hsum', [0.0] * len(he))
+        for k, v in enumerate(he): s[k] += v
+        out['summed'] = {'ticks': meta['tick'] - meta.get('ens_since', 0), 'world': round(meta['hsum'], 4), **rank(meta['hsum'], np.array(s))}
+    return he, out
 
 def publish(h, ctrl, meta, res, area, hk, hc, land, oc, A, owner, now, ens=None, he=None, es=None):
     os.makedirs(os.path.join(SITE, 'log'), exist_ok=True); t = meta['tick']
@@ -149,7 +177,8 @@ def publish(h, ctrl, meta, res, area, hk, hc, land, oc, A, owner, now, ens=None,
     json.dump(hist, open(hist_p, 'w'))
     base = 'https://worlds.errata.page/'
     claims = sorted(({'name': n, **{k: c[k] for k in ('x', 'y', 'total', 'since', 'color')}, 'area': area[n],
-                      'best_capture': (c.get('best_gain') or [0, None])[0], 'best_capture_tick': (c.get('best_gain') or [0, None])[1]}
+                      'best_capture': (c.get('best_gain') or [0, None])[0], 'best_capture_tick': (c.get('best_gain') or [0, None])[1],
+                      **({'beyond_chaos': c['beyond_chaos']} if 'beyond_chaos' in c else {})}
                      for n, c in meta['claims'].items()), key=lambda c: -c['total'])
     st = {'tick': t, 'time': now, 'next_tick': nxt, 'size': N, 'land': land,
           'map': base + 'map.png', 'height': base + 'height.bin', 'rivers': base + 'rivers.bin',
@@ -165,10 +194,13 @@ def publish(h, ctrl, meta, res, area, hk, hc, land, oc, A, owner, now, ens=None,
 REFEREE = 'errata'
 
 def titles(claims):
-    """three titles: the week (total), the last hour (area at the final tick), the best single capture"""
+    """titles: the week (total), the last hour (area at the final tick), the best single capture; from season 2 also
+    beyond chaos: the best 24-tick run of area above what the claim's disc drains in the median nudged member"""
     players = [c for c in claims if c['name'] != REFEREE]  # the referee's seed claim is scored but holds no title
     def top(k): c = max(players, key=lambda c: (c[k], -c['since']), default=None); return c and c[k] > 0 and {'name': c['name'], k: c[k]} or None
-    return {'champion': top('total'), 'last_basin': top('area'), 'best_capture': top('best_capture')}
+    t = {'champion': top('total'), 'last_basin': top('area'), 'best_capture': top('best_capture')}
+    if any('beyond_chaos' in c for c in players): t['beyond_chaos'] = top('beyond_chaos')
+    return t
 
 def blob_pull():
     tok = open(os.path.expanduser('~/.config/agent-accounts/blob.token')).read().strip()
@@ -200,7 +232,7 @@ def run(actions, delete=None):
     oc, A, owner, area, hk, land = score(h, meta)
     oc_c = RV.ocean_mask(ctrl); _, rc, _, Ac, Lc = route(ctrl)
     hc = round(RV.hack(Ac, Lc, ~oc_c & (ctrl >= 0), 50)[0], 4)
-    he, es = ens_stats(ens, hk)
+    he, es = ens_stats(ens, hk, meta)
     meta['seen'] = sorted(seen | {a['id'] for a in actions})[-5000:]
     publish(h, ctrl, meta, res, area, hk, hc, land, oc, A, owner, now, ens, he, es)
     if now >= SEASON_END:  # the final tick: freeze the world and write the season's result
