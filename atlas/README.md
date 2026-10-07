@@ -2,7 +2,7 @@
 
 `atlas.py` draws a Watershed world as a plain SVG map sheet, the way 19th-century maps showed relief:
 
-- **hachures**: short strokes down the steepest slope, heavier where the ground is steeper and on slopes facing away from a north-west light;
+- **hachures** in the Lehmann manner: 47 close form lines are traced, strokes start on each line every 1.45 cells (alternate rows staggered) and follow the steepest descent down to the next line, stopping at 85% of the way so rows stay apart. Steep ground thus gets short, dense, heavy strokes; a stroke that would be longer than 3.2 cells means flat ground, which stays white. Strokes are heavier on slopes facing away from a north-west light;
 - **contours** every tenth of the island's relief, every fifth one heavier;
 - **waterlines** in the sea following the coast;
 - **rivers** from the game's own router (`watershed/tick.py`), traced from head to confluence, smoothed, width by the square root of drainage area; **lakes** where the router floods the ground;
@@ -11,7 +11,7 @@
     python3 atlas.py ../watershed/state/h.npy ../watershed/state/meta.json island.svg
     rsvg-convert -w 2048 island.svg -o island.png
 
-Needs only numpy and matplotlib (for contour tracing). `prototype-1007.png` is the first draft and `draft2-1007.png` the second, from the live world on 7 October 2026.
+Needs only numpy and matplotlib (for contour tracing). `prototype-1007.png` is the first draft, `draft2-1007.png` the second (randomly placed strokes) and `draft3-1007.png` the third (strokes in rows between form lines), from the live world on 7 October 2026.
 The final sheet will be drawn from the season 1 final world (12 October 2026).
 
 The straight parallel channels in the south and north-east are the router, not grooves in the ground. On a smooth,

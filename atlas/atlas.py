@@ -39,6 +39,51 @@ def smooth(seg, k=2):
         else: s[1:-1] = (s[:-2] + 2 * s[1:-1] + s[2:]) / 4
     return s
 
+FORM = 48          # form lines (hachure rows) per island relief
+ALONG = 1.45       # cells between strokes along a row
+MAXLEN = 3.2       # cells; longer strokes mean flat ground, which is left white
+GAP = 0.85         # share of the row height a stroke covers
+
+def bilin(z, x, y):
+    n, m = z.shape; x = np.clip(x, 0, m - 1.001); y = np.clip(y, 0, n - 1.001)
+    i, j = y.astype(int), x.astype(int); fy, fx = y - i, x - j
+    return (z[i, j] * (1 - fx) * (1 - fy) + z[i, j + 1] * fx * (1 - fy) + z[i + 1, j] * (1 - fx) * fy + z[i + 1, j + 1] * fx * fy)
+
+def resample(seg, step, phase):
+    seg = np.asarray(seg); d = np.r_[0, np.cumsum(np.hypot(*np.diff(seg, axis=0).T))]
+    if d[-1] < step: return np.empty((0, 2))
+    t = np.arange(phase * step, d[-1], step)
+    return np.c_[np.interp(t, d, seg[:, 0]), np.interp(t, d, seg[:, 1])]
+
+def hachures(h, land, near_river, relief):
+    hb = blur(np.where(land, h, 0), 1.0); gy, gx = np.gradient(hb); dz = relief / FORM
+    P, lev = [], []
+    for i, (lv, segs) in enumerate(contour_paths(np.where(land, hb, -1), np.arange(dz, relief, dz))):
+        for sg in segs:
+            q = resample(sg, ALONG, 0.25 if i % 2 else 0.75)   # alternate rows are staggered, as an engraver would
+            P.append(q); lev.append(np.full(len(q), lv))
+    P = np.vstack(P); lo = np.concatenate(lev) - dz
+    ok = ~near_river[np.clip(P[:, 1].round().astype(int), 0, h.shape[0] - 1), np.clip(P[:, 0].round().astype(int), 0, h.shape[1] - 1)]
+    P, lo = P[ok], lo[ok]; E = P.copy(); live = np.ones(len(P), bool); L = np.zeros(len(P))
+    for _ in range(int(MAXLEN / 0.2) + 2):
+        ix = np.nonzero(live)[0]
+        if not len(ix): break
+        x, y = E[ix, 0], E[ix, 1]; g1, g2 = bilin(gx, x, y), bilin(gy, x, y); g = np.hypot(g1, g2) + 1e-12
+        E[ix, 0] -= 0.2 * g1 / g; E[ix, 1] -= 0.2 * g2 / g; L[ix] += 0.2
+        done = (bilin(hb, E[ix, 0], E[ix, 1]) <= lo[ix]) | (L[ix] > MAXLEN)
+        live[ix[done]] = False
+    keep = L <= MAXLEN
+    E = P + GAP * (E - P)                     # stop short of the next form line: a thin white seam between rows
+    slope = dz / np.maximum(L, 0.2)          # mean drop per cell along the stroke
+    smax = np.percentile(slope[keep], 97)
+    # north-west light: strokes on slopes facing south-east are heavier
+    dx, dy = E[:, 0] - P[:, 0], E[:, 1] - P[:, 1]; face = (dx + dy) / (np.sqrt(2) * np.maximum(L, 1e-9))
+    w = (0.25 + 1.25 * np.clip(slope / smax, 0, 1.1)) * (1 + 0.45 * face)
+    hs = [f'<path d="M{(a + .5) * S:.1f} {(b + .5) * S:.1f}L{(c + .5) * S:.1f} {(d + .5) * S:.1f}" stroke-width="{ww:.2f}"/>'
+          for (a, b), (c, d), ww, k in zip(P, E, w, keep) if k]
+    print(f'hachures: {len(P)} starts on {FORM - 1} form lines, {len(hs)} drawn, {np.sum(~keep)} left white (flat)')
+    return hs
+
 def main(hp, mp, out):
     import tick as T
     h = np.load(hp); meta = json.load(open(mp)); N = h.shape[0]
@@ -57,24 +102,11 @@ def main(hp, mp, out):
     for i, (lev, segs) in enumerate(contour_paths(np.where(land, h, -1), np.arange(step, relief, step))):
         major = (i + 1) % 5 == 0
         for s in segs: el.append(f'<polyline points="{poly(smooth(s))}" fill="none" stroke="#8a6a4a" stroke-width="{0.7 if major else 0.35}" opacity="0.8"/>')
-    # hachures
-    gy, gx = np.gradient(blur(np.where(land, h, 0), 1.2)); slope = np.hypot(gx, gy)
+    # hachures, Lehmann style: rows between close form lines; each stroke starts on one form line and runs
+    # down the steepest descent to the next, so steep ground gets short, dense, heavy strokes and flats stay white
     near_river = blur(((A >= RIVER_MIN) & land).astype(float), 0.8) > 0.12
-    smax = np.percentile(slope[land], 98)
-    rng = np.random.default_rng(7); sp = 1.9
-    light = np.clip((gx + gy) / (np.sqrt(2) * smax), -1, 1)  # >0: facing south-east, away from a NW light
-    pts = np.mgrid[0:N:sp, 0:N:sp].reshape(2, -1).T + rng.uniform(-.5, .5, (int(np.ceil(N / sp)) ** 2, 2))
-    hs = []
-    for y, x in pts:
-        iy, ix = int(round(y)), int(round(x))
-        if not (0 <= iy < N and 0 <= ix < N) or not land[iy, ix] or near_river[iy, ix]: continue
-        s = slope[iy, ix] / smax
-        if s < 0.10: continue
-        ux, uy = -gx[iy, ix] / slope[iy, ix], -gy[iy, ix] / slope[iy, ix]
-        ln = 1.7
-        x0, y0, x1, y1 = (x - ux * ln / 2 + .5) * S, (y - uy * ln / 2 + .5) * S, (x + ux * ln / 2 + .5) * S, (y + uy * ln / 2 + .5) * S
-        hs.append(f'<path d="M{x0:.1f} {y0:.1f}L{x1:.1f} {y1:.1f}" stroke-width="{(0.25 + 1.1 * min(s, 1.2)) * (1 + 0.6 * light[iy, ix]):.2f}"/>')
-    el.append(f'<g stroke="{INK}" stroke-linecap="round" opacity="0.85">' + ''.join(hs) + '</g>')
+    hs = hachures(h, land, near_river, relief)
+    el.append(f'<g stroke="{INK}" stroke-linecap="round" fill="none" opacity="0.9">' + ''.join(hs) + '</g>')
     # coastline
     for _, segs in contour_paths(land.astype(float), [0.5]):
         for s in segs: el.append(f'<polyline points="{poly(smooth(s, 3))}" fill="none" stroke="{INK}" stroke-width="1.3"/>')
@@ -114,6 +146,6 @@ def main(hp, mp, out):
         el.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3" fill="none" stroke="{INK}" stroke-width="1"/>'
                   f'<text x="{x + 6:.1f}" y="{y - 5:.1f}" font-family="Georgia, serif" font-style="italic" font-size="13" fill="{INK}">{n}</text>')
     svg = f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W:.0f} {H:.0f}" width="{W:.0f}" height="{H:.0f}">' + ''.join(el) + '</svg>'
-    open(out, 'w').write(svg); print(out, len(svg) // 1024, 'KB', len(hs), 'hachures', len(rv), 'river chains', ndash, 'dashed (not incised)')
+    open(out, 'w').write(svg); print(out, len(svg) // 1024, 'KB', len(hs), 'hachure strokes', len(rv), 'river chains', ndash, 'dashed (not incised)')
 
 if __name__ == '__main__': main(*sys.argv[1:4])
