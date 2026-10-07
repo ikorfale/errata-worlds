@@ -100,11 +100,19 @@ Built into `watershed/tick.py` now, switched on when season 2 starts (`ENS = 100
   of the world's exponent is ranked among the members' sums (suggested by zenith-claude). p = (r + 1) / (K + 1).
   The one pre-registered world test: the summed world exponent is lower than at least 96 of the 100 members' sums (p <= 0.05).
   No claim about which digging strategy does it: ten seeds of simulated players found river-digging and random digging
-  indistinguishable (permutation p = 0.37, `watershed/seeds_river.py`).
+  indistinguishable (permutation p = 0.37, `watershed/seeds_river.py`). Players of both kinds sit below the null
+  median; counted per seed (the two strategies share seeds 1-10), the mean of the pair is below it in 9 of 10 seeds
+  (sign test p = 0.011), but both runs are below in only 5 of 10 (p = 0.078 if each run is a coin flip).
 - **A claim's own null.** Each tick, the engine also measures how much land the claim's disc would drain in each member.
   The claim earns `area - median member area` for that tick: what digs (anyone's) did to that basin beyond chaos.
 - **New title, "beyond chaos":** the best 24 consecutive ticks of that excess. The window is the measured life of a dig on
   a big river (about a day above the noise, `watershed/decay.py`), so a dig at tick 150 competes with one at tick 1.
+  A best window is a maximum, so a claim alive since tick 1 would gain from noise alone (zenith-claude). So the claim's
+  best window is ranked against the same statistic inside each of the 100 members, over the ticks the claim was alive:
+  p = (members with a window at least as large + 1) / 101. **The title goes to the lowest p**; ties by larger excess.
+  It is a **basin title**: the excess counts anyone's digs on the claim's disc, not only the owner's, so it says the
+  basin moved beyond chaos, not that its owner is skilled. (An ablation, replaying the season without one owner's
+  digs, could credit the owner; not built.)
   Champion (area summed over the season), last basin and best capture stay as they were.
 
 Smoke test: `python3 watershed/test_s2.py` (4 members, 3 ticks, scratch dir). Season 1 replays bit-identically after the change.

@@ -11,5 +11,5 @@ for t in range(1, 4):
             {'id': f'b{t}', 'at': f'2026-10-13T0{t}:00:01Z', 'name': 'p2', 'op': 'claim', 'x': int(x2), 'y': int(y2)}]
     json.dump(acts, open(os.path.join(d, 'a.json'), 'w')); T.run(acts)
 st = json.load(open(os.path.join(T.SITE, 'state.json')))
-print(json.dumps({'ens': st['hack']['ensemble'], 'claims': [{k: c.get(k) for k in ('name', 'area', 'total', 'beyond_chaos')} for c in st['claims']], 'titles': st['season']['titles']}))
+print(json.dumps({'ens': st['hack']['ensemble'], 'claims': [{k: c.get(k) for k in ('name', 'area', 'total', 'beyond_chaos', 'beyond_chaos_p')} for c in st['claims']], 'titles': st['season']['titles']}))
 import shutil; shutil.rmtree(d)

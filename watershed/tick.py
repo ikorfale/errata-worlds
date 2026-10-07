@@ -153,8 +153,13 @@ def ens_stats(ens, hk, meta=None):
             ow = owners(re_, ordr, claims); lv = (~o & (e >= 0)).ravel()
             za[k] = [int(((ow == i) & lv).sum()) for i in range(len(names))]
     for i, n in enumerate(names):
-        c = claims[n]; c.setdefault('excess', []).append(int(c['area'] - np.median(za[:, i])))
+        c = claims[n]; med = np.median(za[:, i]); c.setdefault('excess', []).append(int(c['area'] - med))
         c['beyond_chaos'] = best_window(c['excess'])
+        # zenith 77309: a best window is a maximum, so a long-lived claim gains from noise alone. Rank the claim's best
+        # window among the same statistic inside each member over the same ticks; the title goes to the lowest p.
+        c.setdefault('member_excess', []).append([int(v - med) for v in za[:, i]])
+        M = np.array(c['member_excess']); null = np.array([best_window(list(M[:, k])) for k in range(M.shape[1])])
+        c['beyond_chaos_p'] = rank(c['beyond_chaos'], null)['p_high']
     a = np.array(he); out = {'k': len(he), 'min': float(a.min()), 'median': float(np.median(a)), 'max': float(a.max())}
     if hk is not None: out.update(rank(hk, a))
     if meta is not None and hk is not None:
@@ -178,7 +183,7 @@ def publish(h, ctrl, meta, res, area, hk, hc, land, oc, A, owner, now, ens=None,
     base = 'https://worlds.errata.page/'
     claims = sorted(({'name': n, **{k: c[k] for k in ('x', 'y', 'total', 'since', 'color')}, 'area': area[n],
                       'best_capture': (c.get('best_gain') or [0, None])[0], 'best_capture_tick': (c.get('best_gain') or [0, None])[1],
-                      **({'beyond_chaos': c['beyond_chaos']} if 'beyond_chaos' in c else {})}
+                      **({k: c[k] for k in ('beyond_chaos', 'beyond_chaos_p') if k in c})}
                      for n, c in meta['claims'].items()), key=lambda c: -c['total'])
     st = {'tick': t, 'time': now, 'next_tick': nxt, 'size': N, 'land': land,
           'map': base + 'map.png', 'height': base + 'height.bin', 'rivers': base + 'rivers.bin',
@@ -195,11 +200,15 @@ REFEREE = 'errata'
 
 def titles(claims):
     """titles: the week (total), the last hour (area at the final tick), the best single capture; from season 2 also
-    beyond chaos: the best 24-tick run of area above what the claim's disc drains in the median nudged member"""
+    beyond chaos: the best 24-tick run of area above what the claim's disc drains in the median nudged member,
+    ranked against the same best run inside each member over the claim's life (lowest p wins)"""
     players = [c for c in claims if c['name'] != REFEREE]  # the referee's seed claim is scored but holds no title
     def top(k): c = max(players, key=lambda c: (c[k], -c['since']), default=None); return c and c[k] > 0 and {'name': c['name'], k: c[k]} or None
     t = {'champion': top('total'), 'last_basin': top('area'), 'best_capture': top('best_capture')}
-    if any('beyond_chaos' in c for c in players): t['beyond_chaos'] = top('beyond_chaos')
+    bc = [c for c in players if c.get('beyond_chaos', 0) > 0 and 'beyond_chaos_p' in c]
+    if bc:  # a basin title: excess counts anyone's digs on the claim's disc, not only the owner's
+        c = min(bc, key=lambda c: (c['beyond_chaos_p'], -c['beyond_chaos'], c['since']))
+        t['beyond_chaos'] = {'name': c['name'], 'beyond_chaos': c['beyond_chaos'], 'p': c['beyond_chaos_p']}
     return t
 
 def blob_pull():
