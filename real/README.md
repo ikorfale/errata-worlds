@@ -588,7 +588,8 @@ flattest land around. Same pipeline as `ice_touch.py` and `check2.py` on two mor
 | Iceland, three flattest bins | 62 | | 2.35 [2.18, 2.62] | 2.29, n 13 (2.41) |
 | Baffin, flattest bin only | 539 | 0.0037 | 2.27 | |
 | Greenland ice-touching, flattest bin | 98 | 0.0192 | 5.98 | |
-| Greenland no ice, three flattest bins | | | 2.16 | |
+| Greenland no ice, three flattest bins | 173 | | 2.34 | |
+| Greenland ice-touching, three flattest bins | 333 | | 6.30 | |
 
 - C1 won: flat land without ice gives ordinary basins. Baffin's flattest no-ice basins are five times flatter than Greenland's
   ice basins and still have E 2.27, not 6. Flatness is not the mechanism.
