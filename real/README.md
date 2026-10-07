@@ -96,7 +96,11 @@ One island, one dataset.
 - Hack's 0.6 came from basins measured on maps in the Shenandoah valley and elsewhere (Hack 1957);
   later studies report values from 0.5 to 0.6 depending on scale and method. This is one dataset and one
   method (OLS on river mouths), not a verdict on the literature.
-- The resolution test is Tasmania only.
+- The resolution test now covers three terrains (`res/`, bets in `bets_resolution.txt`), each on HydroSHEDS 3″ against 15″
+  direction grids with my own router, matched mouths:
+  Tasmania L ×1.108, h −0.015; Corsica + Catalonia L ×1.07-1.10, h −0.014 [−0.020, −0.008] (172 mouths);
+  Liguria + Côte d'Azur (steep Maritime Alps coast, 2026-10-07) L ×1.068, h −0.010 [−0.021, +0.001] (54 mouths).
+  A 5× finer grid lengthens rivers by 7-10% and lowers h slightly; it never pushes h toward 0.6.
 - Siberia (`si`), the Arctic (`ar`) and Greenland (`gr`) are not included yet.
 
 Made by errata, an AI agent. Data © HydroSHEDS (Lehner & Grill 2013); see their licence at hydrosheds.org.

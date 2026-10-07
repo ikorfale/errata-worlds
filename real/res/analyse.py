@@ -11,7 +11,8 @@ def outlets(k):
     lat = g['lat_top'] - (j + 0.5) * g['cd']; lon = g['lon_left'] + (i + 0.5) * g['cd']
     return A[o].astype(float), L[o].astype(float), lat, lon
 allA = {'3s': [], '15s': []}; pairs = []
-for w in ('corsica', 'catalonia'):
+WS = sys.argv[1:] or ['corsica', 'catalonia']; TAG = '' if WS == ['corsica', 'catalonia'] else '_' + '_'.join(WS)
+for w in WS:
     S = {r: outlets(f'{w}_{r}') for r in ('3s', '15s')}
     for r in S: allA[r].append(S[r])
     A3, L3, la3, lo3 = S['3s']
@@ -28,8 +29,9 @@ ratio = l3 / l15; out['ratio_bands'] = {}
 for lo, hi in ((10, 30), (30, 100), (100, 1000), (1000, 1e4)):
     s = (a15 >= lo) & (a15 < hi)
     if s.sum(): out['ratio_bands'][f'{lo:g}-{hi:g}'] = {'n': int(s.sum()), 'median_L3/L15': round(float(np.median(ratio[s])), 3)}
-print('L3/L15 by area band', out['ratio_bands'])
-json.dump(out, open('res.json', 'w'), indent=1, default=float); print('__END__')
+out['ratio_all'] = round(float(np.median(ratio)), 3)
+print('L3/L15 by area band', out['ratio_bands'], 'all', out['ratio_all'])
+json.dump(out, open(f'res{TAG}.json', 'w'), indent=1, default=float); print('__END__')
 # paired bootstrap of h(3s) - h(15s) on the matched mouths
 x15, x3, y15, y3 = np.log10(a15), np.log10(a3), np.log10(l15), np.log10(l3); dh = []
 for _ in range(2000):
@@ -37,4 +39,4 @@ for _ in range(2000):
 out['paired_dh'] = {'est': round(float(np.polyfit(x3, y3, 1)[0] - np.polyfit(x15, y15, 1)[0]), 4), 'ci': [round(float(v), 4) for v in np.percentile(dh, [2.5, 97.5])]}
 r = np.log(ratio); out['logratio_vs_logA_slope'] = round(float(np.polyfit(x15, r / np.log(10), 1)[0]), 4)
 print('paired dh', out['paired_dh'], 'slope of log10(L3/L15) on log10 A', out['logratio_vs_logA_slope'])
-json.dump(out, open('res.json', 'w'), indent=1, default=float); print('__END2__')
+json.dump(out, open(f'res{TAG}.json', 'w'), indent=1, default=float); print('__END2__')

@@ -10,3 +10,11 @@ Q2 HELD, weakly: median L3/L15 = 1.104 (10-30 km2, n75), 1.076 (30-100, n52), 1.
 Q3 HELD: all mouths h 0.546 [0.530, 0.562] n212 at 15s -> 0.527 [0.510, 0.545] n211 at 3s. 172 matched mouths, paired bootstrap:
 h(3s) - h(15s) = -0.014 [-0.020, -0.008]. A 5x finer grid lengthens rivers by ~8-10% and LOWERS h; it does not push h toward 0.6.
 NOTE 20:24Z: this repeats #135 (Tasmania, done 05.10: L x1.108, h -0.015) which I did not check before starting. Counts as an independent replication on two Mediterranean windows, not a new result.
+2026-10-07T00:27Z #136 bet before running the third window (steep terrain): Liguria + Cote d'Azur, 44.6-43.4N, 6.5-9.99E (Maritime Alps and
+Ligurian Apennines draining straight to the sea; inside tile n40e000). Same method (prep.py, analyse.py).
+R1: h(3s) - h(15s) paired is negative again, in [-0.03, 0.00].
+R2: steep short valleys wiggle less below the 15s cell: median L3/L15 over all matched mouths <= 1.08 (Mediterranean windows ~1.09).
+2026-10-07T00:30Z RESULT #136 (res/prep.py liguria, analyse.py liguria -> res_liguria.json): 60 mouths at 15s, 64 at 3s, 54 matched.
+R1 HELD, weakly: paired h(3s) - h(15s) = -0.010 [-0.021, +0.001] (Mediterranean windows -0.014 [-0.020, -0.008]; Tasmania -0.015).
+R2 HELD: median L3/L15 = 1.068 overall, 1.069 in each area band below 1000 km2 (Mediterranean windows 1.07-1.10).
+Three terrains now agree: a 5x finer grid lengthens rivers by 7-10% and lowers h by about 0.01-0.015. Small sample (54); CI touches 0.
