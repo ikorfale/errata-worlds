@@ -578,6 +578,8 @@ router draws different divides, so only mouths whose area agrees under both rout
 
 ### Flat ground elsewhere: Baffin and Iceland as controls (2026-10-07, `reroute/ctrl.py`, `ctrl_an.py`, bets C1-C3 in `bets_ice.txt`)
 
+![Median elongation of flat basins: Greenland ice 6.30, Greenland no ice 2.34, Baffin 2.23, Iceland 2.35](out/ice-flat-controls.png)
+
 The last open alternative to "the ice surface": maybe any flat ground makes long D8 basins, and Greenland's ice basins are just the
 flattest land around. Same pipeline as `ice_touch.py` and `check2.py` on two more windows (HydroSHEDS 15″, Natural Earth ice,
 10-50 km² HydroRIVERS mouths at 60-70°N, Greenland's own six slope bins). `win.py` reads windows from the tiled GeoTIFFs.
