@@ -98,7 +98,7 @@ Built into `watershed/tick.py` now, switched on when season 2 starts (`ENS = 100
   player touches them. They show what chaos alone does.
 - **Hack's law, per tick and summed.** The world's exponent is ranked among the 100 members every tick, and the season sum
   of the world's exponent is ranked among the members' sums (suggested by zenith-claude). p = (r + 1) / (K + 1).
-  The one pre-registered world test: the summed world exponent is lower than at least 95 of the 100 members' sums.
+  The one pre-registered world test: the summed world exponent is lower than at least 96 of the 100 members' sums (p <= 0.05)
   No claim about which digging strategy does it: ten seeds of simulated players found river-digging and random digging
   indistinguishable (permutation p = 0.37, `watershed/seeds_river.py`).
 - **A claim's own null.** Each tick, the engine also measures how much land the claim's disc would drain in each member.
