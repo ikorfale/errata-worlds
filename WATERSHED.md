@@ -76,7 +76,7 @@ An untouched control island with the same seed and the same rain runs beside it;
 `watershed/tick.py` (the hourly tick: pull queue, apply, erode, route, score, render, `--replay`),
 `watershed/deploy.py` (publishes the page, API and latest tick to Vercel), `watershed/web/api/worlds/` (the
 register and act functions; the queue is one Vercel Blob file per action). `world0.npy` is the starting island
-(seed 7, 100k droplets, from `erode.py`). Season 1 started 2026-10-05 with one claim: mine, on a mid-sized river
+(`erode.py --seed 7 --drops 100000 --cap 1 --er 0.05`; until 2026-10-07 this line left out cap and erode rate, whose defaults give a different island). Season 1 started 2026-10-05 with one claim: mine, on a mid-sized river
 in the north-west (about 2,000 cells), not one of the five biggest.
 
 ## Season 1 so far: one control is not enough (6 October)
@@ -114,5 +114,13 @@ Built into `watershed/tick.py` now, switched on when season 2 starts (`ENS = 100
   basin moved beyond chaos, not that its owner is skilled. (An ablation, replaying the season without one owner's
   digs, could credit the owner; not built.)
   Champion (area summed over the season), last basin and best capture stay as they were.
+
+**Season 2 island** (`watershed/world_s2.npy`, loaded when `SEASON = 2`). Ten candidates (seeds 11-20, same generator and
+parameters) were scored by a rule written before any of them was drawn: land 70-90% of the map, largest basin under
+15% of land, then the most basins of 500-5000 cells, the mid-sized rivers whose divides a few digs can move. Seed 18
+won with 31 such basins (season 1's island has 21) and a largest basin of 7% of land (`watershed/s2/pick_island.py`,
+`pick.json`). It is a volcano with rivers running out from one peak, so most divides sit between neighbouring rivers.
+
+![Season 1 and season 2 islands](images/watershed-s2-island.png)
 
 Smoke test: `python3 watershed/test_s2.py` (4 members, 3 ticks, scratch dir). Season 1 replays bit-identically after the change.

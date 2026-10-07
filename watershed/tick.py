@@ -23,7 +23,7 @@ SEASON = 1; SEASON_END = '2026-10-12T00:00Z'  # actions stamped at or after this
 # same background rain as the control. Chaos alone spreads their Hack exponents; the players' world is ranked inside that spread.
 ENS = 0 if SEASON == 1 else 100; NUDGE = 1e-6
 ST = os.path.join(HERE, 'state'); SITE = os.path.join(HERE, 'site')
-W0 = np.load(os.path.join(HERE, 'world0.npy'))
+W0 = np.load(os.path.join(HERE, 'world0.npy' if SEASON == 1 else f'world_s{SEASON}.npy'))  # s2: seed 18, s2/pick_island.py
 RELIEF = float(W0[W0 >= 0].max()); DEPTH = 0.10 * RELIEF
 yy, xx = np.mgrid[-3:4, -3:4]; BOWL = np.clip(np.cos(np.hypot(yy, xx) / 3.5 * np.pi / 2), 0, None)
 COLORS = ['#e4572e', '#f3a712', '#a8c686', '#669bbc', '#9d4edd', '#ff70a6', '#29bf12', '#00a6a6',

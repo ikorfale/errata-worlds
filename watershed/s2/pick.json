@@ -1,0 +1,172 @@
+{
+ "rows": [
+  {
+   "seed": 11,
+   "land_share": 0.952,
+   "largest_share": 0.138,
+   "mid_basins": 20,
+   "basins_ge_100": 64,
+   "top5": [
+    8605,
+    6441,
+    5542,
+    5192,
+    3075
+   ]
+  },
+  {
+   "seed": 12,
+   "land_share": 0.891,
+   "largest_share": 0.185,
+   "mid_basins": 22,
+   "basins_ge_100": 55,
+   "top5": [
+    10786,
+    5965,
+    3652,
+    3017,
+    3016
+   ]
+  },
+  {
+   "seed": 13,
+   "land_share": 0.719,
+   "largest_share": 0.079,
+   "mid_basins": 26,
+   "basins_ge_100": 57,
+   "top5": [
+    3704,
+    3168,
+    2458,
+    2424,
+    2309
+   ]
+  },
+  {
+   "seed": 14,
+   "land_share": 0.869,
+   "largest_share": 0.116,
+   "mid_basins": 23,
+   "basins_ge_100": 54,
+   "top5": [
+    6616,
+    4473,
+    3729,
+    3324,
+    2367
+   ]
+  },
+  {
+   "seed": 15,
+   "land_share": 0.8,
+   "largest_share": 0.083,
+   "mid_basins": 29,
+   "basins_ge_100": 58,
+   "top5": [
+    4330,
+    3325,
+    2845,
+    2401,
+    2316
+   ]
+  },
+  {
+   "seed": 16,
+   "land_share": 0.81,
+   "largest_share": 0.068,
+   "mid_basins": 25,
+   "basins_ge_100": 60,
+   "top5": [
+    3595,
+    3212,
+    2933,
+    2621,
+    2559
+   ]
+  },
+  {
+   "seed": 17,
+   "land_share": 0.86,
+   "largest_share": 0.126,
+   "mid_basins": 25,
+   "basins_ge_100": 61,
+   "top5": [
+    7124,
+    6460,
+    4285,
+    3369,
+    2402
+   ]
+  },
+  {
+   "seed": 18,
+   "land_share": 0.8,
+   "largest_share": 0.072,
+   "mid_basins": 31,
+   "basins_ge_100": 54,
+   "top5": [
+    3783,
+    2904,
+    2784,
+    2603,
+    2507
+   ]
+  },
+  {
+   "seed": 19,
+   "land_share": 0.789,
+   "largest_share": 0.123,
+   "mid_basins": 24,
+   "basins_ge_100": 57,
+   "top5": [
+    6358,
+    3330,
+    2305,
+    2065,
+    2056
+   ]
+  },
+  {
+   "seed": 20,
+   "land_share": 0.847,
+   "largest_share": 0.107,
+   "mid_basins": 24,
+   "basins_ge_100": 54,
+   "top5": [
+    5938,
+    3723,
+    3522,
+    3242,
+    2388
+   ]
+  },
+  {
+   "seed": 7,
+   "land_share": 0.842,
+   "largest_share": 0.098,
+   "mid_basins": 21,
+   "basins_ge_100": 51,
+   "top5": [
+    5407,
+    5309,
+    4323,
+    3807,
+    3740
+   ]
+  }
+ ],
+ "pick": {
+  "seed": 18,
+  "land_share": 0.8,
+  "largest_share": 0.072,
+  "mid_basins": 31,
+  "basins_ge_100": 54,
+  "top5": [
+   3783,
+   2904,
+   2784,
+   2603,
+   2507
+  ]
+ }
+}
