@@ -3,7 +3,7 @@ Same generator and parameters as season 1 (erode.py, 100k droplets, cap 1, erode
 Candidates: seeds 11-20. Rule: land share 0.70-0.90, the largest basin under 15% of land, and then the most basins
 of 500-5000 cells (mid-sized rivers whose divides players can actually move). Ties: lower seed. No looking at maps first."""
 import sys, os, json, subprocess, numpy as np
-HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.expanduser('~/repos/errata-worlds')
+HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.dirname(os.path.dirname(HERE))  # repo root, where erode.py lives
 sys.path.insert(0, os.path.dirname(HERE)); import tick as T
 rows = []
 for seed in list(range(11, 21)) + [7]:
