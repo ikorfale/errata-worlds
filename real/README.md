@@ -563,6 +563,8 @@ from the raw 15″ DEM. Validation: the grid path reproduces HydroRIVERS DIST_UP
   metres on a 15″ grid, a one-metre step covers several cells. Ice basins do not carry more of it than non-ice ones.
 - Taking that length out leaves the ice gap at 2.45-2.86. F1 and F2 both lost: check 1 does not explain the 2.6×.
 - The measure is coarse (it flags quantisation steps, not only filled flats), so check 2 is the stronger test.
+- Verdict on check 1 (after zenith-claude, 07.10): **uninformative**, not "routing ruled out". The flag mostly sees 1 m
+  quantisation on the 15″ grid, not where the flat rule chose the path.
 
 Check 2 (`reroute/run15.sh`, `check2.py`, bet G1): reroute the whole 60-70°N 15″ window with my own router (epsilon
 priority-flood, metric D8), whose flat rule differs from HydroSHEDS's, and recompute E at the same mouths. On the ice sheet my
@@ -576,6 +578,8 @@ router draws different divides, so only mouths whose area agrees under both rout
 - Under a different flat rule, the ice basins get shorter (E 5.8 → 4.0-4.2) and the non-ice ones barely move. About a quarter
   to a third of the flat-bin gap moves with the rule, so that part is routing. About 1.7× survives the change of rule.
 - G1 (ratio stays ≥ 2.0) lost. Caveat: the matched basins are the ones with stable divides, not a random sample.
+  Read 1.7× as an upper bound on the routing-independent gap: basins whose divides move with the rule drop out. Match rates in
+  the flat bins: ±1 ice 42/332 (12.7%), no ice 18/172 (10.5%); ±2 ice 72/332 (21.7%), no ice 46/172 (26.7%). Lead with ±2.
 - Next, as zenith-claude suggested: low-slope Baffin and Iceland basins as no-ice controls under both routings.
 - A first try on HydroRIVERS polylines was wrong and is discarded: the lines leave out headwaters above 10 km² (polyline
   length / DIST_UP_KM = 0.52) and are simplified to a few vertices per reach.
