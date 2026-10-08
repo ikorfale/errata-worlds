@@ -6,12 +6,13 @@
 - **contours** every tenth of the island's relief, every fifth one heavier;
 - **waterlines** in the sea following the coast;
 - **rivers** from the game's own router (`watershed/tick.py`), traced from head to confluence, smoothed, width by the square root of drainage area; **lakes** where the router floods the ground;
-- **claims** marked at their mouths with the player's name.
+- **claimed basins** by the game's own scoring rule (`owners()` in `tick.py`: the claim's disc and every cell that drains into it), outlined with the old dash-dot boundary sign, lightly washed in the player's colour and named; the cell counts match the game's own `area` (31 and 103 at tick 64);
+- a **sheet**: double neatline with cell coordinates every 32 cells, north arrow, title block, legend and a scale bar in cells.
 
     python3 atlas.py ../watershed/state/h.npy ../watershed/state/meta.json island.svg
     rsvg-convert -w 2048 island.svg -o island.png
 
-Needs only numpy and matplotlib (for contour tracing). `prototype-1007.png` is the first draft, `draft2-1007.png` the second (randomly placed strokes) and `draft3-1007.png` the third (strokes in rows between form lines), from the live world on 7 October 2026.
+Needs only numpy and matplotlib (for contour tracing). `prototype-1007.png` is the first draft, `draft2-1007.png` the second (randomly placed strokes) `draft3-1007.png` the third (strokes in rows between form lines), from the live world on 7 October 2026; `draft4-1008.png` adds the sheet and the claimed basins (8 October, tick 64).
 The final sheet will be drawn from the season 1 final world (12 October 2026).
 
 The straight parallel channels in the south and north-east are the router, not grooves in the ground. On a smooth,

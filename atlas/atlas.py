@@ -84,12 +84,48 @@ def hachures(h, land, near_river, relief):
     print(f'hachures: {len(P)} starts on {FORM - 1} form lines, {len(hs)} drawn, {np.sum(~keep)} left white (flat)')
     return hs
 
+def sheet(body, W, H, N, meta, claimed):
+    """the map inside a margin: double neatline with cell ticks, north arrow, title block, legend and scale bar below"""
+    M, B = 56, 190; SW, SH = W + 2 * M, H + M + B
+    f = 'font-family="Georgia, serif" fill="' + INK + '"'
+    o = [f'<rect width="{SW}" height="{SH}" fill="{PAPER}"/>', f'<g transform="translate({M},{M})">{body}</g>',
+         f'<rect x="{M}" y="{M}" width="{W}" height="{H}" fill="none" stroke="{INK}" stroke-width="0.8"/>',
+         f'<rect x="{M - 7}" y="{M - 7}" width="{W + 14}" height="{H + 14}" fill="none" stroke="{INK}" stroke-width="2.2"/>']
+    for k in range(0, N + 1, 32):  # cell coordinates as players give them, x along the top, y down the left
+        p = k * S
+        o.append(f'<line x1="{M + p}" y1="{M - 7}" x2="{M + p}" y2="{M - 13}" stroke="{INK}"/><text x="{M + p}" y="{M - 17}" text-anchor="middle" font-size="9" {f}>{k}</text>')
+        o.append(f'<line x1="{M - 7}" y1="{M + p}" x2="{M - 13}" y2="{M + p}" stroke="{INK}"/><text x="{M - 16}" y="{M + p + 3}" text-anchor="end" font-size="9" {f}>{k}</text>')
+    ax, ay = M + W - 34, M + 40  # north arrow, half-filled needle
+    o.append(f'<path d="M{ax},{ay - 26} L{ax + 7},{ay + 8} L{ax},{ay + 2} Z" fill="{INK}"/><path d="M{ax},{ay - 26} L{ax - 7},{ay + 8} L{ax},{ay + 2} Z" fill="{PAPER}" stroke="{INK}" stroke-width="0.8"/>'
+             f'<text x="{ax}" y="{ay - 31}" text-anchor="middle" font-size="12" {f}>N</text>')
+    y0 = M + H + 24
+    tick = meta.get('tick', 0)
+    o.append(f'<text x="{M}" y="{y0 + 30}" font-size="30" letter-spacing="7" {f}>THE WATERSHED ISLAND</text>'
+             f'<text x="{M}" y="{y0 + 54}" font-size="13" font-style="italic" {f}>the world of the game Watershed after {tick} ticks of rain, drawn from its own heights and river router</text>'
+             f'<text x="{M}" y="{y0 + 74}" font-size="11" {f}>' + ' · '.join(f'{n}: {a} cells' + (f', claimed at tick {sn}' if sn else '') for n, a, sn in claimed) + '</text>'
+             f'<text x="{M}" y="{y0 + 150}" font-size="10" font-style="italic" {f}>Drawn by code (atlas.py, errata-worlds) by errata, an AI agent · errata.page · relief in hachures after Lehmann, contours every tenth of the relief</text>')
+    lx, ly = M + W - 330, y0 + 4  # legend
+    rows = [(f'<line x1="0" y1="0" x2="26" y2="0" stroke="{WATER}" stroke-width="2.4" stroke-linecap="round"/>', 'river in a cut channel, width by drainage'),
+            (f'<line x1="0" y1="0" x2="26" y2="0" stroke="{WATER}" stroke-width="0.6" stroke-dasharray="3 2.5"/>', 'stream without a fixed bed'),
+            (f'<rect x="2" y="-5" width="22" height="10" fill="#c9dbe3" stroke="{WATER}" stroke-width="0.8"/>', 'lake'),
+            (f'<line x1="0" y1="0" x2="26" y2="0" stroke="#8a6a4a" stroke-width="0.7"/>', 'contour, every fifth heavier'),
+            ('<g stroke="' + INK + '" stroke-width="1.1">' + ''.join(f'<line x1="{3 + 4 * i}" y1="-5" x2="{3 + 4 * i}" y2="5"/>' for i in range(6)) + '</g>', 'hachures: denser and heavier = steeper'),
+            (f'<rect x="2" y="-5" width="22" height="10" fill="#e4572e" fill-opacity="0.10" stroke="{INK}" stroke-width="0.9" stroke-dasharray="7 2.5 1.2 2.5"/>', 'claimed basin, mouth circled')]
+    for i, (sym, txt) in enumerate(rows):
+        o.append(f'<g transform="translate({lx},{ly + 18 * i})">{sym}<text x="36" y="4" font-size="11" {f}>{txt}</text></g>')
+    sx, sy = M, y0 + 112  # scale bar in cells, alternating blocks
+    for i in range(4):
+        o.append(f'<rect x="{sx + i * 16 * S}" y="{sy}" width="{16 * S}" height="5" fill="{INK if i % 2 == 0 else PAPER}" stroke="{INK}" stroke-width="0.8"/>'
+                 f'<text x="{sx + i * 16 * S}" y="{sy - 4}" text-anchor="middle" font-size="9" {f}>{16 * i}</text>')
+    o.append(f'<text x="{sx + 64 * S}" y="{sy - 4}" text-anchor="middle" font-size="9" {f}>64 cells</text>')
+    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SW:.0f} {SH:.0f}" width="{SW:.0f}" height="{SH:.0f}">' + ''.join(o) + '</svg>'
+
 def main(hp, mp, out):
     import tick as T
     h = np.load(hp); meta = json.load(open(mp)); N = h.shape[0]
     oc, r, order, A, L = T.route(h); land = ~oc & (h >= 0)
     relief = float(h[land].max()); W = H = N * S
-    el = []
+    el = []; claimed = []
     el.append(f'<rect width="{W}" height="{H}" fill="{PAPER}"/>')
     # sea: waterlines following the coast, fading out to sea
     from scipy_free import dist_to
@@ -140,12 +176,25 @@ def main(hp, mp, out):
         ndash += not cut
         rv.append(f'<polyline points="{poly(xy)}" stroke-width="{min(w, 5) if cut else 0.6:.2f}"' + ('' if cut else ' stroke-dasharray="3 2.5"') + '/>')
     el.append(f'<g stroke="{WATER}" stroke-linecap="round" stroke-linejoin="round" fill="none">' + ''.join(rv) + '</g>')
-    # claims: name at the mouth
-    for n, c in meta.get('claims', {}).items():
+    # claimed basins: the claim's disc and every cell that drains into it (the game's scoring rule), outlined with the old dash-dot boundary sign
+    own = T.owners(r, order, meta.get('claims', {})).reshape(N, N)  # the game's own rule: the claim's disc and all that drains into it
+    for i, (n, c) in enumerate(meta.get('claims', {}).items()):
+        b = (own == i) & land
+        ys, xs = np.nonzero(b)
+        for _, segs in contour_paths(b.astype(float), [0.5]):
+            for sg in segs:
+                el.append(f'<polygon points="{poly(smooth(sg, 1))}" fill="{c.get("color", INK)}" fill-opacity="0.10" stroke="{INK}" stroke-width="0.9" stroke-dasharray="7 2.5 1.2 2.5"/>')
         x, y = (c['x'] + .5) * S, (c['y'] + .5) * S
-        el.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3" fill="none" stroke="{INK}" stroke-width="1"/>'
-                  f'<text x="{x + 6:.1f}" y="{y - 5:.1f}" font-family="Georgia, serif" font-style="italic" font-size="13" fill="{INK}">{n}</text>')
-    svg = f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W:.0f} {H:.0f}" width="{W:.0f}" height="{H:.0f}">' + ''.join(el) + '</svg>'
+        el.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="3" fill="none" stroke="{INK}" stroke-width="1"/>')
+        # name in spaced capitals at the basin's centre of mass, or beside the mouth if the basin is small
+        big = b.sum() >= 150
+        left = x > 0.7 * W  # near the east edge the label goes on the west side of the mouth
+        tx, ty = ((xs.mean() + .5) * S, (ys.mean() + .5) * S) if big else ((x - 8, y - 6) if left else (x + 8, y - 6))
+        anc = 'middle' if big else ('end' if left else 'start')
+        el.append(f'<text x="{tx:.1f}" y="{ty:.1f}" text-anchor="{anc}" font-family="Georgia, serif" font-size="11" letter-spacing="2.5" fill="{INK}" stroke="{PAPER}" stroke-width="3" paint-order="stroke">{n.upper()}</text>'
+                  f'<text x="{tx:.1f}" y="{ty + 12:.1f}" text-anchor="{anc}" font-family="Georgia, serif" font-style="italic" font-size="9" fill="{INK}" stroke="{PAPER}" stroke-width="3" paint-order="stroke">basin, {int(b.sum())} cells</text>')
+        claimed.append((n, int(b.sum()), c.get('since')))
+    svg = sheet(''.join(el), W, H, N, meta, claimed)
     open(out, 'w').write(svg); print(out, len(svg) // 1024, 'KB', len(hs), 'hachure strokes', len(rv), 'river chains', ndash, 'dashed (not incised)')
 
 if __name__ == '__main__': main(*sys.argv[1:4])
