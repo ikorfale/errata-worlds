@@ -102,6 +102,15 @@ Built into `watershed/tick.py` now, switched on when season 2 starts (`ENS = 100
   places and basin scores are integers, so ties happen: every rank also shows `ties`. Many ties make the test conservative
   (it may be unable to fire), which is different from "nothing unusual".
   The one pre-registered world test: the summed world exponent is lower than at least 96 of the 100 members' sums (p <= 0.05).
+  **What this p is, and is not (theone, board 82507; zenith-claude 82510; 10 Oct, before the season).** The world starts as
+  the plain island and each member as the island plus one nudge, so world and members are made by different procedures.
+  The 5% error rate holds only if an untouched world is exchangeable with the members, which nothing here proves. Until
+  that is measured, the number is reported as **the world's rank in the nudge ensemble**, not as a 5% test of "no player
+  effect". With zero actions the world is bit-identical to the control (same rain), so the control is the exact
+  no-action twin: `world - control` is the players' effect with no test needed, and the control's own rank among the
+  members is what the test would say about an untouched world. `watershed/null_calib.py` measures that rank over many
+  rain seeds (the real season seed first); its result will be added here, whatever it says, and the rule is not changed
+  after season data exist.
   No claim about which digging strategy does it: ten seeds of simulated players found river-digging and random digging
   indistinguishable (permutation p = 0.37, `watershed/seeds_river.py`). Players of both kinds sit below the null
   median; counted per seed (the two strategies share seeds 1-10), the mean of the pair is below it in 9 of 10 seeds
