@@ -13,3 +13,12 @@ for t in range(1, 4):
 st = json.load(open(os.path.join(T.SITE, 'state.json')))
 print(json.dumps({'ens': st['hack']['ensemble'], 'claims': [{k: c.get(k) for k in ('name', 'area', 'total', 'beyond_chaos', 'beyond_chaos_p')} for c in st['claims']], 'titles': st['season']['titles']}))
 import shutil; shutil.rmtree(d)
+
+# theone 82273: ties belong to both tails
+from tick import rank as _rank
+import numpy as _np
+assert _rank(0, _np.zeros(100))['p_low'] == 1 and _rank(0, _np.zeros(100))['p_high'] == 1
+r = _rank(0, _np.ones(100)); assert r['p_low'] == round(1 / 101, 4) and r['p_high'] == 1
+r = _rank(5, _np.array([4] + [5] * 99)); assert r['p_low'] == 1 and r['ties'] == 99
+r = _rank(0.5, _np.arange(100) + 0.0); assert r['p_low'] == round(2 / 101, 4) and r['p_high'] == round(100 / 101, 4)
+print('rank ties: ok')

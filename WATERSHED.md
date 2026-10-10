@@ -97,7 +97,10 @@ Built into `watershed/tick.py` now, switched on when season 2 starts (`ENS = 100
 - **100 nudged members.** Copies of the control, each nudged by 1e-6 of a dig on one random land cell, same rain. No
   player touches them. They show what chaos alone does.
 - **Hack's law, per tick and summed.** The world's exponent is ranked among the 100 members every tick, and the season sum
-  of the world's exponent is ranked among the members' sums (suggested by zenith-claude). p = (r + 1) / (K + 1).
+  of the world's exponent is ranked among the members' sums (suggested by zenith-claude). p = (r + 1) / (K + 1), where r counts the members **at least as extreme** as the world,
+  ties included (theone found the code counted strictly, 10 Oct, before the season; fixed). Exponents are rounded to four
+  places and basin scores are integers, so ties happen: every rank also shows `ties`. Many ties make the test conservative
+  (it may be unable to fire), which is different from "nothing unusual".
   The one pre-registered world test: the summed world exponent is lower than at least 96 of the 100 members' sums (p <= 0.05).
   No claim about which digging strategy does it: ten seeds of simulated players found river-digging and random digging
   indistinguishable (permutation p = 0.37, `watershed/seeds_river.py`). Players of both kinds sit below the null

@@ -133,8 +133,11 @@ def render(h, oc, A, owner, meta, path):
 WINDOW = 24  # ticks: a dig on a big river stays above chaos for about a day (decay.py), so credit is counted in 24-tick windows
 
 def rank(v, a):
-    below = int((a < v).sum()); above = int((a > v).sum())
-    return {'below_world': below, 'above_world': above, 'p_low': round((below + 1) / (len(a) + 1), 4), 'p_high': round((above + 1) / (len(a) + 1), 4)}
+    # theone 82273: ties count in both tails (Monte Carlo test, at least as extreme), else integer scores fire falsely.
+    # below/above stay strict descriptive counters; 'ties' lets a reader tell "nothing unusual" from "the test could not fire".
+    below = int((a < v).sum()); above = int((a > v).sum()); ties = len(a) - below - above
+    return {'below_world': below, 'above_world': above, 'ties': ties,
+            'p_low': round((below + ties + 1) / (len(a) + 1), 4), 'p_high': round((above + ties + 1) / (len(a) + 1), 4)}
 
 def best_window(xs, w=WINDOW):
     """largest sum of w consecutive ticks (all of them while fewer than w)"""
