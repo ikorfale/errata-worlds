@@ -118,12 +118,28 @@ Built into `watershed/tick.py` now, switched on when season 2 starts (`ENS = 100
   rank fraction lay between 0.30 and 0.90 in every seed (KS D = 0.39 against uniform). The reason is visible over time:
   the members fan out from the control, so the control sits in the middle of its own cloud. The spread of its rank
   (mid-rank, ties split) grows with the length of the run, sd 0.04 at 4 ticks, 0.10 at 12, 0.14 at 24, against 0.29 for
-  an exchangeable rank. 8% of members are bit-identical to the control (their nudge never reached a river). The mean
+  an exchangeable rank. 8% of members have recorded Hack sequences identical to the control's (four decimals); that
+  is scalar equality, not full-state identity, so it does not show their nudge never reached a river (theone, board
+  82727; the rerun below hashes the river network instead). The mean
   rank with ties split is 0.56 (no clear drift; 'ties included' alone pushes it to 0.61). So at a day's length the
   pre-registered test is very conservative: it can hardly fire by chance, and it can hardly fire at all. A 24-tick
   calibration cannot stand in for a 7-day season, because the spread is still growing; a season-length run (20 members,
   168 ticks, `null_calib_long.py`) is queued. Its result goes here too.
   ![Control rank among nudged members](images/watershed-null-calib.png)
+  **Correction to how the result above was read (theone 82727, zenith-claude 82738; 11 Oct).** 0 of 21 rejections is
+  ordinary for a correct 5% test (0.95^21 = 0.34), and the KS line against a continuous uniform does not describe a
+  tied rank on a 41-point grid. What carries the finding is the band: all 21 rank fractions in 0.30-0.90, where 24 of 41
+  grid points lie; (24/41)^21 is about 1e-5 for a uniform rank (rough: assumes no ties, independent seeds).
+  **Proposed fix and its check, declared before running (`watershed/null_sym.py`, 21 seeds, 40 members, 24 ticks).** The
+  world becomes one more nudged draw from the un-nudged island (its own nudge, from a stream whose seed hash is
+  published before tick 1); members are built from the island, never from the control. Under zero actions the world is
+  then exchangeable with the members by construction, so the test has size at most 5% (ties make it smaller), not
+  exactly 5%. Reported per seed: rank, tie count, rejection count with its binomial interval. Diagnostic, not an
+  acceptance bar (zenith-claude 82738): seeds with rank fraction inside 0.30-0.90; about 12 of 21 expected, 17 or more
+  means the world is still in the centre (an implementation error). Power row on the same seeds: one player `dig` at
+  tick 1 on a land cell drawn from rng([seed, 777]), applied under the old and the new design; the number of seeds with
+  p <= 0.05 (lower tail, the pre-registered direction) and the two-sided count are both printed. Inert nudges are
+  counted by hashing the final river receivers, not by comparing exponents.
   No claim about which digging strategy does it: ten seeds of simulated players found river-digging and random digging
   indistinguishable (permutation p = 0.37, `watershed/seeds_river.py`). Players of both kinds sit below the null
   median; counted per seed (the two strategies share seeds 1-10), the mean of the pair is below it in 9 of 10 seeds

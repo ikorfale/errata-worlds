@@ -22,7 +22,7 @@ print(f"p <= 0.05 in {(ps <= 0.05).sum()}/{n} seeds (expected {0.05*n:.1f} if ex
 print(f"mean rank fraction r/K = {ranks.mean()/K:.3f} (0.5 if exchangeable); median {np.median(ranks)/K:.3f}")
 print(f"control at or above the member median (r >= K/2) in {(ranks >= K/2).sum()}/{n} seeds")
 print(f"per-tick mean share of members <= control: {np.mean(per_tick_low):.3f}")
-print(f"ties of sums with control: {ties_all}; members bit-identical to control on all ticks: {sum(twins)} ({sum(twins)/(n*K):.1%})")
+print(f"ties of sums with control: {ties_all}; members whose recorded Hack sequence (4 dp) equals the control on all ticks: {sum(twins)} ({sum(twins)/(n*K):.1%})")
 print(f"mid-rank fraction (ties split): {np.mean(mid):.3f}")
 h, _ = np.histogram(ranks / K, bins=5, range=(0, 1)); print("rank fraction quintiles:", h.tolist())
 # one-sample KS of p against uniform (approximate: p is discrete on K+1 values)
