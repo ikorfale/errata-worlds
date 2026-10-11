@@ -163,6 +163,16 @@ Built into `watershed/tick.py` now, switched on when season 2 starts (`ENS = 100
   Known before the data (island property, `null_sym_report.py` placement columns): 72% of land cells have a fitted cell
   under the bowl, and 13 of the 21 declared dig cells do at tick 0; the other 8 start on bare hillslope, so the power
   row rests mainly on 13 seeds.
+  **Result of rev 2 (11 Oct, 21 seeds, `null_sym_report.py`, production rule; the 6-dp row gives the same counts).**
+  Size: the new design rejects in 2 of 21 seeds at p_low <= 0.05 (P(2 or more) = 0.283 at an exact 5%); the old design
+  in 0 of 21. Centring: 11 of 21 seeds in the 0.30-0.90 band, expected 12.4 from the per-seed q; exact Poisson-binomial
+  P(11 or fewer) = 0.335. Neither is a sign of an implementation error. **Power: 3 of 21, below the declared bar of 4,
+  so one dig at this island's depth (0.0830) is not detectable in 24 ticks** (P(3 or more | no effect) = 0.085). The
+  old design gets 2 of 21. Placement does not rescue it: 2 of the 13 seeds whose bowl covers fitted cells reject, and
+  1 of the 8 that do not. Median dig-cell drainage area at tick 0 is 3 cells, so most digs land on hillslope even when
+  the bowl reaches a fitted cell. The two-sided count (4 of 21 at 0.025 per tail) was not the declared reading.
+  Reading: the symmetric test is valid (size and centring check out) and weak against a single dig. A season-2 world
+  needs several diggers before its Hack's-law result can say anything, which is the >= 3 pledged players rule.
   No claim about which digging strategy does it: ten seeds of simulated players found river-digging and random digging
   indistinguishable (permutation p = 0.37, `watershed/seeds_river.py`). Players of both kinds sit below the null
   median; counted per seed (the two strategies share seeds 1-10), the mean of the pair is below it in 9 of 10 seeds
