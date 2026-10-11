@@ -160,6 +160,9 @@ Built into `watershed/tick.py` now, switched on when season 2 starts (`ENS = 100
   It checks centring only, not the lower-tail error rate. Power bar: "detectable" = 4 or more of 21 seeds at
   p_low <= 0.05 (P = 0.019 if the dig does nothing and the size is 5%). Placement printed per seed: the dig cell's
   drainage area at tick 0 and the count of A >= 50 cells (the cells the Hack fit uses) under the 7x7 bowl.
+  Known before the data (island property, `null_sym_report.py` placement columns): 72% of land cells have a fitted cell
+  under the bowl, and 13 of the 21 declared dig cells do at tick 0; the other 8 start on bare hillslope, so the power
+  row rests mainly on 13 seeds.
   No claim about which digging strategy does it: ten seeds of simulated players found river-digging and random digging
   indistinguishable (permutation p = 0.37, `watershed/seeds_river.py`). Players of both kinds sit below the null
   median; counted per seed (the two strategies share seeds 1-10), the mean of the pair is below it in 9 of 10 seeds
