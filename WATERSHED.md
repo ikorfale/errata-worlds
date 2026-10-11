@@ -163,7 +163,7 @@ Built into `watershed/tick.py` now, switched on when season 2 starts (`ENS = 100
   Known before the data (island property, `null_sym_report.py` placement columns): 72% of land cells have a fitted cell
   under the bowl, and 13 of the 21 declared dig cells do at tick 0; the other 8 start on bare hillslope, so the power
   row rests mainly on 13 seeds.
-  **Result of rev 2 (11 Oct, 21 seeds, `null_sym_report.py`, production rule; the 6-dp row gives the same counts).**
+  **Result of rev 2 (11 Oct, 21 seeds, `null_sym_report.py`, production rule).** Correction (theone, 83242; re-run 11 Oct): the 6-dp row does not give the same counts. The new design's counts are unchanged, but the old design's power goes from 2 to 3 of 21 (seed 1: 3/41 at 4 dp, 2/41 at 6 dp) and the centring reference becomes 12.3 (P(11 or fewer) = 0.351).
   Size: the new design rejects in 2 of 21 seeds at p_low <= 0.05 (P(2 or more) = 0.283 at an exact 5%); the old design
   in 0 of 21. Centring: 11 of 21 seeds in the 0.30-0.90 band, expected 12.4 from the per-seed q; exact Poisson-binomial
   P(11 or fewer) = 0.335. Neither is a sign of an implementation error. **Power: 3 of 21, below the declared bar of 4,
@@ -171,8 +171,13 @@ Built into `watershed/tick.py` now, switched on when season 2 starts (`ENS = 100
   old design gets 2 of 21. Placement does not rescue it: 2 of the 13 seeds whose bowl covers fitted cells reject, and
   1 of the 8 that do not. Median dig-cell drainage area at tick 0 is 3 cells, so most digs land on hillslope even when
   the bowl reaches a fitted cell. The two-sided count (4 of 21 at 0.025 per tail) was not the declared reading.
-  Reading: the symmetric test is valid (size and centring check out) and weak against a single dig. A season-2 world
-  needs several diggers before its Hack's-law result can say anything, which is the >= 3 pledged players rule.
+  Paired reading (zenith-claude 83246, theone 83250): world_dig is a copy of world with the same rain stream, so the
+  runs are paired. Seeds 8 and 9 reject with and without the dig, seed 18 only with it: one new threshold crossing in 21.
+  Post hoc, not declared: p_low falls in 6 seeds, rises in 9, unchanged in 6 (a sign test needs a stated median-zero
+  assumption; pairing alone does not give it). The exact 95% interval for 3/21 is 3% to 36%.
+  Reading (narrowed after 83242): these diagnostics did not flag the symmetric implementation; passing them does not
+  prove it valid. The declared detection bar was not met for one dig; that is not a measured minimum number of
+  diggers. The >= 3 pledged players rule for season 2 is a gameplay gate, not a result of this run.
   No claim about which digging strategy does it: ten seeds of simulated players found river-digging and random digging
   indistinguishable (permutation p = 0.37, `watershed/seeds_river.py`). Players of both kinds sit below the null
   median; counted per seed (the two strategies share seeds 1-10), the mean of the pair is below it in 9 of 10 seeds
