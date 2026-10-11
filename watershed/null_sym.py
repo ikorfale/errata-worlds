@@ -8,7 +8,7 @@ Per rain seed s, all from the un-nudged island W0 (base), same background rain r
   world_dig   world + the same dig              (new design with a planted action)
   members     W0 + nudge from rng([s, 1000+k]), k < K
 Dig rule, declared before running: one `dig` bowl (tick.py bowl, depth 0.10 of relief) on a land cell drawn from
-rng([s, 777]), applied at tick 1 before the background rain, exactly as step() applies actions. Horizon TT ticks.
+rng([s, 777]) (depth bound to THIS island since rev 2, recorded per seed as dig_depth), applied at tick 1 before the background rain, exactly as step() applies actions. Horizon TT ticks.
 Statistic: the pre-registered one, sum over ticks of the Hack exponent; p_low = (1 + #members <= x) / (K + 1).
 Identity: heights always differ by the nudge itself, so an inert nudge is tested on the river network: sha256 of the
 final receiver array (rsha) per trajectory; heights hashed too (sha). SLICE=a:b runs seeds [a:b] of the list.
@@ -20,9 +20,12 @@ sys.argv = sys.argv[:1]
 import tick as T, erode as ER, rivers as RV
 K = int(os.environ.get('K', 40)); TT = int(os.environ.get('TT', 24)); NSEED = int(os.environ.get('NSEED', 21))
 W0 = np.load(os.path.join(HERE, 'world_s2.npy')); DEPTH = 0.10 * float(W0[W0 >= 0].max())
+T.DEPTH = DEPTH  # theone 82876: T.bowl() reads the module global, which tick.py set from the season-1 island (0.0734, not 0.0830)
 land = np.flatnonzero((~RV.ocean_mask(W0) & (W0 >= 0)).ravel())
 def hack(h):
-    o, r, od, A, L = T.route(h); return round(RV.hack(A, L, ~o & (h >= 0), 50)[0], 6)
+    # raw float, full precision in the JSON (theone 82876): the analysis applies the production rule itself,
+    # round(x, 4) per tick as tick.py ens_stats() does, summed in tick order; never re-round a rounded value
+    o, r, od, A, L = T.route(h); return float(RV.hack(A, L, ~o & (h >= 0), 50)[0])
 def nudged(s, j):
     h = W0.copy(); h.flat[int(np.random.default_rng([s, j]).choice(land))] -= T.NUDGE * DEPTH; return h
 def sha(h): return hashlib.sha256(np.ascontiguousarray(h, np.float64).tobytes()).hexdigest()[:16]
@@ -43,7 +46,7 @@ for s in ([20261005] + list(range(1, 200)))[a:b]:
         row = []
         for e in E: ER.erode(e, T.BG_DROPS, np.random.default_rng([s, t]), **T.ER_KW); row.append(hack(e))
         me.append(row)
-    rec = {'seed': s, 'K': K, 'T': TT, 'dig': [dx, dy], **traj, 'members': me,
+    rec = {'seed': s, 'K': K, 'T': TT, 'dig': [dx, dy], 'dig_depth': T.DEPTH, 'nudge_depth': T.NUDGE * DEPTH, 'hack_dp': 'raw', **traj, 'members': me,
            'sha': {n: sha(h) for n, h in named.items()}, 'sha_members': [sha(e) for e in E],
            'rsha': {n: rsha(h) for n, h in named.items()}, 'rsha_members': [rsha(e) for e in E], 'sec': round(time.time() - t0)}
     with open(out, 'a') as f: f.write(json.dumps(rec) + '\n')
