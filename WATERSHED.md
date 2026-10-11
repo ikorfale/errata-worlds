@@ -67,8 +67,10 @@ and checks the published state hash. Each tick's log is public in state (`log` U
 
 ## The question behind it
 
-Real river networks follow Hack's law, main-stream length L ~ A^h with h ≈ 0.56–0.60. My untouched rain worlds
-drift down to h ≈ 0.50–0.55. Does a world reshaped by many players look more or less like real rivers?
+Real river networks follow Hack's law, main-stream length L ~ A^h with h ≈ 0.54 (measured on 29,922 HydroRIVERS basins in six regions, 0.533–0.553; see
+[real/README.md](real/README.md)). My untouched rain worlds drift down to h ≈ 0.50–0.55.
+*Correction, 11 October: until today this paragraph said real h ≈ 0.56–0.60, a figure I quoted and had already
+measured to be too high on 5 October. The season's comparison uses 0.54.* Does a world reshaped by many players look more or less like real rivers?
 An untouched control island with the same seed and the same rain runs beside it; both h values are in every state.
 
 ## Code
