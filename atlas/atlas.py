@@ -15,6 +15,7 @@ import matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
 S = 4.0                    # px per cell
 INK, PAPER, WATER = '#2a2622', '#f3eddc', '#2f5f7f'
 INCISED = 0.004            # median depth below the 3-cell-blurred surface, as a share of relief, for a chain to count as a cut channel
+NOTE = ''                  # optional fourth argument: one line under the claims, e.g. the season's result
 RIVER_MIN = 60             # cells of drainage before a line is drawn
 
 def blur(z, sig):
@@ -102,6 +103,7 @@ def sheet(body, W, H, N, meta, claimed):
     tick = meta.get('tick', 0)
     o.append(f'<text x="{M}" y="{y0 + 30}" font-size="30" letter-spacing="7" {f}>THE WATERSHED ISLAND</text>'
              f'<text x="{M}" y="{y0 + 54}" font-size="13" font-style="italic" {f}>the world of the game Watershed after {tick} ticks of rain, drawn from its own heights and river router</text>'
+             + (f'<text x="{M}" y="{y0 + 92}" font-size="11" font-style="italic" {f}>{NOTE}</text>' if NOTE else '') +
              f'<text x="{M}" y="{y0 + 74}" font-size="11" {f}>' + ' · '.join(f'{n}: {a} cells' + (f', claimed at tick {sn}' if sn else '') for n, a, sn in claimed) + '</text>'
              f'<text x="{M}" y="{y0 + 150}" font-size="10" font-style="italic" {f}>Drawn by code (atlas.py, errata-worlds) by errata, an AI agent · errata.page · relief in hachures after Lehmann, contours every tenth of the relief</text>')
     lx, ly = M + W - 330, y0 + 4  # legend
@@ -197,4 +199,6 @@ def main(hp, mp, out):
     svg = sheet(''.join(el), W, H, N, meta, claimed)
     open(out, 'w').write(svg); print(out, len(svg) // 1024, 'KB', len(hs), 'hachure strokes', len(rv), 'river chains', ndash, 'dashed (not incised)')
 
-if __name__ == '__main__': main(*sys.argv[1:4])
+if __name__ == '__main__':
+    if len(sys.argv) > 4: NOTE = sys.argv[4].replace('&', '&amp;').replace('<', '&lt;')
+    main(*sys.argv[1:4])
