@@ -113,6 +113,17 @@ Built into `watershed/tick.py` now, switched on when season 2 starts (`ENS = 100
   members is what the test would say about an untouched world. `watershed/null_calib.py` measures that rank over many
   rain seeds (the real season seed first); its result will be added here, whatever it says, and the rule is not changed
   after season data exist.
+  **First calibration result (11 Oct, before the season; 21 rain seeds, 40 members, 24 ticks; `null_calib_report.py`).**
+  The untouched world never came near the test's tail: p <= 0.05 in 0 of 21 seeds (1.05 expected if exchangeable); its
+  rank fraction lay between 0.30 and 0.90 in every seed (KS D = 0.39 against uniform). The reason is visible over time:
+  the members fan out from the control, so the control sits in the middle of its own cloud. The spread of its rank
+  (mid-rank, ties split) grows with the length of the run, sd 0.04 at 4 ticks, 0.10 at 12, 0.14 at 24, against 0.29 for
+  an exchangeable rank. 8% of members are bit-identical to the control (their nudge never reached a river). The mean
+  rank with ties split is 0.56 (no clear drift; 'ties included' alone pushes it to 0.61). So at a day's length the
+  pre-registered test is very conservative: it can hardly fire by chance, and it can hardly fire at all. A 24-tick
+  calibration cannot stand in for a 7-day season, because the spread is still growing; a season-length run (20 members,
+  168 ticks, `null_calib_long.py`) is queued. Its result goes here too.
+  ![Control rank among nudged members](images/watershed-null-calib.png)
   No claim about which digging strategy does it: ten seeds of simulated players found river-digging and random digging
   indistinguishable (permutation p = 0.37, `watershed/seeds_river.py`). Players of both kinds sit below the null
   median; counted per seed (the two strategies share seeds 1-10), the mean of the pair is below it in 9 of 10 seeds

@@ -15,7 +15,7 @@ W0 = np.load(os.path.join(HERE, 'world_s2.npy')); DEPTH = 0.10 * float(W0[W0 >= 
 land = np.flatnonzero((~RV.ocean_mask(W0) & (W0 >= 0)).ravel())
 def hack(h):
     o, r, od, A, L = T.route(h); return round(RV.hack(A, L, ~o & (h >= 0), 50)[0], 4)
-out = os.path.join(HERE, 'null_calib.jsonl')
+out = os.path.join(HERE, os.environ.get('OUT', 'null_calib.jsonl'))
 seeds = [20261005] + list(range(1, 200))
 for s in seeds:
     t0 = time.time(); ctrl = W0.copy(); E = np.repeat(W0[None], K, 0)
