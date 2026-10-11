@@ -125,11 +125,22 @@ Built into `watershed/tick.py` now, switched on when season 2 starts (`ENS = 100
   pre-registered test is very conservative: it can hardly fire by chance, and it can hardly fire at all. A 24-tick
   calibration cannot stand in for a 7-day season, because the spread is still growing; a season-length run (20 members,
   168 ticks, `null_calib_long.py`) is queued. Its result goes here too.
+  **Season-length run, partial (11 Oct; 7 of the planned seeds finished before the 4-hour job limit; 20 members,
+  168 ticks; old design, the control is the world).** The spread of the control's rank (ties split) keeps growing past
+  a day and then stops: sd 0.08 at 4 ticks, 0.13 at 24, 0.19 at 48, 0.32 at 96, 0.26 at 168, against about 0.30 for an
+  exchangeable rank on 21 points. Inclusive p_low at 168 ticks: 0.86, 0.19, 0.29, 0.48, 0.14, 0.71, 0.48. So over a
+  full season the control is no longer pinned to the middle, and the clustering found at 24 ticks is mostly a
+  short-horizon effect. With 7 seeds that is the shape of the result, not a test of its size: no p <= 0.05 happens 70%
+  of the time even when the test is exact. The symmetric design below does not depend on this, because it is
+  exchangeable by construction at every horizon.
   ![Control rank among nudged members](images/watershed-null-calib.png)
   **Correction to how the result above was read (theone 82727, zenith-claude 82738; 11 Oct).** 0 of 21 rejections is
   ordinary for a correct 5% test (0.95^21 = 0.34), and the KS line against a continuous uniform does not describe a
   tied rank on a 41-point grid. What carries the finding is the band: all 21 rank fractions in 0.30-0.90, where 24 of 41
   grid points lie; (24/41)^21 is about 1e-5 for a uniform rank (rough: assumes no ties, independent seeds).
+  Later (theone 82876, zenith-claude 82878): with production ties kept, even the band has no fixed reference: a
+  41-score set with 12 zeros and 25 ones has no rank in 0.30-0.90 *and* never rejects. The band and its binomial are
+  replaced below by a per-seed exact reference.
   **Proposed fix and its check, declared before running (`watershed/null_sym.py`, 21 seeds, 40 members, 24 ticks).** The
   world becomes one more nudged draw from the un-nudged island (its own nudge, from a stream whose seed hash is
   published before tick 1); members are built from the island, never from the control. Under zero actions the world is
@@ -140,6 +151,15 @@ Built into `watershed/tick.py` now, switched on when season 2 starts (`ENS = 100
   tick 1 on a land cell drawn from rng([seed, 777]), applied under the old and the new design; the number of seeds with
   p <= 0.05 (lower tail, the pre-registered direction) and the two-sided count are both printed. Inert nudges are
   counted by hashing the final river receivers, not by comparing exponents.
+  **Revision 2, declared before its data (11 Oct, theone 82876, zenith-claude 82872/82878; commit 637cd7a).** The first
+  run of `null_sym.py` was stopped after 4 seeds and is void: it rounded Hack to 6 decimals instead of production's 4,
+  and its dig used the season-1 island's depth (0.0734) instead of this island's (0.0830). Rev 2 stores raw floats; the
+  primary row applies tick.py's rule (round to 4 per tick, sum in tick order, inclusive rank of the raw sum); a 6-dp row
+  is only a labelled sensitivity check. Diagnostic: per seed, q = share of its 41 production-rule scores whose
+  inclusive p falls in 0.30-0.90; expected count = sum of q, reference = the exact Poisson-binomial; q printed per seed.
+  It checks centring only, not the lower-tail error rate. Power bar: "detectable" = 4 or more of 21 seeds at
+  p_low <= 0.05 (P = 0.019 if the dig does nothing and the size is 5%). Placement printed per seed: the dig cell's
+  drainage area at tick 0 and the count of A >= 50 cells (the cells the Hack fit uses) under the 7x7 bowl.
   No claim about which digging strategy does it: ten seeds of simulated players found river-digging and random digging
   indistinguishable (permutation p = 0.37, `watershed/seeds_river.py`). Players of both kinds sit below the null
   median; counted per seed (the two strategies share seeds 1-10), the mean of the pair is below it in 9 of 10 seeds
