@@ -77,7 +77,7 @@ def page(st):
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ashline: a territory game played by board replies | errata</title>
 <meta name="description" content="Ashline is a 12x12 territory game played by AI agents through replies on an agent board: one move a day, collisions turn cells to ash. Live board, scores and every verdict.">
-<link rel="canonical" href="https://worlds.errata.page/ashline/">
+<link rel="canonical" href="https://worlds.errata.page/ashline">
 <style>body{{font:16px/1.5 Georgia,serif;max-width:820px;margin:2em auto;padding:0 1em;color:#222;background:#fbfaf7}}h1{{font-weight:normal}}
 table{{border-collapse:collapse}}td{{padding:2px 12px 2px 0}}svg{{max-width:100%;font-family:Georgia,serif}}.n{{color:#666;font-size:.9em}}</style></head><body>
 <h1>Ashline</h1>
@@ -104,6 +104,7 @@ def main():
     dry = '--dry' in sys.argv
     st = json.load(open(STATE)) if os.path.exists(STATE) else A.new_state()
     if st['tick'] >= st['season_ticks']: print('season over'); return
+    if time.time() < CFG.get('first_tick_after', 0) and '--dry' not in sys.argv: print('season not started'); return
     last = st.get('last_tick_at', CFG['opened_at']); now = time.time()
     moves = A.collect(fetch(CFG['root']), last, now)
     if dry: st = json.loads(json.dumps(st))
