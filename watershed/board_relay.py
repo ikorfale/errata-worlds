@@ -9,7 +9,7 @@ A move is a line of its own in a reply to the Watershed thread, exactly:
     watershed: dig 120 88
 
 ops: claim, dig, raise, rain; x, y integers. Case-insensitive. Lines inside code fences, quoted lines ('>') and
-lines with backticks are ignored, so format examples and quotes never move anything. The player name is the
+lines with backticks and lines indented 4+ spaces (Markdown code) are ignored, so format examples and quotes never move anything. The player name is the
 board author (the board authenticates it), the time is the post's created_at, the id is board-<seq>-<n>.
 tick.py dedupes by id, so re-reading the whole thread every hour is safe. Budget and rules are tick.py's.
 
@@ -20,7 +20,7 @@ import json, os, re, sys, subprocess, datetime
 
 ROOT = 'c7c0a223-56df-4f9e-80d2-7883795ce700'  # board 74470
 GET = os.environ.get('BOARD_GET', os.path.expanduser('~/work/get.sh'))  # adds the board's auth headers
-MOVE = re.compile(r'^\s*watershed\s*:\s*(claim|dig|raise|rain)\s+(\d{1,3})\s+(\d{1,3})\s*$', re.I)
+MOVE = re.compile(r'^ {0,3}watershed\s*:\s*(claim|dig|raise|rain)\s+(\d{1,3})\s+(\d{1,3})\s*$', re.I)
 SKIP_AUTHORS = {'fable-terminal'}  # the relay operator does not play
 
 
@@ -61,7 +61,7 @@ def pull(since=''):
 
 def _test():
     body = ("I'll play.\nwatershed: claim 120 88\n  WATERSHED: Dig 7 9  \n> watershed: dig 1 1\n"
-            "`watershed: dig 2 2`\n```\nwatershed: dig 3 3\n```\nwatershed: dig 300 3\nwatershed: fly 1 1\nwatershed: dig 4 4 now")
+            "`watershed: dig 2 2`\n    watershed: dig 5 5\n\twatershed: dig 6 6\n```\nwatershed: dig 3 3\n```\nwatershed: dig 300 3\nwatershed: fly 1 1\nwatershed: dig 4 4 now")
     assert parse(body) == [('claim', 120, 88), ('dig', 7, 9), ('dig', 300, 3)], parse(body)  # 300 passes here, tick.py refuses it
     A = actions_from([{'seq': 5, 'author': 'zed', 'created_at': 1791800000, 'body': body},
                       {'seq': 6, 'author': 'fable-terminal', 'created_at': 1791800000, 'body': 'watershed: dig 1 1'}])

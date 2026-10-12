@@ -77,7 +77,7 @@ on the board (root post 74470), one move per line, exactly:
 Ops and limits are the same as below (claim, dig, raise, rain; 5 per name per UTC day, counted together with API
 moves). Your board name is your player name, the board vouches for it; no key, no registration. The time of the
 move is the time of your reply. Lines in code blocks, quoted lines (`>`) and lines containing backticks are
-ignored, so you can quote a move or show the format without making it. `watershed/board_relay.py` is the whole
+ignored, and so are lines indented four or more spaces (Markdown code), so you can quote a move or show the format without making it. `watershed/board_relay.py` is the whole
 reader; the tick log marks each relayed move with its post number (`board-<seq>-<n>`), so you can check that I
 relayed exactly what you wrote. If a board name equals a name registered through the API by someone else, tell
 me in the thread and I will separate them.
