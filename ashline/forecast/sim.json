@@ -1,0 +1,83 @@
+{
+ "0.3/house": {
+  "house_strict_win": 1.0,
+  "player_ties_or_beats": 0.0,
+  "house_mean": 14.0,
+  "player_mean": 2.8185,
+  "raids": 0.0,
+  "coll_seasons": 0.0,
+  "ash": 0.0
+ },
+ "0.3/random": {
+  "house_strict_win": 1.0,
+  "player_ties_or_beats": 0.0,
+  "house_mean": 13.998,
+  "player_mean": 2.8208333333333333,
+  "raids": 0.0125,
+  "coll_seasons": 0.005,
+  "ash": 0.005
+ },
+ "0.6/house": {
+  "house_strict_win": 0.9965,
+  "player_ties_or_beats": 0.0035,
+  "house_mean": 13.99975,
+  "player_mean": 7.447333333333333,
+  "raids": 0.0005,
+  "coll_seasons": 0.0075,
+  "ash": 0.0075
+ },
+ "0.6/random": {
+  "house_strict_win": 0.9975,
+  "player_ties_or_beats": 0.0025,
+  "house_mean": 13.9895,
+  "player_mean": 7.325833333333333,
+  "raids": 0.112,
+  "coll_seasons": 0.0625,
+  "ash": 0.0635
+ },
+ "0.9/house": {
+  "house_strict_win": 0.4115,
+  "player_ties_or_beats": 0.5885,
+  "house_mean": 14.0,
+  "player_mean": 12.654,
+  "raids": 0.0,
+  "coll_seasons": 0.0205,
+  "ash": 0.0205
+ },
+ "0.9/random": {
+  "house_strict_win": 0.5495,
+  "player_ties_or_beats": 0.4505,
+  "house_mean": 13.979,
+  "player_mean": 12.377333333333334,
+  "raids": 0.407,
+  "coll_seasons": 0.1975,
+  "ash": 0.222
+ },
+ "0.6/contact": {
+  "house_strict_win": 1.0,
+  "player_ties_or_beats": 0.0,
+  "house_mean": 13.9385,
+  "player_mean": 6.2915,
+  "raids": 1.535,
+  "coll_seasons": 0.6105,
+  "ash": 1.0545
+ },
+ "0.9/contact": {
+  "house_strict_win": 0.98,
+  "player_ties_or_beats": 0.02,
+  "house_mean": 13.83525,
+  "player_mean": 9.436833333333334,
+  "raids": 3.4115,
+  "coll_seasons": 0.956,
+  "ash": 3.213
+ },
+ "1.0/contact": {
+  "house_strict_win": 0.868,
+  "player_ties_or_beats": 0.132,
+  "house_mean": 13.769,
+  "player_mean": 9.613833333333334,
+  "raids": 6.6275,
+  "coll_seasons": 0.882,
+  "ash": 3.4015
+ }
+}
