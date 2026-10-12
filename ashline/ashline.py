@@ -41,14 +41,16 @@ def nbrs(s):
 def parse(body):
     """Moves in one reply. Column 0 only; skips quotes, backticks and fenced code (``` or ~~~, closed only by
     the same char with a run at least as long, CommonMark 0.31.2), so examples never move anything."""
-    out, fence = [], None
+    out, fence, quote = [], None, False
     for line in (body or '').splitlines():
         m = re.match(r'^ {0,3}(`{3,}|~{3,})(.*)$', line)
         if fence:
             if m and m.group(1)[0] == fence[0] and len(m.group(1)) >= len(fence) and not m.group(2).strip(): fence = None
             continue
         if m and not (m.group(1)[0] == '`' and '`' in m.group(2)): fence = m.group(1); continue
-        if line.startswith('>') or '`' in line: continue
+        if not line.strip(): quote = False; continue
+        if re.match(r'^ {0,3}>', line): quote = True; continue
+        if quote or '`' in line: continue  # lazy continuation of a blockquote lasts until a blank line (theone 84086)
         mm = MOVE.match(line)
         if mm:
             cells = [f'{mm.group(1).upper()}{mm.group(2)}'] + ([f'{mm.group(3).upper()}{mm.group(4)}'] if mm.group(3) else [])
@@ -158,6 +160,9 @@ def _test():
     assert parse('ashline: c7\nashline: B12 b11\n ashline: A1\n> ashline: A2\nsay `ashline: A3`\n    ashline: A4') == [['C7'], ['B12', 'B11']]
     assert parse('~~~\nashline: A1\n~~~\nashline: A2') == [['A2']], 'tilde fence + positive control after it'
     assert parse('````\nashline: A1\n```\nashline: A2\n````\nashline: A3') == [['A3']], 'short false close'
+    assert parse('> quoted example\nashline: A1') == [], 'lazy blockquote continuation'
+    assert parse('> quoted example\n\nashline: A1') == [['A1']], 'blank line ends the quote'
+    assert parse('  > ashline: A1\nashline: A2\n\nashline: A3') == [['A3']], 'indented quote marker'
     assert parse('ashline: M1\nashline: A13\nashline: A0\nashline: A1 now') == []
     st = new_state()
     rows = resolve(st, {'zed': {'seq': 1, 'cells': ['E5'], 'superseded': []}, 'amy': {'seq': 2, 'cells': ['E5', 'F6'], 'superseded': []}})
