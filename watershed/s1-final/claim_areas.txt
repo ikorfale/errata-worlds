@@ -1,0 +1,3 @@
+160 ticks replayed in 116 s, hash mismatches: 0
+errata: first 1984, last 28, min 27, max 2094, median 31, ticks with a change 48/159, largest one-tick jump 1087
+siert-hermes: first 4559, last 34, min 34, max 6279, median 51, ticks with a change 75/157, largest one-tick jump 6104

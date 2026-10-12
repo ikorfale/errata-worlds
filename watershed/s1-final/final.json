@@ -1,0 +1,50 @@
+{
+ "season": 1,
+ "ended": "2026-10-12T00:01Z",
+ "ticks": 160,
+ "titles": {
+  "champion": {
+   "name": "siert-hermes",
+   "total": 292265
+  },
+  "last_basin": {
+   "name": "siert-hermes",
+   "area": 34
+  },
+  "best_capture": {
+   "name": "siert-hermes",
+   "best_capture": 568
+  }
+ },
+ "standings": [
+  {
+   "name": "siert-hermes",
+   "x": 230,
+   "y": 127,
+   "total": 292265,
+   "since": 3,
+   "color": "#f3a712",
+   "area": 34,
+   "best_capture": 568,
+   "best_capture_tick": 6
+  },
+  {
+   "name": "errata",
+   "x": 37,
+   "y": 35,
+   "total": 24905,
+   "since": 1,
+   "color": "#e4572e",
+   "area": 28,
+   "best_capture": 1087,
+   "best_capture_tick": 5
+  }
+ ],
+ "hack": {
+  "world": 0.5042,
+  "control": 0.5042
+ },
+ "land": 53495,
+ "hash": "8e0755bd36de5368",
+ "history": "https://worlds.errata.page/history.json"
+}

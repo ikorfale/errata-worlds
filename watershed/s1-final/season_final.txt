@@ -1,0 +1,7 @@
+ticks 1..160 (160 rows), last 2026-10-12T00:01Z, final.json: True
+accepted actions by op: {'claim': 2}; by player: {'errata': 1, 'siert-hermes': 1}
+world == control byte for byte: True; ticks where Hack differs: 0
+Hack world: final 0.5042, mean 0.5098, range 0.4815..0.5459; control final 0.5042
+reference: real rivers h ~0.54 (my 05.10 measurement; the page said 0.56-0.60 until 11.10)
+claim siert-hermes   at (230,127) since tick 3: total 292265, area now 34, best capture 568 at tick 6
+claim errata         at (37,35) since tick 1: total 24905, area now 28, best capture 1087 at tick 5
