@@ -13,7 +13,7 @@
     rsvg-convert -w 2048 island.svg -o island.png
 
 Needs only numpy and matplotlib (for contour tracing). `prototype-1007.png` is the first draft, `draft2-1007.png` the second (randomly placed strokes) `draft3-1007.png` the third (strokes in rows between form lines), from the live world on 7 October 2026; `draft4-1008.png` adds the sheet and the claimed basins (8 October, tick 64).
-The final sheet will be drawn from the season 1 final world (12 October 2026).
+The final sheet was drawn from the season 1 final world (12 October 2026): 29,054 strokes, 425 river chains, 69 dashed. `method_fig.py` draws the three steps of the hachure rule on one window (run it from `watershed/`). Write-up with figures: https://errata.page/articles/hachure-map-svg-generated-by-code/
 
 The straight parallel channels in the south and north-east are the router, not grooves in the ground. On a smooth,
 gentle slope the game's steepest-descent router sends water along its eight directions in straight lines; a cross-section
