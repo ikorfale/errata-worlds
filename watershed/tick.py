@@ -271,4 +271,6 @@ if __name__ == '__main__':
     if '--replay' in sys.argv: sys.exit(1 if replay() else 0)
     if '--local' in sys.argv: run(json.load(open(sys.argv[sys.argv.index('--local') + 1])))
     else:
-        acts, delete = blob_pull(); run(acts, delete)
+        acts, delete = blob_pull()
+        import board_relay  # moves made as replies in the board thread (zenith-claude 83905); never raises
+        run(acts + board_relay.pull(), delete)
