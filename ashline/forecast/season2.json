@@ -1,0 +1,482 @@
+{
+ "6/0.6/house": {
+  "contact": 1.0,
+  "first_med": 5,
+  "raids": 2.1066666666666665,
+  "coll": 1.3466666666666667,
+  "ash": 1.3466666666666667,
+  "fill": 0.999537037037037,
+  "house_win": 0.8666666666666667,
+  "seeds": {
+   "zenith-claude": "E2",
+   "quiet-contour": "B5",
+   "claude-sonnet-scout": "D4",
+   "house-n": "B2",
+   "house-s": "E5"
+  }
+ },
+ "6/0.6/random": {
+  "contact": 1.0,
+  "first_med": 3,
+  "raids": 3.7266666666666666,
+  "coll": 1.8433333333333333,
+  "ash": 1.8433333333333333,
+  "fill": 0.9975925925925926,
+  "house_win": 0.87,
+  "seeds": {
+   "zenith-claude": "E2",
+   "quiet-contour": "B5",
+   "claude-sonnet-scout": "D4",
+   "house-n": "B2",
+   "house-s": "E5"
+  }
+ },
+ "6/0.6/contact": {
+  "contact": 1.0,
+  "first_med": 2,
+  "raids": 3.59,
+  "coll": 2.7733333333333334,
+  "ash": 2.77,
+  "fill": 0.982962962962963,
+  "house_win": 0.86,
+  "seeds": {
+   "zenith-claude": "E2",
+   "quiet-contour": "B5",
+   "claude-sonnet-scout": "D4",
+   "house-n": "B2",
+   "house-s": "E5"
+  }
+ },
+ "6/0.9/house": {
+  "contact": 1.0,
+  "first_med": 2,
+  "raids": 2.0433333333333334,
+  "coll": 2.08,
+  "ash": 2.08,
+  "fill": 0.9998148148148148,
+  "house_win": 0.32,
+  "seeds": {
+   "zenith-claude": "E2",
+   "quiet-contour": "B5",
+   "claude-sonnet-scout": "D4",
+   "house-n": "B2",
+   "house-s": "E5"
+  }
+ },
+ "6/0.9/random": {
+  "contact": 1.0,
+  "first_med": 2,
+  "raids": 3.703333333333333,
+  "coll": 2.243333333333333,
+  "ash": 2.2266666666666666,
+  "fill": 0.9999074074074075,
+  "house_win": 0.3233333333333333,
+  "seeds": {
+   "zenith-claude": "E2",
+   "quiet-contour": "B5",
+   "claude-sonnet-scout": "D4",
+   "house-n": "B2",
+   "house-s": "E5"
+  }
+ },
+ "6/0.9/contact": {
+  "contact": 1.0,
+  "first_med": 2,
+  "raids": 3.453333333333333,
+  "coll": 3.453333333333333,
+  "ash": 3.453333333333333,
+  "fill": 0.9968518518518518,
+  "house_win": 0.22666666666666666,
+  "seeds": {
+   "zenith-claude": "E2",
+   "quiet-contour": "B5",
+   "claude-sonnet-scout": "D4",
+   "house-n": "B2",
+   "house-s": "E5"
+  }
+ },
+ "7/0.6/house": {
+  "contact": 1.0,
+  "first_med": 2,
+  "raids": 1.4966666666666666,
+  "coll": 0.8433333333333334,
+  "ash": 0.8433333333333334,
+  "fill": 0.9808163265306122,
+  "house_win": 0.95,
+  "seeds": {
+   "zenith-claude": "E3",
+   "quiet-contour": "C5",
+   "claude-sonnet-scout": "D4",
+   "house-n": "B2",
+   "house-s": "F6"
+  }
+ },
+ "7/0.6/random": {
+  "contact": 1.0,
+  "first_med": 2,
+  "raids": 3.3466666666666667,
+  "coll": 1.87,
+  "ash": 1.8633333333333333,
+  "fill": 0.9318367346938775,
+  "house_win": 0.96,
+  "seeds": {
+   "zenith-claude": "E3",
+   "quiet-contour": "C5",
+   "claude-sonnet-scout": "D4",
+   "house-n": "B2",
+   "house-s": "F6"
+  }
+ },
+ "7/0.6/contact": {
+  "contact": 1.0,
+  "first_med": 2,
+  "raids": 3.87,
+  "coll": 2.8966666666666665,
+  "ash": 2.8966666666666665,
+  "fill": 0.8912925170068028,
+  "house_win": 0.9533333333333334,
+  "seeds": {
+   "zenith-claude": "E3",
+   "quiet-contour": "C5",
+   "claude-sonnet-scout": "D4",
+   "house-n": "B2",
+   "house-s": "F6"
+  }
+ },
+ "7/0.9/house": {
+  "contact": 1.0,
+  "first_med": 2,
+  "raids": 2.2466666666666666,
+  "coll": 1.3733333333333333,
+  "ash": 1.3733333333333333,
+  "fill": 0.9999319727891156,
+  "house_win": 0.32666666666666666,
+  "seeds": {
+   "zenith-claude": "E3",
+   "quiet-contour": "C5",
+   "claude-sonnet-scout": "D4",
+   "house-n": "B2",
+   "house-s": "F6"
+  }
+ },
+ "7/0.9/random": {
+  "contact": 1.0,
+  "first_med": 2,
+  "raids": 4.096666666666667,
+  "coll": 2.6866666666666665,
+  "ash": 2.6866666666666665,
+  "fill": 0.9900680272108844,
+  "house_win": 0.43333333333333335,
+  "seeds": {
+   "zenith-claude": "E3",
+   "quiet-contour": "C5",
+   "claude-sonnet-scout": "D4",
+   "house-n": "B2",
+   "house-s": "F6"
+  }
+ },
+ "7/0.9/contact": {
+  "contact": 1.0,
+  "first_med": 2,
+  "raids": 3.33,
+  "coll": 4.3533333333333335,
+  "ash": 4.3533333333333335,
+  "fill": 0.9343537414965986,
+  "house_win": 0.49666666666666665,
+  "seeds": {
+   "zenith-claude": "E3",
+   "quiet-contour": "C5",
+   "claude-sonnet-scout": "D4",
+   "house-n": "B2",
+   "house-s": "F6"
+  }
+ },
+ "8/0.6/house": {
+  "contact": 1.0,
+  "first_med": 5,
+  "raids": 0.3466666666666667,
+  "coll": 0.18666666666666668,
+  "ash": 0.18666666666666668,
+  "fill": 0.835,
+  "house_win": 0.99,
+  "seeds": {
+   "zenith-claude": "F3",
+   "quiet-contour": "C6",
+   "claude-sonnet-scout": "E5",
+   "house-n": "B2",
+   "house-s": "G7"
+  }
+ },
+ "8/0.6/random": {
+  "contact": 1.0,
+  "first_med": 4,
+  "raids": 1.8533333333333333,
+  "coll": 0.9866666666666667,
+  "ash": 0.9866666666666667,
+  "fill": 0.7972916666666666,
+  "house_win": 0.9933333333333333,
+  "seeds": {
+   "zenith-claude": "F3",
+   "quiet-contour": "C6",
+   "claude-sonnet-scout": "E5",
+   "house-n": "B2",
+   "house-s": "G7"
+  }
+ },
+ "8/0.6/contact": {
+  "contact": 1.0,
+  "first_med": 3,
+  "raids": 3.95,
+  "coll": 2.52,
+  "ash": 2.52,
+  "fill": 0.7306770833333334,
+  "house_win": 1.0,
+  "seeds": {
+   "zenith-claude": "F3",
+   "quiet-contour": "C6",
+   "claude-sonnet-scout": "E5",
+   "house-n": "B2",
+   "house-s": "G7"
+  }
+ },
+ "8/0.9/house": {
+  "contact": 1.0,
+  "first_med": 3,
+  "raids": 0.7666666666666667,
+  "coll": 1.5633333333333332,
+  "ash": 1.5633333333333332,
+  "fill": 0.98015625,
+  "house_win": 0.7533333333333333,
+  "seeds": {
+   "zenith-claude": "F3",
+   "quiet-contour": "C6",
+   "claude-sonnet-scout": "E5",
+   "house-n": "B2",
+   "house-s": "G7"
+  }
+ },
+ "8/0.9/random": {
+  "contact": 1.0,
+  "first_med": 3,
+  "raids": 3.22,
+  "coll": 2.1233333333333335,
+  "ash": 2.1233333333333335,
+  "fill": 0.9188541666666666,
+  "house_win": 0.7833333333333333,
+  "seeds": {
+   "zenith-claude": "F3",
+   "quiet-contour": "C6",
+   "claude-sonnet-scout": "E5",
+   "house-n": "B2",
+   "house-s": "G7"
+  }
+ },
+ "8/0.9/contact": {
+  "contact": 1.0,
+  "first_med": 2,
+  "raids": 5.006666666666667,
+  "coll": 4.6066666666666665,
+  "ash": 4.6066666666666665,
+  "fill": 0.8141145833333333,
+  "house_win": 0.9366666666666666,
+  "seeds": {
+   "zenith-claude": "F3",
+   "quiet-contour": "C6",
+   "claude-sonnet-scout": "E5",
+   "house-n": "B2",
+   "house-s": "G7"
+  }
+ },
+ "10/0.6/house": {
+  "contact": 1.0,
+  "first_med": 6,
+  "raids": 0.02,
+  "coll": 0.12,
+  "ash": 0.12,
+  "fill": 0.5445,
+  "house_win": 1.0,
+  "seeds": {
+   "zenith-claude": "H3",
+   "quiet-contour": "C8",
+   "claude-sonnet-scout": "F6",
+   "house-n": "C3",
+   "house-s": "H8"
+  }
+ },
+ "10/0.6/random": {
+  "contact": 1.0,
+  "first_med": 6,
+  "raids": 0.44666666666666666,
+  "coll": 0.31,
+  "ash": 0.31,
+  "fill": 0.5366666666666666,
+  "house_win": 0.99,
+  "seeds": {
+   "zenith-claude": "H3",
+   "quiet-contour": "C8",
+   "claude-sonnet-scout": "F6",
+   "house-n": "C3",
+   "house-s": "H8"
+  }
+ },
+ "10/0.6/contact": {
+  "contact": 1.0,
+  "first_med": 4,
+  "raids": 1.99,
+  "coll": 1.54,
+  "ash": 1.54,
+  "fill": 0.5068333333333334,
+  "house_win": 1.0,
+  "seeds": {
+   "zenith-claude": "H3",
+   "quiet-contour": "C8",
+   "claude-sonnet-scout": "F6",
+   "house-n": "C3",
+   "house-s": "H8"
+  }
+ },
+ "10/0.9/house": {
+  "contact": 1.0,
+  "first_med": 7,
+  "raids": 0.016666666666666666,
+  "coll": 0.66,
+  "ash": 0.66,
+  "fill": 0.6530666666666667,
+  "house_win": 0.6,
+  "seeds": {
+   "zenith-claude": "H3",
+   "quiet-contour": "C8",
+   "claude-sonnet-scout": "F6",
+   "house-n": "C3",
+   "house-s": "H8"
+  }
+ },
+ "10/0.9/random": {
+  "contact": 1.0,
+  "first_med": 5,
+  "raids": 0.8233333333333334,
+  "coll": 0.48,
+  "ash": 0.48,
+  "fill": 0.6474666666666667,
+  "house_win": 0.6566666666666666,
+  "seeds": {
+   "zenith-claude": "H3",
+   "quiet-contour": "C8",
+   "claude-sonnet-scout": "F6",
+   "house-n": "C3",
+   "house-s": "H8"
+  }
+ },
+ "10/0.9/contact": {
+  "contact": 1.0,
+  "first_med": 3,
+  "raids": 4.98,
+  "coll": 2.5966666666666667,
+  "ash": 2.5966666666666667,
+  "fill": 0.579,
+  "house_win": 0.9433333333333334,
+  "seeds": {
+   "zenith-claude": "H3",
+   "quiet-contour": "C8",
+   "claude-sonnet-scout": "F6",
+   "house-n": "C3",
+   "house-s": "H8"
+  }
+ },
+ "12/0.6/house": {
+  "contact": 0.9166666666666666,
+  "first_med": 11,
+  "raids": 0.0,
+  "coll": 0.0033333333333333335,
+  "ash": 0.0033333333333333335,
+  "fill": 0.37622685185185184,
+  "house_win": 0.9966666666666667,
+  "seeds": {
+   "zenith-claude": "I4",
+   "quiet-contour": "D9",
+   "claude-sonnet-scout": "G7",
+   "house-n": "C3",
+   "house-s": "J10"
+  }
+ },
+ "12/0.6/random": {
+  "contact": 0.97,
+  "first_med": 8,
+  "raids": 0.13666666666666666,
+  "coll": 0.11333333333333333,
+  "ash": 0.11333333333333333,
+  "fill": 0.3779398148148148,
+  "house_win": 0.9966666666666667,
+  "seeds": {
+   "zenith-claude": "I4",
+   "quiet-contour": "D9",
+   "claude-sonnet-scout": "G7",
+   "house-n": "C3",
+   "house-s": "J10"
+  }
+ },
+ "12/0.6/contact": {
+  "contact": 1.0,
+  "first_med": 5,
+  "raids": 1.7333333333333334,
+  "coll": 1.4466666666666668,
+  "ash": 1.4466666666666668,
+  "fill": 0.3547222222222222,
+  "house_win": 1.0,
+  "seeds": {
+   "zenith-claude": "I4",
+   "quiet-contour": "D9",
+   "claude-sonnet-scout": "G7",
+   "house-n": "C3",
+   "house-s": "J10"
+  }
+ },
+ "12/0.9/house": {
+  "contact": 0.9666666666666667,
+  "first_med": 10,
+  "raids": 0.0,
+  "coll": 0.023333333333333334,
+  "ash": 0.023333333333333334,
+  "fill": 0.4572222222222222,
+  "house_win": 0.42,
+  "seeds": {
+   "zenith-claude": "I4",
+   "quiet-contour": "D9",
+   "claude-sonnet-scout": "G7",
+   "house-n": "C3",
+   "house-s": "J10"
+  }
+ },
+ "12/0.9/random": {
+  "contact": 1.0,
+  "first_med": 6,
+  "raids": 0.34,
+  "coll": 0.22666666666666666,
+  "ash": 0.22666666666666666,
+  "fill": 0.4545138888888889,
+  "house_win": 0.5633333333333334,
+  "seeds": {
+   "zenith-claude": "I4",
+   "quiet-contour": "D9",
+   "claude-sonnet-scout": "G7",
+   "house-n": "C3",
+   "house-s": "J10"
+  }
+ },
+ "12/0.9/contact": {
+  "contact": 1.0,
+  "first_med": 4,
+  "raids": 3.546666666666667,
+  "coll": 3.2066666666666666,
+  "ash": 3.2066666666666666,
+  "fill": 0.41020833333333334,
+  "house_win": 0.99,
+  "seeds": {
+   "zenith-claude": "I4",
+   "quiet-contour": "D9",
+   "claude-sonnet-scout": "G7",
+   "house-n": "C3",
+   "house-s": "J10"
+  }
+ }
+}

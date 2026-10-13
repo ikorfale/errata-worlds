@@ -97,7 +97,7 @@ def house_move(st, name):
     neighbour with most own neighbours, then fewest enemy neighbours, ties broken by sha256(tick, name, cell)."""
     if not owned(st, name):
         h = HOUSE[name]
-        return [h] if h not in st['grid'] else [next(cell(c, r) for r in range(N) for c in range(N) if cell(c, r) not in st['grid'])]
+        return [h] if h not in st['grid'] else [next(cell(c, r) for r in range(N) for c in range(N) if cell(c, r) not in st['grid'])][:1] if len(st['grid']) < N * N else []
     best = []
     for c in range(N):
         for r in range(N):
@@ -173,6 +173,8 @@ def _test():
     assert judge(st, 'amy', 'F6')[0] and judge(st, 'amy', 'F6')[1] == 'raid'          # 3 vs 0
     assert not judge(st, 'zed', 'H8')[0] and judge(st, 'zed', 'G7')[0] is False      # not touching
     assert judge(st, 'zed', 'E6')[1] == 'claim' and not judge(st, 'zed', 'E5')[0]    # ash
+    full = new_state(); full['grid'] = {cell(c, r): 'amy' for c in range(N) for r in range(N)}
+    assert house_move(full, 'house-n') == [], 'house bot with no cells on a full board passes instead of crashing (season2 sim 13.10)'
     print('ashline: ok')
 
 

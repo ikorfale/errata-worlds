@@ -1,0 +1,98 @@
+{
+ "8/0.6/house": {
+  "contact": 1.0,
+  "first_med": 5,
+  "raids": 0.36,
+  "coll": 0.23666666666666666,
+  "ash": 0.23666666666666666,
+  "fill": 0.8391145833333333,
+  "house_win": 1.0,
+  "seeds": {
+   "zenith-claude": "F3",
+   "quiet-contour": "C6",
+   "claude-sonnet-scout": "E5",
+   "house-n": "B2",
+   "house-s": "G7"
+  }
+ },
+ "8/0.6/random": {
+  "contact": 1.0,
+  "first_med": 4,
+  "raids": 2.06,
+  "coll": 0.9533333333333334,
+  "ash": 0.9533333333333334,
+  "fill": 0.7971875,
+  "house_win": 1.0,
+  "seeds": {
+   "zenith-claude": "F3",
+   "quiet-contour": "C6",
+   "claude-sonnet-scout": "E5",
+   "house-n": "B2",
+   "house-s": "G7"
+  }
+ },
+ "8/0.6/contact": {
+  "contact": 1.0,
+  "first_med": 3,
+  "raids": 3.5633333333333335,
+  "coll": 2.736666666666667,
+  "ash": 2.736666666666667,
+  "fill": 0.73171875,
+  "house_win": 1.0,
+  "seeds": {
+   "zenith-claude": "F3",
+   "quiet-contour": "C6",
+   "claude-sonnet-scout": "E5",
+   "house-n": "B2",
+   "house-s": "G7"
+  }
+ },
+ "8/0.9/house": {
+  "contact": 1.0,
+  "first_med": 3,
+  "raids": 0.7533333333333333,
+  "coll": 1.54,
+  "ash": 1.54,
+  "fill": 0.9811458333333334,
+  "house_win": 0.69,
+  "seeds": {
+   "zenith-claude": "F3",
+   "quiet-contour": "C6",
+   "claude-sonnet-scout": "E5",
+   "house-n": "B2",
+   "house-s": "G7"
+  }
+ },
+ "8/0.9/random": {
+  "contact": 1.0,
+  "first_med": 3,
+  "raids": 3.223333333333333,
+  "coll": 2.0966666666666667,
+  "ash": 2.0966666666666667,
+  "fill": 0.9202604166666667,
+  "house_win": 0.7966666666666666,
+  "seeds": {
+   "zenith-claude": "F3",
+   "quiet-contour": "C6",
+   "claude-sonnet-scout": "E5",
+   "house-n": "B2",
+   "house-s": "G7"
+  }
+ },
+ "8/0.9/contact": {
+  "contact": 1.0,
+  "first_med": 2,
+  "raids": 4.53,
+  "coll": 4.663333333333333,
+  "ash": 4.663333333333333,
+  "fill": 0.8200520833333333,
+  "house_win": 0.92,
+  "seeds": {
+   "zenith-claude": "F3",
+   "quiet-contour": "C6",
+   "claude-sonnet-scout": "E5",
+   "house-n": "B2",
+   "house-s": "G7"
+  }
+ }
+}

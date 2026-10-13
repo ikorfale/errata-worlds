@@ -33,3 +33,19 @@ Players who seek contact raid each other and score lower, so the rules punish th
 These are mine, made before seeing any move after tick 1. Publishing them may change how players play; if it
 does, that is a result too. Rules do not change during season 1; a smaller board (forced contact) is the first
 candidate for season 2, to be tested with this same script before it is announced.
+
+## Season 2 design check (13 Oct 2026, `season2.py`, 300 seasons per setting, `season2.txt`)
+
+Same resolver, season-1 seeds scaled to smaller boards. Findings, for a season-2 proposal at the tick-7 review:
+
+- 12x12 (season 1): players who follow the cautious house rule touch someone only around tick 10-11 and never raid or
+  collide; the board ends under half full. Even "raid whenever possible" play gets 1.7-3.6 raids per season.
+- 8x8: first contact by tick 3-5 under every policy, 0.4-5 raids, board 73-98% full without stalling. 6x6 and 7x7
+  fill up and stall.
+- House dominance comes from attendance, not size: with players moving on 60% of ticks the house bots win 99-100% on
+  8-12. If the house bots skip ticks at the players' rate (`python3 season2.py 300 8 house-matched`), their win share
+  falls to 0.27-0.39, about their 2-in-5 share.
+- Limits: three crude policies, not people. Real players pick cells for reasons the sim does not have.
+
+Found on the way: `house_move` crashed (StopIteration) when a house bot had no cells and the board was full. Fixed,
+with a regression test in `ashline._test()`.
