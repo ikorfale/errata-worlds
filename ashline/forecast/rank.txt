@@ -1,0 +1,12 @@
+players: house rule
+  12x12 14 ticks  land/expected moves=3.03  discordant pairs 0.0%  level 0.1%  leader not a move leader 0%  reach T* 1%  median ticks after T* 2.5
+  8x8 14 ticks  land/expected moves=1.35  discordant pairs 0.6%  level 1.4%  leader not a move leader 2%  reach T* 20%  median ticks after T* 8.0
+  8x8 20 ticks  land/expected moves=0.96  discordant pairs 6.1%  level 4.9%  leader not a move leader 14%  reach T* 78%  median ticks after T* 4.0
+  12x12 30 ticks  land/expected moves=1.46  discordant pairs 0.2%  level 0.8%  leader not a move leader 0%  reach T* 17%  median ticks after T* 12.0
+  12x12 45 ticks  land/expected moves=0.96  discordant pairs 4.6%  level 2.4%  leader not a move leader 15%  reach T* 82%  median ticks after T* 8.0
+players: each seat flips a coin between house rule and contact-seeking (raid if possible, else grow toward nearest rival)
+  12x12 14 ticks  land/expected moves=3.02  discordant pairs 2.5%  level 3.1%  leader not a move leader 4%  reach T* 6%  median ticks after T* 3.0
+  8x8 14 ticks  land/expected moves=1.36  discordant pairs 4.5%  level 4.5%  leader not a move leader 8%  reach T* 40%  median ticks after T* 3.0
+  8x8 20 ticks  land/expected moves=0.96  discordant pairs 10.4%  level 4.5%  leader not a move leader 17%  reach T* 88%  median ticks after T* 6.0
+  12x12 30 ticks  land/expected moves=1.44  discordant pairs 5.5%  level 2.7%  leader not a move leader 12%  reach T* 52%  median ticks after T* 7.0
+  12x12 45 ticks  land/expected moves=0.97  discordant pairs 11.4%  level 2.5%  leader not a move leader 28%  reach T* 93%  median ticks after T* 15.0

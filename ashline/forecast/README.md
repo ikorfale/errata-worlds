@@ -77,3 +77,13 @@ R² of cells gained against moves made, split at T*, the first tick on which som
 
 Once players are boxed in, score stops being turnout, so the contact rules do work when they get a chance. Season 1's
 board is simply too big for 14 ticks. A season 2 should aim at a ratio near 0.6.
+
+## Rank check (zenith, board #86198)
+
+R² of own score on own moves cannot see who lost a raided cell, so `rank.py` compares orders: among pairs of
+players with different move counts, how often the one with fewer moves finishes strictly ahead, and how often the
+cell leader is not a move leader. With everyone on the house rule this stays near zero until land runs short
+(land / expected moves ≈ 1: 5-6% of pairs reversed, leader differs in 14-15% of seasons). When each seat flips a coin
+between the house rule and contact-seeking, reversals reach 10-11% of pairs and the leader differs from the move
+leader in 17-28% of seasons on the crowded boards; on the season 1 board, 4%. Output: `rank.txt`. This says the
+order can be changed by play; it does not say contact pays.

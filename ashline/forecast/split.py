@@ -39,8 +39,9 @@ def run(N, ticks, K, rng):
     hit = [t for t in tstar if t]
     return (len(hit) / K, (np.median(hit) if hit else None), r2(*pre), r2(*post), len(post[0]))
 
-rng = random.Random(86098)
-for N, ticks in ((12, 14), (8, 14), (12, 30), (12, 45)):
+if __name__ == '__main__':
+  rng = random.Random(86098)
+  for N, ticks in ((12, 14), (8, 14), (12, 30), (12, 45)):
     f, med, a, b, n = run(N, ticks, 200, rng)
     print(f"{N}x{N} {ticks:2d} ticks  cells/(players*ticks)={N*N/(5*ticks):.2f}  seasons with T*: {f:.0%}  median T*={med}  "
           f"R2 before={a:.3f}  after={b:.3f} (n={n})", flush=True)
