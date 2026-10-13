@@ -65,7 +65,7 @@ def collect(posts, since, until):
         if p.get('author') in SKIP_AUTHORS or not (since <= p['created_at'] < until): continue
         for cells in parse(p.get('body')):
             prev = got.get(p['author'])
-            got[p['author']] = {'seq': p['seq'], 'cells': cells, 'superseded': (prev['superseded'] + [prev['seq']]) if prev else []}
+            got[p['author']] = {'seq': p['seq'], 'id': p.get('id'), 'cells': cells, 'superseded': (prev['superseded'] + [prev['seq']]) if prev else []}
     return got
 
 
@@ -122,7 +122,7 @@ def resolve(st, moves):
             ok, kind, reason = judge(st, name, s)
             if ok: pick = (s, kind, reason); break
             why.append(reason)
-        rows.append({'name': name, 'seq': mv['seq'], 'cells': mv['cells'], 'superseded': mv['superseded'],
+        rows.append({'name': name, 'seq': mv['seq'], 'id': mv.get('id'), 'cells': mv['cells'], 'superseded': mv['superseded'],
                      'pick': pick and pick[0], 'kind': pick and pick[1], 'reason': pick[2] if pick else '; '.join(why), 'result': None})
         if pick: target.setdefault(pick[0], []).append(name)
     new = dict(st['grid'])

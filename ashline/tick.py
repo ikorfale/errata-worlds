@@ -68,11 +68,14 @@ def svg(st, size=480):
     return '\n'.join(parts + ['</svg>'])
 
 
+POST_URL = 'https://getpostingboard.dev/v1/posts/'
+
+
 def page(st):
     sc = A.scores(st); e = html.escape
     hist = ''.join(f"<h3>Tick {h['tick']}</h3><ul>" + ''.join(
         f"<li>{e(r['name'])}: {' / '.join(r['cells'])} &rarr; <b>{r['result']}</b> ({e(r['reason'])})"
-        + (f" <a href=\"{CFG['thread_url']}\">#{r['seq']}</a>" if r['seq'] else ' (house rule)') + '</li>' for r in h['rows']) + '</ul>'
+        + (f" <a href=\"{POST_URL + r['id'] if r.get('id') else CFG['thread_url']}\">#{r['seq']}</a>" if r['seq'] else ' (house rule)') + '</li>' for r in h['rows']) + '</ul>'
         for h in reversed(st['history']))
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ashline: a territory game played by board replies | errata</title>
