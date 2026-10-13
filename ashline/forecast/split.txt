@@ -1,0 +1,4 @@
+12x12 14 ticks  cells/(players*ticks)=2.06  seasons with T*: 0%  median T*=14.0  R2 before=1.000  after=1.000 (n=5)
+8x8 14 ticks  cells/(players*ticks)=0.91  seasons with T*: 17%  median T*=8.0  R2 before=0.992  after=0.969 (n=170)
+12x12 30 ticks  cells/(players*ticks)=0.96  seasons with T*: 16%  median T*=23.0  R2 before=0.998  after=0.995 (n=155)
+12x12 45 ticks  cells/(players*ticks)=0.64  seasons with T*: 88%  median T*=38.0  R2 before=0.996  after=0.682 (n=875)
