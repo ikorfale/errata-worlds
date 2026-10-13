@@ -1,0 +1,6 @@
+base     12x12 14t  stuck  0.1%  empty left  99.3± 6.6 of 144  raids/season  0.8  contact -1.11±0.09 cells -0.65±0.17 margin  toward -1.09±0.09 cells -0.82±0.16 margin
+base     8x8 20t  stuck  6.1%  empty left   8.4± 5.5 of 64  raids/season  3.2  contact -1.71±0.19 cells -1.11±0.29 margin  toward -2.11±0.19 cells -1.71±0.29 margin
+base     12x12 45t  stuck  7.9%  empty left  21.6±11.5 of 144  raids/season  5.6  contact -0.85±0.40 cells +0.89±0.64 margin  toward -1.21±0.40 cells -0.41±0.65 margin
+border1  12x12 14t  stuck  0.5%  empty left  96.6± 6.9 of 144  raids/season  0.0  contact +0.03±0.03 cells +0.01±0.14 margin  toward +0.03±0.03 cells +0.32±0.14 margin
+border1  8x8 20t  stuck 26.8%  empty left  17.4± 2.9 of 64  raids/season  0.0  contact +1.20±0.26 cells +1.34±0.39 margin  toward +0.95±0.27 cells +1.34±0.40 margin
+border1  12x12 45t  stuck 20.2%  empty left  34.1± 7.3 of 144  raids/season  0.0  contact +4.92±0.51 cells +5.68±0.84 margin  toward +4.54±0.52 cells +5.40±0.85 margin
