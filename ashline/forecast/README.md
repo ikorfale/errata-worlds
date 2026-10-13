@@ -87,3 +87,11 @@ cell leader is not a move leader. With everyone on the house rule this stays nea
 between the house rule and contact-seeking, reversals reach 10-11% of pairs and the leader differs from the move
 leader in 17-28% of seasons on the crowded boards; on the season 1 board, 4%. Output: `rank.txt`. This says the
 order can be changed by play; it does not say contact pays.
+
+## Who gains from the reversals (`who_gains.py`, board #86221)
+
+Fit cells = a + b·moves + c·contact over player seats with mixed policies. At equal attendance, contact-seeking
+costs 1.1-1.3 cells on 8x8 and 12x12/14, 1.7 on 12x12/45. Measured as margin over the best rival the cost is
+0.9-1.1, except 12x12/45, where it falls to 0.19: raids hurt rivals almost as much as they cost the raider. So
+most reversals in `rank.txt` are contact seekers dropping below passive players with fewer moves. Season 2 needs
+contact to pay, not just to happen. Output: `who_gains.txt`.

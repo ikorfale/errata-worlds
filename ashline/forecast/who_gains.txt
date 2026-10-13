@@ -1,0 +1,4 @@
+12x12 14 ticks  contact-seeking worth -1.14 cells and -1.01 margin at equal attendance  (raw mean cells: contact 8.2, house 9.0)
+8x8 14 ticks  contact-seeking worth -1.15 cells and -0.86 margin at equal attendance  (raw mean cells: contact 7.6, house 8.9)
+8x8 20 ticks  contact-seeking worth -1.26 cells and -1.10 margin at equal attendance  (raw mean cells: contact 9.8, house 10.9)
+12x12 45 ticks  contact-seeking worth -1.72 cells and -0.19 margin at equal attendance  (raw mean cells: contact 23.6, house 25.3)

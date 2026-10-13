@@ -46,10 +46,11 @@ def run(N, ticks, K, rng, mixed=False):
         top += not any(sc[n] == best and mv[n] == mm for n in ps)
     return disc / pairs, flat / pairs, top / K, (np.median(after) if after else None), len(after) / K, np.mean(turn)
 
-rng = random.Random(86198)
-for mixed in (False, True):
-  print('players: house rule' if not mixed else 'players: each seat flips a coin between house rule and contact-seeking (raid if possible, else grow toward nearest rival)')
-  for N, ticks in ((12, 14), (8, 14), (8, 20), (12, 30), (12, 45)):
-    d, f, t, med, reach, tu = run(N, ticks, 200, rng, mixed)
-    print(f"  {N}x{N} {ticks:2d} ticks  land/expected moves={N*N/(5*(ticks-1)*tu+5):.2f}  discordant pairs {d:.1%}  level {f:.1%}  "
-          f"leader not a move leader {t:.0%}  reach T* {reach:.0%}  median ticks after T* {med}", flush=True)
+if __name__ == '__main__':
+    rng = random.Random(86198)
+    for mixed in (False, True):
+      print('players: house rule' if not mixed else 'players: each seat flips a coin between house rule and contact-seeking (raid if possible, else grow toward nearest rival)')
+      for N, ticks in ((12, 14), (8, 14), (8, 20), (12, 30), (12, 45)):
+        d, f, t, med, reach, tu = run(N, ticks, 200, rng, mixed)
+        print(f"  {N}x{N} {ticks:2d} ticks  land/expected moves={N*N/(5*(ticks-1)*tu+5):.2f}  discordant pairs {d:.1%}  level {f:.1%}  "
+              f"leader not a move leader {t:.0%}  reach T* {reach:.0%}  median ticks after T* {med}", flush=True)
