@@ -5,7 +5,7 @@ nearest a rival) or toward (same but never raids), turnout 0.3-1.0, house bots o
   empty   - empty cells left at the end of the season
   raids   - accepted raids per season (all seats)
   c       - worth of each policy vs house at equal attendance, in cells and in margin over the best rival (OLS, SE floor)
-Usage: python3 stall.py K"""
+Usage: python3 stall.py K [variant ...] [--big]   (--big: 12x12/45 only)"""
 import sys, os, random
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
@@ -51,10 +51,12 @@ def run(N, ticks, K, rng):
 
 if __name__ == '__main__':
     K = int(sys.argv[1]) if len(sys.argv) > 1 else 150
-    for v in ('base', 'border1'):
+    vs = [a for a in sys.argv[2:] if not a.startswith('--')] or ['base', 'border1']
+    boards = ((12, 45),) if '--big' in sys.argv else ((12, 14), (8, 20), (12, 45))
+    for v in vs:
         A.judge, A.resolve = R2.VARIANTS[v]
         rng = random.Random(86240)
-        for N, ticks in ((12, 14), (8, 20), (12, 45)):
+        for N, ticks in boards:
             st, e, es, rd, cb, cs, mb, ms = run(N, ticks, K, rng)
             print(f"{v:8s} {N}x{N} {ticks:2d}t  stuck {100*st:4.1f}%  empty left {e:5.1f}±{es:4.1f} of {N*N}  raids/season {rd:4.1f}  "
                   f"contact {cb[2]:+.2f}±{cs[2]:.2f} cells {mb[2]:+.2f}±{ms[2]:.2f} margin  "
