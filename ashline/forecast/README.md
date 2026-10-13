@@ -49,3 +49,15 @@ Same resolver, season-1 seeds scaled to smaller boards. Findings, for a season-2
 
 Found on the way: `house_move` crashed (StopIteration) when a house bot had no cells and the board was full. Fixed,
 with a regression test in `ashline._test()`.
+
+## Is there a strategy? (13 Oct, evolve.py, attendance.py, pressure.py)
+
+- `evolve.py 8 0.9 40`: an evolution strategy over 8 cell features (own/enemy neighbours, raid margin, contested,
+  room, distance to foes, ash) searched 40 generations for a policy that beats the house rule on the 8x8 board.
+  On 240 fresh seasons: evolved margin -1.37 vs house-rule seat -1.38, score 11.9 vs 12.0. Nothing found.
+- `attendance.py`: give each player its own move probability (0.3-1.0) and regress final score on moves made.
+  R^2 = 0.983 (8x8, house rule), 0.999 (12x12); score is within 1 of moves made in 99-100% of seasons.
+  **As written, Ashline's score counts turnout, not play.** Season 1 keeps its announced rules.
+- `pressure.py`: candidate fix "cells out-touched on >= 2 sides by one neighbour flip after each tick":
+  1.2 flips a season on 8x8, R^2 0.956 -> 0.915. Not enough. Next to test: enclosure (empty cells sealed off by
+  one owner count as theirs), so shape can be worth more than one cell per move.
