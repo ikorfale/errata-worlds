@@ -28,12 +28,18 @@ def run(N, ticks, K, rng):
             best_other = max(v for k, v in sc.items() if k != n)
             rows.append((mv[n], float(pol[n]), sc[n], sc[n] - best_other))
     a = np.array(rows); M = np.column_stack([np.ones(len(a)), a[:, 0], a[:, 1]])
-    cells = np.linalg.lstsq(M, a[:, 2], rcond=None)[0]; marg = np.linalg.lstsq(M, a[:, 3], rcond=None)[0]
-    return cells[2], marg[2], a[a[:, 1] == 1, 2].mean(), a[a[:, 1] == 0, 2].mean()
+    cells, sc = ols(M, a[:, 2]); marg, sm = ols(M, a[:, 3])
+    return cells[2], marg[2], a[a[:, 1] == 1, 2].mean(), a[a[:, 1] == 0, 2].mean(), sc[2], sm[2]
+
+def ols(M, y):
+    """coefficients and plain OLS standard errors (rows within a season are not independent: treat as a floor)."""
+    b = np.linalg.lstsq(M, y, rcond=None)[0]; e = y - M @ b
+    cov = (e @ e / (len(y) - M.shape[1])) * np.linalg.inv(M.T @ M)
+    return b, np.sqrt(np.diag(cov))
 
 if __name__ == '__main__':
     rng = random.Random(86221)
     for N, ticks in ((12, 14), (8, 14), (8, 20), (12, 45)):
-        c, m, mc, mh = run(N, ticks, 200, rng)
-        print(f"{N}x{N} {ticks:2d} ticks  contact-seeking worth {c:+.2f} cells and {m:+.2f} margin at equal attendance  "
+        c, m, mc, mh, sc, sm = run(N, ticks, 200, rng)
+        print(f"{N}x{N} {ticks:2d} ticks  contact-seeking worth {c:+.2f}±{sc:.2f} cells and {m:+.2f}±{sm:.2f} margin at equal attendance  "
               f"(raw mean cells: contact {mc:.1f}, house {mh:.1f})", flush=True)

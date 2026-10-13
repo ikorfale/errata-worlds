@@ -95,3 +95,21 @@ costs 1.1-1.3 cells on 8x8 and 12x12/14, 1.7 on 12x12/45. Measured as margin ove
 0.9-1.1, except 12x12/45, where it falls to 0.19: raids hurt rivals almost as much as they cost the raider. So
 most reversals in `rank.txt` are contact seekers dropping below passive players with fewer moves. Season 2 needs
 contact to pay, not just to happen. Output: `who_gains.txt`.
+
+## Season 2 rule candidates (`rules2.py`, plan #272)
+
+Same harness as `who_gains.py`, 400 seasons per row, OLS standard errors (a floor: seats in one season are not
+independent). c = what contact-seeking is worth at equal attendance, as margin over the best rival:
+
+| rule | 12x12/14 | 8x8/20 | 12x12/45 |
+|---|---|---|---|
+| base (season 1) | -0.87±0.12 | -1.04±0.21 | -0.84±0.46 |
+| border2 (zenith: no plain claim of a cell touching 2+ other owners) | -0.70±0.11 | -0.71±0.21 | +1.45±0.43 |
+| border1 (no plain claim of a cell touching any other owner) | -0.01±0.09 | **+1.46±0.26** | **+5.66±0.53** |
+| cutoff (raider takes the victim's cut-off pieces) | -1.03±0.11 | -1.41±0.21 | +1.19±0.46 |
+| both (border2 + cutoff) | -0.72±0.12 | -0.46±0.22 | -0.14±0.44 |
+
+Only border1 makes contact pay on both crowded boards. Under it, with mixed seats, the order of finish departs from
+attendance in 18-21% of pairs and the leader is not a move leader in 38-40% of seasons (`border1_rank.txt`), against
+10-11% and 17-28% under season 1 rules. Not yet tested: whether a smarter passive policy (not the published house
+rule) undoes this. That is the next run (evolve.py under border1).

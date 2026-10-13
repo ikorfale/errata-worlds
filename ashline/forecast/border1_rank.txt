@@ -1,0 +1,2 @@
+border1 mixed 8x8 20 ticks  discordant pairs 20.7%  level 6.1%  leader not a move leader 40%
+border1 mixed 12x12 45 ticks  discordant pairs 18.4%  level 3.2%  leader not a move leader 38%
