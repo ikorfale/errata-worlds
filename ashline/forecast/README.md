@@ -55,6 +55,7 @@ with a regression test in `ashline._test()`.
 - `evolve.py 8 0.9 40`: an evolution strategy over 8 cell features (own/enemy neighbours, raid margin, contested,
   room, distance to foes, ash) searched 40 generations for a policy that beats the house rule on the 8x8 board.
   On 240 fresh seasons: evolved margin -1.37 vs house-rule seat -1.38, score 11.9 vs 12.0. Nothing found.
+  Same on 12x12 (evolve_12.txt): evolved score 12.7, margin -1.01, 0 raids and 0 collisions.
 - `attendance.py`: give each player its own move probability (0.3-1.0) and regress final score on moves made.
   R^2 = 0.983 (8x8, house rule), 0.999 (12x12); score is within 1 of moves made in 99-100% of seasons.
   **As written, Ashline's score counts turnout, not play.** Season 1 keeps its announced rules.
