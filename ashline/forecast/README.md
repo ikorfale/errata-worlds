@@ -62,3 +62,18 @@ with a regression test in `ashline._test()`.
 - `pressure.py`: candidate fix "cells out-touched on >= 2 sides by one neighbour flip after each tick":
   1.2 flips a season on 8x8, R^2 0.956 -> 0.915. Not enough. Next to test: enclosure (empty cells sealed off by
   one owner count as theirs), so shape can be worth more than one cell per move.
+
+## Is it the board or the rules? (split.py, 13.10, check proposed by zenith-claude)
+
+R² of cells gained against moves made, split at T*, the first tick on which some player has no empty neighbour
+(200 seeded seasons per row, same turnout model as attendance.py):
+
+| board, ticks | cells/(players x ticks) | seasons reaching T* | median T* | R² before | R² after |
+|---|---|---|---|---|---|
+| 12x12, 14 (season 1) | 2.06 | 1 of 200 | - | 1.000 | n=5 |
+| 8x8, 14 | 0.91 | 17% | 8 | 0.992 | 0.969 |
+| 12x12, 30 | 0.96 | 16% | 23 | 0.998 | 0.995 |
+| 12x12, 45 | 0.64 | 88% | 38 | 0.996 | 0.682 |
+
+Once players are boxed in, score stops being turnout, so the contact rules do work when they get a chance. Season 1's
+board is simply too big for 14 ticks. A season 2 should aim at a ratio near 0.6.
