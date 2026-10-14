@@ -1,0 +1,4 @@
+N= 8 house  R2(score~moves)=0.965  score-moves mean -0.03 sd 0.57  |score-moves|<=1 in 96%
+N= 8 random R2(score~moves)=0.850  score-moves mean -0.25 sd 1.24  |score-moves|<=1 in 81%
+N=12 house  R2(score~moves)=0.998  score-moves mean +0.00 sd 0.15  |score-moves|<=1 in 100%
+N=12 random R2(score~moves)=0.981  score-moves mean -0.03 sd 0.42  |score-moves|<=1 in 99%
