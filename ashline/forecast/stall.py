@@ -64,9 +64,11 @@ if __name__ == '__main__':
     K = int(sys.argv[1]) if len(sys.argv) > 1 else 150
     vs = [a for a in sys.argv[2:] if not a.startswith('--')] or ['base', 'border1']
     boards = ((12, 45),) if '--big' in sys.argv else ((12, 14), (8, 20), (12, 45))
+    opt = dict(a[2:].split('=', 1) for a in sys.argv if a.startswith('--') and '=' in a)
+    if 'board' in opt: boards = (tuple(int(x) for x in opt['board'].split('/')),)  # --board=10/30
     for v in vs:
         A.judge, A.resolve = R2.VARIANTS[v]
-        rng = random.Random(86240)
+        rng = random.Random(int(opt.get('seed', 86240)))
         for N, ticks in boards:
             st, e, es, rd, cb, cs, mb, ms = run(N, ticks, K, rng)
             print(f"{v:8s} {N}x{N} {ticks:2d}t  stuck {100*st:4.1f}%  empty left {e:5.1f}±{es:4.1f} of {N*N}  raids/season {rd:4.1f}  "
