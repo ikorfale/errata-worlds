@@ -1,0 +1,6 @@
+seed 20261014 12x12 45t hh: base -0.69  border2 +1.22  paired diff +1.90±0.38
+seed 20261014 12x12 45t tt: base +0.66  border2 +1.58  paired diff +0.93±0.44
+seed 20261014 12x12 45t cc: base -0.52  border2 +0.74  paired diff +1.25±0.43
+seed 20261014 12x12 45t ht: base +0.88  border2 +1.45  paired diff +0.57±0.44
+seed 20261014 12x12 45t hc: base +0.01  border2 +0.89  paired diff +0.88±0.44
+seed 20261014 12x12 45t tc: base -0.04  border2 +1.41  paired diff +1.45±0.39

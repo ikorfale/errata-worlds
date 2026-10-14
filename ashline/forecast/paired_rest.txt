@@ -1,0 +1,6 @@
+seed 273 10x10 30t tt: base -0.06  border2 +0.68  paired diff +0.74±0.34
+seed 273 10x10 30t hc: base -1.00  border2 +0.10  paired diff +1.10±0.29
+seed 273 10x10 30t tc: base -0.50  border2 +0.33  paired diff +0.82±0.34
+seed 273 12x12 45t tt: base +1.10  border2 +1.58  paired diff +0.47±0.48
+seed 273 12x12 45t hc: base +0.23  border2 +1.87  paired diff +1.65±0.42
+seed 273 12x12 45t tc: base -0.25  border2 +0.78  paired diff +1.03±0.45
