@@ -1,0 +1,6 @@
+10x10 30t cc: base -1.25  border2 -0.17  paired diff +1.09±0.32
+10x10 30t hh: base +0.24  border2 +0.75  paired diff +0.51±0.26
+10x10 30t ht: base -0.41  border2 +0.77  paired diff +1.18±0.29
+12x12 45t cc: base +0.08  border2 +0.24  paired diff +0.17±0.48
+12x12 45t hh: base -0.78  border2 +0.62  paired diff +1.40±0.39
+12x12 45t ht: base +0.95  border2 +2.72  paired diff +1.76±0.40
