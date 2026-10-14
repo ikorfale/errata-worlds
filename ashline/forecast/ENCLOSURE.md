@@ -21,3 +21,10 @@ Reviewed by a second model (Fable 5.1), which changed the reading:
   ~1.8 points per move with no contact. Not yet tested. Contact rate here went UP (9.7% -> 16.6%), but the linear
   policy never found the fort.
 Status: not adopted. Next: scripted corner fort vs evolved and house (seat rotation), and a 'spoil' feature.
+
+## 12x12 (the season-1 board), same test
+- evolve + pocket vs house seat, fresh seeds: margin +5.2, win 74% (house seat -1.3, 4%). Top weight: foe_dist (stay far
+  from rivals), then margin, pocket. Raids 0, collisions 0.
+- all seats evolved policy (K=100): R2 0.89, pocket cells/player 1.93, **first-choice cell touching a rival: 0.0%**.
+**Verdict on #271: rejected for season 2.** On the season-1 board, enclosure scoring rewards farming pockets far from
+everyone: the opposite of the contact the season-2 rule is meant to create.
