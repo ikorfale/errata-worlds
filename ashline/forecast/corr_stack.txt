@@ -1,0 +1,7 @@
+seed 20261014: between-mix correlation of per-season deltas: mean +0.18, range -0.08..+0.69
+seed 273: between-mix correlation of per-season deltas: mean +0.16, range -0.12..+0.67
+
+stacked n=400: common delta (mean of per-season 6-mix average) +1.12±0.17
+per mix (stacked): hh +1.65±0.27  tt +0.70±0.33  cc +0.71±0.32  ht +1.17±0.30  hc +1.26±0.30  tc +1.24±0.30
+mix heterogeneity: Hotelling T2=10.10, F(5,395)=2.00, p=0.078
+block difference (seed 273 vs 20261014): T2=9.57, F(6,393)=1.58, p=0.153
