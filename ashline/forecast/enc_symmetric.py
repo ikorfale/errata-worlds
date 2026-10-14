@@ -16,7 +16,7 @@ def feats(st, name, s, vsets):
     return np.concatenate([E.features(st, name, s, vsets), [after - before]])
 
 N = int(sys.argv[1]); w = np.array(json.load(open(sys.argv[2]))['w']); K = int(sys.argv[3]) if len(sys.argv) > 3 else 120
-players = S.setup(N); rng = random.Random(1014); X, Y, P = [], [], []
+players = S.setup(N); rng = random.Random(1014); X, Y, P = [], [], []; touch_moves = [0, 0]; sizes = {}
 for _ in range(K):
     ps = {n: rng.uniform(0.3, 1.0) for n in list(players) + list(A.HOUSE)}
     st = A.new_state(); A.resolve(st, {n: {'seq': 0, 'cells': [s], 'superseded': []} for n, s in players.items()})
@@ -30,10 +30,15 @@ for _ in range(K):
             v = sorted(vsets[n])
             if not v: continue
             sc = [(feats(st, n, s, vsets) @ w + 1e-6 * rng.random(), s) for s in v]
-            moves[n] = {'seq': 0, 'cells': [s for _, s in sorted(sc, reverse=True)[:2]], 'superseded': []}
+            cells = [s for _, s in sorted(sc, reverse=True)[:2]]
+            touch_moves[1] += 1; touch_moves[0] += any(st['grid'].get(m) not in (None, '#', n) for m in A.nbrs(cells[0]))
+            moves[n] = {'seq': 0, 'cells': cells, 'superseded': []}
         A.resolve(st, moves)
     sc = A.scores(st); pk = EN.sealed(st)
+    for size, cnt in EN.region_sizes(st).items(): sizes[size] = sizes.get(size, 0) + cnt
     for n in players: X.append(att[n]); Y.append(sc[n]); P.append(pk.get(n, 0))
 X, Y = np.array(X, float), np.array(Y, float)
 r = np.corrcoef(X, Y)[0, 1]
 print(f"N={N} cap={EN.CAP} all seats pocket policy, K={K}: R2(score~moves)={r*r:.3f}  mean pocket cells/player {np.mean(P):.2f}  score-moves sd {np.std(Y - X):.2f}")
+print(f"  first-choice cell touches a rival: {touch_moves[0]/touch_moves[1]:.1%} of {touch_moves[1]} player moves")
+print("  single-owner empty regions at tick 14, size:count (any size):", dict(sorted(sizes.items())[:12]))

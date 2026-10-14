@@ -29,6 +29,29 @@ def sealed(st):
                 o = owners.pop(); out[o] = out.get(o, 0) + len(comp)
     return out
 
+def region_sizes(st):
+    """size -> count of single-owner empty regions, no cap (diagnostic for the CAP artefact)."""
+    global CAP
+    c0 = CAP; CAP = 10 ** 9
+    try:
+        g = st['grid']; seen = set(); out = {}
+        for c in range(A.N):
+            for r in range(A.N):
+                s = A.cell(c, r)
+                if g.get(s) is not None or s in seen: continue
+                comp, stack, owners = 0, [s], set(); seen.add(s)
+                while stack:
+                    x = stack.pop(); comp += 1
+                    for m in A.nbrs(x):
+                        v = g.get(m)
+                        if v is None:
+                            if m not in seen: seen.add(m); stack.append(m)
+                        elif v != '#': owners.add(v)
+                if len(owners) == 1: out[comp] = out.get(comp, 0) + 1
+        return out
+    finally:
+        CAP = c0
+
 def scores_enc(st):
     base = _plain(st); add = sealed(st)
     tot = {p: base[p] + add.get(p, 0) for p in base}

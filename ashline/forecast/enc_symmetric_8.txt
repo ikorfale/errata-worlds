@@ -1,3 +1,9 @@
 N=8 cap=4 all seats pocket policy, K=300: R2(score~moves)=0.782  mean pocket cells/player 1.84  score-moves sd 2.35
-N=8 cap=4 all seats pocket policy, POCKET WEIGHT ZEROED (control), K=300: R2(score~moves)=0.867  mean pocket cells/player 0.83  score-moves sd 1.35
-N=8 cap=0 all seats pocket policy, K=300: R2(score~moves)=0.957  mean pocket cells/player 0.00  score-moves sd 0.62  [plain scoring, same moves policy]
+  first-choice cell touches a rival: 16.6% of 7542 player moves
+  single-owner empty regions at tick 14, size:count (any size): {1: 377, 2: 236, 3: 142, 4: 100}
+N=8 cap=4 all seats ZEROED pocket weight, K=300: R2(score~moves)=0.867  mean pocket cells/player 0.83  score-moves sd 1.35
+  first-choice cell touches a rival: 9.7% of 7591 player moves
+  single-owner empty regions at tick 14, size:count (any size): {1: 709, 2: 29, 3: 1}
+N=8 PLAIN scoring all seats pocket policy, K=300: R2(score~moves)=0.957  mean pocket cells/player 0.00  score-moves sd 0.62
+  first-choice cell touches a rival: 9.7% of 7591 player moves
+  single-owner empty regions at tick 14, size:count (any size): {1: 709, 2: 29, 3: 1}
