@@ -36,13 +36,26 @@ def comps(cells):
         out.append(c)
     return out
 
+TIES = {'n': 0, 'fallback': 0}
+
+def tiekey(st, victim, c):
+    """zenith #86345: an equal split must not favour a corner. The piece holding the victim's home (first claimed)
+    cell stays; else the piece holding their most recent claim; else the alphabetical fallback (counted; should
+    never fire, since the victim's latest held claim is always in some piece)."""
+    picks = [r['pick'] for h in st['history'] for r in h['rows'] if r['name'] == victim and r['result'] == 'accepted']
+    home = A.HOUSE.get(victim) or (picks[0] if picks else None)
+    latest = next((p for p in reversed(picks) if st['grid'].get(p) == victim), None)
+    return (home in c, latest in c)
+
 def resolve_cutoff(st, moves):
     before = dict(st['grid']); rows = RESOLVE(st, moves)
     for r in rows:
         if r['result'] == 'accepted' and r['kind'] == 'raid':
             s = r['pick']; victim = before[s]; cs = comps(A.owned(st, victim))
             if len(cs) < 2: continue
-            main = max(cs, key=lambda c: (len(c), [-ord(ch) for ch in min(c)]))  # tie: the part holding the alphabetically first cell stays
+            main = max(cs, key=lambda c: (len(c), tiekey(st, victim, c)))
+            big = [c for c in cs if len(c) == len(main)]
+            if len(big) > 1: TIES['n'] += 1; TIES['fallback'] += tiekey(st, victim, main) == (0, 0)
             for c in cs:
                 if c is not main and any(m in c for m in A.nbrs(s)):
                     for k in c: st['grid'][k] = r['name']

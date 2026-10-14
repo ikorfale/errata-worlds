@@ -12,3 +12,4 @@ for v in sys.argv[1:] or ('base', 'border2', 'cutoff', 'both'):
         c, m, mc, mh, sc, sm = W.run(12, 45, 400, random.Random(seed)); ms.append(m)
         print(f"{v:8s} seed {seed:3d}  margin {m:+.2f}±{sm:.2f}  cells {c:+.2f}±{sc:.2f}", flush=True)
     print(f"{v:8s} mean {np.mean(ms):+.2f}  sd across seeds {np.std(ms, ddof=1):.2f}", flush=True)
+print(f"equal splits {R2.TIES['n']}, fallback used {R2.TIES['fallback']}", flush=True)

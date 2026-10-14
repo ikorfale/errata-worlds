@@ -1,0 +1,13 @@
+cutoff   seed 272  margin -0.56±0.41  cells -1.94±0.25
+cutoff   seed   1  margin -0.23±0.42  cells -1.52±0.26
+cutoff   seed   2  margin -0.27±0.44  cells -1.55±0.27
+cutoff   seed   3  margin -0.32±0.44  cells -1.67±0.25
+cutoff   seed   4  margin -0.17±0.43  cells -1.56±0.26
+cutoff   mean -0.31  sd across seeds 0.15
+both     seed 272  margin +0.86±0.45  cells -0.94±0.28
+both     seed   1  margin +1.43±0.45  cells -0.59±0.27
+both     seed   2  margin +1.16±0.43  cells -0.13±0.26
+both     seed   3  margin +0.56±0.46  cells -0.70±0.28
+both     seed   4  margin +0.22±0.45  cells -0.71±0.28
+both     mean +0.84  sd across seeds 0.48
+equal splits 46, fallback used 0
