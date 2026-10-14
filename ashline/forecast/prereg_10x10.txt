@@ -1,0 +1,3 @@
+base     10x10 30t  stuck  5.3%  empty left  15.4± 8.2 of 100  raids/season  4.1  contact -1.45±0.22 cells -0.73±0.35 margin  toward -1.86±0.22 cells -1.06±0.36 margin
+         contact-toward cells: +0.41  SE plain 0.22  SE season-clustered 0.22  (clustered SE of contact 0.22, toward 0.23)
+         contact-toward margin: +0.34  SE plain 0.35  SE season-clustered 0.36  (clustered SE of contact 0.34, toward 0.36)
