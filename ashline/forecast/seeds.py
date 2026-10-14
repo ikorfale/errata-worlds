@@ -6,7 +6,7 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 import ashline as A, rules2 as R2, who_gains as W
 
-for v in ('base', 'border2', 'cutoff', 'both'):
+for v in sys.argv[1:] or ('base', 'border2', 'cutoff', 'both'):
     A.judge, A.resolve = R2.VARIANTS[v]; ms = []
     for seed in (272, 1, 2, 3, 4):
         c, m, mc, mh, sc, sm = W.run(12, 45, 400, random.Random(seed)); ms.append(m)

@@ -23,7 +23,7 @@ def legal(st, n):
 
 def run(N, ticks, K, rng):
     players = S.setup(N); rows = []; stuck = present = 0; empty = []; raids = 0
-    for _ in range(K):
+    for season in range(K):
         ps = {n: rng.uniform(0.3, 1.0) for n in list(players) + list(A.HOUSE)}
         st = A.new_state(); A.resolve(st, {n: {'seq': 0, 'cells': [s], 'superseded': []} for n, s in players.items()})
         mv = {n: 1 for n in ps}; pol = {n: rng.choice('hct') for n in players}
@@ -44,10 +44,21 @@ def run(N, ticks, K, rng):
         empty.append(N * N - len(st['grid']))
         sc = A.scores(st)
         for n in players:
-            rows.append((mv[n], float(pol[n] == 'c'), float(pol[n] == 't'), sc[n], sc[n] - max(v for k, v in sc.items() if k != n)))
+            rows.append((mv[n], float(pol[n] == 'c'), float(pol[n] == 't'), sc[n], sc[n] - max(v for k, v in sc.items() if k != n), season))
     a = np.array(rows); M = np.column_stack([np.ones(len(a)), a[:, 0], a[:, 1], a[:, 2]])
     cb, cs = W.ols(M, a[:, 3]); mb, ms = W.ols(M, a[:, 4])
+    paired.last = [diff(M, a[:, j], a[:, 5]) for j in (3, 4)]
     return stuck / present, np.mean(empty), np.std(empty), raids / K, cb, cs, mb, ms
+
+def diff(M, y, g):
+    """zenith #86294: contact minus toward from the same regression, SE from the covariance (plain OLS) and
+    clustered by season (CR0 sandwich), since seats in one season share a board and are not independent."""
+    b = np.linalg.lstsq(M, y, rcond=None)[0]; e = y - M @ b; Bi = np.linalg.inv(M.T @ M)
+    V = (e @ e / (len(y) - M.shape[1])) * Bi
+    meat = sum(np.outer(M[g == k].T @ e[g == k], M[g == k].T @ e[g == k]) for k in np.unique(g)); Vc = Bi @ meat @ Bi
+    w = np.array([0, 0, 1, -1.0])
+    return b @ w, np.sqrt(w @ V @ w), np.sqrt(w @ Vc @ w), np.sqrt(Vc[2, 2]), np.sqrt(Vc[3, 3])
+paired = lambda: None
 
 if __name__ == '__main__':
     K = int(sys.argv[1]) if len(sys.argv) > 1 else 150
@@ -61,3 +72,5 @@ if __name__ == '__main__':
             print(f"{v:8s} {N}x{N} {ticks:2d}t  stuck {100*st:4.1f}%  empty left {e:5.1f}±{es:4.1f} of {N*N}  raids/season {rd:4.1f}  "
                   f"contact {cb[2]:+.2f}±{cs[2]:.2f} cells {mb[2]:+.2f}±{ms[2]:.2f} margin  "
                   f"toward {cb[3]:+.2f}±{cs[3]:.2f} cells {mb[3]:+.2f}±{ms[3]:.2f} margin", flush=True)
+            for name, (d, se, sec, scc, sct) in zip(('cells', 'margin'), paired.last):
+                print(f"         contact-toward {name}: {d:+.2f}  SE plain {se:.2f}  SE season-clustered {sec:.2f}  (clustered SE of contact {scc:.2f}, toward {sct:.2f})", flush=True)

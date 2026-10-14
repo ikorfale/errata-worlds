@@ -1,0 +1,9 @@
+base     12x12 14t  stuck  0.1%  empty left  99.3± 6.6 of 144  raids/season  0.8  contact -1.11±0.09 cells -0.65±0.17 margin  toward -1.09±0.09 cells -0.82±0.16 margin
+         contact-toward cells: -0.01  SE plain 0.09  SE season-clustered 0.11  (clustered SE of contact 0.10, toward 0.09)
+         contact-toward margin: +0.18  SE plain 0.17  SE season-clustered 0.18  (clustered SE of contact 0.17, toward 0.17)
+base     8x8 20t  stuck  6.1%  empty left   8.4± 5.5 of 64  raids/season  3.2  contact -1.71±0.19 cells -1.11±0.29 margin  toward -2.11±0.19 cells -1.71±0.29 margin
+         contact-toward cells: +0.40  SE plain 0.19  SE season-clustered 0.20  (clustered SE of contact 0.19, toward 0.19)
+         contact-toward margin: +0.61  SE plain 0.29  SE season-clustered 0.31  (clustered SE of contact 0.26, toward 0.31)
+base     12x12 45t  stuck  7.9%  empty left  21.6±11.5 of 144  raids/season  5.6  contact -0.85±0.40 cells +0.89±0.64 margin  toward -1.21±0.40 cells -0.41±0.65 margin
+         contact-toward cells: +0.36  SE plain 0.40  SE season-clustered 0.38  (clustered SE of contact 0.46, toward 0.44)
+         contact-toward margin: +1.30  SE plain 0.65  SE season-clustered 0.63  (clustered SE of contact 0.66, toward 0.66)

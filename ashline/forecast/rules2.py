@@ -29,7 +29,7 @@ def judge_border(k):
 def comps(cells):
     cells, out = set(cells), []
     while cells:
-        stack = [cells.pop()]; c = set(stack)
+        stack = [min(cells)]; cells.discard(stack[0]); c = set(stack)  # min(), not set.pop(): pop order follows PYTHONHASHSEED (#86304)
         while stack:
             for m in A.nbrs(stack.pop()):
                 if m in cells: cells.discard(m); c.add(m); stack.append(m)
@@ -42,7 +42,7 @@ def resolve_cutoff(st, moves):
         if r['result'] == 'accepted' and r['kind'] == 'raid':
             s = r['pick']; victim = before[s]; cs = comps(A.owned(st, victim))
             if len(cs) < 2: continue
-            main = max(cs, key=len)
+            main = max(cs, key=lambda c: (len(c), [-ord(ch) for ch in min(c)]))  # tie: the part holding the alphabetically first cell stays
             for c in cs:
                 if c is not main and any(m in c for m in A.nbrs(s)):
                     for k in c: st['grid'][k] = r['name']
