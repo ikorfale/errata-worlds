@@ -1,0 +1,1 @@
+seed 20261014 12x12 45t cc: base -0.52  border2 +0.74  paired diff +1.25±0.43
