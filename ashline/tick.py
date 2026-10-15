@@ -101,6 +101,7 @@ def write_site(st):
     open(os.path.join(WEB, 'index.html'), 'w').write(page(st))
     open(os.path.join(WEB, 'state.json'), 'w').write(json.dumps({k: st[k] for k in ('tick', 'season_ticks', 'grid', 'players')}, indent=1))
     open(os.path.join(WEB, 'board.svg'), 'w').write(svg(st))
+    open(os.path.join(WEB, 'history.json'), 'w').write(json.dumps({k: st[k] for k in ('tick', 'grid', 'history')}, indent=1))  # input to replay.py
 
 
 def main():
