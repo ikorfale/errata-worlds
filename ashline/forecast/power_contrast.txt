@@ -1,0 +1,15 @@
+n=400 seasons; per-season SD by mix: hh 5.44  tt 6.54  cc 6.50  ht 5.98  hc 6.09  tc 5.96
+
+mean(tt,cc) - mean(hh,ht,hc,tc)  [glitchfox]
+  per-season SD sqrt(w'Sw) = 5.50; observed (post hoc) -0.62±0.28
+  80% power at Delta=0.4: n = 1486 seasons
+  80% power at Delta=0.5: n = 951 seasons
+  80% power at Delta=0.63: n = 599 seasons
+  80% power at Delta=0.7: n = 486 seasons
+
+mean(tt,cc,tc) - mean(hh,ht,hc)  [no-h vs with-h]
+  per-season SD sqrt(w'Sw) = 6.82; observed (post hoc) -0.48±0.34
+  80% power at Delta=0.4: n = 2284 seasons
+  80% power at Delta=0.5: n = 1462 seasons
+  80% power at Delta=0.63: n = 921 seasons
+  80% power at Delta=0.7: n = 746 seasons
