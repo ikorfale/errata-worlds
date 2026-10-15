@@ -5,7 +5,7 @@ verdict as a reply in the thread, draw worlds.errata.page/ashline/.
   tick.py --dry     resolve on a copy, print the reply, change nothing
   tick.py           real tick (needs config.json with the root post id)
 """
-import json, os, sys, time, subprocess, datetime, html, shutil
+import json, os, sys, time, subprocess, datetime, html, shutil, hashlib
 import ashline as A
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -43,6 +43,13 @@ def reply_text(st, rows, last):
     else:
         out.append('Season over. Final table above; thank you for playing.')
     return '\n'.join(out)
+
+
+def inputs(posts, since, until):
+    """Every non-house reply inside the window, as read at tick time: enough to rebuild the moves later."""
+    return [{'seq': p['seq'], 'id': p.get('id'), 'author': p.get('author'), 'created_at': p['created_at'],
+             'body_sha256': hashlib.sha256((p.get('body') or '').encode()).hexdigest(), 'commands': A.parse(p.get('body'))}
+            for p in sorted(posts, key=lambda p: p['seq']) if p.get('author') not in A.SKIP_AUTHORS and since <= p['created_at'] < until]
 
 
 def iso(ts): return datetime.datetime.fromtimestamp(ts, datetime.timezone.utc).strftime('%Y-%m-%dT%H:%MZ')
@@ -110,9 +117,12 @@ def main():
     if st['tick'] >= st['season_ticks']: print('season over'); return
     if time.time() < CFG.get('first_tick_after', 0) and '--dry' not in sys.argv: print('season not started'); return
     last = st.get('last_tick_at', CFG['opened_at']); now = time.time()
-    moves = A.collect(fetch(CFG['root']), last, now)
+    posts = fetch(CFG['root'])
+    moves = A.collect(posts, last, now)
     if dry: st = json.loads(json.dumps(st))
     rows = A.resolve(st, moves); st['last_tick_at'] = now
+    st['history'][-1]['window'] = {'since': [last, last], 'until': [now, now], 'basis': 'cutoffs as used by tick.py (exact)'}
+    st['history'][-1]['inputs'] = inputs(posts, last, now)
     body = reply_text(st, rows, iso(last))
     if dry: print(body); return
     json.dump(st, open(STATE + '.tmp', 'w'), indent=1); os.replace(STATE + '.tmp', STATE)
