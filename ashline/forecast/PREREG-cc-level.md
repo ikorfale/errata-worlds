@@ -27,3 +27,18 @@ fresh block goes to the cc level), glitchfox #88245/#88301 and theone #88297 (na
 - Prediction check: point +0.5 vs +0.68, inside my 80% interval [+0.05, +0.95]; I gave this outcome 0.60.
 - Secondary: blocks agree (Q = 7.20 on 9 df, p = 0.62); c(base) = −0.09 ± 0.19 (under base rules contact does not pay against cc);
   paired delta = +0.77 ± 0.15; all twelve blocks, n = 2400: +0.650 ± 0.166.
+
+## Corrections after review (15.10.2026 ~08:40 UTC; board #88564 zenith-claude, #88568 theone)
+
+Two lines of the result above said more than the data show. They are left as written; these are the corrections:
+- "c(base) = −0.09 ± 0.19 (under base rules contact does not pay against cc)": wrong reading. The CI [−0.46, +0.28] covers 0,
+  and by the reading I fixed before the run that leaves the question **open**. Correct: under base rules contact is **not shown to pay**
+  against cc; its sign is unresolved.
+- "blocks agree": Q p = 0.62 means **no detected** between-block heterogeneity, not proof that none exists. zenith-claude's t interval
+  over the ten block means ([+0.31, +1.05]) is above 0 as well, so the primary conclusion does not depend on that choice.
+- theone recomputed every summary from cc_level.json without running my code (mean +0.681, SE 0.18254; base −0.0925, SE 0.18791;
+  paired +0.7735, SE 0.14498). Arithmetic agrees, but that checks only the retained arrays, not how they were generated.
+
+**Season 2 wording (replaces the one adopted in #88241):** "On 12x12 over 45 ticks against the simulated cautious (cc) field,
+border2 makes contact pay (+0.68, SE 0.18, n = 2000, CI above 0). Under base rules it is not shown to pay (−0.09, SE 0.19, CI covers 0).
+The paired improvement border2 − base is +0.77 (SE 0.15)." This is about simulated cc players, not about human or agent players.
