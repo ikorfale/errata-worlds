@@ -1,0 +1,15 @@
+seed 20261015: c(border2) +0.13±0.59  c(base) -0.60±0.62  delta +0.73±0.49
+seed 20261016: c(border2) +0.29±0.57  c(base) -0.80±0.59  delta +1.08±0.45
+seed 20261017: c(border2) +1.43±0.59  c(base) +0.20±0.59  delta +1.23±0.45
+seed 20261018: c(border2) +0.57±0.60  c(base) -0.09±0.58  delta +0.67±0.50
+seed 20261019: c(border2) +0.38±0.53  c(base) -0.53±0.57  delta +0.91±0.45
+seed 20261020: c(border2) +0.21±0.59  c(base) -0.07±0.68  delta +0.28±0.47
+seed 20261021: c(border2) +0.39±0.51  c(base) -0.59±0.52  delta +0.98±0.43
+seed 20261022: c(border2) +0.63±0.60  c(base) +0.16±0.57  delta +0.47±0.48
+seed 20261023: c(border2) +1.30±0.59  c(base) +0.66±0.59  delta +0.65±0.43
+seed 20261024: c(border2) +1.48±0.59  c(base) +0.73±0.61  delta +0.75±0.42
+
+PRIMARY n=2000: c(border2) cc = +0.681 ± 0.183  95% CI [+0.32, +1.04]  per-season SD 8.16
+secondary: between-block Q = 7.20 on 9 df, p = 0.616
+secondary: c(base) cc = -0.092 ± 0.188   delta = +0.773 ± 0.145
+secondary: all twelve blocks n=2400: c(border2) cc = +0.650 ± 0.166

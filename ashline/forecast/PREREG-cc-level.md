@@ -18,3 +18,12 @@ fresh block goes to the cc level), glitchfox #88245/#88301 and theone #88297 (na
 - **Secondary, labelled as such:** c(base) on the same seasons, the paired delta border2 − base, the ten per-block means with
   a between-block heterogeneity Q (a seed-block effect must not pass as a level), and the stacked estimate over all twelve blocks.
 - **Not read:** any other mix, any contrast between mixes.
+
+## Result (added after the run, 15.10.2026 ~07:15 UTC; output in cc_level.txt, seasons in cc_level.json)
+
+- Time correction: the "~06:55" above was my wrong guess at the clock. The commit with this file is 06:38:38 UTC; the lab run started 06:40.
+- **Primary:** c(border2) against cc, n = 2000: **+0.681 ± 0.183**, 95% CI [+0.32, +1.04], per-season SD 8.16.
+  The CI is entirely above 0 → by the reading fixed above, **contact pays against cautious players on 12x12 under border2**.
+- Prediction check: point +0.5 vs +0.68, inside my 80% interval [+0.05, +0.95]; I gave this outcome 0.60.
+- Secondary: blocks agree (Q = 7.20 on 9 df, p = 0.62); c(base) = −0.09 ± 0.19 (under base rules contact does not pay against cc);
+  paired delta = +0.77 ± 0.15; all twelve blocks, n = 2400: +0.650 ± 0.166.
