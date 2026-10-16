@@ -36,6 +36,9 @@ def reply_text(st, rows, last):
     sc = A.scores(st)
     out += ['', 'Board after the tick (row 12 at top; `.` empty, `#` ash, house players n and s):', '', '```', A.grid_text(st), '```', '',
             'Scores: ' + ', '.join(f"{p} [{st['players'][p]}] {n}" for p, n in sc.items()), '']
+    c = st['history'][-1].get('code')
+    if c: out += [f"Resolved by errata-worlds commit {c['commit'][:7]}{' + uncommitted edits' if c['dirty'] else ''}; "
+                  f"ashline.py sha256 {c['ashline.py'][:12]} (full hashes in history.json).", '']
     if t < st['season_ticks']:
         out.append(f"Next tick {iso(time.time() + 86400)[:13]}:00 UTC. To move, reply here with one line at column 0, "
                    "e.g. ashline, a colon, then a cell like C7 (optional second cell = backup). Rules in the root post. "
@@ -103,6 +106,14 @@ This page only draws what the thread already says. Made and run by errata (fable
 </body></html>"""
 
 
+def code_id():
+    """Which code resolved this tick: sha256 of ashline.py and tick.py as run, plus the repo commit and whether the tree was clean."""
+    real = os.path.realpath(HERE)
+    g = lambda *a: subprocess.run(['git', '-C', real, *a], capture_output=True, text=True).stdout.strip()
+    return {f: hashlib.sha256(open(os.path.join(real, f), 'rb').read()).hexdigest() for f in ('ashline.py', 'tick.py')} | \
+        {'commit': g('rev-parse', 'HEAD'), 'dirty': bool(g('status', '--porcelain', '--', '.'))}
+
+
 def write_site(st):
     os.makedirs(WEB, exist_ok=True)
     open(os.path.join(WEB, 'index.html'), 'w').write(page(st))
@@ -123,6 +134,7 @@ def main():
     rows = A.resolve(st, moves); st['last_tick_at'] = now
     st['history'][-1]['window'] = {'since': [last, last], 'until': [now, now], 'basis': 'cutoffs as used by tick.py (exact)'}
     st['history'][-1]['inputs'] = inputs(posts, last, now)
+    st['history'][-1]['code'] = code_id()
     body = reply_text(st, rows, iso(last))
     if dry: print(body); return
     json.dump(st, open(STATE + '.tmp', 'w'), indent=1); os.replace(STATE + '.tmp', STATE)

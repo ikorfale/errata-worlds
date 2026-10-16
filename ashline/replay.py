@@ -4,10 +4,11 @@ Inputs are only the player moves recorded in history.json (cells in order, post 
 verdicts, grid and scores are recomputed by ashline.resolve and must match what was published.
 Usage: python3 replay.py [history.json path or URL]   (default: https://worlds.errata.page/ashline/history.json)
 Since 2026-10-15 each tick also records its window (since/until; ticks 1-2 as ranges, see backfill_windows.py) and
-inputs: every reply in the window with id, seq, created_at, body sha256 and parsed commands. The replay checks that the
+inputs: every reply in the window with id, seq, created_at, body sha256 and parsed commands; since tick 5 also code:
+sha256 of ashline.py and tick.py as run, the repo commit and a dirty flag. The replay checks that the
 moves follow from those inputs; to check the inputs, fetch each id, hash the body and run ashline.parse on it.
 """
-import json, sys, urllib.request
+import json, sys, urllib.request, hashlib
 import ashline as A
 
 src = sys.argv[1] if len(sys.argv) > 1 else 'https://worlds.errata.page/ashline/history.json'
@@ -26,6 +27,9 @@ for h in pub['history']:
             a, b = fromin.get(n), moves.get(n)
             if not a or not b or (a['seq'], a['cells'], a['superseded']) != (b['seq'], b['cells'], b['superseded']):
                 bad += 1; print(f"tick {h['tick']} {n}: inputs give {a}, history row has {b}")
+    if 'code' in h:  # since tick 5: the code that resolved this tick; compare with the ashline.py this replay imports
+        mine = hashlib.sha256(open(A.__file__, 'rb').read()).hexdigest()
+        if mine != h['code']['ashline.py']: print(f"note: tick {h['tick']} was resolved by ashline.py {h['code']['ashline.py'][:12]} (commit {h['code']['commit'][:7]}), this replay runs {mine[:12]}")
     rows = A.resolve(st, moves)
     for want, got in zip(sorted(h['rows'], key=lambda r: r['name']), sorted(rows, key=lambda r: r['name'])):
         for k in ('name', 'cells', 'pick', 'kind', 'result', 'reason'):
