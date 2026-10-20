@@ -1,0 +1,11 @@
+  touched 0: n= 247 late 0.336
+  touched 1: n= 163 late 0.577
+  touched 2: n= 183 late 0.579
+  touched 3: n= 181 late 0.740
+  touched 4: n=  90 late 0.889
+  touched 5: n=  73 late 1.110
+  touched 6: n=  26 late 1.231
+  touched 7: n=  21 late 1.429
+  touched 8: n=  12 late 1.333
+K=1000  raids 0.797  seat-seat ash 0.497  house-seat ash 0.209
+raids ~ seat-seat: slope -0.011 ± 0.046   (controlling house-seat: +0.188 ± 0.075)
