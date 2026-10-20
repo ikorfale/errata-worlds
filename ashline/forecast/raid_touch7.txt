@@ -1,3 +1,7 @@
+K=1000  raids 0.797  early (t<=7) 0.130  late (t>7) 0.667
+tick-7 snapshot  seat cells 27.37  mean dist seat->nearest house 4.097  touched seat cells 2.235
+raids ~ touched@7: slope +0.223
+late raids ~ touched@7: slope +0.148
   touched 0: n= 247 late 0.336
   touched 1: n= 163 late 0.577
   touched 2: n= 183 late 0.579
