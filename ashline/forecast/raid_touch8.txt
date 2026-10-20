@@ -1,0 +1,14 @@
+K=1000 SNAP=8  raids 0.797  early (t<=SNAP) 0.212  late (t>SNAP) 0.585
+snapshot  seat cells 31.19  mean dist seat->nearest house 3.907  touched seat cells 2.925
+raids ~ touched@SNAP: slope +0.214
+late raids ~ touched@SNAP: slope +0.120
+  touched 0: n= 179 late 0.246
+  touched 1: n= 104 late 0.519
+  touched 2: n= 196 late 0.398
+  touched 3: n= 162 late 0.611
+  touched 4: n= 133 late 0.707
+  touched 5: n=  86 late 0.756
+  touched 6: n=  70 late 0.743
+  touched 7: n=  31 late 1.452
+  touched 8: n=  19 late 0.789
+  touched 9: n=  12 late 1.667

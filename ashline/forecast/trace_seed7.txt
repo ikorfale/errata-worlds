@@ -1,0 +1,25 @@
+== first season, random.Random(7) ==
+resolve 1 (st.tick 1): seats=4  P1->(4, 6):seed/accepted  P2->(1, 11):seed/accepted  P3->(5, 3):seed/accepted  P4->(8, 1):seed/accepted  n->(2, 2):seed/accepted  s->(9, 9):seed/accepted
+resolve 2 (st.tick 2): seats=8  P1->(4, 5):claim/accepted  P2->(0, 11):claim/accepted  P3->(5, 4):claim/accepted  P4->(8, 0):claim/accepted  n->(1, 2):claim/accepted  s->(8, 9):claim/accepted
+resolve 3 (st.tick 3): seats=12  P1->(3, 6):claim/accepted  P2->(2, 11):claim/accepted  P3->(4, 4):claim/accepted  P4->(7, 0):claim/accepted  n->(1, 1):claim/accepted  s->(7, 9):claim/accepted
+resolve 4 (st.tick 4): seats=16  P1->(3, 5):claim/accepted  P2->(0, 10):claim/accepted  P3->(4, 3):claim/accepted  P4->(7, 1):claim/accepted  n->(2, 1):claim/accepted  s->(6, 9):claim/accepted
+resolve 5 (st.tick 5): seats=18  P1->(3, 4):claim/collision  P2->(1, 10):claim/accepted  P3->(3, 4):claim/collision  P4->(7, 2):claim/accepted  n->(0, 1):claim/accepted  s->(9, 10):claim/accepted
+resolve 6 (st.tick 6): seats=20  P1->(5, 5):claim/collision  P2->(2, 10):claim/accepted  P3->(5, 5):claim/collision  P4->(8, 2):claim/accepted  n->(0, 2):claim/accepted  s->(8, 10):claim/accepted
+resolve 7 (st.tick 7): seats=24  P1->(4, 7):claim/accepted  P2->(2, 9):claim/accepted  P3->(5, 2):claim/accepted  P4->(9, 0):claim/accepted  n->(3, 1):claim/accepted  s->(7, 10):claim/accepted
+resolve 8 (st.tick 8): seats=28  P1->(3, 7):claim/accepted  P2->(1, 9):claim/accepted  P3->(4, 2):claim/accepted  P4->(9, 1):claim/accepted  n->(3, 2):claim/accepted  s->(6, 10):claim/accepted
+
+== K=1000, raid_touch7 stream: mean per resolve index (resolve 1 = seed placement) ==
+resolve  1: seats   4.00  seat collisions 0.000  seat rejects 0.000  house raids 0.000
+resolve  2: seats   7.94  seat collisions 0.063  seat rejects 0.000  house raids 0.000
+resolve  3: seats  11.83  seat collisions 0.109  seat rejects 0.000  house raids 0.000
+resolve  4: seats  15.77  seat collisions 0.050  seat rejects 0.002  house raids 0.007
+resolve  5: seats  19.64  seat collisions 0.087  seat rejects 0.002  house raids 0.035
+resolve  6: seats  23.51  seat collisions 0.075  seat rejects 0.003  house raids 0.054
+resolve  7: seats  27.37  seat collisions 0.101  seat rejects 0.006  house raids 0.034
+resolve  8: seats  31.19  seat collisions 0.091  seat rejects 0.010  house raids 0.082
+resolve  9: seats  35.03  seat collisions 0.078  seat rejects 0.016  house raids 0.062
+resolve 10: seats  38.87  seat collisions 0.092  seat rejects 0.023  house raids 0.045
+resolve 11: seats  42.67  seat collisions 0.081  seat rejects 0.035  house raids 0.089
+resolve 12: seats  46.27  seat collisions 0.112  seat rejects 0.042  house raids 0.241
+resolve 13: seats  50.06  seat collisions 0.129  seat rejects 0.062  house raids 0.022
+resolve 14: seats  53.70  seat collisions 0.141  seat rejects 0.089  house raids 0.126
