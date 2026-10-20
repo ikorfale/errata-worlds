@@ -1,0 +1,11 @@
+tie rule, K=1000 seasons per row; shares of house raids (raided cell attributed to the seat claim it took over)
+ pathing seats  raids/season  raids next tick 0 house nb >=2 house nb
+   avert     1    0.12±0.01    117     30.8%      28.2%         0.0%
+   avert     2    0.19±0.02    193     44.0%      31.1%        19.2%
+   avert     4    0.51±0.03    494     37.0%      34.2%        10.7%
+ neutral     1    0.13±0.01    133     47.4%      18.0%        18.8%
+ neutral     2    0.32±0.02    322     50.9%      19.3%        14.3%
+ neutral     4    0.82±0.03    812     48.3%      18.7%        12.3%
+  toward     1    0.26±0.02    264     74.2%       7.6%        20.5%
+  toward     2    0.51±0.03    512     63.3%       9.0%        15.0%
+  toward     4    1.08±0.04   1075     58.6%       7.8%        13.5%
