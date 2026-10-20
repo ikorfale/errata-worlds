@@ -1,0 +1,6 @@
+K=1000 SNAP=8  early raids/season 0.212  touched@SNAP 2.925
+touched=0: n=179  early raids mean 0.000  seasons with >=1 early raid 0
+seasons with any early raid: 173, of which touched=0 at SNAP: 0
+early raid victims (owner before resolve): house 0  seat 212  none 0  (total 212)
+early-raided cells no longer house-owned at SNAP: 0 of 212
+house raids by resolve index (2 = first move after seeds; his t = index-1): {2: 0, 3: 0, 4: 7, 5: 35, 6: 54, 7: 34, 8: 82, 9: 62, 10: 45, 11: 89, 12: 241, 13: 22, 14: 126}
