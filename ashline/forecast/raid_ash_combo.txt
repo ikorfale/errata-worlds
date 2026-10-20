@@ -1,0 +1,4 @@
+tie rule, neutral seat pathing, 4 seats, K=1000 seasons per row (seed 95199 as raid_diag.py)
+ variant    raids/s  0-delay next tick  ash/s house-seat seat-seat house-house
+hashtie+timing  1.43±0.05    13.1%     17.8%   0.56       0.00      0.56        0.00
+growth+timing  3.71±0.07     2.4%     20.1%   0.61       0.00      0.61        0.00
