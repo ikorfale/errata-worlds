@@ -1,0 +1,6 @@
+tie rule, neutral seat pathing, K=1000 seasons per row; shares of house raids; 95% CI by season bootstrap
+ variant seats  raids/season  raids        next tick       0 house nb
+    base     4    0.80±0.03    797  49.3% [45.9,52.5]  20.4% [17.9,23.0]
+  growth     4    2.14±0.07   2144   4.4% [ 3.4, 5.3]  70.2% [68.2,72.2]
+ hashtie     4    1.17±0.04   1167  24.9% [22.3,27.6]  28.9% [26.5,31.4]
+  timing     4    0.80±0.03    804   7.2% [ 5.5, 9.1]  15.6% [13.1,17.9]
