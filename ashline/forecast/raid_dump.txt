@@ -1,0 +1,11 @@
+K=1000 seasons, avert houses, simul, seed 95199 (raid_ash.py base)
+house-seat collisions: 209 (0.21/season)
+cell at end of the collision tick: {'#': 209}
+same cell at end of season: {'#': 209}
+first example: tick 6, cell I9, before=None
+   ('P1', ['F7', 'E8'], 'F7', 'claim', 'accepted')
+   ('P2', ['I9', 'H10'], 'I9', 'claim', 'collision')
+   ('P3', ['E8', 'B9'], 'E8', 'claim', 'accepted')
+   ('P4', ['K3', 'J4'], 'K3', 'claim', 'accepted')
+   ('house-n', ['A3', 'C4'], 'A3', 'claim', 'accepted')
+   ('house-s', ['I9', 'L9'], 'I9', 'claim', 'collision')

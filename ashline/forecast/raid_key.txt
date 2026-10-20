@@ -1,0 +1,6 @@
+avert houses, raid-first, 4 seats, K=1000, seed 95199 (raid_ash.py)
+      raid key        tick    raids/s  0-delay next tick  hs ash
+        margin       simul  0.80±0.03     0.0%     49.3%    0.21
+        margin seats-first  0.80±0.03    34.3%      7.2%    0.00
+         touch       simul  0.80±0.03     0.0%     49.3%    0.21
+         touch seats-first  0.80±0.03    34.3%      7.2%    0.00
