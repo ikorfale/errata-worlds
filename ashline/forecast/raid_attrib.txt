@@ -1,0 +1,10 @@
+tie
+seats  house raids seat raids  contacts raids/contact   (K=1500)
+    0    0.00±0.00       0.00  0.00±0.00           nan
+raided cell: (ticks since the seat claimed it, house neighbours when claimed) -> []
+    1    0.10±0.01       0.00  0.00±0.00           nan
+raided cell: (ticks since the seat claimed it, house neighbours when claimed) -> [((7, 0), 45), ((1, 1), 36), ((6, 1), 29), ((2, 1), 26), ((3, 1), 18)]
+    2    0.20±0.01       0.00  0.03±0.00          5.71
+raided cell: (ticks since the seat claimed it, house neighbours when claimed) -> [((1, 1), 60), ((7, 0), 54), ((1, 2), 49), ((2, 1), 31), ((3, 1), 23), ((8, 0), 22), ((6, 1), 19), ((5, 0), 13), ((9, 0), 7), ((3, 0), 4)]
+    4    0.54±0.02       0.00  0.07±0.01          7.44
+raided cell: (ticks since the seat claimed it, house neighbours when claimed) -> [((1, 1), 196), ((2, 1), 91), ((1, 2), 84), ((7, 0), 75), ((5, 0), 56), ((6, 0), 51), ((3, 1), 45), ((9, 0), 31), ((3, 0), 22), ((6, 1), 20)]
