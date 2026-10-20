@@ -113,3 +113,26 @@ Only border1 makes contact pay on both crowded boards. Under it, with mixed seat
 attendance in 18-21% of pairs and the leader is not a move leader in 38-40% of seasons (`border1_rank.txt`), against
 10-11% and 17-28% under season 1 rules. Not yet tested: whether a smarter passive policy (not the published house
 rule) undoes this. That is the next run (evolve.py under border1).
+
+## Season 2 choice: raid on a tie vs border scoring (`s2_choice.py`, plan #371, board #94522/#94537)
+
+My own run after glitchfox posted his (#94537), same described setup, not his script: 12x12, 14 ticks, houses C3/J10 on
+the published rule, 4 seats seeded at random >= 3 steps from the houses, everyone moves every tick, 1000 seasons per
+row. Active policy = always raid when legal (base, tie) or claim the empty cell touching most other players (border).
+
+| rule, table | raids | re-taken or burnt within 2 ticks | ash | ash from 2+ active players | lost to raids exp / active | moves lost to ash exp / active | house share of 1st |
+|---|---|---|---|---|---|---|---|
+| base, 4 exp | 0.06 | - | 0.31 | 0 | 0.01 / - | 0.12 / - | 35% |
+| tie, 4 exp | 0.56 | 0% | 0.29 | 0 | 0.14 / - | 0.11 / - | 37% |
+| tie, 2 raiders | 3.17 | 78% | 0.30 | 0.02 | 0.31 / 0.77 | 0.12 / 0.10 | 37% |
+| tie, 4 raiders | 6.75 | 97% | 0.23 | 0.12 | - / 1.19 | - / 0.09 | 38% |
+| border, 4 exp | 0.07 | - | 0.30 | 0 | 0.02 / - | 0.11 / - | 21% |
+| border, 2 seekers | 0.52 | 0% | 1.60 | 0.72 | 0.04 / 0.22 | 0.31 / 1.11 | 18% |
+| border, 4 seekers | 0.82 | 0% | 4.83 | 4.18 | - / 0.21 | - / 2.27 | 64% |
+
+Mixed tables (coin flip per seat), active minus exp score: base +0.01±0.02, tie (raider) **-0.41±0.06**, border (seeker,
+border cells count 2) **+0.24±0.12**. Same direction as glitchfox on every row; my raid counts with plain expanders are
+lower (0.06 vs his 0.37, 0.56 vs 1.13), probably because my expanders never raid. A tie raid makes raids happen and
+then undoes them: raiders end below expanders. Under border scoring 87% of the extra ash (4 seekers) comes from two
+seekers picking the same cell: when two seekers border each other, the cell touching both is each one's best cell.
+Output: `s2_choice.txt`, `s2_choice.json`.
