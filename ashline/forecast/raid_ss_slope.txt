@@ -1,0 +1,8 @@
+K=1000  raids 0.797  seat-seat ash 0.497  house-seat ash 0.209
+raids ~ seat-seat: slope -0.011 ± 0.046   (controlling house-seat: +0.188 ± 0.075)
+needed for glitchfox's gap: -1.57
+  seat-seat ash = 0: n= 624  raids/season 0.795
+  seat-seat ash = 1: n= 284  raids/season 0.806
+  seat-seat ash = 2: n=  69  raids/season 0.855
+  seat-seat ash = 3: n=  17  raids/season 0.647
+  seat-seat ash = 4: n=   6  raids/season 0.333
