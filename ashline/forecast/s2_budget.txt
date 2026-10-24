@@ -1,0 +1,55 @@
+B=6 expiry=0 base   early not-top-attender leader 0.598±0.004  house strictly first 0.002±0.001  ash 0.10±0.01  (K=2000)
+    player moves per tick 3.08 3.10 3.09 3.09 3.08 3.11 1.56 1.20 1.07 0.96 0.91 0.79 0.67 0.58   share in ticks 13-14 0.05
+    tied top 0.979±0.003  P1 strictly first 0.007±0.002
+    win share by seat (p 1.00/0.92/0.50/0.42/0.17/0.08) 0.305 0.310 0.228 0.153 0.004 0.000
+    ash per tick 0.04 0.01 0.01 0.01 0.01 0.02 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00   share in ticks 13-14 0.00
+B=6 expiry=0 base   late  not-top-attender leader 0.503±0.005  house strictly first 0.004±0.001  ash 0.08±0.01  (K=2000)
+    player moves per tick 0.66 0.67 1.14 1.12 1.14 1.17 1.17 1.18 3.03 3.02 2.94 2.86 2.77 2.64   share in ticks 13-14 0.21
+    tied top 0.922±0.006  P1 strictly first 0.063±0.005
+    win share by seat (p 1.00/0.92/0.50/0.42/0.17/0.08) 0.398 0.204 0.201 0.190 0.007 0.000
+    ash per tick 0.00 0.00 0.00 0.01 0.00 0.01 0.00 0.00 0.03 0.01 0.00 0.01 0.00 0.01   share in ticks 13-14 0.10
+B=6 expiry=0 base   half  not-top-attender leader 0.503±0.005  house strictly first 0.004±0.001  ash 0.08±0.01  (K=2000)
+    player moves per tick 0.66 0.67 1.14 1.12 1.14 1.17 1.17 1.18 3.03 3.02 2.94 2.86 2.77 2.64   share in ticks 13-14 0.21
+    tied top 0.922±0.006  P1 strictly first 0.063±0.005
+    win share by seat (p 1.00/0.92/0.50/0.42/0.17/0.08) 0.398 0.204 0.201 0.190 0.007 0.000
+    ash per tick 0.00 0.00 0.00 0.01 0.00 0.01 0.00 0.00 0.03 0.01 0.00 0.01 0.00 0.01   share in ticks 13-14 0.10
+B=6 expiry=0 border early not-top-attender leader 0.621±0.009  house strictly first 0.136±0.008  ash 0.10±0.01  (K=2000)
+    player moves per tick 3.08 3.10 3.09 3.09 3.08 3.11 1.56 1.20 1.07 0.96 0.91 0.79 0.67 0.58   share in ticks 13-14 0.05
+    tied top 0.390±0.011  P1 strictly first 0.171±0.008
+    win share by seat (p 1.00/0.92/0.50/0.42/0.17/0.08) 0.285 0.302 0.238 0.168 0.007 0.000
+    ash per tick 0.04 0.01 0.01 0.01 0.01 0.02 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00   share in ticks 13-14 0.00
+B=6 expiry=0 border late  not-top-attender leader 0.533±0.010  house strictly first 0.139±0.008  ash 0.08±0.01  (K=2000)
+    player moves per tick 0.66 0.67 1.14 1.12 1.14 1.17 1.17 1.18 3.03 3.02 2.94 2.86 2.77 2.64   share in ticks 13-14 0.21
+    tied top 0.366±0.011  P1 strictly first 0.248±0.010
+    win share by seat (p 1.00/0.92/0.50/0.42/0.17/0.08) 0.370 0.221 0.201 0.194 0.012 0.001
+    ash per tick 0.00 0.00 0.00 0.01 0.00 0.01 0.00 0.00 0.03 0.01 0.00 0.01 0.00 0.01   share in ticks 13-14 0.10
+B=6 expiry=0 border half  not-top-attender leader 0.533±0.010  house strictly first 0.139±0.008  ash 0.08±0.01  (K=2000)
+    player moves per tick 0.66 0.67 1.14 1.12 1.14 1.17 1.17 1.18 3.03 3.02 2.94 2.86 2.77 2.64   share in ticks 13-14 0.21
+    tied top 0.366±0.011  P1 strictly first 0.248±0.010
+    win share by seat (p 1.00/0.92/0.50/0.42/0.17/0.08) 0.370 0.221 0.201 0.194 0.012 0.001
+    ash per tick 0.00 0.00 0.00 0.01 0.00 0.01 0.00 0.00 0.03 0.01 0.00 0.01 0.00 0.01   share in ticks 13-14 0.10
+B=6 expiry=1 base   early not-top-attender leader 0.577±0.005  house strictly first 0.004±0.001  ash 0.10±0.01  (K=2000)
+    player moves per tick 3.07 3.12 3.12 1.26 0.94 0.77 0.60 3.09 3.09 3.07 1.27 1.03 0.90 0.74   share in ticks 13-14 0.06
+    tied top 0.977±0.003  P1 strictly first 0.008±0.002
+    win share by seat (p 1.00/0.92/0.50/0.42/0.17/0.08) 0.324 0.328 0.209 0.135 0.004 0.000
+    ash per tick 0.03 0.01 0.01 0.00 0.00 0.00 0.00 0.01 0.00 0.02 0.00 0.00 0.00 0.00   share in ticks 13-14 0.03
+B=6 expiry=1 base   late  not-top-attender leader 0.496±0.005  house strictly first 0.004±0.001  ash 0.07±0.01  (K=2000)
+    player moves per tick 0.64 1.16 1.14 1.13 2.91 2.80 2.65 0.82 1.17 1.20 1.32 2.98 2.86 2.75   share in ticks 13-14 0.22
+    tied top 0.935±0.006  P1 strictly first 0.052±0.005
+    win share by seat (p 1.00/0.92/0.50/0.42/0.17/0.08) 0.393 0.267 0.193 0.144 0.004 0.000
+    ash per tick 0.00 0.00 0.00 0.00 0.03 0.00 0.00 0.00 0.00 0.01 0.00 0.00 0.00 0.01   share in ticks 13-14 0.17
+B=6 expiry=1 base   half  not-top-attender leader 0.496±0.005  house strictly first 0.004±0.001  ash 0.07±0.01  (K=2000)
+    player moves per tick 0.64 1.16 1.14 1.13 2.91 2.80 2.65 0.82 1.17 1.20 1.32 2.98 2.86 2.75   share in ticks 13-14 0.22
+    tied top 0.935±0.006  P1 strictly first 0.052±0.005
+    win share by seat (p 1.00/0.92/0.50/0.42/0.17/0.08) 0.393 0.267 0.193 0.144 0.004 0.000
+    ash per tick 0.00 0.00 0.00 0.00 0.03 0.00 0.00 0.00 0.00 0.01 0.00 0.00 0.00 0.01   share in ticks 13-14 0.17
+B=6 expiry=1 border early not-top-attender leader 0.597±0.009  house strictly first 0.117±0.007  ash 0.10±0.01  (K=2000)
+    player moves per tick 3.07 3.12 3.12 1.26 0.94 0.77 0.60 3.09 3.09 3.07 1.27 1.03 0.90 0.74   share in ticks 13-14 0.06
+    tied top 0.385±0.011  P1 strictly first 0.185±0.009
+    win share by seat (p 1.00/0.92/0.50/0.42/0.17/0.08) 0.304 0.314 0.208 0.167 0.007 0.000
+    ash per tick 0.03 0.01 0.01 0.00 0.00 0.00 0.00 0.01 0.00 0.02 0.00 0.00 0.00 0.00   share in ticks 13-14 0.03
+B=6 expiry=1 border late  not-top-attender leader 0.509±0.010  house strictly first 0.122±0.007  ash 0.07±0.01  (K=2000)
+    player moves per tick 0.64 1.16 1.14 1.13 2.91 2.80 2.65 0.82 1.17 1.20 1.32 2.98 2.86 2.75   share in ticks 13-14 0.22
+    tied top 0.381±0.011  P1 strictly first 0.264±0.010
+    win share by seat (p 1.00/0.92/0.50/0.42/0.17/0.08) 0.394 0.272 0.191 0.136 0.007 0.000
+    ash per tick 0.00 0.00 0.00 0.00 0.03 0.00 0.00 0.00 0.00 0.01 0.00 0.00 0.00 0.01   share in ticks 13-14 0.17

@@ -38,3 +38,29 @@ construction, and expiry rows did not give houses the weekly budget. Both fixed 
 hold/spend; now a one-way release (per week under expiry), as the policy was written. Round 3 found one:
 criterion 2 on a tie-split share passes through ties; restated on strict wins plus a tie cap, outputs added.
 No round 4: the round-3 change only adds two outputs and rewords a criterion; said here rather than hidden.
+
+## Result (run after ffba336, `s2_budget.txt`, K=2000, seed 2410)
+
+    row (B=6)               not-top-attender  tied top  P1 strictly first  house first  13-14 move share  ash/season
+    base   early            0.598±0.004       0.979     0.007              0.002        0.05              0.10
+    base   late             0.503±0.005       0.922     0.063              0.004        0.21              0.08
+    border early            0.621±0.009       0.390     0.171              0.136        0.05              0.10
+    border late             0.533±0.010       0.366     0.248              0.139        0.21              0.08
+    expiry base early       0.577±0.005       0.977     0.008              0.004        0.06              0.10
+    expiry border early     0.597±0.009       0.385     0.185              0.117        0.06              0.10
+
+- Criterion 1 passes everywhere, criterion 2 **fails** on the decision row base/early: the top is tied in 0.979 of
+  seasons. With a budget and contact-free play every seat that can spend 6 moves ends on 6 cells. **A budget under
+  season 1 scoring is not adopted**: it does not let choices decide, it turns the season into a draw.
+- Not the pre-registered decision row, so a lead and not a result: border/early meets both criteria (tied 0.390,
+  P1 strictly first 0.171), house strictly first 0.136. Budget plus border scoring is the candidate for the next
+  pre-registered test.
+- zenith's pile-up: late rows put 0.21-0.22 of player moves into ticks 13-14 (prediction < 0.30: right) and ash
+  stays <= 0.10 per season (prediction < 0.5: right). Late spending is spread over ticks 9-14 by the one-move cap.
+- Expiry changes the primary statistic by 0.021 (early base) and 0.024 (early border): prediction < 0.05, right.
+  Not needed under the one-move rule.
+- Found in the output, not predicted: holding moves costs the irregular seats. Under late timing P2 (p=0.92) is
+  released at tick 9 with 6 moves and 6 ticks, misses about one in twelve, and its win share falls 0.310 -> 0.204
+  (base) while P1's rises 0.305 -> 0.398. "late" and "half" rows are identical because seats with p <= 0.42 are
+  released at tick 1 (0.42 x 14 <= 6) and P3 at tick 3 either way, so "half" differs from "late" only for seats
+  whose late rule already equals early.
