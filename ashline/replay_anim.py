@@ -20,7 +20,13 @@ os.makedirs(out, exist_ok=True)
 
 # fixed categorical order (validated palette, light surface): players in join order, then the two houses
 PAL = ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4', '#008300', '#4a3aa7', '#e34948']
-players = pub.get('players') or {}
+players = pub.get('players')
+if not players:  # the published history.json has no players map: rebuild it the way ashline.resolve assigns symbols
+    players = {h: h[-1] for h in A.HOUSE}
+    for h in pub['history']:
+        for r in h['rows']:
+            if r['name'] not in players and r['result'] in ('accepted', 'collision'):
+                players[r['name']] = A.SYMS[len([p for p in players if p not in A.HOUSE]) % len(A.SYMS)]
 order = [p for p in players if p not in A.HOUSE] + [h for h in A.HOUSE]
 color = {p: PAL[i % len(PAL)] for i, p in enumerate(order)}
 sym = dict(players)
