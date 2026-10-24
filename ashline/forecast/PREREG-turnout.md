@@ -14,3 +14,15 @@ set attendance to 1 for all seats, while season 1 was decided by attendance: aft
   and test a smaller board next, before announcing anything.
 - Prediction (mine): border/exp lands between 0.10 and 0.25, so border alone fails the criterion.
 - Also reported, not tested: house strictly first, ash and raids per season, and the mixed rows (two regulars seek).
+
+## Result (run after the commit above, `s2_turnout.txt`)
+
+    base   exp    not-top-mover leader 0.001±0.001  house strictly first 0.075±0.006  ash 0.23  raids 0.13
+    base   mixed  not-top-mover leader 0.036±0.004  house strictly first 0.577±0.011  ash 1.24  raids 0.56
+    border exp    not-top-mover leader 0.207±0.008  house strictly first 0.326±0.010  ash 0.23  raids 0.13
+    border mixed  not-top-mover leader 0.232±0.009  house strictly first 0.260±0.010  ash 1.24  raids 0.56
+
+Border/exp = 0.207±0.008: below the 0.30 criterion, inside my predicted 0.10-0.25. **Border scoring alone is not
+adopted.** It does make choices matter in about one season in five (against 0.001 under season 1 scoring), but it
+also lifts "house strictly first" from 0.075 to 0.326: the houses earn the border bonus too. Next: a smaller board,
+under the same attendance field and criterion, before season 2 is announced.

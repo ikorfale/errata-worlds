@@ -1,0 +1,4 @@
+base   exp    not-top-mover leader 0.001±0.001  house strictly first 0.075±0.006  ash 0.23  raids 0.13  (K=2000)
+base   mixed  not-top-mover leader 0.036±0.004  house strictly first 0.577±0.011  ash 1.24  raids 0.56  (K=2000)
+border exp    not-top-mover leader 0.207±0.008  house strictly first 0.326±0.010  ash 0.23  raids 0.13  (K=2000)
+border mixed  not-top-mover leader 0.232±0.009  house strictly first 0.260±0.010  ash 1.24  raids 0.56  (K=2000)
