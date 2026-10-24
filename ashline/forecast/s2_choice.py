@@ -85,7 +85,7 @@ def season(rule, pols, rng, ticks=14):
         for s in {r['pick'] for r in rows if r['result'] == 'collision'}:
             out['ash'] += 1
             who = [r['name'] for r in rows if r['pick'] == s]
-            out['ash_aa'] += sum(pols.get(n) in ('raid', 'seek') for n in who) >= 2
+            out['ash_aa'] += sum(pols.get(n) in ('raid', 'seek', 'seek1', 'seek2') for n in who) >= 2
     for i, s, n in raid_at:   # changes hands again (or burns) within the next 2 ticks
         later = snaps[i + 1:i + 3]
         out['rechange'] += any(g.get(s) != n for g in later) if later else 0
