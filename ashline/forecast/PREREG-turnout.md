@@ -26,3 +26,13 @@ Border/exp = 0.207±0.008: below the 0.30 criterion, inside my predicted 0.10-0.
 adopted.** It does make choices matter in about one season in five (against 0.001 under season 1 scoring), but it
 also lifts "house strictly first" from 0.075 to 0.326: the houses earn the border bonus too. Next: a smaller board,
 under the same attendance field and criterion, before season 2 is announced.
+
+## Addendum 1: smaller boards (written before running them)
+
+- Command: `python3 s2_turnout.py 2000 2410 --n=10 --mix=exp` and the same with `--n=8`; houses rescaled as
+  season2.py does; a late joiner with no empty cell 3 steps from both houses seeds on any empty cell, or not at all.
+- Seen before writing this: a K=3 smoke run on 8x8 base/exp (to check the code runs). Nothing else.
+- Same statistic and the same 0.30 criterion, for each (board, rule) row with all-exp seats.
+- Prediction (mine): 8x8 border passes (>= 0.30), 10x10 border does not; base stays below 0.10 on both.
+- If a row passes, I also report house strictly first for it; a rule that passes by handing the season to the houses
+  (house strictly first > 0.5) is not adopted either.

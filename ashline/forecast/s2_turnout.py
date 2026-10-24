@@ -12,7 +12,8 @@ Per row, K seasons:
   primary  - share of seasons where the top-scoring player seat is not a top-mover among player seats
              (ties split: a tied top counts as the fraction of top seats that are not top movers)
   also     - house strictly first (top house score > every player seat), ash per season, raids per season
-Usage: python3 s2_turnout.py [K] [seed]"""
+Board size: --n=N rescales the board and the two house cells as season2.py does (default 12).
+Usage: python3 s2_turnout.py [K] [seed] [--n=N] [--rules=base,border] [--mix=exp,mixed]"""
 import sys, random
 import numpy as np
 import s2_choice as C
@@ -33,6 +34,8 @@ def season(rule, pols, rng, ticks=14):
             if not A.owned(st, n):
                 ok = [A.cell(c, r) for c in range(A.N) for r in range(A.N)
                       if st['grid'].get(A.cell(c, r)) is None and all(abs(c - hc) + abs(r - hr) >= 3 for hc, hr in houses)]
+                ok = ok or [A.cell(c, r) for c in range(A.N) for r in range(A.N) if st['grid'].get(A.cell(c, r)) is None]
+                if not ok: continue  # a late joiner on a full board cannot seed
                 cells = [rng.choice(ok)]
             else:
                 cells = C.policy(st, n, pols[n], rng)
@@ -62,8 +65,15 @@ def row(rule, mix, K, seed):
 
 
 if __name__ == '__main__':
-    K = int(sys.argv[1]) if len(sys.argv) > 1 else 1000
-    seed = int(sys.argv[2]) if len(sys.argv) > 2 else 2410
-    for rule in ('base', 'border'):
-        for mix in ('exp', 'mixed'):
+    opt = dict(a[2:].split('=', 1) for a in sys.argv[1:] if a.startswith('--'))
+    pos = [a for a in sys.argv[1:] if not a.startswith('--')]
+    K = int(pos[0]) if len(pos) > 0 else 1000
+    seed = int(pos[1]) if len(pos) > 1 else 2410
+    n = int(opt.get('n', 12))
+    if n != 12:
+        import season2
+        A.N = n; A.HOUSE.update({h: season2.scale(s, n) for h, s in season2.HOUSE1.items()})
+        print(f'board {n}x{n}, houses {A.HOUSE}', flush=True)
+    for rule in opt.get('rules', 'base,border').split(','):
+        for mix in opt.get('mix', 'exp,mixed').split(','):
             row(rule, mix, K, seed)
