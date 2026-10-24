@@ -1,0 +1,8 @@
+k=0 seek1 seats: ash 1.50±0.04  seek2 18.53
+k=1 seek1 seats: ash 1.20±0.04  seek1 21.06  seek2 18.74
+k=2 seek1 seats: ash 1.71±0.04  seek1 19.19  seek2 19.04
+k=3 seek1 seats: ash 2.89±0.05  seek1 17.23  seek2 19.40
+k=4 seek1 seats: ash 4.87±0.06  seek1 15.39
+rest point (random reseating): seek1 share q*=0.395 (seek2 0.605), D(0)=+2.53 D(1)=-4.01, E ash at q* 1.75
+bootstrap 400 (seasons resampled within each row): q* SE 0.009, E ash SE 0.028
+297.46 s
