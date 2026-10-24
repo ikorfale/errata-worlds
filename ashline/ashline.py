@@ -26,6 +26,7 @@ import json, re, hashlib
 N = 12
 COLS = 'ABCDEFGHIJKL'
 HOUSE = {'house-n': 'C3', 'house-s': 'J10'}
+SEASON2 = {'budget': 6, 'border': True, 'tie': True}  # board 101649/101655, errata-worlds 7d55292
 SYMS = 'ABCDEFGHJKMNPQRTUVWXYZ'  # players; house gets n/s; '.' empty, '#' ash
 MOVE = re.compile(r'^ashline\s*:\s*([A-La-l])(1[0-2]|[1-9])(?:\s+([A-La-l])(1[0-2]|[1-9]))?\s*$', re.I)
 SKIP_AUTHORS = {'fable-terminal'}
@@ -69,8 +70,12 @@ def collect(posts, since, until):
     return got
 
 
-def new_state():
-    return {'tick': 0, 'season_ticks': 14, 'grid': {}, 'players': {'house-n': 'n', 'house-s': 's'}, 'history': []}
+def new_state(rules=None):
+    """A new season. rules=SEASON2 switches on budget, border score and tie key; a season always starts from an
+    empty history, so nothing from an earlier season counts against a budget or a tie (Fable review 24.10)."""
+    st = {'tick': 0, 'season_ticks': 14, 'grid': {}, 'players': {'house-n': 'n', 'house-s': 's'}, 'history': []}
+    if rules: st['rules'] = dict(rules)
+    return st
 
 
 def owned(st, name): return [k for k, v in st['grid'].items() if v == name]
@@ -112,12 +117,24 @@ def house_move(st, name):
     return [s for _, s in best[:2]]
 
 
+def spent(st, name):
+    """Season 2 budget for players: moves used = past ticks where this player's move was picked (accepted or turned
+    to ash); a line whose cells were all invalid costs nothing. Houses move on ticks 1 to budget, as in the simulator."""
+    return sum(r['name'] == name and r['result'] in ('accepted', 'collision') for h in st['history'] for r in h['rows'])
+
+
 def resolve(st, moves):
     """moves: {name: {'seq', 'cells', 'superseded'}}; house moves are added here. Returns verdict rows."""
-    for h in HOUSE: moves.setdefault(h, {'seq': None, 'cells': house_move(st, h), 'superseded': []})
+    B = st.get('rules', {}).get('budget')
+    for h in HOUSE:
+        if not (B and st['tick'] >= B): moves.setdefault(h, {'seq': None, 'cells': house_move(st, h), 'superseded': []})
     rows, target = [], {}
     for name in sorted(moves):
         mv = moves[name]; pick, why = None, []
+        if B and spent(st, name) >= B:
+            rows.append({'name': name, 'seq': mv['seq'], 'id': mv.get('id'), 'cells': mv['cells'], 'superseded': mv['superseded'],
+                         'pick': None, 'kind': None, 'reason': f'budget spent: {B} of {B} moves used', 'result': 'rejected'})
+            continue
         for s in mv['cells']:
             ok, kind, reason = judge(st, name, s)
             if ok: pick = (s, kind, reason); break
@@ -142,8 +159,35 @@ def resolve(st, moves):
     return rows
 
 
+def foes(st, name, s): return sum(st['grid'].get(m) not in (None, '#', name) for m in nbrs(s))
+def points(st, p):
+    """Season 1: cells owned. Season 2 (rules.border): a cell touching another player's cell scores 2."""
+    mine = owned(st, p)
+    return len(mine) + (sum(foes(st, p, s) > 0 for s in mine) if st.get('rules', {}).get('border') else 0)
+
+
 def scores(st):
-    return {p: len(owned(st, p)) for p in sorted(st['players'], key=lambda p: (-len(owned(st, p)), p))}
+    return {p: points(st, p) for p in sorted(st['players'], key=lambda p: (-points(st, p), p))}
+
+
+def tie_key(st, p):
+    """Season 2 tie rule among players level on score: 1) fewest own picked moves that turned to ash,
+    2) most border cells (own cells touching another player), 3) most open frontier: distinct empty cells
+    (neither owned nor ash) orthogonally next to own cells, each counted once per player."""
+    ash = sum(r['name'] == p and r['result'] == 'collision' for h in st['history'] for r in h['rows'])
+    mine = owned(st, p)
+    return (-ash, sum(foes(st, p, s) > 0 for s in mine), len({m for s in mine for m in nbrs(s) if st['grid'].get(m) is None}))
+
+
+def winners(st, among=None):
+    """Top score among `among` (default: every player but the houses); season 2 applies tie_key, a tie that
+    survives all three steps is a shared win."""
+    names = [p for p in (among or st['players']) if among or p not in HOUSE]
+    if not names: return []
+    sc = {p: points(st, p) for p in names}; top = max(sc.values()); tops = sorted(p for p in names if sc[p] == top)
+    if not st.get('rules', {}).get('tie') or len(tops) == 1: return tops
+    best = max(tie_key(st, p) for p in tops)
+    return [p for p in tops if tie_key(st, p) == best]
 
 
 def grid_text(st):
@@ -175,6 +219,22 @@ def _test():
     assert judge(st, 'zed', 'E6')[1] == 'claim' and not judge(st, 'zed', 'E5')[0]    # ash
     full = new_state(); full['grid'] = {cell(c, r): 'amy' for c in range(N) for r in range(N)}
     assert house_move(full, 'house-n') == [], 'house bot with no cells on a full board passes instead of crashing (season2 sim 13.10)'
+    s2 = new_state(SEASON2)
+    for t in range(8):
+        rows = resolve(s2, {'amy': {'seq': t, 'cells': ['A1'] if t == 0 else [c for c in ('A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8') if s2['grid'].get(c) is None][:1], 'superseded': []},
+                            'bob': {'seq': t, 'cells': ['Z9'] if False else ['L12'] if t == 0 else ['A1'], 'superseded': []}})
+    assert spent(s2, 'amy') == 6 and len(owned(s2, 'amy')) == 6, (spent(s2, 'amy'), owned(s2, 'amy'))
+    assert [r['reason'] for r in rows if r['name'] == 'amy'] == ['budget spent: 6 of 6 moves used']
+    assert spent(s2, 'bob') == 1, 'bob: seed, then 7 invalid lines that cost nothing'
+    assert spent(s2, 'house-n') == 6 and spent(s2, 'house-s') == 6 and len(s2['history'][-1]['rows']) == 2, 'houses stop after 6'
+    b = new_state(SEASON2); b['players'].update(amy='A', bob='B', cy='C')
+    b['grid'] = {'E5': 'amy', 'E6': 'bob', 'H8': 'cy', 'H9': 'cy', 'A1': '#', 'A2': 'cy'}
+    assert points(b, 'amy') == 2 and points(b, 'bob') == 2 and points(b, 'cy') == 3, scores(b)
+    assert winners(b) == ['cy'] and winners(b, ['amy', 'bob']) == ['amy', 'bob'], 'ash 0-0, border 1-1, frontier 3-3: shared'
+    b['grid']['F6'] = '#'
+    assert tie_key(b, 'bob')[2] == 2 and winners(b, ['amy', 'bob']) == ['amy'], 'ash next to bob is not frontier'
+    b['history'] = [{'rows': [{'name': 'amy', 'result': 'collision'}]}]
+    assert winners(b, ['amy', 'bob']) == ['bob'], 'ash step comes first'
     print('ashline: ok')
 
 

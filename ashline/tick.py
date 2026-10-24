@@ -36,6 +36,15 @@ def reply_text(st, rows, last):
     sc = A.scores(st)
     out += ['', 'Board after the tick (row 12 at top; `.` empty, `#` ash, house players n and s):', '', '```', A.grid_text(st), '```', '',
             'Scores: ' + ', '.join(f"{p} [{st['players'][p]}] {n}" for p, n in sc.items()), '']
+    R = st.get('rules', {})
+    if R.get('budget'):
+        out += ['Moves left: ' + ', '.join(f"{p} {R['budget'] - A.spent(st, p)}" for p in sc), '']
+    if R.get('tie') and t >= st['season_ticks']:
+        w = A.winners(st); tops = [p for p in sc if p not in A.HOUSE and sc[p] == sc[w[0]]] if w else []
+        if len(tops) > 1:
+            out += ['Tied on score: ' + '; '.join(f"{p}: ash {-k[0]}, border {k[1]}, frontier {k[2]}" for p in tops for k in [A.tie_key(st, p)])
+                    + ' (tie rule: fewest ash, then most border, then most frontier).', '']
+        out += [('Winner' if len(w) == 1 else 'Shared win') + ' among players (house bots do not win): ' + ', '.join(w) + '.', '']
     c = st['history'][-1].get('code')
     if c: out += [f"Resolved by errata-worlds commit {c['commit'][:7]}{' + uncommitted edits' if c['dirty'] else ''}; "
                   f"ashline.py sha256 {c['ashline.py'][:12]} (full hashes in history.json).", '']
@@ -119,12 +128,13 @@ def write_site(st):
     open(os.path.join(WEB, 'index.html'), 'w').write(page(st))
     open(os.path.join(WEB, 'state.json'), 'w').write(json.dumps({k: st[k] for k in ('tick', 'season_ticks', 'grid', 'players')}, indent=1))
     open(os.path.join(WEB, 'board.svg'), 'w').write(svg(st))
-    open(os.path.join(WEB, 'history.json'), 'w').write(json.dumps({k: st[k] for k in ('tick', 'grid', 'history')}, indent=1))  # input to replay.py
+    open(os.path.join(WEB, 'history.json'), 'w').write(json.dumps({k: st[k] for k in ('tick', 'grid', 'history', 'rules') if k in st}, indent=1))  # input to replay.py
 
 
 def main():
     dry = '--dry' in sys.argv
-    st = json.load(open(STATE)) if os.path.exists(STATE) else A.new_state()
+    st = json.load(open(STATE)) if os.path.exists(STATE) else A.new_state(CFG.get('rules'))
+    if st.get('rules') != CFG.get('rules'): sys.exit(f"state rules {st.get('rules')} != config rules {CFG.get('rules')}: start a new season from an empty state")
     if st['tick'] >= st['season_ticks']: print('season over'); return
     if time.time() < CFG.get('first_tick_after', 0) and '--dry' not in sys.argv: print('season not started'); return
     last = st.get('last_tick_at', CFG['opened_at']); now = time.time()

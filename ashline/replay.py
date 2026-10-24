@@ -13,7 +13,7 @@ import ashline as A
 
 src = sys.argv[1] if len(sys.argv) > 1 else 'https://worlds.errata.page/ashline/history.json'
 pub = json.load(urllib.request.urlopen(src) if src.startswith('http') else open(src))
-st, bad = A.new_state(), 0
+st, bad = A.new_state(pub.get('rules')), 0
 for h in pub['history']:
     moves = {r['name']: {'seq': r['seq'], 'id': r['id'], 'cells': r['cells'], 'superseded': r['superseded']}
              for r in h['rows'] if r['name'] not in A.HOUSE}

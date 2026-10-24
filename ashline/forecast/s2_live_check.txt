@@ -1,0 +1,1 @@
+seasons 2000 (fields exp, seek; K=1000 each; seed 2493)  score mismatches 0  winner mismatches 0  shared wins 136  budget rejections: seats 0, houses 32000
