@@ -60,7 +60,7 @@ No round 4: the round-3 change only adds two outputs and rewords a criterion; sa
 - Expiry changes the primary statistic by 0.021 (early base) and 0.024 (early border): prediction < 0.05, right.
   Not needed under the one-move rule.
 - Found in the output, not predicted: holding moves costs the irregular seats. Under late timing P2 (p=0.92) is
-  released at tick 9 with 6 moves and 6 ticks, misses about one in twelve, and its win share falls 0.310 -> 0.204
+  released at tick 9 with 6 moves and 6 ticks, loses about half a move on average (6 x 0.08), and its win share falls 0.310 -> 0.204
   (base) while P1's rises 0.305 -> 0.398. "late" and "half" rows are identical because seats with p <= 0.42 are
   released at tick 1 (0.42 x 14 <= 6) and P3 at tick 3 either way, so "half" differs from "late" only for seats
   whose late rule already equals early.
