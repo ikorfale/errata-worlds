@@ -3,7 +3,9 @@ every such cell also touches its own territory, so the bordering foe sees it as 
 into ash (border act4: ash 4.83, seeker-seeker ash 4.18 per season in s2_choice.txt).
 'seek2': drop candidates that are in the argmax set of any bordering foe's seek candidates (assuming every foe seeks);
 claim the best remaining one; if none remains, play the house-rule claim order (exp).
-Rerun of the border rule with the same harness, seeds and seasons as s2_choice.py, seek vs seek2.
+Rerun of the border rule with the same harness as s2_choice.py, seek vs seek2; each row restarts the rng at the same
+seed, but the policies draw different numbers, so rows are not paired past the first season.
+Mixed rows (seek1 vs seek2 at one table) test the level-k worry: seek2 yields to cells a seek1 would take.
 Usage: python3 s2_seek2.py [seasons]"""
 import sys, os, random
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -47,9 +49,26 @@ def run(act, mix, K, seed=94537):
     act_sc = np.mean([o['score'][n] for o in R for n in o['pols'] if o['pols'][n] == act])
     return f"{act:6} {mix:5} raids {m('raids'):5.2f} ash {m('ash'):5.2f} ash-aa {m('ash_aa'):5.2f} house-win {m('house_win'):4.0%} act-score {act_sc:5.2f} act-exp {pay[0]:+.2f}±{pay[1]:.2f}"
 
+def run_mixed(seats, K, seed=94537):
+    """seek1 and seek2 at one table; seats rotate each season so no policy keeps a seat."""
+    import numpy as np
+    rng = random.Random(seed); R = []; sc = {'seek1': [], 'seek2': []}; d = []
+    names = ('P1', 'P2', 'P3', 'P4')
+    for i in range(K):
+        pols = {names[(k + i) % 4]: seats[k] for k in range(4)}
+        o = S.season('border', pols, rng); R.append(o)
+        per = {p: [o['score'][n] for n in pols if pols[n] == p] for p in ('seek1', 'seek2')}
+        for p in per: sc[p] += per[p]
+        d.append(np.mean(per['seek2']) - np.mean(per['seek1']))
+    m = lambda key: np.mean([o[key] for o in R])
+    return (f"mixed {'+'.join(seats)} ash {m('ash'):5.2f} ash-aa {m('ash_aa'):5.2f} house-win {m('house_win'):4.0%} "
+            f"seek1 {np.mean(sc['seek1']):5.2f} seek2 {np.mean(sc['seek2']):5.2f} seek2-seek1 {np.mean(d):+.2f}±{np.std(d, ddof=1) / np.sqrt(K):.2f}")
+
 if __name__ == '__main__':
     K = int(sys.argv[1]) if len(sys.argv) > 1 else 400
-    print(f"border rule, 12x12, 14 ticks, K={K} seasons per row, seed 94537 per row (paired across policies)")
+    print(f"border rule, 12x12, 14 ticks, K={K} seasons per row, rng restarted at seed 94537 per row (not paired past season 1)")
     for mix in ('act2', 'act4', 'coin'):
         for act in ('seek1', 'seek2'):
             print(run(act, mix, K), flush=True)
+    for mix in (('seek1', 'seek2', 'seek2', 'seek2'), ('seek1', 'seek1', 'seek2', 'seek2'), ('seek1', 'seek1', 'seek1', 'seek2')):
+        print(run_mixed(mix, K), flush=True)

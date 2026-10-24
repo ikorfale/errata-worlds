@@ -1,7 +1,10 @@
-border rule, 12x12, 14 ticks, K=1000 seasons per row, seed 94537 per row (paired across policies)
+border rule, 12x12, 14 ticks, K=1000 seasons per row, rng restarted at seed 94537 per row (not paired past season 1)
 seek1  act2  raids  0.47 ash  1.59 ash-aa  0.72 house-win  19% act-score 19.12 act-exp +0.15±0.09
 seek2  act2  raids  0.25 ash  0.84 ash-aa  0.12 house-win  18% act-score 18.84 act-exp +0.51±0.08
 seek1  act4  raids  0.81 ash  4.90 ash-aa  4.21 house-win  66% act-score 15.30 act-exp +nan±0.00
 seek2  act4  raids  0.56 ash  1.52 ash-aa  1.05 house-win  22% act-score 18.50 act-exp +nan±0.00
 seek1  coin  raids  0.46 ash  1.85 ash-aa  1.04 house-win  22% act-score 18.11 act-exp +0.53±0.12
 seek2  coin  raids  0.33 ash  0.94 ash-aa  0.29 house-win  20% act-score 18.70 act-exp +0.51±0.10
+mixed seek1+seek2+seek2+seek2 ash  1.20 ash-aa  0.70 house-win  17% seek1 21.06 seek2 18.74 seek2-seek1 -2.32±0.12
+mixed seek1+seek1+seek2+seek2 ash  1.71 ash-aa  1.16 house-win  18% seek1 19.19 seek2 19.04 seek2-seek1 -0.15±0.10
+mixed seek1+seek1+seek1+seek2 ash  2.89 ash-aa  2.36 house-win  31% seek1 17.23 seek2 19.40 seek2-seek1 +2.17±0.11
