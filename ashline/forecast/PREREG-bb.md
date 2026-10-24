@@ -35,3 +35,25 @@ Review before freezing: Fable, blocking-only. Round 1 found one: one rng stream 
 focal rows were not common-random-number pairs (estimate and SE still valid). Fixed: per-season streams as above.
 Round 2 found one: arng.choice consumed a board-dependent number of words, so attendance could drift out of step
 after tick 2. Fixed: two uniforms per seat per tick, always drawn; the seed index uses the second.
+
+## Result (run after 2c5ff75, `s2_bb.txt`, K=2000, seed 2493)
+
+    decision row (early)          tied raw  tied after rule  P1 strictly first  not-top-attender  house first  ash
+    field exp,  P1 exp            0.398     0.356 FAIL       0.160              0.643             0.124        0.11
+    field seek, P1 seek           0.266     0.148            0.189              0.704             0.205        0.98
+
+    choice (paired, focal seat's win share)     field exp          field seek
+    P1  seek - exp                              +0.247±0.009       +0.020±0.010
+    P3  seek - exp                              +0.274±0.009       +0.102±0.009
+
+- **Not adopted under the frozen rule.** The field-seek row passes all four criteria; the field-exp row fails
+  criterion 1: when nobody plays for contact, 0.356 of seasons still end tied after the tie rule (raw 0.398; the
+  tie rule breaks only 0.04 of them, because with no contact there is neither ash nor border to break on).
+  The choice criterion passes (+0.25 for a lone seeker).
+- This is the reverse of the failure I wrote a verdict for ("passes only while players ignore the scoring"): it
+  passes only once players play for the scoring. Since a lone seeker gains about 0.25 win share, the incentive
+  points to the passing field, but that is an argument, not this test's result.
+- Predictions (all 24 rows): lone seeker in field exp gains > 0.2 (right on all four: 0.25, 0.27, late 0.31, 0.22);
+  advantage gone in field seek, |diff| < 0.1 (2 of 4: early P1 0.020, late P3 0.060 right; early P3 0.102 and late
+  P1 0.143 wrong); raw tied top < 0.5 on all rows (right, max 0.398); ash < 1 on every row (right, max 0.98, the
+  field-seek rows with a seek focal).
