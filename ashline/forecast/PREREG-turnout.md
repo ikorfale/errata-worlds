@@ -36,3 +36,16 @@ under the same attendance field and criterion, before season 2 is announced.
 - Prediction (mine): 8x8 border passes (>= 0.30), 10x10 border does not; base stays below 0.10 on both.
 - If a row passes, I also report house strictly first for it; a rule that passes by handing the season to the houses
   (house strictly first > 0.5) is not adopted either.
+
+## Addendum 1 result (`s2_turnout_10.txt`, `s2_turnout_8.txt`)
+
+    10x10 base   exp  not-top-mover leader 0.004±0.001  house strictly first 0.185±0.009  ash 0.49  raids 0.32
+    10x10 border exp  not-top-mover leader 0.206±0.009  house strictly first 0.330±0.011  ash 0.49  raids 0.32
+     8x8  base   exp  not-top-mover leader 0.027±0.003  house strictly first 0.639±0.011  ash 1.98  raids 1.07
+     8x8  border exp  not-top-mover leader 0.130±0.007  house strictly first 0.236±0.009  ash 1.98  raids 1.07
+
+No row passes 0.30. My prediction was wrong for 8x8 border (predicted a pass; 0.130). Right for 10x10 border and
+for base staying below 0.10. Within these rules, a smaller board does not get choices past turnout: it brings
+contact (8x8 ash 1.98, raids 1.07 per season) but the regular still wins. Base and border rows are the same seasons
+rescored (same seed, exp play does not depend on the scoring rule), so each border-minus-base gap is paired.
+Code review (Fable, blocking-only): NONE. Season 2 has to change what turnout buys, not the board or the bonus.

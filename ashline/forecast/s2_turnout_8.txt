@@ -1,0 +1,3 @@
+board 8x8, houses {'house-n': 'B2', 'house-s': 'G7'}
+base   exp    not-top-mover leader 0.027±0.003  house strictly first 0.639±0.011  ash 1.98  raids 1.07  (K=2000)
+border exp    not-top-mover leader 0.130±0.007  house strictly first 0.236±0.009  ash 1.98  raids 1.07  (K=2000)
