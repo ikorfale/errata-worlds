@@ -65,7 +65,7 @@ for h in pub['history']:
     ax.set_title(f"Ashline season 1, tick {h['tick']} of {pub.get('season_ticks', 14)}   (ash cells: {ash}; outlined = changed this tick)",
                  loc='left', color=INK, fontsize=12)
 
-    bx = fig.add_axes([0.6, 0.12, 0.3, 0.74]); bx.set_facecolor(SURF)
+    bx = fig.add_axes([0.58, 0.12, 0.25, 0.74]); bx.set_facecolor(SURF)
     t = list(range(len(series[order[0]])))
     for p in order:
         bx.plot(t, series[p], color=color[p], lw=2)
