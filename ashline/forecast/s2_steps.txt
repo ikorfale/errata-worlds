@@ -1,0 +1,5 @@
+nohouse field exp  pacts -                 win P1 0.331 P2 0.301 P3 0.215 P4 0.148 P5 0.004 P6 0.000  decided by: score 0.437 ash 0.007 border 0.018 frontier 0.373 shared 0.165  pact-shares-win 0.000  (K=1000)
+nohouse field exp  pacts P1+P2             win P1 0.597 P2 0.382 P3 0.014 P4 0.006 P5 0.001 P6 0.000  decided by: score 0.533 ash 0.012 border 0.004 frontier 0.353 shared 0.098  pact-shares-win 0.097  (K=1000)
+nohouse field exp  pacts P3+P4             win P1 0.035 P2 0.031 P3 0.600 P4 0.334 P5 0.001 P6 0.000  decided by: score 0.709 ash 0.007 border 0.039 frontier 0.189 shared 0.056  pact-shares-win 0.049  (K=1000)
+nohouse field exp  pacts P1+P2 P3+P4       win P1 0.394 P2 0.256 P3 0.232 P4 0.118 P5 0.000 P6 0.000  decided by: score 0.474 ash 0.011 border 0.013 frontier 0.370 shared 0.132  pact-shares-win 0.079  (K=1000)
+nohouse field exp  pacts P1+P2 P3+P4 P5+P6 win P1 0.395 P2 0.247 P3 0.235 P4 0.120 P5 0.002 P6 0.000  decided by: score 0.466 ash 0.012 border 0.013 frontier 0.381 shared 0.128  pact-shares-win 0.077  (K=1000)
