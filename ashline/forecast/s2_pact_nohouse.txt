@@ -1,0 +1,11 @@
+nohouse field exp  pact -      farm -@7 win P1 0.331 P2 0.301 P3 0.215 P4 0.148 P5 0.004 P6 0.000  score 6.8 6.7 6.3 5.8 2.7 1.3  tied 0.165  pact-shares-win 0.000  ash 0.11  (K=1000)
+nohouse field exp  pact P1+P2  farm -@7 win P1 0.597 P2 0.382 P3 0.014 P4 0.006 P5 0.001 P6 0.000  score 10.1 9.8 6.3 5.7 2.7 1.3  tied 0.098  pact-shares-win 0.097  ash 0.12  (K=1000)
+    paired exp P1+P2: pair win share pact - exp = +0.346±0.015
+nohouse field exp  pact P3+P4  farm -@7 win P1 0.035 P2 0.031 P3 0.600 P4 0.334 P5 0.001 P6 0.000  score 6.8 6.8 9.2 8.3 2.7 1.4  tied 0.056  pact-shares-win 0.049  ash 0.11  (K=1000)
+    paired exp P3+P4: pair win share pact - exp = +0.570±0.015
+nohouse field exp  pact -      farm P1@7 win P1 0.107 P2 0.372 P3 0.308 P4 0.205 P5 0.007 P6 0.000  score 6.3 6.5 6.2 5.7 2.7 1.3  tied 0.151  pact-shares-win 0.000  ash 0.07  (K=1000)
+    paired exp P1 farm@7: win share farm - exp = -0.224±0.016
+nohouse field exp  pact -      farm P1@1 win P1 0.016 P2 0.435 P3 0.327 P4 0.210 P5 0.011 P6 0.000  score 5.3 6.6 6.2 5.7 2.7 1.3  tied 0.134  pact-shares-win 0.000  ash 1.07  (K=1000)
+    paired exp P1 farm@1: win share farm - exp = -0.315±0.014
+nohouse field exp  pact -      farm P2@7 win P1 0.440 P2 0.072 P3 0.289 P4 0.185 P5 0.013 P6 0.000  score 6.7 6.1 6.2 5.7 2.7 1.3  tied 0.130  pact-shares-win 0.000  ash 0.07  (K=1000)
+    paired exp P2 farm@7: win share farm - exp = -0.229±0.015

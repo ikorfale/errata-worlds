@@ -9,14 +9,19 @@ import sys, random
 import s2_bb, s2_frontier as F
 from s2_bb import A, SEATS
 
-K = int(sys.argv[1]) if len(sys.argv) > 1 else 500
-seed = int(sys.argv[2]) if len(sys.argv) > 2 else 2493
+pos = [a for a in sys.argv[1:] if not a.startswith('--')]
+K = int(pos[0]) if pos else 500
+seed = int(pos[1]) if len(pos) > 1 else 2493
 _new, _res = A.new_state, A.resolve
 last = {}
 def new_state():
     st = _new(); st['rules'] = dict(A.SEASON2); last['st'] = st; return st
 A.new_state = new_state
 F.RULE = 'frontier'
+# 25.10: the live engine no longer counts houses as foes; the simulator gets the same rule here (s2_pact.py --nohouse=1)
+if '--old-foes' not in sys.argv:
+    C = s2_bb.C
+    C.foes = lambda st, name, s: sum(st['grid'].get(m) not in (None, '#', name) and st['grid'].get(m) not in A.HOUSE for m in A.nbrs(s))
 n = bad_score = bad_win = seat_budget = house_budget = shared = 0
 for field in ('exp', 'seek'):
     for k in range(K):

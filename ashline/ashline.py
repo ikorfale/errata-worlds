@@ -159,9 +159,12 @@ def resolve(st, moves):
     return rows
 
 
-def foes(st, name, s): return sum(st['grid'].get(m) not in (None, '#', name) for m in nbrs(s))
+def foes(st, name, s):
+    """Other players' cells next to s. Houses are not foes (25.10, s2_pact.py: a seat that waited until the houses stopped
+    and hugged one won 0.89 of seasons). Only season 2's border score and tie key use it; house_move counts enemies itself."""
+    return sum(st['grid'].get(m) not in (None, '#', name) and st['grid'].get(m) not in HOUSE for m in nbrs(s))
 def points(st, p):
-    """Season 1: cells owned. Season 2 (rules.border): a cell touching another player's cell scores 2."""
+    """Season 1: cells owned. Season 2 (rules.border): a cell touching another player's cell (not a house's) scores 2."""
     mine = owned(st, p)
     return len(mine) + (sum(foes(st, p, s) > 0 for s in mine) if st.get('rules', {}).get('border') else 0)
 
@@ -231,6 +234,8 @@ def _test():
     b['grid'] = {'E5': 'amy', 'E6': 'bob', 'H8': 'cy', 'H9': 'cy', 'A1': '#', 'A2': 'cy'}
     assert points(b, 'amy') == 2 and points(b, 'bob') == 2 and points(b, 'cy') == 3, scores(b)
     assert winners(b) == ['cy'] and winners(b, ['amy', 'bob']) == ['amy', 'bob'], 'ash 0-0, border 1-1, frontier 3-3: shared'
+    h = new_state(SEASON2); h['players']['amy'] = 'A'; h['players']['house-n'] = 'n'; h['grid'].update({'C3': 'house-n', 'C4': 'amy'})
+    assert points(h, 'amy') == 1, 'a cell next to a house scores 1, not 2 (houses are not foes, 25.10)'
     b['grid']['F6'] = '#'
     assert tie_key(b, 'bob')[2] == 2 and winners(b, ['amy', 'bob']) == ['amy'], 'ash next to bob is not frontier'
     b['history'] = [{'rows': [{'name': 'amy', 'result': 'collision'}]}]
