@@ -50,7 +50,7 @@ def partner_cells(st, n):
     return m, A.owned(st, m)
 
 
-def pact_pick(st, n, avoid=()):
+def pact_pick(st, n, avoid=(), left=None):  # left = moves remaining incl. this one (s2_defect.py)
     m, pc = partner_cells(st, n)
     v = [s for s, k in C.valid(st, n) if k in ('claim', 'seed') and s not in avoid]
     if not v: return []
@@ -105,7 +105,7 @@ def season(timing, pols, B, rng, arng):
             elif pact:
                 m = PARTNER[n]
                 avoid = mv[m]['cells'] if m in mv else ()
-                cells = pact_pick(st, n, avoid)
+                cells = pact_pick(st, n, avoid, left[n])
             else:
                 cells = F.place(st, n, pols[n], rng)
             if cells:

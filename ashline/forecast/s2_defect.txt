@@ -1,0 +1,77 @@
+no pact          win P1 0.331 P2 0.301 P3 0.215 P4 0.148 P5 0.004 P6 0.000  score 6.77 6.70 6.30 5.79 2.71 1.32  decided: score 0.437 ash 0.007 border 0.018 frontier 0.373 shared 0.165
+pact P1+P2       win P1 0.597 P2 0.382 P3 0.014 P4 0.006 P5 0.001 P6 0.000  score 10.05 9.76 6.32 5.73 2.70 1.31  decided: score 0.533 ash 0.012 border 0.004 frontier 0.353 shared 0.098
+    honest pact: pair gain over no pact +0.346±0.015
+raw P1 k=1       win P1 0.518 P2 0.464 P3 0.013 P4 0.004 P5 0.001 P6 0.000  score 9.89 9.86 6.32 5.73 2.68 1.31  decided: score 0.503 ash 0.008 border 0.006 frontier 0.387 shared 0.096
+    pair joint share 0.982 (honest 0.979), pair gain over no pact +0.350±0.015; P1: share 0.518, gain over honest -0.079±0.013, share of pair wins 0.528, score 9.89 (honest 10.05)
+raw P1 k=2       win P1 0.492 P2 0.485 P3 0.016 P4 0.005 P5 0.001 P6 0.000  score 9.85 9.95 6.34 5.75 2.69 1.32  decided: score 0.540 ash 0.012 border 0.004 frontier 0.372 shared 0.072
+    pair joint share 0.978 (honest 0.979), pair gain over no pact +0.345±0.015; P1: share 0.492, gain over honest -0.105±0.016, share of pair wins 0.503, score 9.85 (honest 10.05)
+raw P1 k=3       win P1 0.450 P2 0.530 P3 0.014 P4 0.005 P5 0.001 P6 0.000  score 9.90 10.15 6.33 5.75 2.69 1.32  decided: score 0.583 ash 0.005 border 0.003 frontier 0.352 shared 0.057
+    pair joint share 0.980 (honest 0.979), pair gain over no pact +0.348±0.015; P1: share 0.450, gain over honest -0.147±0.018, share of pair wins 0.459, score 9.90 (honest 10.05)
+raw P2 k=1       win P1 0.592 P2 0.388 P3 0.013 P4 0.006 P5 0.001 P6 0.000  score 10.03 9.60 6.32 5.74 2.70 1.31  decided: score 0.570 ash 0.014 border 0.004 frontier 0.349 shared 0.063
+    pair joint share 0.980 (honest 0.979), pair gain over no pact +0.347±0.015; P2: share 0.388, gain over honest +0.006±0.011, share of pair wins 0.396, score 9.60 (honest 9.76)
+raw P2 k=2       win P1 0.592 P2 0.391 P3 0.012 P4 0.004 P5 0.001 P6 0.000  score 10.10 9.56 6.30 5.75 2.70 1.31  decided: score 0.593 ash 0.014 border 0.004 frontier 0.338 shared 0.051
+    pair joint share 0.983 (honest 0.979), pair gain over no pact +0.350±0.015; P2: share 0.391, gain over honest +0.009±0.014, share of pair wins 0.398, score 9.56 (honest 9.76)
+raw P2 k=3       win P1 0.569 P2 0.413 P3 0.011 P4 0.005 P5 0.001 P6 0.000  score 10.26 9.76 6.33 5.76 2.70 1.32  decided: score 0.609 ash 0.010 border 0.004 frontier 0.344 shared 0.033
+    pair joint share 0.982 (honest 0.979), pair gain over no pact +0.350±0.015; P2: share 0.413, gain over honest +0.032±0.016, share of pair wins 0.421, score 9.76 (honest 9.76)
+raw P1+P2 k=1    win P1 0.565 P2 0.419 P3 0.011 P4 0.004 P5 0.001 P6 0.000  score 9.75 9.53 6.31 5.74 2.70 1.32  decided: score 0.507 ash 0.006 border 0.006 frontier 0.372 shared 0.109
+    pair joint share 0.984 (honest 0.979), pair gain over no pact +0.352±0.015; P1: share 0.565, gain over honest -0.033±0.013, share of pair wins 0.574, score 9.75 (honest 10.05); P2: share 0.419, gain over honest +0.038±0.013, share of pair wins 0.426, score 9.53 (honest 9.76)
+raw P1+P2 k=2    win P1 0.540 P2 0.430 P3 0.019 P4 0.009 P5 0.001 P6 0.000  score 9.39 9.21 6.32 5.74 2.70 1.32  decided: score 0.469 ash 0.007 border 0.009 frontier 0.384 shared 0.131
+    pair joint share 0.971 (honest 0.979), pair gain over no pact +0.338±0.015; P1: share 0.540, gain over honest -0.057±0.016, share of pair wins 0.557, score 9.39 (honest 10.05); P2: share 0.430, gain over honest +0.049±0.016, share of pair wins 0.443, score 9.21 (honest 9.76)
+raw P1+P2 k=3    win P1 0.484 P2 0.489 P3 0.016 P4 0.009 P5 0.001 P6 0.000  score 9.04 8.96 6.32 5.77 2.70 1.32  decided: score 0.437 ash 0.003 border 0.006 frontier 0.443 shared 0.111
+    pair joint share 0.974 (honest 0.979), pair gain over no pact +0.341±0.015; P1: share 0.484, gain over honest -0.113±0.018, share of pair wins 0.497, score 9.04 (honest 10.05); P2: share 0.489, gain over honest +0.108±0.018, share of pair wins 0.503, score 8.96 (honest 9.76)
+level P1 k=1     win P1 0.626 P2 0.355 P3 0.012 P4 0.006 P5 0.000 P6 0.000  score 10.14 9.75 6.35 5.78 2.71 1.32  decided: score 0.559 ash 0.014 border 0.003 frontier 0.336 shared 0.088
+    pair joint share 0.982 (honest 0.979), pair gain over no pact +0.350±0.015; P1: share 0.626, gain over honest +0.029±0.007, share of pair wins 0.638, score 10.14 (honest 10.05)
+level P1 k=2     win P1 0.649 P2 0.336 P3 0.011 P4 0.004 P5 0.000 P6 0.000  score 10.18 9.73 6.34 5.79 2.71 1.32  decided: score 0.581 ash 0.015 border 0.005 frontier 0.315 shared 0.084
+    pair joint share 0.985 (honest 0.979), pair gain over no pact +0.353±0.015; P1: share 0.649, gain over honest +0.052±0.008, share of pair wins 0.659, score 10.18 (honest 10.05)
+level P1 k=3     win P1 0.653 P2 0.330 P3 0.012 P4 0.005 P5 0.000 P6 0.000  score 10.20 9.71 6.36 5.79 2.71 1.33  decided: score 0.586 ash 0.014 border 0.005 frontier 0.313 shared 0.082
+    pair joint share 0.983 (honest 0.979), pair gain over no pact +0.350±0.015; P1: share 0.653, gain over honest +0.056±0.008, share of pair wins 0.665, score 10.20 (honest 10.05)
+level P2 k=1     win P1 0.547 P2 0.431 P3 0.015 P4 0.005 P5 0.001 P6 0.000  score 10.04 9.87 6.34 5.78 2.70 1.31  decided: score 0.564 ash 0.014 border 0.004 frontier 0.328 shared 0.090
+    pair joint share 0.979 (honest 0.979), pair gain over no pact +0.346±0.015; P2: share 0.431, gain over honest +0.050±0.008, share of pair wins 0.441, score 9.87 (honest 9.76)
+level P2 k=2     win P1 0.548 P2 0.432 P3 0.013 P4 0.005 P5 0.001 P6 0.000  score 10.03 9.88 6.37 5.80 2.70 1.31  decided: score 0.571 ash 0.016 border 0.002 frontier 0.324 shared 0.087
+    pair joint share 0.981 (honest 0.979), pair gain over no pact +0.348±0.015; P2: share 0.432, gain over honest +0.051±0.009, share of pair wins 0.441, score 9.88 (honest 9.76)
+level P2 k=3     win P1 0.550 P2 0.429 P3 0.013 P4 0.006 P5 0.001 P6 0.000  score 10.03 9.90 6.39 5.81 2.69 1.31  decided: score 0.569 ash 0.014 border 0.003 frontier 0.330 shared 0.084
+    pair joint share 0.980 (honest 0.979), pair gain over no pact +0.348±0.015; P2: share 0.429, gain over honest +0.048±0.010, share of pair wins 0.438, score 9.90 (honest 9.76)
+level P1+P2 k=1  win P1 0.587 P2 0.396 P3 0.013 P4 0.005 P5 0.000 P6 0.000  score 10.13 9.85 6.38 5.82 2.72 1.32  decided: score 0.562 ash 0.015 border 0.003 frontier 0.334 shared 0.086
+    pair joint share 0.983 (honest 0.979), pair gain over no pact +0.350±0.015; P1: share 0.587, gain over honest -0.011±0.009, share of pair wins 0.597, score 10.13 (honest 10.05); P2: share 0.396, gain over honest +0.015±0.009, share of pair wins 0.403, score 9.85 (honest 9.76)
+level P1+P2 k=2  win P1 0.597 P2 0.389 P3 0.011 P4 0.004 P5 0.000 P6 0.000  score 10.16 9.86 6.39 5.84 2.72 1.32  decided: score 0.587 ash 0.016 border 0.004 frontier 0.314 shared 0.079
+    pair joint share 0.985 (honest 0.979), pair gain over no pact +0.353±0.015; P1: share 0.597, gain over honest -0.001±0.011, share of pair wins 0.606, score 10.16 (honest 10.05); P2: share 0.389, gain over honest +0.007±0.011, share of pair wins 0.394, score 9.86 (honest 9.76)
+level P1+P2 k=3  win P1 0.607 P2 0.378 P3 0.009 P4 0.006 P5 0.000 P6 0.000  score 10.17 9.83 6.41 5.85 2.71 1.33  decided: score 0.594 ash 0.013 border 0.005 frontier 0.311 shared 0.077
+    pair joint share 0.985 (honest 0.979), pair gain over no pact +0.352±0.015; P1: share 0.607, gain over honest +0.009±0.011, share of pair wins 0.616, score 10.17 (honest 10.05); P2: share 0.378, gain over honest -0.004±0.011, share of pair wins 0.384, score 9.83 (honest 9.76)
+pact P3+P4       win P1 0.035 P2 0.031 P3 0.600 P4 0.334 P5 0.001 P6 0.000  score 6.79 6.78 9.22 8.31 2.72 1.35  decided: score 0.709 ash 0.007 border 0.039 frontier 0.189 shared 0.056
+    honest pact: pair gain over no pact +0.570±0.015
+raw P3 k=1       win P1 0.035 P2 0.033 P3 0.577 P4 0.354 P5 0.001 P6 0.000  score 6.78 6.74 9.09 8.39 2.72 1.34  decided: score 0.686 ash 0.009 border 0.051 frontier 0.191 shared 0.063
+    pair joint share 0.931 (honest 0.934), pair gain over no pact +0.568±0.015; P3: share 0.577, gain over honest -0.023±0.010, share of pair wins 0.619, score 9.09 (honest 9.22)
+raw P3 k=2       win P1 0.036 P2 0.033 P3 0.552 P4 0.377 P5 0.002 P6 0.000  score 6.75 6.72 9.00 8.48 2.71 1.34  decided: score 0.674 ash 0.013 border 0.060 frontier 0.210 shared 0.043
+    pair joint share 0.929 (honest 0.934), pair gain over no pact +0.566±0.015; P3: share 0.552, gain over honest -0.047±0.012, share of pair wins 0.594, score 9.00 (honest 9.22)
+raw P3 k=3       win P1 0.043 P2 0.035 P3 0.526 P4 0.395 P5 0.002 P6 0.000  score 6.73 6.70 8.97 8.63 2.71 1.34  decided: score 0.664 ash 0.013 border 0.062 frontier 0.218 shared 0.043
+    pair joint share 0.921 (honest 0.934), pair gain over no pact +0.557±0.016; P3: share 0.526, gain over honest -0.074±0.014, share of pair wins 0.571, score 8.97 (honest 9.22)
+raw P4 k=1       win P1 0.034 P2 0.031 P3 0.610 P4 0.324 P5 0.001 P6 0.000  score 6.79 6.77 9.22 8.20 2.71 1.35  decided: score 0.723 ash 0.007 border 0.043 frontier 0.190 shared 0.037
+    pair joint share 0.934 (honest 0.934), pair gain over no pact +0.570±0.015; P4: share 0.324, gain over honest -0.011±0.008, share of pair wins 0.346, score 8.20 (honest 8.31)
+raw P4 k=2       win P1 0.034 P2 0.029 P3 0.635 P4 0.301 P5 0.001 P6 0.000  score 6.77 6.76 9.26 8.11 2.72 1.35  decided: score 0.734 ash 0.009 border 0.039 frontier 0.186 shared 0.032
+    pair joint share 0.936 (honest 0.934), pair gain over no pact +0.573±0.015; P4: share 0.301, gain over honest -0.033±0.010, share of pair wins 0.322, score 8.11 (honest 8.31)
+raw P4 k=3       win P1 0.032 P2 0.026 P3 0.649 P4 0.292 P5 0.001 P6 0.000  score 6.76 6.75 9.33 8.05 2.71 1.34  decided: score 0.754 ash 0.010 border 0.040 frontier 0.173 shared 0.023
+    pair joint share 0.941 (honest 0.934), pair gain over no pact +0.578±0.015; P4: share 0.292, gain over honest -0.042±0.012, share of pair wins 0.311, score 8.05 (honest 8.31)
+raw P3+P4 k=1    win P1 0.035 P2 0.032 P3 0.586 P4 0.346 P5 0.001 P6 0.000  score 6.77 6.74 9.04 8.23 2.71 1.34  decided: score 0.674 ash 0.009 border 0.055 frontier 0.211 shared 0.051
+    pair joint share 0.932 (honest 0.934), pair gain over no pact +0.569±0.015; P3: share 0.586, gain over honest -0.014±0.010, share of pair wins 0.628, score 9.04 (honest 9.22); P4: share 0.346, gain over honest +0.013±0.010, share of pair wins 0.372, score 8.23 (honest 8.31)
+raw P3+P4 k=2    win P1 0.041 P2 0.035 P3 0.582 P4 0.340 P5 0.003 P6 0.000  score 6.72 6.70 8.70 7.96 2.70 1.33  decided: score 0.661 ash 0.012 border 0.054 frontier 0.237 shared 0.036
+    pair joint share 0.922 (honest 0.934), pair gain over no pact +0.558±0.015; P3: share 0.582, gain over honest -0.018±0.013, share of pair wins 0.631, score 8.70 (honest 9.22); P4: share 0.340, gain over honest +0.006±0.012, share of pair wins 0.369, score 7.96 (honest 8.31)
+raw P3+P4 k=3    win P1 0.057 P2 0.038 P3 0.562 P4 0.341 P5 0.003 P6 0.000  score 6.69 6.66 8.37 7.72 2.71 1.33  decided: score 0.634 ash 0.016 border 0.048 frontier 0.250 shared 0.052
+    pair joint share 0.903 (honest 0.934), pair gain over no pact +0.539±0.016; P3: share 0.562, gain over honest -0.038±0.015, share of pair wins 0.622, score 8.37 (honest 9.22); P4: share 0.341, gain over honest +0.007±0.014, share of pair wins 0.378, score 7.72 (honest 8.31)
+level P3 k=1     win P1 0.034 P2 0.027 P3 0.625 P4 0.313 P5 0.001 P6 0.000  score 6.84 6.82 9.34 8.32 2.74 1.36  decided: score 0.730 ash 0.008 border 0.035 frontier 0.177 shared 0.050
+    pair joint share 0.938 (honest 0.934), pair gain over no pact +0.575±0.015; P3: share 0.625, gain over honest +0.025±0.006, share of pair wins 0.666, score 9.34 (honest 9.22)
+level P3 k=2     win P1 0.033 P2 0.028 P3 0.650 P4 0.288 P5 0.001 P6 0.000  score 6.89 6.87 9.46 8.32 2.77 1.37  decided: score 0.746 ash 0.009 border 0.040 frontier 0.166 shared 0.039
+    pair joint share 0.939 (honest 0.934), pair gain over no pact +0.575±0.015; P3: share 0.650, gain over honest +0.051±0.008, share of pair wins 0.693, score 9.46 (honest 9.22)
+level P3 k=3     win P1 0.033 P2 0.027 P3 0.660 P4 0.279 P5 0.001 P6 0.000  score 6.92 6.91 9.52 8.35 2.77 1.37  decided: score 0.742 ash 0.010 border 0.045 frontier 0.164 shared 0.039
+    pair joint share 0.940 (honest 0.934), pair gain over no pact +0.576±0.015; P3: share 0.660, gain over honest +0.061±0.009, share of pair wins 0.703, score 9.52 (honest 9.22)
+level P4 k=1     win P1 0.033 P2 0.031 P3 0.581 P4 0.353 P5 0.001 P6 0.000  score 6.83 6.82 9.22 8.39 2.73 1.36  decided: score 0.726 ash 0.004 border 0.036 frontier 0.188 shared 0.046
+    pair joint share 0.935 (honest 0.934), pair gain over no pact +0.571±0.015; P4: share 0.353, gain over honest +0.019±0.005, share of pair wins 0.378, score 8.39 (honest 8.31)
+level P4 k=2     win P1 0.034 P2 0.028 P3 0.562 P4 0.376 P5 0.001 P6 0.000  score 6.87 6.86 9.22 8.46 2.74 1.36  decided: score 0.731 ash 0.004 border 0.039 frontier 0.180 shared 0.046
+    pair joint share 0.938 (honest 0.934), pair gain over no pact +0.574±0.015; P4: share 0.376, gain over honest +0.042±0.007, share of pair wins 0.400, score 8.46 (honest 8.31)
+level P4 k=3     win P1 0.036 P2 0.029 P3 0.552 P4 0.382 P5 0.001 P6 0.000  score 6.89 6.88 9.22 8.50 2.75 1.36  decided: score 0.730 ash 0.004 border 0.042 frontier 0.178 shared 0.046
+    pair joint share 0.934 (honest 0.934), pair gain over no pact +0.571±0.015; P4: share 0.382, gain over honest +0.048±0.008, share of pair wins 0.409, score 8.50 (honest 8.31)
+level P3+P4 k=1  win P1 0.033 P2 0.027 P3 0.606 P4 0.334 P5 0.001 P6 0.000  score 6.88 6.85 9.33 8.40 2.75 1.37  decided: score 0.740 ash 0.005 border 0.032 frontier 0.177 shared 0.046
+    pair joint share 0.939 (honest 0.934), pair gain over no pact +0.576±0.015; P3: share 0.606, gain over honest +0.006±0.007, share of pair wins 0.645, score 9.33 (honest 9.22); P4: share 0.334, gain over honest -0.001±0.007, share of pair wins 0.355, score 8.40 (honest 8.31)
+level P3+P4 k=2  win P1 0.033 P2 0.029 P3 0.611 P4 0.328 P5 0.001 P6 0.000  score 6.97 6.95 9.45 8.47 2.77 1.38  decided: score 0.747 ash 0.006 border 0.037 frontier 0.168 shared 0.042
+    pair joint share 0.939 (honest 0.934), pair gain over no pact +0.575±0.015; P3: share 0.611, gain over honest +0.011±0.009, share of pair wins 0.651, score 9.45 (honest 9.22); P4: share 0.328, gain over honest -0.006±0.009, share of pair wins 0.349, score 8.47 (honest 8.31)
+level P3+P4 k=3  win P1 0.038 P2 0.030 P3 0.599 P4 0.333 P5 0.001 P6 0.000  score 7.04 7.01 9.51 8.56 2.80 1.38  decided: score 0.740 ash 0.008 border 0.048 frontier 0.162 shared 0.042
+    pair joint share 0.931 (honest 0.934), pair gain over no pact +0.567±0.015; P3: share 0.599, gain over honest -0.001±0.010, share of pair wins 0.643, score 9.51 (honest 9.22); P4: share 0.333, gain over honest -0.002±0.010, share of pair wins 0.357, score 8.56 (honest 8.31)
