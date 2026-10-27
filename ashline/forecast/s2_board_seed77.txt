@@ -1,0 +1,18 @@
+--- board 12x12, houses {'house-n': 'C3', 'house-s': 'J10'}
+A pact -     front -   win P1 0.310 P2 0.275 P3 0.225 P4 0.172 P5 0.018 P6 0.000  score 6.7 6.7 6.3 5.8 2.7 1.2  decided: score 0.420 ash 0.003 border 0.023 frontier 0.417 shared 0.137
+B pact P1+P2 front -   win P1 0.602 P2 0.373 P3 0.017 P4 0.008 P5 0.000 P6 0.000  score 10.1 9.7 6.3 5.7 2.6 1.3  decided: score 0.540 ash 0.003 border 0.003 frontier 0.347 shared 0.107
+C pact -     front P3  win P1 0.238 P2 0.217 P3 0.389 P4 0.141 P5 0.015 P6 0.000  score 6.6 6.6 6.2 5.8 2.7 1.2  decided: score 0.393 ash 0.007 border 0.017 frontier 0.473 shared 0.110
+    P1+P2 pact value (B-A), win share = +0.390±0.027
+    P3 front value (C-A), win share = +0.164±0.025
+--- board 10x10, houses {'house-n': 'C3', 'house-s': 'H8'}
+A pact -     front -   win P1 0.298 P2 0.268 P3 0.229 P4 0.192 P5 0.013 P6 0.000  score 7.0 6.9 6.7 6.2 2.8 1.4  decided: score 0.520 ash 0.013 border 0.037 frontier 0.350 shared 0.080
+B pact P1+P2 front -   win P1 0.513 P2 0.417 P3 0.038 P4 0.032 P5 0.000 P6 0.000  score 9.9 9.7 6.7 6.1 2.8 1.4  decided: score 0.547 ash 0.007 border 0.000 frontier 0.390 shared 0.057
+C pact -     front P3  win P1 0.267 P2 0.237 P3 0.320 P4 0.163 P5 0.013 P6 0.000  score 7.0 6.9 6.6 6.2 2.9 1.4  decided: score 0.530 ash 0.007 border 0.017 frontier 0.387 shared 0.060
+    P1+P2 pact value (B-A), win share = +0.364±0.029
+    P3 front value (C-A), win share = +0.091±0.024
+--- board 8x8, houses {'house-n': 'C3', 'house-s': 'F6'}
+A pact -     front -   win P1 0.270 P2 0.262 P3 0.265 P4 0.193 P5 0.010 P6 0.000  score 7.6 7.5 7.1 6.7 3.1 1.4  decided: score 0.683 ash 0.047 border 0.037 frontier 0.190 shared 0.043
+B pact P1+P2 front -   win P1 0.540 P2 0.338 P3 0.068 P4 0.050 P5 0.003 P6 0.000  score 9.6 8.9 6.8 6.2 3.0 1.4  decided: score 0.727 ash 0.040 border 0.027 frontier 0.163 shared 0.043
+C pact -     front P3  win P1 0.230 P2 0.238 P3 0.328 P4 0.197 P5 0.007 P6 0.000  score 7.6 7.5 7.2 6.7 3.1 1.5  decided: score 0.687 ash 0.030 border 0.057 frontier 0.183 shared 0.043
+    P1+P2 pact value (B-A), win share = +0.347±0.033
+    P3 front value (C-A), win share = +0.063±0.023
