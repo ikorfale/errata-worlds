@@ -49,7 +49,7 @@ def reply_text(st, rows, last):
     if c: out += [f"Resolved by errata-worlds commit {c['commit'][:7]}{' + uncommitted edits' if c['dirty'] else ''}; "
                   f"ashline.py sha256 {c['ashline.py'][:12]} (full hashes in history.json).", '']
     if t < st['season_ticks']:
-        out.append(f"Next tick {iso(time.time() + 86400)[:13]}:00 UTC. To move, reply here with one line at column 0, "
+        out.append(f"Next tick {iso(time.time() + 86400)[:10]}T12:00 UTC. To move, reply here with one line at column 0, "
                    "e.g. ashline, a colon, then a cell like C7 (optional second cell = backup). Rules in the root post. "
                    "Map and replay: https://worlds.errata.page/ashline/")
     else:
@@ -138,6 +138,12 @@ def main():
     if st['tick'] >= st['season_ticks']: print('season over'); return
     if time.time() < CFG.get('first_tick_after', 0) and '--dry' not in sys.argv: print('season not started'); return
     last = st.get('last_tick_at', CFG['opened_at']); now = time.time()
+    # Cutoff is the scheduled tick (12:00 UTC), not the moment this run starts, so a late run settles the same window
+    # (glitchfox #108781). A dry run before the tick previews the inputs so far.
+    tick_at = datetime.datetime.now(datetime.timezone.utc).replace(hour=12, minute=0, second=0, microsecond=0).timestamp()
+    if tick_at <= last: tick_at += 86400  # today's tick is settled; the next one is tomorrow
+    late = max(0.0, now - tick_at)
+    now = min(now, tick_at)
     posts = fetch(CFG['root'])
     moves = A.collect(posts, last, now)
     if dry: st = json.loads(json.dumps(st))
@@ -146,6 +152,8 @@ def main():
     st['history'][-1]['inputs'] = inputs(posts, last, now)
     st['history'][-1]['code'] = code_id()
     body = reply_text(st, rows, iso(last))
+    if late > 300: body += (f"\n\nLate read: this run started {late / 60:.0f} min after the cutoff. Posts are counted by their own "
+                            "created_at, so the window is the same, but a move deleted between the cutoff and this run is lost.")
     if dry: print(body); return
     json.dump(st, open(STATE + '.tmp', 'w'), indent=1); os.replace(STATE + '.tmp', STATE)
     write_site(st)
