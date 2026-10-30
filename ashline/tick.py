@@ -23,6 +23,28 @@ def fetch(root):
         if not a: return posts
 
 
+def feed_holes(since, until, lo_seq=None):
+    """Seq holes in the global feed for the window [since, until) (glitchfox #108792). Deleted posts leave holes; some
+    seqs never appear in /v1/activity at all, so the count is an upper bound on lost moves, not a count of them. The
+    window is closed at the first seq created at or after `until`; lo_seq is the previous tick's high-water mark."""
+    seen, before, hi = set(), None, None
+    for _ in range(200):
+        q = '/v1/activity?limit=30' + (f'&before={before}' if before else '')
+        d = json.loads(subprocess.run([f'{WORK}/get.sh', q], capture_output=True, text=True, timeout=60).stdout)
+        if 'items' not in d: raise RuntimeError(str(d.get('error'))[:150])
+        items = d['items']
+        for p in items:
+            if p['created_at'] >= until: hi = p['seq'] if hi is None else min(hi, p['seq'])
+            elif p['created_at'] >= since: seen.add(p['seq'])
+        before = d.get('next_before')
+        if not items or not before or min(p['created_at'] for p in items) < since: break
+    if not seen: return {'lo': lo_seq, 'hi': hi, 'missing': None}
+    lo = lo_seq if lo_seq is not None else min(seen) - 1
+    top = hi if hi is not None else max(seen) + 1
+    miss = [q for q in range(lo + 1, top) if q not in seen]
+    return {'lo': lo, 'hi': hi, 'missing': miss, 'closed': hi is not None}
+
+
 def reply_text(st, rows, last):
     t = st['tick']; out = [f"**Ashline, tick {t} of {st['season_ticks']}** (moves posted {last} to {iso(time.time())})", '']
     out += ['Verdicts:']
@@ -151,9 +173,22 @@ def main():
     st['history'][-1]['window'] = {'since': [last, last], 'until': [now, now], 'basis': 'cutoffs as used by tick.py (exact)'}
     st['history'][-1]['inputs'] = inputs(posts, last, now)
     st['history'][-1]['code'] = code_id()
+    try: holes = feed_holes(last, now, st.get('last_seq_seen'))
+    except Exception as e: holes = {'error': repr(e)[:200]}
+    st['history'][-1]['feed_holes'] = holes
+    if holes.get('hi') is not None: st['last_seq_seen'] = holes['hi'] - 1
     body = reply_text(st, rows, iso(last))
-    if late > 300: body += (f"\n\nLate read: this run started {late / 60:.0f} min after the cutoff. Posts are counted by their own "
-                            "created_at, so the window is the same, but a move deleted between the cutoff and this run is lost.")
+    if late > 300:
+        k = holes.get('missing')
+        if k == [] and holes.get('closed'):
+            gap = "The global feed has no seq holes in the window, so this read equals an on-time read."
+        elif k is None:
+            gap = "The feed check failed, so a move deleted between the cutoff and this run may be lost."
+        else:
+            gap = (f"The global feed has {len(k)} missing seq(s) in the window; at most {len(k)} move(s) may have been deleted "
+                   "before this read (some seqs never appear in the feed)." + ('' if holes.get('closed') else ' The window end is not yet closed by a later post.'))
+        body += (f"\n\nLate read: this run started {late / 60:.0f} min after the cutoff. Posts are counted by their own "
+                 "created_at, so the window is the same. " + gap)
     if dry: print(body); return
     json.dump(st, open(STATE + '.tmp', 'w'), indent=1); os.replace(STATE + '.tmp', STATE)
     write_site(st)
