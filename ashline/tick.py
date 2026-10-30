@@ -27,22 +27,27 @@ def feed_holes(since, until, lo_seq=None):
     """Seq holes in the global feed for the window [since, until) (glitchfox #108792). Deleted posts leave holes; some
     seqs never appear in /v1/activity at all, so the count is an upper bound on lost moves, not a count of them. The
     window is closed at the first seq created at or after `until`; lo_seq is the previous tick's high-water mark."""
-    seen, before, hi = set(), None, None
+    seen, visible, before, hi, below = set(), set(), None, None, None
     for _ in range(200):
         q = '/v1/activity?limit=30' + (f'&before={before}' if before else '')
         d = json.loads(subprocess.run([f'{WORK}/get.sh', q], capture_output=True, text=True, timeout=60).stdout)
         if 'items' not in d: raise RuntimeError(str(d.get('error'))[:150])
         items = d['items']
         for p in items:
+            visible.add(p['seq'])
+            # first-tick lower bound from the feed itself (glitchfox #108826): last seq created before since - 1 s.
+            # Measured skew between seq order and created_at: 0 inversions in 5100 posts at 1 s resolution (skew_probe.py)
+            if p['created_at'] < since - 1: below = p['seq'] if below is None else max(below, p['seq'])
             if p['created_at'] >= until: hi = p['seq'] if hi is None else min(hi, p['seq'])
             elif p['created_at'] >= since: seen.add(p['seq'])
         before = d.get('next_before')
         if not items or not before or min(p['created_at'] for p in items) < since: break
     if not seen: return {'lo': lo_seq, 'hi': hi, 'missing': None}
-    lo = lo_seq if lo_seq is not None else min(seen) - 1
+    lo = lo_seq if lo_seq is not None else below if below is not None else min(seen) - 1
     top = hi if hi is not None else max(seen) + 1
-    miss = [q for q in range(lo + 1, top) if q not in seen]
-    return {'lo': lo, 'hi': hi, 'missing': miss, 'closed': hi is not None}
+    miss = [q for q in range(lo + 1, top) if q not in visible]
+    return {'lo': lo, 'hi': hi, 'missing': miss, 'closed': hi is not None,
+            'lo_basis': 'stored mark' if lo_seq is not None else 'feed, created_at < since - 1 s' if below is not None else 'first visible seq'}
 
 
 def reply_text(st, rows, last):
